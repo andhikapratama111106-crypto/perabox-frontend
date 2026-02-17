@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 140">
+  <!-- Three Diamond Mark (Mitsubishi logo) -->
+  <g transform="translate(40, 10)">
+    <!-- Top diamond -->
+    <polygon points="55,0 80,40 55,80 30,40" fill="#E60012"/>
+    <!-- Bottom-left diamond -->
+    <polygon points="10,50 35,90 10,130 -15,90" fill="#E60012"/>
+    <!-- Bottom-right diamond -->
+    <polygon points="100,50 125,90 100,130 75,90" fill="#E60012"/>
+  </g>
+  <!-- MITSUBISHI text -->
+  <text x="185" y="62" font-family="'Helvetica Neue', 'Arial Black', Arial, sans-serif" font-weight="900" font-size="38" fill="#1A1A1A" letter-spacing="1.5" font-stretch="condensed">MITSUBISHI</text>
+  <!-- ELECTRIC text -->
+  <text x="185" y="108" font-family="'Helvetica Neue', 'Arial Black', Arial, sans-serif" font-weight="900" font-size="38" fill="#1A1A1A" letter-spacing="1.5" font-stretch="condensed">ELECTRIC</text>
+</svg>

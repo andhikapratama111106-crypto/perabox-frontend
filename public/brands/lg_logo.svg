@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 120">
+  <!-- Circle -->
+  <circle cx="55" cy="60" r="42" fill="#A50034"/>
+  <!-- L shape (nose + face) -->
+  <path d="M38 35 L38 72 L62 72" stroke="white" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Eye dot -->
+  <circle cx="55" cy="42" r="5" fill="white"/>
+  <!-- LG text -->
+  <text x="115" y="78" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="60" fill="#8C8C8C" letter-spacing="3">LG</text>
+</svg>

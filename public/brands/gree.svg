@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220">
+  <!-- Circle background - orange -->
+  <circle cx="100" cy="80" r="62" fill="#F58220"/>
+  <!-- Blue upper-left arc overlay -->
+  <path d="M100 18 A62 62 0 0 0 38 80 L100 80 Z" fill="#003D8F"/>
+  <path d="M100 18 A62 62 0 0 1 162 80 L100 80 Z" fill="#003D8F"/>
+  <!-- Restore orange bottom half -->
+  <path d="M38 80 A62 62 0 0 0 162 80 L100 80 Z" fill="#F58220"/>
+  <!-- Blue top portion -->
+  <path d="M100 18 A62 62 0 0 0 42 60 Q65 52 100 80 Q135 52 158 60 A62 62 0 0 0 100 18 Z" fill="#003D8F"/>
+  <!-- White swoosh/wing -->
+  <path d="M42 85 Q60 55 100 72 Q140 55 158 85" stroke="white" stroke-width="6" fill="none" stroke-linecap="round"/>
+  <!-- Small white triangle detail -->
+  <polygon points="58,78 72,68 68,82" fill="white"/>
+  <!-- GREE text -->
+  <text x="100" y="190" text-anchor="middle" font-family="'Arial Black', 'Helvetica Neue', Arial, sans-serif" font-weight="900" font-size="52" fill="#003D8F" letter-spacing="3">GREE</text>
+</svg>

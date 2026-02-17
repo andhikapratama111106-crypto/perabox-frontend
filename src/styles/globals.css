@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --primary: #8B5E3C;
+    --secondary: #F9F5EA;
+    --accent: #D4A373;
+    --dark: #333333;
+    --light: #FFFBF2;
+}
+
+body {
+    color: var(--dark);
+    background: var(--light);
+    font-family: 'Inter', sans-serif;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
+
+/* ===== Brand Marquee Slider ===== */
+@keyframes marquee {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.marquee-container {
+    overflow: hidden;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.marquee-track {
+    display: flex;
+    align-items: center;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-container.paused .marquee-track {
+    animation-play-state: paused;
+}
+
+/* Mobile: smaller brand pills */
+@media (max-width: 767px) {
+    .marquee-track {
+        animation-duration: 20s;
+    }
+
+    .marquee-track>div>div {
+        height: 40px !important;
+        min-width: 110px !important;
+    }
+
+    .marquee-track>div>div>span {
+        font-size: 0.875rem !important;
+    }
+}
+
+/* ===== Booking Modal - Focus Trap ===== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== Spinner Animation ===== */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin 1.2s linear infinite;
+}
