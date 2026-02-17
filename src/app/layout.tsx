@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import '../styles/globals.css';
 import '../styles/animations.css';
-import TransitionProvider from '@/components/TransitionProvider';
+
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
