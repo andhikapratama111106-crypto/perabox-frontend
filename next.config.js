@@ -5,7 +5,7 @@ const nextConfig = {
     domains: ['localhost', 'minio'],
   },
   env: {
-    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000',
+    NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://perabox-backend.vercel.app',
   },
 }
 
