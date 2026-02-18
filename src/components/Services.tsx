@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from './Reveal/Reveal';
 
@@ -164,6 +165,17 @@ const Services = () => {
                                                 </motion.li>
                                             ))}
                                         </ul>
+                                        <div className="mt-8 flex flex-col sm:flex-row gap-4">
+                                            <Link
+                                                href="/book"
+                                                className="bg-primary hover:bg-primary/90 text-white font-bold py-3.5 px-8 rounded-full transition-all shadow-lg hover:shadow-primary/30 active:scale-95 text-center"
+                                            >
+                                                Pesan Sekarang
+                                            </Link>
+                                            <button className="border-2 border-primary/20 text-primary hover:bg-primary/5 font-bold py-3.5 px-8 rounded-full transition-all active:scale-95">
+                                                Detail Layanan
+                                            </button>
+                                        </div>
                                     </motion.div>
                                 </AnimatePresence>
                             </div>

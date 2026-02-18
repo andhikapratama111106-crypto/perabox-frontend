@@ -89,7 +89,7 @@ const Hero = () => {
                         </Link>
                         <button
                             onClick={() => customSmoothScroll('#services')}
-                            className="px-8 py-4 text-dark font-bold hover:text-primary transition-colors flex items-center gap-2 group"
+                            className="px-10 py-4 border-2 border-primary/20 text-dark font-bold hover:bg-primary/5 hover:border-primary/40 rounded-full transition-all flex items-center gap-2 group active:scale-95"
                         >
                             Explore Services
                             <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform"></span>

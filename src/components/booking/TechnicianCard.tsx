@@ -6,26 +6,29 @@ interface TechnicianCardProps {
     technician: Technician;
     onSelect: (tech: Technician) => void;
     selected?: boolean;
+    priority?: boolean;
 }
 
-export default function TechnicianCard({ technician, onSelect, selected }: TechnicianCardProps) {
+export default function TechnicianCard({ technician, onSelect, selected, priority = false }: TechnicianCardProps) {
     return (
         <div
             onClick={() => onSelect(technician)}
-            className={`group relative bg-white rounded-2xl p-4 cursor-pointer transition-all duration-300 border-2 hover:shadow-xl
+            className={`group relative bg-white rounded-3xl p-4 cursor-pointer transition-all duration-500 border-2 hover:shadow-2xl
                 ${selected
-                    ? 'border-primary shadow-primary/20 scale-[1.02]'
-                    : 'border-transparent hover:border-gray-100 shadow-sm'
+                    ? 'border-primary shadow-primary/20 scale-[1.02] ring-4 ring-primary/5'
+                    : 'border-transparent hover:border-primary/20 shadow-sm'
                 }
             `}
         >
             <div className="relative mb-4">
-                <div className="aspect-[4/5] overflow-hidden rounded-xl bg-gray-100 relative">
-                    {/* Use a standard placeholder if external image fails, but here we expect the mock URL or local asset */}
-                    <img
+                <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-gray-100 relative shadow-inner">
+                    <Image
                         src={technician.photoUrl}
                         alt={technician.name}
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        priority={priority}
+                        sizes="(max-width: 768px) 50vw, 25vw"
                     />
                     <div className="absolute top-2 right-2 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-lg flex items-center gap-1 shadow-sm">
                         <span className="text-yellow-500 text-xs">★</span>
