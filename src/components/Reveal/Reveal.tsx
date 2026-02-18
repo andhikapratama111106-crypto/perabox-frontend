@@ -26,7 +26,7 @@ export interface RevealProps extends UseRevealOptions {
     /** Custom Framer Motion variants (overrides direction) */
     variants?: Variants;
     /** HTML tag for the wrapper. Default 'div' */
-    as?: keyof React.JSX.IntrinsicElements;
+    as?: any;
     /** Disable all animation via data attribute */
     'data-no-animations'?: boolean;
 }
@@ -79,7 +79,7 @@ export function Reveal({
     const totalDelay = delay + computedDelay / 1000; // convert ms → sec
 
     // Build motion component
-    const MotionComp = motion[as as keyof typeof motion] as typeof motion.div;
+    const MotionComp = (motion as any)[as || 'div'] || motion.div;
 
     return (
         <MotionComp
