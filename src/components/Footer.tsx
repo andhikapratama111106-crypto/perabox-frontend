@@ -1,6 +1,6 @@
 
 "use client";
-
+import React from 'react';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal/Reveal';
 // Forced refresh for Vercel build v1.1.1
