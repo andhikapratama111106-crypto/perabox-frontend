@@ -57,14 +57,17 @@ const ChatBot = () => {
                 }),
             });
 
-            if (!response.ok) throw new Error('Failed to fetch response');
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(`Server Error ${response.status}: ${errorData.detail || response.statusText}`);
+            }
 
             const data = await response.json();
             setMessages(prev => [...prev, { role: 'model', content: data.response }]);
-        } catch (error) {
+        } catch (error: any) {
             console.error('Chat Error:', error);
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://perabox-backend.vercel.app';
-            setMessages(prev => [...prev, { role: 'model', content: `Wah, sepertinya saya sedang kesulitan terhubung ke pusat (${apiUrl}). Mohon pastikan Backend sudah online ya!` }]);
+            setMessages(prev => [...prev, { role: 'model', content: `Wah, sepertinya saya sedang kesulitan terhubung ke pusat (${apiUrl}). Detail: ${error.message}` }]);
         } finally {
             setIsLoading(false);
         }
