@@ -127,13 +127,13 @@ const ChatBot = () => {
                         {/* Premium Header */}
                         <div className="bg-gradient-to-br from-primary to-primary/80 p-8 text-white relative">
                             {/* Decorative watermarked mascot */}
-                            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
-                                <img src="/perabot_mascot.png" alt="" className="w-32 h-32 object-contain" />
+                            <div className="absolute top-0 right-0 p-2 opacity-10 pointer-events-none">
+                                <MessageCircle className="w-24 h-24 text-white" />
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-primary/20 bg-secondary/20">
-                                    <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-110" />
+                                <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-white/20">
+                                    <MessageCircle className="w-8 h-8 text-white" />
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2">
