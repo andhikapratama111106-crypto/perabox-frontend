@@ -63,7 +63,8 @@ const ChatBot = () => {
             setMessages(prev => [...prev, { role: 'model', content: data.response }]);
         } catch (error) {
             console.error('Chat Error:', error);
-            setMessages(prev => [...prev, { role: 'model', content: 'Wah, sepertinya saya sedang kesulitan terhubung ke pusat. Mohon coba lagi sebentar lagi ya!' }]);
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://perabox-backend.vercel.app';
+            setMessages(prev => [...prev, { role: 'model', content: `Wah, sepertinya saya sedang kesulitan terhubung ke pusat (${apiUrl}). Mohon pastikan Backend sudah online ya!` }]);
         } finally {
             setIsLoading(false);
         }
