@@ -4,6 +4,8 @@ import '../styles/globals.css';
 import '../styles/animations.css';
 
 
+import ChatBot from '../components/ChatBot';
+
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
     subsets: ['latin'],
@@ -54,6 +56,7 @@ export default function RootLayout({
                 <div className="scroll-blur-content">
                     {children}
                 </div>
+                <ChatBot />
             </body>
         </html>
     );
