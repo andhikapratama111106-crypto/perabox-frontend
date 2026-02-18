@@ -74,24 +74,7 @@ const ChatBot = () => {
             {/* Chat Bubble Button - Mascot Peek Version */}
             <div className="relative">
                 {/* Mascot Peeking from top of bubble when closed */}
-                <AnimatePresence>
-                    {!isOpen && (
-                        <motion.div
-                            initial={{ y: 20, opacity: 0, scale: 0.8 }}
-                            animate={{ y: -55, opacity: 1, scale: 1 }}
-                            exit={{ y: -100, opacity: 0, scale: 1.5 }}
-                            whileHover={{ y: -65, scale: 1.1 }}
-                            transition={{
-                                type: "spring",
-                                stiffness: 260,
-                                damping: 20
-                            }}
-                            className="absolute left-1/2 -translate-x-1/2 w-28 h-28 pointer-events-none z-10"
-                        >
-                            <img src="/perabot_mascot.png" alt="Mascot Peek" className="w-full h-full object-contain drop-shadow-2xl" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                {/* Mascot Peek Removed */}
 
                 <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(139, 94, 60, 0.4)" }}
@@ -121,8 +104,7 @@ const ChatBot = () => {
                                 exit={{ opacity: 0, scale: 0.5 }}
                                 className="w-full h-full"
                             >
-                                <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-150 translate-y-2 opacity-20" />
-                                <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="absolute inset-0 flex items-center justify-center bg-primary">
                                     <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                                     </svg>
