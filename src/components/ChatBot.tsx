@@ -9,6 +9,7 @@ interface Message {
 }
 
 const ChatBot = () => {
+    // Forced update to sync deployment
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { role: 'model', content: 'Halo! Saya Pera, asisten teknisi Anda. Siap membantu segala kebutuhan rumah Anda. Ada yang bisa saya bantu?' }
