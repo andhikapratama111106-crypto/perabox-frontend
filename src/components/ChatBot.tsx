@@ -69,7 +69,7 @@ const ChatBot = () => {
     };
 
     return (
-        <div className="fixed bottom-6 right-6 z-[9999] font-sans">
+        <div className="fixed bottom-6 right-10 z-[9999] font-sans">
             {/* Chat Bubble Button - Mascot Peek Version */}
             <div className="relative">
                 {/* Mascot Peeking from top of bubble when closed */}
