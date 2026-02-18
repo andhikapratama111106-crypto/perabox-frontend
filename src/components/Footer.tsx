@@ -3,6 +3,8 @@
 
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal/Reveal';
+// Forced refresh for Vercel build v1.1.1
+
 
 const socialLinks = [
     {
@@ -160,7 +162,7 @@ const Footer = () => {
                 <div className="border-t border-gray-200 pt-8 mt-12">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                         <p className="text-[10px] text-gray-400 order-2 md:order-1 text-center md:text-left">
-                            © 2024 PERABOX. All rights reserved. (v1.1)
+                            {"\u00A9"} 2024 PERABOX. All rights reserved. (v1.1.1)
                         </p>
 
                         <div className="flex flex-col md:flex-row items-center gap-6 order-1 md:order-2">
