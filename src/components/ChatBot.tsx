@@ -126,14 +126,18 @@ const ChatBot = () => {
                     >
                         {/* Premium Header */}
                         <div className="bg-gradient-to-br from-primary to-primary/80 p-8 text-white relative">
-                            {/* Decorative watermarked mascot */}
+                            {/* Decorative watermark icon */}
                             <div className="absolute top-0 right-0 p-2 opacity-10 pointer-events-none">
-                                <MessageCircle className="w-24 h-24 text-white" />
+                                <svg className="w-24 h-24 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                </svg>
                             </div>
 
                             <div className="flex items-center gap-4">
                                 <div className="w-14 h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-white/20">
-                                    <MessageCircle className="w-8 h-8 text-white" />
+                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2">
