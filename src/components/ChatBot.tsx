@@ -73,16 +73,24 @@ const ChatBot = () => {
             {/* Chat Bubble Button - Mascot Peek Version */}
             <div className="relative">
                 {/* Mascot Peeking from top of bubble when closed */}
-                {!isOpen && (
-                    <motion.div
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: -50, opacity: 1 }}
-                        transition={{ delay: 1, type: "spring", stiffness: 100 }}
-                        className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 pointer-events-none z-10"
-                    >
-                        <img src="/perabot_mascot.png" alt="Mascot Peek" className="w-full h-full object-contain drop-shadow-xl" />
-                    </motion.div>
-                )}
+                <AnimatePresence>
+                    {!isOpen && (
+                        <motion.div
+                            initial={{ y: 20, opacity: 0, scale: 0.8 }}
+                            animate={{ y: -55, opacity: 1, scale: 1 }}
+                            exit={{ y: -100, opacity: 0, scale: 1.5 }}
+                            whileHover={{ y: -65, scale: 1.1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 260,
+                                damping: 20
+                            }}
+                            className="absolute left-1/2 -translate-x-1/2 w-28 h-28 pointer-events-none z-10"
+                        >
+                            <img src="/perabot_mascot.png" alt="Mascot Peek" className="w-full h-full object-contain drop-shadow-2xl" />
+                        </motion.div>
+                    )}
+                </AnimatePresence>
 
                 <motion.button
                     whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(139, 94, 60, 0.4)" }}
@@ -112,7 +120,12 @@ const ChatBot = () => {
                                 exit={{ opacity: 0, scale: 0.5 }}
                                 className="w-full h-full"
                             >
-                                <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-150 translate-y-2" />
+                                <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-150 translate-y-2 opacity-20" />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                </div>
                             </motion.div>
                         )}
                     </AnimatePresence>
@@ -160,8 +173,8 @@ const ChatBot = () => {
                                 >
                                     <div
                                         className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
-                                                ? 'bg-primary text-white rounded-tr-none shadow-md'
-                                                : 'bg-white/80 backdrop-blur-md text-dark shadow-sm border border-gray-100 rounded-tl-none font-medium'
+                                            ? 'bg-primary text-white rounded-tr-none shadow-md'
+                                            : 'bg-white/80 backdrop-blur-md text-dark shadow-sm border border-gray-100 rounded-tl-none font-medium'
                                             }`}
                                     >
                                         {msg.content}
