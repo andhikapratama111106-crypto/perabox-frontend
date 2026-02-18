@@ -26,7 +26,7 @@ export interface RevealProps extends UseRevealOptions {
     /** Custom Framer Motion variants (overrides direction) */
     variants?: Variants;
     /** HTML tag for the wrapper. Default 'div' */
-    as?: keyof JSX.IntrinsicElements;
+    as?: keyof React.JSX.IntrinsicElements;
     /** Disable all animation via data attribute */
     'data-no-animations'?: boolean;
 }
