@@ -172,12 +172,7 @@ const ChatBot = () => {
                                     key={index}
                                     className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
-                                    <div className={`flex items-end gap-2 max-w-[85%] ${msg.role === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
-                                        {msg.role === 'model' && (
-                                            <div className="w-8 h-8 rounded-full bg-white border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm mb-1">
-                                                <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover" />
-                                            </div>
-                                        )}
+                                    <div className={`flex max-w-[85%] ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                         <div
                                             className={`p-4 rounded-2xl text-sm leading-relaxed ${msg.role === 'user'
                                                 ? 'bg-primary text-white rounded-tr-none shadow-md'
