@@ -17,6 +17,19 @@ const ChatBot = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const messagesEndRef = useRef<HTMLDivElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+    const adjustHeight = () => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.style.height = 'auto';
+            textarea.style.height = `${Math.min(textarea.scrollHeight, 150)}px`;
+        }
+    };
+
+    useEffect(() => {
+        adjustHeight();
+    }, [input]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -26,12 +39,20 @@ const ChatBot = () => {
         scrollToBottom();
     }, [messages, isLoading]);
 
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            handleSendMessage(e as any);
+        }
+    };
+
     const handleSendMessage = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
 
         const userMessage = input.trim();
         setInput('');
+        if (textareaRef.current) textareaRef.current.style.height = 'auto';
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
         setIsLoading(true);
 
@@ -187,13 +208,15 @@ const ChatBot = () => {
                         </div>
 
                         {/* Input Area */}
-                        <form onSubmit={handleSendMessage} className="p-6 bg-white/50 backdrop-blur-md border-t border-gray-100/50 flex gap-3">
-                            <input
-                                type="text"
+                        <form onSubmit={handleSendMessage} className="p-6 bg-white/50 backdrop-blur-md border-t border-gray-100/50 flex items-end gap-3">
+                            <textarea
+                                ref={textareaRef}
+                                rows={1}
                                 value={input}
+                                onKeyDown={handleKeyDown}
                                 onChange={(e) => setInput(e.target.value)}
                                 placeholder="Tanya Pera tentang AC..."
-                                className="flex-1 bg-gray-100/50 backdrop-blur-sm border border-transparent rounded-2xl px-6 py-4 text-sm focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-all outline-none font-medium"
+                                className="flex-1 bg-gray-100/50 backdrop-blur-sm border border-transparent rounded-2xl px-6 py-4 text-sm focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-all outline-none font-medium resize-none min-h-[56px] max-h-[150px] overflow-y-auto"
                             />
                             <motion.button
                                 whileHover={{ scale: 1.05 }}
