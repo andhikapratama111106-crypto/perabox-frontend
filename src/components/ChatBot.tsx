@@ -11,7 +11,7 @@ interface Message {
 const ChatBot = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'model', content: 'Selamat datang di PERABOX Premium Concierge. Saya Pera, asisten pribadi Anda. Ada yang bisa saya bantu hari ini?' }
+        { role: 'model', content: 'Halo! Saya Pera, asisten teknisi Anda. Siap membantu segala kebutuhan rumah Anda. Ada yang bisa saya bantu?' }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +35,18 @@ const ChatBot = () => {
         setIsLoading(true);
 
         try {
-            const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+            // Determine API URL: Use env var, or fallback to perabox-backend.vercel.app if on vercel.app
+            let apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
+            if (!apiUrl) {
+                const currentHost = typeof window !== 'undefined' ? window.location.hostname : '';
+                if (currentHost.includes('vercel.app')) {
+                    apiUrl = 'https://perabox-backend.vercel.app';
+                } else {
+                    apiUrl = 'http://localhost:8000';
+                }
+            }
+
             const response = await fetch(`${apiUrl}/api/v1/chat/message`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -51,7 +62,7 @@ const ChatBot = () => {
             setMessages(prev => [...prev, { role: 'model', content: data.response }]);
         } catch (error) {
             console.error('Chat Error:', error);
-            setMessages(prev => [...prev, { role: 'model', content: 'Maaf, terjadi sedikit kendala pada koneksi premium kami. Silakan coba sesaat lagi.' }]);
+            setMessages(prev => [...prev, { role: 'model', content: 'Wah, sepertinya saya sedang kesulitan terhubung ke pusat. Mohon coba lagi sebentar lagi ya!' }]);
         } finally {
             setIsLoading(false);
         }
@@ -59,42 +70,54 @@ const ChatBot = () => {
 
     return (
         <div className="fixed bottom-6 right-6 z-[9999] font-sans">
-            {/* Chat Bubble Button - Enhanced with Glow */}
-            <motion.button
-                whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(139, 94, 60, 0.4)" }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className="w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center cursor-pointer overflow-hidden relative border-2 border-white/20"
-            >
-                <AnimatePresence mode="wait">
-                    {isOpen ? (
-                        <motion.svg
-                            key="close"
-                            initial={{ opacity: 0, rotate: -90 }}
-                            animate={{ opacity: 1, rotate: 0 }}
-                            exit={{ opacity: 0, rotate: 90 }}
-                            className="w-8 h-8"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                        >
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </motion.svg>
-                    ) : (
-                        <motion.div
-                            key="chat"
-                            initial={{ opacity: 0, scale: 0.5 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 0.5 }}
-                            className="w-full h-full flex items-center justify-center relative"
-                        >
-                            {/* Avatar or Icon */}
-                            <img src="/perabot_avatar.png" alt="Pera" className="w-full h-full object-cover" />
-                            <div className="absolute inset-0 bg-primary/20 hover:bg-transparent transition-colors" />
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </motion.button>
+            {/* Chat Bubble Button - Mascot Peek Version */}
+            <div className="relative">
+                {/* Mascot Peeking from top of bubble when closed */}
+                {!isOpen && (
+                    <motion.div
+                        initial={{ y: 20, opacity: 0 }}
+                        animate={{ y: -50, opacity: 1 }}
+                        transition={{ delay: 1, type: "spring", stiffness: 100 }}
+                        className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 pointer-events-none z-10"
+                    >
+                        <img src="/perabot_mascot.png" alt="Mascot Peek" className="w-full h-full object-contain drop-shadow-xl" />
+                    </motion.div>
+                )}
+
+                <motion.button
+                    whileHover={{ scale: 1.05, boxShadow: "0 20px 40px -10px rgba(139, 94, 60, 0.4)" }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-16 h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center cursor-pointer overflow-hidden relative border-2 border-white/20 z-0"
+                >
+                    <AnimatePresence mode="wait">
+                        {isOpen ? (
+                            <motion.svg
+                                key="close"
+                                initial={{ opacity: 0, rotate: -90 }}
+                                animate={{ opacity: 1, rotate: 0 }}
+                                exit={{ opacity: 0, rotate: 90 }}
+                                className="w-8 h-8"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </motion.svg>
+                        ) : (
+                            <motion.div
+                                key="chat"
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                className="w-full h-full"
+                            >
+                                <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-150 translate-y-2" />
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </motion.button>
+            </div>
 
             {/* Chat Window - Glassmorphism Upgrade */}
             <AnimatePresence>
@@ -107,27 +130,26 @@ const ChatBot = () => {
                     >
                         {/* Premium Header */}
                         <div className="bg-gradient-to-br from-primary to-primary/80 p-8 text-white relative">
-                            <div className="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
-                                <svg className="w-24 h-24" fill="currentColor" viewBox="0 0 24 24">
-                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z" />
-                                </svg>
+                            {/* Decorative watermarked mascot */}
+                            <div className="absolute top-0 right-0 p-2 opacity-5 pointer-events-none">
+                                <img src="/perabot_mascot.png" alt="" className="w-32 h-32 object-contain" />
                             </div>
 
                             <div className="flex items-center gap-4">
-                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-primary/20">
-                                    <img src="/perabot_avatar.png" alt="Pera" className="w-full h-full object-cover" />
+                                <div className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-primary/20 bg-secondary/20">
+                                    <img src="/perabot_mascot.png" alt="Pera" className="w-full h-full object-cover scale-110" />
                                 </div>
                                 <div>
                                     <div className="flex items-center gap-2">
                                         <h3 className="font-bold text-xl tracking-tight">Pera</h3>
                                         <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.8)]"></span>
                                     </div>
-                                    <p className="text-sm text-white/80 font-medium">Premium Concierge</p>
+                                    <p className="text-sm text-white/80 font-medium">Asisten Teknis Anda</p>
                                 </div>
                             </div>
                         </div>
 
-                        {/* Messages Area - Subtle Texture */}
+                        {/* Messages Area */}
                         <div className="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-secondary/10 to-transparent">
                             {messages.map((msg, index) => (
                                 <motion.div
@@ -158,13 +180,13 @@ const ChatBot = () => {
                             <div ref={messagesEndRef} />
                         </div>
 
-                        {/* Input Area - Sleek and Minimal */}
+                        {/* Input Area */}
                         <form onSubmit={handleSendMessage} className="p-6 bg-white/50 backdrop-blur-md border-t border-gray-100/50 flex gap-3">
                             <input
                                 type="text"
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
-                                placeholder="Tulis pesan untuk Pera..."
+                                placeholder="Tanya Pera tentang AC..."
                                 className="flex-1 bg-gray-100/50 backdrop-blur-sm border border-transparent rounded-2xl px-6 py-4 text-sm focus:bg-white focus:border-primary/20 focus:ring-4 focus:ring-primary/5 transition-all outline-none font-medium"
                             />
                             <motion.button
