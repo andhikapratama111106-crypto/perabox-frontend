@@ -1,26 +1,31 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
+import { authAPI } from '@/lib/api';
+import { motion } from 'framer-motion';
 
 const CustomerProfile = () => {
     // State for user data
     const [user, setUser] = useState({
-        name: 'Yoga Arya Saputra',
-        role: 'User (free)',
-        location: 'Palmerah, West Jakarta, Indonesia',
+        name: '',
+        role: 'Customer',
+        location: 'Indonesia',
         avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
-        firstName: 'Yoga',
-        lastName: 'Arya Saputra',
-        email: 'yoga.saputra@binus.ac.id',
-        phone: '(62) 817 423 5269',
-        bio: 'Sini mampir ke Kos Anggur',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        bio: '',
         address: {
             country: 'Indonesia',
-            street: 'Jl. Kyai H. Syahdan No.1, RT.3/RW.11, Palmerah, Kec. Palmerah, Kota Jakarta Barat...',
-            postalCode: '11480',
-            taxId: 'INA578936',
+            street: '',
+            postalCode: '',
+            taxId: '',
         }
     });
+
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     // State for edit modes
     const [editMode, setEditMode] = useState({
@@ -31,6 +36,46 @@ const CustomerProfile = () => {
 
     // Temporary state for form inputs (to allow canceling)
     const [formData, setFormData] = useState(user);
+
+    const fetchUserData = useCallback(async () => {
+        try {
+            setLoading(true);
+            const response = await authAPI.getCurrentUser();
+            const data = response.data;
+
+            // Map backend data to local state
+            const nameParts = data.full_name.split(' ');
+            const mappedUser = {
+                name: data.full_name,
+                role: data.role.charAt(0).toUpperCase() + data.role.slice(1),
+                location: 'Indonesia',
+                avatar: data.avatar_url || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
+                firstName: nameParts[0] || '',
+                lastName: nameParts.slice(1).join(' ') || '',
+                email: data.email,
+                phone: data.phone,
+                bio: '', // Bio not in basic user response yet
+                address: {
+                    country: 'Indonesia',
+                    street: '',
+                    postalCode: '',
+                    taxId: '',
+                }
+            };
+
+            setUser(mappedUser);
+            setFormData(mappedUser);
+        } catch (err: any) {
+            console.error('Failed to fetch user profile:', err);
+            setError('Could not load profile data');
+        } finally {
+            setLoading(false);
+        }
+    }, []);
+
+    useEffect(() => {
+        fetchUserData();
+    }, [fetchUserData]);
 
     const handleEdit = (section: keyof typeof editMode) => {
         setFormData(user); // Reset form data to current user data
@@ -61,6 +106,29 @@ const CustomerProfile = () => {
             setFormData({ ...formData, [field]: e.target.value });
         }
     };
+
+    if (loading) {
+        return (
+            <div className="flex items-center justify-center min-h-[400px]">
+                <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="bg-red-50 border border-red-100 text-red-600 p-8 rounded-2xl text-center">
+                <p className="font-bold text-lg mb-2">Error</p>
+                <p>{error}</p>
+                <button
+                    onClick={() => fetchUserData()}
+                    className="mt-4 px-6 py-2 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors"
+                >
+                    Try Again
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6 animate-fade-in-up pb-10">
