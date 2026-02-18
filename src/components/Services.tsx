@@ -109,7 +109,7 @@ const Services = () => {
                 {/* Service Detail Panel — smooth crossfade */}
                 <Reveal direction="up" delay={0.2}>
                     <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
-                        <div className="flex flex-col md:flex-row md:h-[480px]">
+                        <div className="flex flex-col md:flex-row md:h-[580px]">
                             {/* Detail Image — crossfade with absolute positioning */}
                             <div className="w-full md:w-1/2 relative h-[280px] md:h-full overflow-hidden flex-shrink-0">
                                 <AnimatePresence initial={false}>
@@ -131,7 +131,7 @@ const Services = () => {
                             </div>
 
                             {/* Detail Text — crossfade (no layout shift) */}
-                            <div className="w-full md:w-1/2 p-8 md:p-12 relative overflow-hidden flex-shrink-0 flex items-center">
+                            <div className="w-full md:w-1/2 p-8 md:p-12 relative overflow-hidden flex-shrink-0 flex items-center min-h-[500px] md:min-h-0">
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.div
                                         key={activeTab}
