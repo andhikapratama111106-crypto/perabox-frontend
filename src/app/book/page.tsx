@@ -480,28 +480,55 @@ Mohon konfirmasinya. Terima kasih.`;
                             </div>
                         </div>
 
-                        <div className="space-y-3">
+                        <div className="grid grid-cols-1 gap-4">
                             {apiServices.length > 0 ? apiServices.map(service => (
                                 <div
                                     key={service.id}
                                     onClick={() => handleServiceToggle(service.id)}
-                                    className={`flex items-center p-4 rounded-xl border cursor-pointer transition-all
+                                    className={`group relative flex items-center p-6 rounded-[2rem] border-2 cursor-pointer transition-all duration-300
                                         ${selectedServices.includes(service.id)
-                                            ? 'border-primary bg-primary/5'
-                                            : 'border-gray-100 hover:border-gray-300'
+                                            ? 'border-[#9C6D3F] bg-[#FDF8F3] shadow-lg scale-[1.01]'
+                                            : 'border-gray-100 bg-white hover:border-[#9C6D3F]/30 hover:shadow-md'
                                         }`}
                                 >
-                                    <div className={`w-6 h-6 rounded-md border mr-4 flex items-center justify-center
-                                         ${selectedServices.includes(service.id) ? 'bg-primary border-primary' : 'border-gray-300 bg-white'}`}>
-                                        {selectedServices.includes(service.id) && <span className="text-white text-xs">✓</span>}
+                                    <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mr-6 transition-all
+                                         ${selectedServices.includes(service.id) ? 'bg-[#9C6D3F] text-white shadow-lg rotate-12' : 'bg-gray-50 text-gray-400 group-hover:bg-amber-50'}`}>
+                                        {service.icon || '❄️'}
                                     </div>
                                     <div className="flex-1">
-                                        <h3 className="font-bold text-gray-800">{service.title}</h3>
-                                        <p className="text-xs text-gray-500">{service.price}</p>
+                                        <h3 className={`text-xl font-black tracking-tight mb-1 transition-colors
+                                            ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-dark'}`}>
+                                            {service.title}
+                                        </h3>
+                                        <div className="flex items-center gap-2">
+                                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Mulai dari</span>
+                                            <p className={`font-black text-lg ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-gray-600'}`}>
+                                                {service.price}
+                                            </p>
+                                        </div>
                                     </div>
+                                    <div className={`w-10 h-10 rounded-full border-2 flex items-center justify-center transition-all
+                                        ${selectedServices.includes(service.id)
+                                            ? 'bg-[#9C6D3F] border-[#9C6D3F] shadow-inner'
+                                            : 'border-gray-200 group-hover:border-[#9C6D3F]/50'}`}>
+                                        {selectedServices.includes(service.id) ? (
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" viewBox="0 0 20 20" fill="currentColor">
+                                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                            </svg>
+                                        ) : (
+                                            <div className="w-2 h-2 rounded-full bg-gray-200 group-hover:bg-[#9C6D3F]/30" />
+                                        )}
+                                    </div>
+
+                                    {/* Subtle decorative element */}
+                                    {selectedServices.includes(service.id) && (
+                                        <div className="absolute -top-3 -right-3 w-12 h-12 bg-[#9C6D3F]/10 rounded-full blur-xl animate-pulse" />
+                                    )}
                                 </div>
                             )) : (
-                                <p>Loading services...</p>
+                                <div className="text-center py-20 bg-gray-50 rounded-[2rem] border-2 border-dashed border-gray-200">
+                                    <p className="text-gray-400 font-medium">Memuat daftar layanan...</p>
+                                </div>
                             )}
                         </div>
 
@@ -583,58 +610,65 @@ Mohon konfirmasinya. Terima kasih.`;
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8 animate-fade-in-up">
                         <h2 className="text-2xl font-bold text-dark mb-6">Konfirmasi Pesanan</h2>
 
-                        {/* Booking Summary Card - PREMIUM UPGRADE */}
-                        <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl mb-8 transform hover:scale-[1.01] transition-all duration-300">
+                        {/* Booking Summary Card - REMASTERED TO MATCH SCREENSHOT */}
+                        <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-2xl mb-8">
                             {/* Technician Header */}
-                            <div className="bg-gradient-to-r from-primary/10 to-transparent p-6 flex items-center gap-5 border-b border-gray-50">
-                                {selectedTechnician && (
-                                    <div className="relative">
-                                        <div className="w-20 h-20 rounded-full border-4 border-white shadow-md overflow-hidden bg-white">
-                                            <img src={selectedTechnician.photoUrl} alt="Tech" className="w-full h-full object-cover" />
+                            <div className="bg-gradient-to-b from-[#FDF8F3] to-white p-6 border-b border-gray-50">
+                                <div className="flex items-center gap-6">
+                                    {selectedTechnician && (
+                                        <div className="relative">
+                                            <div className="w-24 h-24 rounded-full border-4 border-white shadow-lg overflow-hidden bg-white">
+                                                <img src={selectedTechnician.photoUrl} alt="Tech" className="w-full h-full object-cover" />
+                                            </div>
+                                            <div className="absolute bottom-0 right-0 bg-white px-2 py-0.5 rounded-full shadow-md flex items-center gap-1 border border-amber-100">
+                                                <span className="text-amber-500 text-sm font-black">{selectedTechnician.rating}</span>
+                                                <span className="text-amber-500 text-[10px]">★</span>
+                                            </div>
                                         </div>
-                                        <div className="absolute -bottom-1 -right-1 bg-white px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1 border border-primary/10">
-                                            <span className="text-amber-500 text-xs font-bold">{selectedTechnician.rating}</span>
-                                            <span className="text-amber-500 text-[10px]">★</span>
+                                    )}
+                                    <div className="flex-1">
+                                        <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">Teknisi Pilihan</p>
+                                        <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
+                                        <div className="flex items-center gap-1.5">
+                                            <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                                            <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">{selectedTechnician?.specialty}</p>
                                         </div>
                                     </div>
-                                )}
-                                <div className="flex-1">
-                                    <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-1">Teknisi Pilihan</p>
-                                    <h3 className="text-xl font-black text-dark tracking-tight leading-tight">{selectedTechnician?.name}</h3>
-                                    <p className="text-gray-500 text-xs font-medium flex items-center gap-1.5 mt-1">
-                                        <span>{selectedTechnician?.specialty}</span>
-                                        <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                                        <span>{selectedTechnician?.experience}</span>
-                                    </p>
                                 </div>
                             </div>
 
-                            {/* Schedule Details */}
-                            <div className="p-6 space-y-5">
-                                <div className="flex items-center gap-4 group">
-                                    <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300 border border-gray-100">
-                                        📅
+                            {/* Schedule & Cost Details */}
+                            <div className="p-8 space-y-8">
+                                {/* Date & Time */}
+                                <div className="flex items-start gap-5">
+                                    <div className="w-14 h-14 rounded-2xl bg-gray-50 flex flex-col items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
+                                        <div className="bg-red-500 w-full h-4 flex items-center justify-center">
+                                            <span className="text-[8px] text-white font-black uppercase">JUL</span>
+                                        </div>
+                                        <span className="text-xl font-black text-dark leading-none mt-1">17</span>
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-0.5">Jadwal Kunjungan</p>
-                                        <p className="font-black text-dark text-lg leading-tight">
+                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">Jadwal Kunjungan</p>
+                                        <h4 className="font-black text-dark text-xl leading-tight">
                                             {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
-                                        </p>
-                                        <p className="text-primary font-black mt-0.5">{selectedTime || '-'}</p>
+                                        </h4>
+                                        <p className="text-[#9C6D3F] text-2xl font-black mt-1">{selectedTime || '-'}</p>
                                     </div>
                                 </div>
 
-                                <div className="pt-5 border-t border-gray-100 space-y-3">
+                                <div className="pt-8 border-t border-gray-100 space-y-6">
                                     <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Detail Biaya</p>
-                                    <div className="flex justify-between items-center text-sm font-medium text-gray-600">
+
+                                    <div className="flex justify-between items-center text-lg font-bold text-gray-700">
                                         <span>Estimasi Layanan ({selectedServices.length})</span>
                                         <span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span>
                                     </div>
-                                    <div className="flex justify-between items-end pt-2">
-                                        <span className="text-sm font-bold text-dark">Total Estimasi</span>
+
+                                    <div className="flex justify-between items-end pt-4">
+                                        <span className="text-lg font-black text-dark mb-2">Total Estimasi</span>
                                         <div className="text-right">
-                                            <span className="block text-2xl font-black text-primary leading-none">Rp {calculateTotal().toLocaleString('id-ID')}</span>
-                                            <span className="text-[10px] text-gray-400 font-medium">Sudah termasuk PPN & Biaya Layanan</span>
+                                            <span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                                            <span className="text-[10px] text-gray-400 font-medium italic tracking-wide">Sudah termasuk PPN & Biaya Layanan</span>
                                         </div>
                                     </div>
                                 </div>
