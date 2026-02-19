@@ -2,6 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useRouter } from 'next/navigation';
 
 interface Message {
     role: 'user' | 'model';
@@ -9,6 +10,7 @@ interface Message {
 }
 
 const ChatBot = () => {
+    const router = useRouter();
     // Forced update to sync deployment
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
@@ -55,6 +57,26 @@ const ChatBot = () => {
         if (textareaRef.current) textareaRef.current.style.height = 'auto';
         setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
         setIsLoading(true);
+
+        // Check for booking intent
+        const bookingKeywords = ['pesan', 'booking', 'book', 'order', 'buat janji', 'mau servis'];
+        const hasIntent = bookingKeywords.some(keyword => userMessage.toLowerCase().includes(keyword));
+
+        if (hasIntent) {
+            setTimeout(() => {
+                setMessages(prev => [...prev, {
+                    role: 'model',
+                    content: 'Tentu! Saya akan langsung mengarahkan Anda ke halaman pemesanan. Mohon tunggu sebentar...'
+                }]);
+
+                setTimeout(() => {
+                    router.push('/book');
+                    setIsOpen(false);
+                }, 1500);
+            }, 500);
+            setIsLoading(false);
+            return;
+        }
 
         try {
             // Determine API URL: Use env var, or fallback to perabox-backend.vercel.app if on vercel.app
