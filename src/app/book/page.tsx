@@ -43,8 +43,16 @@ export default function BookingPage() {
     const [currentPaymentId, setCurrentPaymentId] = useState('');
     const [uniqueCode] = useState(() => Math.floor(Math.random() * 999) + 1); // Random 1-999
 
-    // Load available services (you might still want to fetch from API, or use mock if preferred)
-    const [apiServices, setApiServices] = useState<Service[]>([]);
+    // Load available services (initialized with mock data for instant display)
+    const [apiServices, setApiServices] = useState<Service[]>(
+        serviceTypes.map((s) => ({
+            id: s.id,
+            title: s.name,
+            price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
+            icon: "❄️",
+            base_price: s.price
+        }))
+    );
 
     const fetchData = async (isInitial = false) => {
         // ONLY set loading to true if we genuinely have NO data yet.
@@ -448,34 +456,62 @@ Mohon konfirmasinya. Terima kasih.`;
                         <h2 className="text-2xl font-bold text-dark mb-6">Pilih Layanan</h2>
 
                         {/* Selected Technician & Schedule Confirmation - Combined Large Card */}
-                        <div className="bg-white border rounded-3xl p-6 mb-8 shadow-sm flex flex-col md:flex-row gap-6 items-center md:items-start">
+                        <div className="bg-white border border-gray-100 rounded-[2.5rem] p-6 mb-8 shadow-xl shadow-gray-200/50 flex flex-col gap-6">
                             {selectedTechnician && (
-                                <div className="relative">
-                                    <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-primary/10">
-                                        <img src={selectedTechnician.photoUrl} alt={selectedTechnician.name} className="w-full h-full object-cover" />
+                                <div className="flex items-center gap-5">
+                                    <div className="relative">
+                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white shadow-md">
+                                            <img
+                                                src={selectedTechnician.photoUrl}
+                                                alt={selectedTechnician.name}
+                                                className="w-full h-full object-cover"
+                                            />
+                                        </div>
+                                        <div className="absolute -bottom-1 -right-1 bg-white px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1 border border-amber-50">
+                                            <span className="text-[10px] font-black text-dark">{selectedTechnician.rating}</span>
+                                            <span className="text-amber-400 text-[8px]">★</span>
+                                        </div>
                                     </div>
-                                    <div className="absolute -bottom-2 -right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded-lg shadow-md">
-                                        {selectedTechnician.rating} ★
+
+                                    <div className="flex-1">
+                                        <p className="text-[10px] text-[#9C6D3F] font-black uppercase tracking-[0.2em] mb-1 opacity-80">
+                                            Teknisi Pilihan
+                                        </p>
+                                        <h3 className="text-2xl font-black text-dark tracking-tight leading-tight">
+                                            {selectedTechnician.name}
+                                        </h3>
+                                        <div className="flex items-center gap-1.5 mt-1">
+                                            <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                            <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-none">
+                                                {selectedTechnician.specialty}
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             )}
 
-                            <div className="flex-1 text-center md:text-left space-y-3 w-full">
-                                <div>
-                                    <p className="text-xs text-primary font-bold uppercase tracking-wider mb-1">Teknisi Pilihan</p>
-                                    <h3 className="text-xl font-bold text-dark">{selectedTechnician?.name}</h3>
-                                    <p className="text-gray-500 text-sm">{selectedTechnician?.specialty} • {selectedTechnician?.experience}</p>
+                            <div className="bg-[#f9fbfc] rounded-3xl p-5 flex items-center gap-5 border border-gray-50">
+                                <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center overflow-hidden shrink-0">
+                                    <div className="bg-red-500 w-full h-3 flex items-center justify-center">
+                                        <span className="text-[6px] text-white font-black uppercase">
+                                            {selectedDate ? new Date(selectedDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase() : 'DATE'}
+                                        </span>
+                                    </div>
+                                    <span className="text-lg font-black text-dark leading-none mt-1">
+                                        {selectedDate ? new Date(selectedDate).getDate() : '--'}
+                                    </span>
                                 </div>
 
-                                <div className="bg-gray-50 rounded-xl p-4 border border-gray-100 flex items-center gap-4">
-                                    <div className="bg-white p-2 rounded-lg text-2xl shadow-sm">📅</div>
-                                    <div className="text-left">
-                                        <p className="text-xs text-gray-500 font-semibold uppercase">Jadwal Kunjungan</p>
-                                        <p className="font-bold text-dark text-lg">
-                                            {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
-                                        </p>
-                                        <p className="text-primary font-bold">{selectedTime || '-'}</p>
-                                    </div>
+                                <div className="flex-1 leading-tight">
+                                    <p className="text-[9px] text-gray-400 font-black uppercase tracking-[0.15em] mb-1">
+                                        Jadwal Kunjungan
+                                    </p>
+                                    <h4 className="font-black text-dark text-base">
+                                        {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
+                                    </h4>
+                                    <p className="text-[#9C6D3F] font-black text-lg">
+                                        {selectedTime || '-'}
+                                    </p>
                                 </div>
                             </div>
                         </div>
