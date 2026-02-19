@@ -2,10 +2,16 @@
 
 import React, { useEffect, useState } from 'react';
 import { adminAPI } from '@/lib/api';
+import { useAdminStore } from '@/store/adminStore';
 
 export default function AdminTechniciansPage() {
-    const [technicians, setTechnicians] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const {
+        technicians,
+        lastFetched,
+        fetchTechnicians,
+        updateTechnicianAvailability
+    } = useAdminStore();
+
     const [selectedTech, setSelectedTech] = useState<any | null>(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
@@ -23,21 +29,9 @@ export default function AdminTechniciansPage() {
         avatar_url: ''
     });
 
-    const fetchTechnicians = async () => {
-        setLoading(true);
-        try {
-            const response = await adminAPI.getTechnicians();
-            setTechnicians(response.data || []);
-        } catch (error) {
-            console.error("Failed to fetch technicians", error);
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
         fetchTechnicians();
-    }, []);
+    }, [fetchTechnicians]);
 
     const handleEditClick = (tech: any) => {
         setSelectedTech(tech);
@@ -61,7 +55,7 @@ export default function AdminTechniciansPage() {
         try {
             await adminAPI.updateTechnician(selectedTech.id, formData);
             setIsEditModalOpen(false);
-            fetchTechnicians(); // Refresh data
+            fetchTechnicians(true); // Force refresh store
         } catch (error) {
             console.error("Failed to update technician", error);
             alert("Failed to update technician");
@@ -70,16 +64,18 @@ export default function AdminTechniciansPage() {
 
     const toggleAvailability = async (id: string, currentStatus: boolean) => {
         try {
-            // Optimistic update
-            setTechnicians(prev => prev.map((t: any) => t.id === id ? { ...t, is_available: !currentStatus } : t));
+            // Optimistic update in store
+            updateTechnicianAvailability(id, !currentStatus);
             await adminAPI.updateTechnicianAvailability(id, !currentStatus);
         } catch (error) {
             console.error("Failed to toggle availability", error);
-            fetchTechnicians(); // Revert on error
+            // Revert in store on error
+            updateTechnicianAvailability(id, currentStatus);
+            alert("Gagal merubah status ketersediaan");
         }
     };
 
-    if (loading) {
+    if (!lastFetched.technicians) {
         return (
             <div className="p-8 flex items-center justify-center min-h-[60vh]">
                 <div className="flex flex-col items-center gap-3">

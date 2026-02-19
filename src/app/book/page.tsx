@@ -141,6 +141,13 @@ export default function BookingPage() {
         setStep(2);
     };
 
+    const validateDateRange = (dateString: string) => {
+        if (!dateString) return false;
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        return year >= 2026 && year <= 2028;
+    };
+
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const selectedDate = e.target.value;
         setSelectedDate(selectedDate);
@@ -148,6 +155,10 @@ export default function BookingPage() {
 
     const handleScheduleSelect = () => {
         if (selectedDate && selectedTime) {
+            if (!validateDateRange(selectedDate)) {
+                alert('Silakan pilih tanggal antara tahun 2026 dan 2028.');
+                return;
+            }
             setStep(3);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -394,7 +405,8 @@ Mohon konfirmasinya. Terima kasih.`;
                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                 value={selectedDate}
                                 onChange={handleDateChange}
-                                min={new Date().toISOString().split('T')[0]}
+                                min="2026-01-01"
+                                max="2028-12-31"
                             />
                         </div>
 
@@ -519,8 +531,22 @@ Mohon konfirmasinya. Terima kasih.`;
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp</label>
-                                <input type="tel" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                                    value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} placeholder="0812xxxxxxxx" />
+                                <input
+                                    type="tel"
+                                    className={`w-full px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-primary/20 transition-all ${formData.phone && (!formData.phone.startsWith('08') || !/^\d+$/.test(formData.phone))
+                                        ? 'border-red-400 bg-red-50'
+                                        : 'border-gray-200 focus:border-primary'
+                                        }`}
+                                    value={formData.phone}
+                                    onChange={e => {
+                                        const val = e.target.value.replace(/[^\d]/g, '');
+                                        setFormData({ ...formData, phone: val });
+                                    }}
+                                    placeholder="08xxxxxxxxxx"
+                                />
+                                {formData.phone && !formData.phone.startsWith('08') && (
+                                    <p className="text-red-500 text-xs mt-1">Nomor harus dimulai dengan 08</p>
+                                )}
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
@@ -537,8 +563,13 @@ Mohon konfirmasinya. Terima kasih.`;
                         <div className="mt-8 flex justify-between">
                             <button onClick={() => setStep(3)} className="text-gray-500 hover:text-dark">Kembali</button>
                             <button
-                                onClick={() => formData.full_name && formData.phone && formData.address && setStep(5)}
-                                disabled={!formData.full_name || !formData.phone || !formData.address}
+                                onClick={() => {
+                                    const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10;
+                                    if (formData.full_name && isPhoneValid && formData.address) {
+                                        setStep(5);
+                                    }
+                                }}
+                                disabled={!formData.full_name || !formData.phone.startsWith('08') || formData.phone.length < 10 || !formData.address}
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all"
                             >
                                 Lanjut Pembayaran
@@ -552,27 +583,60 @@ Mohon konfirmasinya. Terima kasih.`;
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8 animate-fade-in-up">
                         <h2 className="text-2xl font-bold text-dark mb-6">Konfirmasi Pesanan</h2>
 
-                        {/* Booking Summary Card */}
-                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100 mb-8">
-                            <div className="flex items-start gap-4 mb-6 border-b border-gray-200 pb-6">
-                                <img src={selectedTechnician?.photoUrl} alt="Tech" className="w-16 h-16 rounded-full object-cover" />
-                                <div>
-                                    <h3 className="font-bold text-lg text-dark">{selectedTechnician?.name}</h3>
-                                    <p className="text-sm text-gray-500">⭐ {selectedTechnician?.rating} • {selectedTechnician?.reviewCount} Reviews</p>
-                                    <div className="mt-2 text-primary font-bold bg-primary/10 inline-block px-3 py-1 rounded-full text-xs">
-                                        {selectedDate} • {selectedTime}
+                        {/* Booking Summary Card - PREMIUM UPGRADE */}
+                        <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-xl mb-8 transform hover:scale-[1.01] transition-all duration-300">
+                            {/* Technician Header */}
+                            <div className="bg-gradient-to-r from-primary/10 to-transparent p-6 flex items-center gap-5 border-b border-gray-50">
+                                {selectedTechnician && (
+                                    <div className="relative">
+                                        <div className="w-20 h-20 rounded-full border-4 border-white shadow-md overflow-hidden bg-white">
+                                            <img src={selectedTechnician.photoUrl} alt="Tech" className="w-full h-full object-cover" />
+                                        </div>
+                                        <div className="absolute -bottom-1 -right-1 bg-white px-2 py-0.5 rounded-full shadow-sm flex items-center gap-1 border border-primary/10">
+                                            <span className="text-amber-500 text-xs font-bold">{selectedTechnician.rating}</span>
+                                            <span className="text-amber-500 text-[10px]">★</span>
+                                        </div>
                                     </div>
+                                )}
+                                <div className="flex-1">
+                                    <p className="text-[10px] text-primary font-black uppercase tracking-[0.2em] mb-1">Teknisi Pilihan</p>
+                                    <h3 className="text-xl font-black text-dark tracking-tight leading-tight">{selectedTechnician?.name}</h3>
+                                    <p className="text-gray-500 text-xs font-medium flex items-center gap-1.5 mt-1">
+                                        <span>{selectedTechnician?.specialty}</span>
+                                        <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
+                                        <span>{selectedTechnician?.experience}</span>
+                                    </p>
                                 </div>
                             </div>
 
-                            <div className="space-y-3 text-sm text-gray-600 mb-6">
-                                <div className="flex justify-between">
-                                    <span>Layanan ({selectedServices.length})</span>
-                                    <span>Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                            {/* Schedule Details */}
+                            <div className="p-6 space-y-5">
+                                <div className="flex items-center gap-4 group">
+                                    <div className="w-12 h-12 rounded-2xl bg-gray-50 flex items-center justify-center text-2xl group-hover:bg-primary/10 group-hover:scale-110 transition-all duration-300 border border-gray-100">
+                                        📅
+                                    </div>
+                                    <div className="flex-1">
+                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-0.5">Jadwal Kunjungan</p>
+                                        <p className="font-black text-dark text-lg leading-tight">
+                                            {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
+                                        </p>
+                                        <p className="text-primary font-black mt-0.5">{selectedTime || '-'}</p>
+                                    </div>
                                 </div>
-                                <div className="flex justify-between font-bold text-dark text-lg pt-3 border-t border-gray-200">
-                                    <span>Total Estimasi</span>
-                                    <span>Rp {calculateTotal().toLocaleString('id-ID')}</span>
+
+                                <div className="pt-5 border-t border-gray-100 space-y-3">
+                                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Detail Biaya</p>
+                                    <div className="flex justify-between items-center text-sm font-medium text-gray-600">
+                                        <span>Estimasi Layanan ({selectedServices.length})</span>
+                                        <span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                                    </div>
+                                    <div className="flex justify-between items-end pt-2">
+                                        <span className="text-sm font-bold text-dark">Total Estimasi</span>
+                                        <div className="text-right">
+                                            <span className="block text-2xl font-black text-primary leading-none">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                                            <span className="text-[10px] text-gray-400 font-medium">Sudah termasuk PPN & Biaya Layanan</span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -733,7 +797,17 @@ Mohon konfirmasinya. Terima kasih.`;
                 <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg md:hidden z-40">
                     <div className="flex items-center justify-between">
                         {step === 2 && (
-                            <button onClick={handleScheduleSelect} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                            <button
+                                onClick={() => {
+                                    if (validateDateRange(selectedDate)) {
+                                        handleScheduleSelect();
+                                    } else {
+                                        alert('Silakan pilih tanggal antara tahun 2026 dan 2028.');
+                                    }
+                                }}
+                                disabled={!selectedDate || !selectedTime}
+                                className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold"
+                            >
                                 Lanjut
                             </button>
                         )}

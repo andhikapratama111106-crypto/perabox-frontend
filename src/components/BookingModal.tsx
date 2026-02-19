@@ -106,8 +106,13 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
     const validateField = (field: string, value: string) => {
         switch (field) {
             case 'fullName': return value.trim().length >= 3;
-            case 'contact': return value.startsWith('08') && value.length >= 10;
-            case 'date': return !!value;
+            case 'contact': return value.startsWith('08') && value.length >= 10 && /^\d+$/.test(value);
+            case 'date': {
+                if (!value) return false;
+                const d = new Date(value);
+                const year = d.getFullYear();
+                return year >= 2026 && year <= 2028;
+            }
             case 'time': return !!value;
             case 'address': return value.trim().length >= 10;
             case 'selectedServiceId': return !!value;
@@ -332,11 +337,14 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
                                     }}
                                     onBlur={() => handleBlur('contact')}
                                     placeholder="Contoh: 0812..."
-                                    className={`w-full px-5 py-3.5 bg-gray-50 border rounded-xl outline-none focus:ring-4 focus:ring-primary/10 transition-all font-medium ${touched.contact && (!contact.startsWith('08') || contact.length < 10) ? 'border-red-300' : 'border-gray-100'}`}
+                                    className={`w-full px-5 py-3.5 bg-gray-50 border rounded-xl outline-none focus:ring-4 focus:ring-primary/10 transition-all font-medium ${touched.contact && (!contact.startsWith('08') || contact.length < 10 || !/^\d+$/.test(contact)) ? 'border-red-300' : 'border-gray-100'}`}
                                     required
                                 />
                                 {touched.contact && !contact.startsWith('08') && contact.length > 0 && (
                                     <p className="text-red-500 text-xs mt-1 ml-1">Nomor harus dimulai dengan 08</p>
+                                )}
+                                {touched.contact && contact.startsWith('08') && contact.length < 10 && (
+                                    <p className="text-red-500 text-xs mt-1 ml-1">Nomor telepon minimal 10 digit</p>
                                 )}
                             </div>
 
@@ -352,6 +360,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
                                         onChange={(e) => setDate(e.target.value)}
                                         onBlur={() => handleBlur('date')}
                                         min="2026-01-01"
+                                        max="2028-12-31"
                                         className={`w-full px-5 py-3.5 bg-gray-50 border rounded-xl outline-none focus:ring-4 focus:ring-primary/10 transition-all font-medium ${touched.date && !validateField('date', date) ? 'border-red-300' : 'border-gray-100'}`}
                                         required
                                     />

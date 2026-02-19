@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from 'react';
 import { bookingsAPI, adminAPI } from '@/lib/api';
+import { useAdminStore } from '@/store/adminStore';
 
 // Types
 interface PaymentData {
@@ -195,14 +196,13 @@ function IncomeChart({ data, timeFrame }: { data: PaymentData[]; timeFrame: Time
 
 // ======= Main Dashboard Component =======
 export default function AdminDashboard() {
-    const [stats, setStats] = useState({
-        totalOrders: 0,
-        pendingOrders: 0,
-        activeTechnicians: 0,
-        revenue: 0,
-    });
-    const [recentBookings, setRecentBookings] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+    const {
+        stats,
+        recentBookings,
+        lastFetched,
+        fetchDashboardData
+    } = useAdminStore();
+
     const [timeFrame, setTimeFrame] = useState<TimeFrame>('1W');
 
     // Generate mock data for chart
@@ -223,34 +223,12 @@ export default function AdminDashboard() {
     }, [timeFrame, allDailyData, hourlyData]);
 
     useEffect(() => {
-        const fetchDashboardData = async () => {
-            try {
-                const bookingsRes = await bookingsAPI.getAll();
-                const bookings = bookingsRes.data || [];
-
-                const techniciansRes = await adminAPI.getTechnicians();
-                const technicians = techniciansRes.data || [];
-
-                const totalOrders = bookings.length;
-                const pendingOrders = bookings.filter((b: any) => b.status === 'pending').length;
-                const activeTechnicians = technicians.filter((t: any) => t.is_available).length;
-                const revenue = bookings
-                    .filter((b: any) => b.status === 'completed')
-                    .reduce((acc: number, curr: any) => acc + Number(curr.total_price), 0);
-
-                setStats({ totalOrders, pendingOrders, activeTechnicians, revenue });
-                setRecentBookings(bookings.slice(0, 5));
-            } catch (error) {
-                console.error("Failed to fetch dashboard data", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
+        // Trigger background refresh
         fetchDashboardData();
-    }, []);
+    }, [fetchDashboardData]);
 
-    if (loading) {
+    // Only show full loading if we have absolutely no data yet
+    if (!lastFetched.dashboard) {
         return (
             <div className="p-8 flex items-center justify-center min-h-[60vh]">
                 <div className="flex flex-col items-center gap-3">

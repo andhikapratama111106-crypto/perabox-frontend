@@ -2,60 +2,51 @@
 
 import React, { useEffect, useState } from 'react';
 import { bookingsAPI, adminAPI } from '@/lib/api';
+import { useAdminStore } from '@/store/adminStore';
 
 export default function AdminOrdersPage() {
-    const [orders, setOrders] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const {
+        orders,
+        lastFetched,
+        fetchOrders,
+        technicians,
+        fetchTechnicians
+    } = useAdminStore();
+
+    const [loading, setLoading] = useState(false); // For action-specific loading (e.g., assign)
     const [filterStatus, setFilterStatus] = useState('all');
-
-    // Assign Modal State
-    const [selectedOrder, setSelectedOrder] = useState<any>(null);
+    const [selectedBooking, setSelectedBooking] = useState<any | null>(null);
     const [isAssignModalOpen, setIsAssignModalOpen] = useState(false);
-    const [technicians, setTechnicians] = useState([]);
-
-    const fetchOrders = async () => {
-        setLoading(true);
-        try {
-            const params: any = {};
-            if (filterStatus !== 'all') params.status = filterStatus;
-
-            const response = await bookingsAPI.getAll(params);
-            setOrders(response.data);
-        } catch (error) {
-            console.error("Failed to fetch orders", error);
-        } finally {
-            setLoading(false);
-        }
-    };
 
     useEffect(() => {
-        fetchOrders();
-    }, [filterStatus]);
+        // Fetch orders when status changes
+        fetchOrders({ status: filterStatus === 'all' ? undefined : filterStatus });
+    }, [filterStatus, fetchOrders]);
 
-    const handleOpenAssignModal = async (order: any) => {
-        setSelectedOrder(order);
+    useEffect(() => {
+        // Ensure technicians are available for assignment modal
+        fetchTechnicians();
+    }, [fetchTechnicians]);
+
+    const handleAssignClick = (booking: any) => {
+        setSelectedBooking(booking);
         setIsAssignModalOpen(true);
-        // Fetch technicians if not already loaded
-        if (technicians.length === 0) {
-            try {
-                const res = await adminAPI.getTechnicians();
-                setTechnicians(res.data);
-            } catch (error) {
-                console.error("Failed to fetch technicians", error);
-            }
-        }
     };
 
     const handleAssignTechnician = async (technicianId: string) => {
-        if (!selectedOrder) return;
+        if (!selectedBooking) return;
+        setLoading(true);
         try {
-            await adminAPI.assignTechnician(selectedOrder.id, technicianId);
+            await adminAPI.assignTechnician(selectedBooking.id, technicianId);
             setIsAssignModalOpen(false);
-            fetchOrders(); // Refresh list
+            // Refresh orders list, forcing a refetch to get updated data
+            fetchOrders({ status: filterStatus === 'all' ? undefined : filterStatus }, true);
             alert("Teknisi berhasil di-assign!");
         } catch (error) {
             console.error("Failed to assign technician", error);
-            alert("Gagal assign teknisi");
+            alert("Gagal menetapkan teknisi");
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -73,6 +64,18 @@ export default function AdminOrdersPage() {
             </span>
         );
     };
+
+    // Only show full loading if we have absolutely no data yet for initial view
+    if (!lastFetched.orders && filterStatus === 'all') {
+        return (
+            <div className="p-8 flex items-center justify-center min-h-[60vh]">
+                <div className="flex flex-col items-center gap-3">
+                    <div className="w-10 h-10 border-4 border-primary/30 border-t-primary rounded-full animate-spin" />
+                    <span className="text-gray-400 font-medium text-sm">Memuat data pesanan...</span>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div className="space-y-6 animate-fade-in-up">
@@ -138,7 +141,7 @@ export default function AdminOrdersPage() {
                                         </td>
                                         <td className="px-6 py-4">
                                             <button
-                                                onClick={() => handleOpenAssignModal(order)}
+                                                onClick={() => handleAssignClick(order)}
                                                 className="text-primary hover:text-primary-dark font-medium text-xs border border-primary/20 px-3 py-1 rounded-lg hover:bg-primary/5 transition-colors"
                                             >
                                                 Manage
@@ -157,7 +160,7 @@ export default function AdminOrdersPage() {
                 <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center p-4">
                     <div className="bg-white rounded-2xl w-full max-w-md p-6 animate-fade-in-up">
                         <h3 className="text-xl font-bold mb-4">Assign Teknisi</h3>
-                        <p className="text-gray-500 text-sm mb-6">Pilih teknisi untuk Order #{selectedOrder?.id.slice(0, 8)}</p>
+                        <p className="text-gray-500 text-sm mb-6">Pilih teknisi untuk Order #{selectedBooking?.id.slice(0, 8)}</p>
 
                         <div className="space-y-3 max-h-[300px] overflow-y-auto mb-6">
                             {technicians.map((tech: any) => (

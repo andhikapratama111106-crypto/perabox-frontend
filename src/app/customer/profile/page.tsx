@@ -94,16 +94,32 @@ const CustomerProfile = () => {
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, field: string, nestedField?: string) => {
+        let { value } = e.target;
+
         if (nestedField) {
-            setFormData({
-                ...formData,
+            setFormData(prev => ({
+                ...prev,
                 address: {
-                    ...formData.address,
-                    [nestedField]: e.target.value
+                    ...prev.address,
+                    [nestedField]: value
                 }
-            });
+            }));
         } else {
-            setFormData({ ...formData, [field]: e.target.value });
+            if (field === 'phone') {
+                value = value.replace(/[^\d]/g, '');
+            }
+            setFormData(prev => ({ ...prev, [field]: value }));
+
+            // Validation
+            if (field === 'phone') {
+                if (value && !value.startsWith('08')) {
+                    setError('Nomor telepon harus dimulai dengan 08');
+                } else if (value && value.length < 10) {
+                    setError('Nomor telepon minimal 10 digit');
+                } else {
+                    setError('');
+                }
+            }
         }
     };
 

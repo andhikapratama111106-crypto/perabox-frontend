@@ -32,7 +32,7 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
         fetchQRIS();
 
         const timer = setInterval(() => {
-            setTimeLeft((prev) => (prev > 0 ? prev - 1 : 0));
+            setTimeLeft((prev: number) => (prev > 0 ? prev - 1 : 0));
         }, 1000);
 
         return () => clearInterval(timer);
@@ -47,11 +47,16 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
     const handleVerify = async () => {
         setVerifying(true);
         try {
-            await paymentAPI.verify(paymentId);
-            onSuccess();
+            const response = await paymentAPI.verify(paymentId);
+            // Check status from response
+            if (response.data.status === 'paid') {
+                onSuccess();
+            } else {
+                alert("Pembayaran belum terdeteksi. Silakan coba lagi setelah membayar.");
+            }
         } catch (error) {
             console.error("Verification failed", error);
-            alert("Pembayaran belum terdeteksi. Silakan coba lagi setelah membayar.");
+            alert("Kesalahan verifikasi. Silakan coba lagi.");
         } finally {
             setVerifying(false);
         }

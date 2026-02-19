@@ -12,6 +12,32 @@ export default function ContactPage() {
         message: '',
     });
     const [submitted, setSubmitted] = useState(false);
+    const [errors, setErrors] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        let { name, value } = e.target;
+        if (name === 'phone') {
+            value = value.replace(/[^\d]/g, '');
+        }
+        setFormData(prev => ({ ...prev, [name]: value }));
+
+        // Validation
+        if (name === 'phone') {
+            if (value && !value.startsWith('08')) {
+                setErrors(prev => ({ ...prev, phone: 'Nomor telepon harus dimulai dengan 08' }));
+            } else if (value && value.length < 10) {
+                setErrors(prev => ({ ...prev, phone: 'Nomor telepon minimal 10 digit' }));
+            } else {
+                setErrors(prev => ({ ...prev, phone: '' }));
+            }
+        } else if (name === 'email') {
+            if (value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+                setErrors(prev => ({ ...prev, email: 'Email tidak valid' }));
+            } else {
+                setErrors(prev => ({ ...prev, email: '' }));
+            }
+        }
+    };
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();

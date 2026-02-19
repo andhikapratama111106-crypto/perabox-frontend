@@ -27,6 +27,14 @@ export default function RegisterPage() {
     });
     const [isSuccess, setIsSuccess] = useState(false);
 
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        let { name, value } = e.target;
+        if (name === 'phone') {
+            value = value.replace(/[^\d]/g, '');
+        }
+        setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
     // Client-side validation
     const errors = useMemo(() => {
         const errs = { full_name: '', email: '', phone: '', password: '' };
@@ -43,6 +51,10 @@ export default function RegisterPage() {
 
         if (!formData.phone) {
             errs.phone = 'Phone number is required';
+        } else if (!formData.phone.startsWith('08')) {
+            errs.phone = 'Phone number must start with 08';
+        } else if (formData.phone.length < 10) {
+            errs.phone = 'Phone number must be at least 10 digits';
         }
 
         if (!formData.password) {
@@ -53,13 +65,6 @@ export default function RegisterPage() {
 
         return errs;
     }, [formData]);
-
-    const isFormValid = !errors.full_name && !errors.email && !errors.phone && !errors.password;
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
-    };
 
     const handleBlur = (field: string) => {
         setTouched(prev => ({ ...prev, [field]: true }));

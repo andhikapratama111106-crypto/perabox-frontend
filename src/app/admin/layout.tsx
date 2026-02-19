@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AdminSidebar from '@/components/admin/Sidebar';
-import { authAPI } from '@/lib/api'; // Assume this exists or will be updated
+import { authAPI } from '@/lib/api';
+import { useAdminStore } from '@/store/adminStore';
 
 export default function AdminLayout({
     children,
@@ -29,6 +30,10 @@ export default function AdminLayout({
                 // Check for admin privileges
                 if (user.role === 'admin' || user.is_superuser) {
                     setIsLoading(false);
+                    // Warm up the store in background
+                    useAdminStore.getState().fetchDashboardData();
+                    useAdminStore.getState().fetchTechnicians();
+                    useAdminStore.getState().fetchOrders();
                 } else {
                     // Redirect non-admin users to home
                     router.replace('/');
