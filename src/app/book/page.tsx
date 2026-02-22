@@ -155,7 +155,7 @@ export default function BookingPage() {
         if (!dateString) return false;
         const date = new Date(dateString);
         const year = date.getFullYear();
-        return year >= 2026 && year <= 2028;
+        return year >= 2025 && year <= 2030;
     };
 
     const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -166,13 +166,10 @@ export default function BookingPage() {
     const handleScheduleSelect = () => {
         if (selectedDate && selectedTime) {
             if (!validateDateRange(selectedDate)) {
-                alert('Silakan pilih tanggal antara tahun 2026 dan 2028.');
+                alert('Silakan pilih tanggal antara tahun 2025 dan 2030.');
                 return;
             }
-            if (formData.phone.length < 10 || formData.phone.length > 12) {
-                setFetchError('Lengkapi semua form. Nomor HP harus valid (10-12 digit).');
-                return;
-            }
+            // Phone validation removed from here as it should only happen in Step 4
             setStep(3);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
