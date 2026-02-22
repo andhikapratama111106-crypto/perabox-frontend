@@ -44,13 +44,69 @@ export default function CustomerLayout({
     }
 
     const sidebarItems = [
-        { name: 'My Profile', href: '/customer/profile', icon: '👤' },
-        { name: 'Security', href: '/customer/security', icon: '🛡️' },
-        { name: 'Notification', href: '/customer/notifications', icon: '🔔' },
-        { name: 'Dashboard', href: '/customer/dashboard', icon: '📊' }, // Assuming this leads to main customer dashboard
-        { name: 'Rate', href: '/customer/rate', icon: '⭐' },
-        { name: 'Help & Support', href: '/customer/support', icon: 'ℹ️' },
-        { name: 'Terms & Conditions', href: '/customer/terms', icon: '❓' },
+        {
+            name: 'My Profile',
+            href: '/customer/profile',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Security',
+            href: '/customer/security',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Notification',
+            href: '/customer/notifications',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+            )
+        },
+        {
+            name: 'Dashboard',
+            href: '/customer/dashboard',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Rate',
+            href: '/customer/rate',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.783-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Help & Support',
+            href: '/customer/support',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            )
+        },
+        {
+            name: 'Terms & Conditions',
+            href: '/customer/terms',
+            icon: (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            )
+        },
     ];
 
     const navLinks = [
@@ -65,7 +121,6 @@ export default function CustomerLayout({
             {/* Top Navbar */}
             <nav className="bg-white px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
                 <Link href="/" className="flex items-center gap-2">
-                    {/* Use text logo as in Figma if image not available, or keep existing branding */}
                     <div className="relative h-10 w-32 md:h-12 md:w-40">
                         <Image
                             src="/perabox_icon.png"
@@ -81,7 +136,7 @@ export default function CustomerLayout({
                         <Link
                             key={link.name}
                             href={link.href}
-                            className={`text-sm font-bold tracking-wide transition-colors ${pathname === link.href ? 'text-primary' : 'text-gray-500 hover:text-dark'
+                            className={`text-sm font-bold tracking-wide transition-all ${pathname === link.href ? 'text-[#9C6D3F]' : 'text-gray-500 hover:text-[#9C6D3F]'
                                 }`}
                         >
                             {link.name}
@@ -89,7 +144,7 @@ export default function CustomerLayout({
                     ))}
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-200">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm">
                         <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="User" className="w-full h-full object-cover" />
                     </div>
                 </div>
@@ -98,23 +153,25 @@ export default function CustomerLayout({
             <div className="flex-1 container mx-auto px-4 py-8 flex flex-col md:flex-row gap-8">
                 {/* Sidebar Navigation */}
                 <aside className="w-full md:w-64 flex-shrink-0">
-                    <div className="bg-white rounded-2xl p-4 shadow-sm h-full flex flex-col">
-                        <div className="space-y-1 mb-auto">
+                    <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
+                        <div className="space-y-1.5 mb-auto">
                             {sidebarItems.map((item) => {
                                 const isActive = pathname === item.href;
                                 return (
                                     <Link
                                         key={item.href}
                                         href={item.href}
-                                        className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all font-medium text-sm
+                                        className={`flex items-center gap-3.5 px-4 py-3.5 rounded-2xl transition-all duration-300 group
                                             ${isActive
-                                                ? 'bg-orange-50 text-orange-600 font-bold' // Matching visual style (My Profile highlighted)
-                                                : 'text-gray-500 hover:bg-gray-50 hover:text-dark'
+                                                ? 'bg-[#FDF8F3] text-[#9C6D3F] shadow-sm shadow-[#9C6D3F]/5'
+                                                : 'text-gray-500 hover:bg-[#FDF8F3]/50 hover:text-[#9C6D3F]'
                                             }
                                         `}
                                     >
-                                        <span className="text-lg">{item.icon}</span>
-                                        <span>{item.name}</span>
+                                        <div className={`transition-transform duration-300 ${isActive ? 'scale-110' : 'group-hover:scale-110'}`}>
+                                            {item.icon}
+                                        </div>
+                                        <span className={`text-[13px] font-bold ${isActive ? 'tracking-tight' : 'tracking-normal'}`}>{item.name}</span>
                                     </Link>
                                 );
                             })}

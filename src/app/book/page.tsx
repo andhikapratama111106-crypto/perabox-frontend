@@ -169,6 +169,10 @@ export default function BookingPage() {
                 alert('Silakan pilih tanggal antara tahun 2026 dan 2028.');
                 return;
             }
+            if (formData.phone.length < 10 || formData.phone.length > 12) {
+                setFetchError('Lengkapi semua form. Nomor HP harus valid (10-12 digit).');
+                return;
+            }
             setStep(3);
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -531,7 +535,9 @@ Mohon konfirmasinya. Terima kasih.`;
                                 >
                                     <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl mr-6 transition-all
                                          ${selectedServices.includes(service.id) ? 'bg-[#9C6D3F] text-white shadow-lg rotate-12' : 'bg-gray-50 text-gray-400 group-hover:bg-amber-50'}`}>
-                                        {service.icon || '❄️'}
+                                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                                        </svg>
                                     </div>
                                     <div className="flex-1">
                                         <h3 className={`text-xl font-black tracking-tight mb-1 transition-colors
@@ -605,15 +611,19 @@ Mohon konfirmasinya. Terima kasih.`;
                                     value={formData.phone}
                                     onChange={e => {
                                         const val = e.target.value.replace(/[^\d]/g, '');
-                                        setFormData({ ...formData, phone: val });
+                                        // Allow up to 13 digits (08 + 11 digits) in input to not block typing completely,
+                                        // but validation messages will enforce the specific rule
+                                        if (val.length <= 13) {
+                                            setFormData({ ...formData, phone: val });
+                                        }
                                     }}
-                                    placeholder="08xxxxxxxxxx"
+                                    placeholder="08xxxxxxxx"
                                 />
                                 {formData.phone && !formData.phone.startsWith('08') && (
                                     <p className="text-red-500 text-xs mt-1 font-bold">Nomor harus dimulai dengan 08</p>
                                 )}
-                                {formData.phone && formData.phone.startsWith('08') && formData.phone.length > 0 && formData.phone.length < 10 && (
-                                    <p className="text-red-500 text-xs mt-1 font-bold">Nomor minimal 10 digit (Format: 08xx...)</p>
+                                {formData.phone && formData.phone.startsWith('08') && formData.phone.length > 0 && (formData.phone.length < 10 || formData.phone.length > 12) && (
+                                    <p className="text-red-500 text-xs mt-1 font-bold">Panjang nomor 10-12 digit (Format: 08xx...)</p>
                                 )}
                             </div>
                             <div>
@@ -632,12 +642,19 @@ Mohon konfirmasinya. Terima kasih.`;
                             <button onClick={() => setStep(3)} className="text-gray-500 hover:text-dark">Kembali</button>
                             <button
                                 onClick={() => {
-                                    const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10;
+                                    const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10 && formData.phone.length <= 12;
                                     if (formData.full_name && isPhoneValid && formData.address) {
                                         setStep(5);
                                     }
                                 }}
-                                disabled={!formData.full_name || !formData.phone.startsWith('08') || formData.phone.length < 10 || !formData.address}
+                                disabled={
+                                    !formData.full_name ||
+                                    !formData.phone ||
+                                    formData.phone.length < 10 ||
+                                    formData.phone.length > 12 ||
+                                    !formData.phone.startsWith('08') ||
+                                    !formData.address
+                                }
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all"
                             >
                                 Lanjut Pembayaran

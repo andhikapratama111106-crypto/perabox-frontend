@@ -114,8 +114,8 @@ const CustomerProfile = () => {
             if (field === 'phone') {
                 if (value && !value.startsWith('08')) {
                     setError('Nomor telepon harus dimulai dengan 08');
-                } else if (value && value.length < 10) {
-                    setError('Nomor telepon minimal 10 digit');
+                } else if (value && (value.length < 10 || value.length > 12)) {
+                    setError('Nomor telepon harus 10-12 digit');
                 } else {
                     setError('');
                 }
