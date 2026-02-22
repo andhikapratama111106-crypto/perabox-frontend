@@ -21,15 +21,18 @@ export default function CustomerLayout({
     const [isLangOpen, setIsLangOpen] = useState(false);
 
     useEffect(() => {
+        const token = localStorage.getItem('access_token');
+        if (!token) {
+            router.replace('/login');
+            return;
+        }
+
+        // Optimistically allow the layout to render if we have a token
+        setIsLoading(false);
+
         const checkAuth = async () => {
-            const token = localStorage.getItem('access_token');
-            if (!token) {
-                router.replace('/login');
-                return;
-            }
             try {
                 await authAPI.getCurrentUser();
-                setIsLoading(false);
             } catch (error) {
                 console.error("Auth check failed", error);
                 localStorage.removeItem('access_token');

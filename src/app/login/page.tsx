@@ -62,19 +62,15 @@ export default function LoginPage() {
                 const user = userRes.data;
 
                 setIsSuccess(true);
-                setTimeout(() => {
-                    if (user.role === 'admin') {
-                        router.push('/admin');
-                    } else {
-                        router.push('/customer/profile');
-                    }
-                }, 1000);
+                if (user.role === 'admin') {
+                    router.push('/admin');
+                } else {
+                    router.push('/customer/profile');
+                }
             } catch (roleError) {
                 console.error("Failed to fetch user role", roleError);
                 setIsSuccess(true);
-                setTimeout(() => {
-                    router.push('/'); // Default to home if role check fails
-                }, 1000);
+                router.push('/'); // Default to home if role check fails
             }
 
         } catch (err: any) {
