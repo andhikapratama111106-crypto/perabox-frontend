@@ -111,7 +111,7 @@ export default function LoginPage() {
                                 <div className="relative z-10">
                                     <Link href="/" className="inline-block mb-12">
                                         <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl">
-                                            <img src="/perabox_icon.png" alt="Logo" className="h-12 w-auto object-contain" />
+                                            <img src="/perabox_icon.png" alt="PERABOX Logo" className="h-12 w-auto object-contain" />
                                         </div>
                                     </Link>
                                     <h2 className="text-4xl font-extrabold leading-tight mb-6">
@@ -142,7 +142,11 @@ export default function LoginPage() {
                                 </div>
 
                                 {serverError && (
-                                    <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex flex-col gap-2 animate-in fade-in slide-in-from-top duration-300">
+                                    <div
+                                        role="alert"
+                                        aria-live="polite"
+                                        className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex flex-col gap-2 animate-in fade-in slide-in-from-top duration-300"
+                                    >
                                         <div className="flex items-center gap-3">
                                             <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -176,9 +180,10 @@ export default function LoginPage() {
                                                     } outline-none transition-all font-medium text-dark`}
                                                 placeholder="name@example.com"
                                                 required
+                                                aria-required="true"
                                             />
                                             {touched.email && errors.email && (
-                                                <p id="email-error" className="text-xs text-red-500 font-bold mt-1.5 ml-1">{errors.email}</p>
+                                                <p id="email-error" aria-live="assertive" className="text-xs text-red-500 font-bold mt-1.5 ml-1">{errors.email}</p>
                                             )}
                                         </div>
                                     </div>

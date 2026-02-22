@@ -138,7 +138,7 @@ export default function RegisterPage() {
                                 <div className="relative z-10">
                                     <Link href="/" className="inline-block mb-12">
                                         <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl">
-                                            <img src="/perabox_icon.png" alt="Logo" className="h-12 w-auto object-contain" />
+                                            <img src="/perabox_icon.png" alt="PERABOX Corporate Logo" className="h-12 w-auto object-contain" />
                                         </div>
                                     </Link>
                                     <h2 className="text-4xl font-extrabold leading-tight mb-6">
@@ -159,7 +159,11 @@ export default function RegisterPage() {
                                 </div>
 
                                 {serverError && (
-                                    <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex items-center gap-3 animate-in fade-in slide-in-from-top duration-300">
+                                    <div
+                                        role="alert"
+                                        aria-live="polite"
+                                        className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex items-center gap-3 animate-in fade-in slide-in-from-top duration-300"
+                                    >
                                         <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
@@ -181,6 +185,7 @@ export default function RegisterPage() {
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.full_name && errors.full_name ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
                                             placeholder="John Doe"
                                             required
+                                            aria-required="true"
                                         />
                                         {touched.full_name && errors.full_name && <p className="text-xs text-red-500 font-bold ml-1">{errors.full_name}</p>}
                                     </div>

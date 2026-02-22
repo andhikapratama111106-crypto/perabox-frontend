@@ -51,7 +51,7 @@ export default function BookingPage() {
             id: s.id,
             title: s.name,
             price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-            icon: "❄️",
+            icon: "🔧",
             base_price: s.price
         }))
     );
@@ -107,7 +107,7 @@ export default function BookingPage() {
                 id: s.id,
                 title: s.name,
                 price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-                icon: "❄️",
+                icon: "🔧",
                 base_price: s.price
             }));
             setApiServices(mappedServices);
@@ -126,7 +126,7 @@ export default function BookingPage() {
                 id: s.id,
                 title: s.name,
                 price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-                icon: "❄️",
+                icon: "🔧",
                 base_price: s.price
             }));
             setApiServices(mappedServices);

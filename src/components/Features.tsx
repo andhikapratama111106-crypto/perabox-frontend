@@ -70,7 +70,16 @@ const Features = () => {
                     {features.map((feature, index) => (
                         <Reveal key={index} direction="up" delay={index * 0.15} staggerIndex={index} staggerDelay={100}>
                             <div
+                                role="button"
+                                tabIndex={0}
+                                aria-expanded={expandedIndex === index}
                                 onClick={() => toggleExpand(index)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        e.preventDefault();
+                                        toggleExpand(index);
+                                    }
+                                }}
                                 className={`group p-10 rounded-[2.5rem] bg-secondary border cursor-pointer transition-all duration-500 ${expandedIndex === index
                                     ? 'border-primary/30 bg-white shadow-2xl shadow-primary/10 ring-1 ring-primary/20'
                                     : 'border-transparent hover:border-accent/20 hover:bg-white hover:shadow-2xl hover:shadow-accent/10'

@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /technician/
+Disallow: /customer/
+
+Sitemap: https://perabox.vercel.app/sitemap.xml

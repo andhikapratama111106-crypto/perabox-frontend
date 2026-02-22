@@ -113,6 +113,7 @@ const Navbar = () => {
                         <a
                             key={link.name}
                             href={link.href}
+                            role="menuitem"
                             onClick={(e) => {
                                 e.preventDefault();
                                 if (pathname === '/') {
@@ -160,6 +161,7 @@ const Navbar = () => {
                     className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg"
                     aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                     aria-expanded={isMobileMenuOpen}
+                    aria-haspopup="true"
                     aria-controls="mobile-nav"
                 >
                     <span

@@ -24,13 +24,61 @@ const poppins = Poppins({
 
 /* ───────── Metadata ───────── */
 export const metadata: Metadata = {
-    title: 'PERABOX - Layanan Homecare Terpercaya',
-    description:
-        'Platform layanan perbaikan dan perawatan rumah terpercaya di Indonesia. AC Cleaning, AC Repair, dan layanan profesional lainnya.',
+    title: {
+        default: 'PERABOX - Layanan Homecare Terpercaya',
+        template: '%s | PERABOX'
+    },
+    description: 'Platform layanan perbaikan dan perawatan rumah terpercaya di Indonesia. AC Cleaning, AC Repair, dan layanan profesional lainnya.',
+    keywords: ['homecare', 'perbaikan AC', 'perawatan rumah', 'teknisi profesional', 'Perabox', 'Indonesia'],
+    authors: [{ name: 'PERABOX Team' }],
+    creator: 'PERABOX',
+    publisher: 'PERABOX',
+    formatDetection: {
+        email: false,
+        address: false,
+        telephone: false,
+    },
+    metadataBase: new URL('https://perabox.vercel.app'),
+    alternates: {
+        canonical: '/',
+    },
     openGraph: {
         title: 'PERABOX - Layanan Homecare Terpercaya',
-        description: 'Solusi profesional untuk perawatan rumah Anda',
+        description: 'Solusi profesional untuk perawatan rumah Anda. Teknisi bersertifikat dan harga transparan.',
+        url: 'https://perabox.vercel.app',
+        siteName: 'PERABOX',
+        images: [
+            {
+                url: '/perabox_icon.png',
+                width: 800,
+                height: 600,
+                alt: 'PERABOX Logo',
+            },
+        ],
+        locale: 'id_ID',
         type: 'website',
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: 'PERABOX - Layanan Homecare Terpercaya',
+        description: 'Solusi profesional untuk perawatan rumah Anda',
+        images: ['/perabox_icon.png'],
+    },
+    robots: {
+        index: true,
+        follow: true,
+        googleBot: {
+            index: true,
+            follow: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+    },
+    icons: {
+        icon: '/favicon.ico',
+        shortcut: '/favicon-16x16.png',
+        apple: '/apple-touch-icon.png',
     },
 };
 
@@ -50,6 +98,52 @@ export default function RootLayout({
                     rel="preconnect"
                     href="https://fonts.gstatic.com"
                     crossOrigin="anonymous"
+                />
+                {/* SEO: Structured Data for Local Business */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "HomeAndConstructionBusiness",
+                            "name": "PERABOX",
+                            "image": "https://perabox.vercel.app/perabox_icon.png",
+                            "@id": "https://perabox.vercel.app",
+                            "url": "https://perabox.vercel.app",
+                            "telephone": "+628123456789",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "Jl. Kemerdekaan No. 123",
+                                "addressLocality": "Jakarta",
+                                "postalCode": "12345",
+                                "addressCountry": "ID"
+                            },
+                            "geo": {
+                                "@type": "GeoCoordinates",
+                                "latitude": -6.2088,
+                                "longitude": 106.8456
+                            },
+                            "openingHoursSpecification": {
+                                "@type": "OpeningHoursSpecification",
+                                "dayOfWeek": [
+                                    "Monday",
+                                    "Tuesday",
+                                    "Wednesday",
+                                    "Thursday",
+                                    "Friday",
+                                    "Saturday",
+                                    "Sunday"
+                                ],
+                                "opens": "00:00",
+                                "closes": "23:59"
+                            },
+                            "sameAs": [
+                                "https://facebook.com/perabox",
+                                "https://instagram.com/perabox"
+                            ],
+                            "priceRange": "$$"
+                        })
+                    }}
                 />
             </head>
             <body className="font-sans antialiased bg-secondary text-dark">
