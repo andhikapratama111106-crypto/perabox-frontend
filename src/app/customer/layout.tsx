@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authAPI } from '@/lib/api';
+import { motion } from 'framer-motion';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { Language } from '@/translations';
