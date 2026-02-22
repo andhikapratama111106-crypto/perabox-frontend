@@ -147,10 +147,12 @@ export default function RootLayout({
                 />
             </head>
             <body className="font-sans antialiased bg-secondary text-dark">
-                <div className="scroll-blur-content">
-                    {children}
-                </div>
-                <ChatBot />
+                <LanguageProvider>
+                    <div className="scroll-blur-content">
+                        {children}
+                    </div>
+                    <ChatBot />
+                </LanguageProvider>
             </body>
         </html>
     );

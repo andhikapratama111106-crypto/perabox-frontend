@@ -3,8 +3,10 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { authAPI } from '@/lib/api';
 import { motion } from 'framer-motion';
+import { useLanguage } from '@/context/LanguageContext';
 
 const CustomerProfile = () => {
+    const { t } = useLanguage();
     // State for user data
     const [user, setUser] = useState({
         name: '',
@@ -134,13 +136,13 @@ const CustomerProfile = () => {
     if (error) {
         return (
             <div className="bg-red-50 border border-red-100 text-red-600 p-8 rounded-2xl text-center">
-                <p className="font-bold text-lg mb-2">Error</p>
+                <p className="font-bold text-lg mb-2">{t('common.error')}</p>
                 <p>{error}</p>
                 <button
                     onClick={() => fetchUserData()}
                     className="mt-4 px-6 py-2 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors"
                 >
-                    Try Again
+                    {t('common.tryAgain')}
                 </button>
             </div>
         );
@@ -148,7 +150,7 @@ const CustomerProfile = () => {
 
     return (
         <div className="space-y-6 animate-fade-in-up pb-10">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">My Profile</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('common.myProfile')}</h1>
 
             {/* Top Card: Identity */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -189,12 +191,12 @@ const CustomerProfile = () => {
                 <div className="flex gap-2 self-end md:self-center">
                     {editMode.identity ? (
                         <>
-                            <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">Save</button>
-                            <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                            <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
+                            <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
                         </>
                     ) : (
                         <button onClick={() => handleEdit('identity')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                            Edit
+                            {t('common.edit')}
                         </button>
                     )}
                 </div>
@@ -203,16 +205,16 @@ const CustomerProfile = () => {
             {/* Middle Card: Personal Information */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">Personal Information</h3>
+                    <h3 className="text-lg font-bold text-gray-800">{t('profile.personalInfo')}</h3>
                     <div className="flex gap-2">
                         {editMode.personal ? (
                             <>
-                                <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">Save</button>
-                                <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                                <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
+                                <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
                             </>
                         ) : (
                             <button onClick={() => handleEdit('personal')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                Edit
+                                {t('common.edit')}
                             </button>
                         )}
                     </div>
@@ -220,7 +222,7 @@ const CustomerProfile = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">First Name</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.firstName')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.firstName} onChange={(e) => handleChange(e, 'firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -228,7 +230,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Last Name</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.lastName')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.lastName} onChange={(e) => handleChange(e, 'lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -236,7 +238,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Email address</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.email')}</label>
                         {editMode.personal ? (
                             <input type="email" value={formData.email} onChange={(e) => handleChange(e, 'email')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -244,7 +246,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Phone</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.phone')}</label>
                         {editMode.personal ? (
                             <input type="tel" value={formData.phone} onChange={(e) => handleChange(e, 'phone')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -252,7 +254,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div className="md:col-span-2">
-                        <label className="block text-xs text-gray-400 mb-1">Bio</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.bio')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.bio} onChange={(e) => handleChange(e, 'bio')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -265,16 +267,16 @@ const CustomerProfile = () => {
             {/* Bottom Card: Address */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">Address</h3>
+                    <h3 className="text-lg font-bold text-gray-800">{t('profile.address')}</h3>
                     <div className="flex gap-2">
                         {editMode.address ? (
                             <>
-                                <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">Save</button>
-                                <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">Cancel</button>
+                                <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
+                                <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
                             </>
                         ) : (
                             <button onClick={() => handleEdit('address')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                Edit
+                                {t('common.edit')}
                             </button>
                         )}
                     </div>
@@ -282,7 +284,7 @@ const CustomerProfile = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Country</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.country')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.country} onChange={(e) => handleChange(e, 'address', 'country')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -290,7 +292,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Address</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.street')}</label>
                         {editMode.address ? (
                             <textarea rows={2} value={formData.address.street} onChange={(e) => handleChange(e, 'address', 'street')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" />
                         ) : (
@@ -298,7 +300,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">Postal Code</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.postalCode')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.postalCode} onChange={(e) => handleChange(e, 'address', 'postalCode')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -306,7 +308,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">TAX ID</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profile.taxId')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.taxId} onChange={(e) => handleChange(e, 'address', 'taxId')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (

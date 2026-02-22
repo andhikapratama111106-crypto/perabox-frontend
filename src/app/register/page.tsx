@@ -137,8 +137,14 @@ export default function RegisterPage() {
 
                                 <div className="relative z-10">
                                     <Link href="/" className="inline-block mb-12">
-                                        <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl">
-                                            <img src="/perabox_icon.png" alt="PERABOX Corporate Logo" className="h-12 w-auto object-contain" />
+                                        <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl flex items-center justify-center">
+                                            <Image
+                                                src="/perabox_icon.png"
+                                                alt="PERABOX Corporate Logo"
+                                                width={160}
+                                                height={90}
+                                                className="h-12 w-auto"
+                                            />
                                         </div>
                                     </Link>
                                     <h2 className="text-4xl font-extrabold leading-tight mb-6">

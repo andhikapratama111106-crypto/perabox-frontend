@@ -109,16 +109,23 @@ export function AnimatedNavbar({
     return (
         <nav
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-                    ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 py-3'
-                    : 'bg-transparent py-5'
+                ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 py-3'
+                : 'bg-transparent py-5'
                 }`}
             role="navigation"
             aria-label="Navigasi utama"
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="relative h-10 w-32 md:h-12 md:w-40 transition-transform hover:scale-105">
-                    <Image src={logoSrc} alt="PERABOX Logo" fill className="object-contain object-left" priority />
+                <Link href="/" className="transition-transform hover:scale-105">
+                    <Image
+                        src={logoSrc}
+                        alt="PERABOX Logo"
+                        width={160}
+                        height={90}
+                        className="h-10 w-auto md:h-12"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Links */}

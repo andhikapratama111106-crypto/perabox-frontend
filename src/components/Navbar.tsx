@@ -96,12 +96,13 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <Link href="/" className="flex items-center gap-2 group">
-                    <div className="relative h-10 w-32 md:h-12 md:w-40 transition-transform group-hover:scale-105">
+                    <div className="transition-transform group-hover:scale-105">
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
-                            fill
-                            className="object-contain object-left"
+                            width={160}
+                            height={90}
+                            className="h-10 w-auto md:h-12"
                             priority
                         />
                     </div>

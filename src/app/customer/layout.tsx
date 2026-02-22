@@ -6,6 +6,9 @@ import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
 import { authAPI } from '@/lib/api';
 
+import { useLanguage } from '@/context/LanguageContext';
+import { Language } from '@/translations';
+
 export default function CustomerLayout({
     children,
 }: {
@@ -13,7 +16,9 @@ export default function CustomerLayout({
 }) {
     const router = useRouter();
     const pathname = usePathname();
+    const { t, language, setLanguage } = useLanguage();
     const [isLoading, setIsLoading] = useState(true);
+    const [isLangOpen, setIsLangOpen] = useState(false);
 
     useEffect(() => {
         const checkAuth = async () => {
@@ -45,7 +50,7 @@ export default function CustomerLayout({
 
     const sidebarItems = [
         {
-            name: 'My Profile',
+            name: t('sidebar.myProfile'),
             href: '/customer/profile',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -54,7 +59,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Security',
+            name: t('sidebar.security'),
             href: '/customer/security',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +68,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Notification',
+            name: t('sidebar.notification'),
             href: '/customer/notifications',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -72,7 +77,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Dashboard',
+            name: t('sidebar.dashboard'),
             href: '/customer/dashboard',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -81,7 +86,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Rate',
+            name: t('sidebar.rate'),
             href: '/customer/rate',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -90,7 +95,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Help & Support',
+            name: t('sidebar.support'),
             href: '/customer/support',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -99,7 +104,7 @@ export default function CustomerLayout({
             )
         },
         {
-            name: 'Terms & Conditions',
+            name: t('sidebar.terms'),
             href: '/customer/terms',
             icon: (
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,10 +115,18 @@ export default function CustomerLayout({
     ];
 
     const navLinks = [
-        { name: 'HOME', href: '/' },
-        { name: 'ABOUT', href: '/#about' },
-        { name: 'SERVICES', href: '/#services' },
-        { name: 'PROFILE', href: '/customer/profile' },
+        { name: t('common.home'), href: '/' },
+        { name: t('common.about'), href: '/#about' },
+        { name: t('common.services'), href: '/#services' },
+        { name: t('common.profile'), href: '/customer/profile' },
+    ];
+
+    const languages: { code: Language; name: string; flag: string }[] = [
+        { code: 'en', name: 'English', flag: '🇺🇸' },
+        { code: 'id', name: 'Indonesia', flag: '🇮🇩' },
+        { code: 'es', name: 'Español', flag: '🇪🇸' },
+        { code: 'ja', name: '日本語', flag: '🇯🇵' },
+        { code: 'fr', name: 'Français', flag: '🇫🇷' },
     ];
 
     return (
@@ -121,12 +134,13 @@ export default function CustomerLayout({
             {/* Top Navbar */}
             <nav className="bg-white px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="relative h-10 w-32 md:h-12 md:w-40">
+                    <div className="transition-transform hover:scale-105">
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
-                            fill
-                            className="object-contain object-left"
+                            width={160}
+                            height={90}
+                            className="h-10 w-auto md:h-12"
                             priority
                         />
                     </div>
@@ -177,18 +191,50 @@ export default function CustomerLayout({
                             })}
                         </div>
 
-                        <div className="mt-8 pt-4 border-t border-gray-100 space-y-2">
-                            <button className="w-full text-left px-4 py-2 text-sm text-gray-500 hover:text-dark transition-colors font-medium">
-                                Change Language
+                        <div className="mt-8 pt-4 border-t border-gray-100 space-y-2 relative">
+                            <button
+                                onClick={() => setIsLangOpen(!isLangOpen)}
+                                className="w-full flex items-center justify-between px-4 py-2.5 text-sm text-gray-500 hover:text-[#9C6D3F] hover:bg-[#FDF8F3]/50 rounded-xl transition-all font-bold group"
+                            >
+                                <span className="flex items-center gap-2">
+                                    <span className="text-lg">{languages.find(l => l.code === language)?.flag}</span>
+                                    {t('common.changeLanguage')}
+                                </span>
+                                <svg className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </button>
+
+                            {isLangOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    className="absolute bottom-full left-0 w-full mb-2 bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-10"
+                                >
+                                    {languages.map((lang) => (
+                                        <button
+                                            key={lang.code}
+                                            onClick={() => {
+                                                setLanguage(lang.code);
+                                                setIsLangOpen(false);
+                                            }}
+                                            className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors hover:bg-gray-50 
+                                                ${language === lang.code ? 'text-[#9C6D3F] font-bold bg-[#FDF8F3]/50' : 'text-gray-600'}
+                                            `}
+                                        >
+                                            <span className="text-lg">{lang.flag}</span>
+                                            {lang.name}
+                                        </button>
+                                    ))}
+                                </motion.div>
+                            )}
+
                             <button
                                 onClick={() => {
                                     localStorage.removeItem('access_token');
                                     window.location.href = '/login';
                                 }}
-                                className="w-full text-left px-4 py-2 text-sm text-red-500 hover:bg-red-50 rounded-lg transition-colors font-bold"
+                                className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-colors font-bold"
                             >
-                                Log Out
+                                {t('common.logout')}
                             </button>
                         </div>
                     </div>
