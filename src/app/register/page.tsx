@@ -15,6 +15,7 @@ export default function RegisterPage() {
         email: '',
         phone: '',
         password: '',
+        confirm_password: '', // Added confirm password
         role: 'customer' // Default role
     });
     const [loading, setLoading] = useState(false);
@@ -23,7 +24,8 @@ export default function RegisterPage() {
         full_name: false,
         email: false,
         phone: false,
-        password: false
+        password: false,
+        confirm_password: false
     });
     const [isSuccess, setIsSuccess] = useState(false);
 
@@ -37,7 +39,7 @@ export default function RegisterPage() {
 
     // Client-side validation
     const errors = useMemo(() => {
-        const errs = { full_name: '', email: '', phone: '', password: '' };
+        const errs = { full_name: '', email: '', phone: '', password: '', confirm_password: '' };
 
         if (!formData.full_name) {
             errs.full_name = 'Full name is required';
@@ -63,6 +65,10 @@ export default function RegisterPage() {
             errs.password = 'Password must be at least 8 characters';
         }
 
+        if (formData.password !== formData.confirm_password) {
+            errs.confirm_password = 'Passwords do not match';
+        }
+
         return errs;
     }, [formData]);
 
@@ -76,16 +82,20 @@ export default function RegisterPage() {
             full_name: true,
             email: true,
             phone: true,
-            password: true
+            password: true,
+            confirm_password: true
         });
 
+        const isFormValid = !Object.values(errors).some(error => error !== '');
         if (!isFormValid) return;
 
         setLoading(true);
         setServerError('');
 
         try {
-            const response = await authAPI.register(formData);
+            // Remove confirm_password from payload before sending
+            const { confirm_password, ...payload } = formData;
+            const response = await authAPI.register(payload);
 
             // Auto-login on success (backend returns tokens)
             localStorage.setItem('access_token', response.data.access_token);
@@ -226,10 +236,27 @@ export default function RegisterPage() {
                                         {touched.password && errors.password && <p className="text-xs text-red-500 font-bold ml-1">{errors.password}</p>}
                                     </div>
 
+                                    {/* Confirm Password */}
+                                    <div className="space-y-2">
+                                        <label htmlFor="confirm_password" className="block text-sm font-bold text-dark ml-1">Confirm Password</label>
+                                        <input
+                                            id="confirm_password"
+                                            name="confirm_password"
+                                            type="password"
+                                            value={formData.confirm_password}
+                                            onChange={handleChange}
+                                            onBlur={() => handleBlur('confirm_password')}
+                                            className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.confirm_password && errors.confirm_password ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
+                                            placeholder="••••••••"
+                                            required
+                                        />
+                                        {touched.confirm_password && errors.confirm_password && <p className="text-xs text-red-500 font-bold ml-1">{errors.confirm_password}</p>}
+                                    </div>
+
                                     <motion.button
                                         whileTap={{ scale: 0.98 }}
                                         type="submit"
-                                        disabled={loading || (Object.values(touched).some(t => t) && !isFormValid)}
+                                        disabled={loading || (Object.values(touched).some(t => t) && Object.values(errors).some(error => error !== ''))}
                                         className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 text-white font-extrabold py-4 px-6 rounded-2xl transition-all shadow-xl mt-4"
                                     >
                                         {loading ? 'Creating Account...' : 'Create Account'}

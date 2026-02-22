@@ -18,8 +18,18 @@ const ChatBot = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const messagesEndRef = useRef<HTMLDivElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
+    const messagesEndRef = useRef<HTMLDivElement>(null);
+
+    const renderMessageContent = (content: string) => {
+        const parts = content.split(/(\*\*.*?\*\*)/g);
+        return parts.map((part, i) => {
+            if (part.startsWith('**') && part.endsWith('**')) {
+                return <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>;
+            }
+            return part;
+        });
+    };
 
     const adjustHeight = () => {
         const textarea = textareaRef.current;
@@ -212,7 +222,7 @@ const ChatBot = () => {
                                                 : 'bg-white/80 backdrop-blur-md text-dark shadow-sm border border-gray-100 rounded-tl-none font-medium'
                                                 }`}
                                         >
-                                            {msg.content}
+                                            {renderMessageContent(msg.content)}
                                         </div>
                                     </div>
                                 </motion.div>

@@ -29,7 +29,9 @@ export default function BookingPage() {
     const [selectedTechnician, setSelectedTechnician] = useState<Technician | null>(null);
     const [fetchError, setFetchError] = useState<string | null>(null);
     const [isUsingMockData, setIsUsingMockData] = useState(true); // Default to true since we start with mock
-    const [selectedDate, setSelectedDate] = useState('');
+    const tzOffset = new Date().getTimezoneOffset() * 60000;
+    const todayStr = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
+    const [selectedDate, setSelectedDate] = useState(todayStr); // Sync to today
     const [selectedTime, setSelectedTime] = useState('');
     const [selectedServices, setSelectedServices] = useState<string[]>([]); // Service IDs
     const [formData, setFormData] = useState({
@@ -78,7 +80,7 @@ export default function BookingPage() {
                 price: 'On Request',
                 basePrice: 50000,
                 photoUrl: t.avatar_url || '/technician_1.jpg',
-                experience: `${t.experience_years} Tahun`,
+                experience: `${t.experience_years || 5} Tahun`, // 5 tahun default
                 specialties: t.specializations || [],
                 phone: t.user_phone,
                 bio: t.bio
@@ -413,7 +415,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                                 value={selectedDate}
                                 onChange={handleDateChange}
-                                min="2026-01-01"
+                                min={todayStr}
                                 max="2028-12-31"
                             />
                         </div>
@@ -608,7 +610,10 @@ Mohon konfirmasinya. Terima kasih.`;
                                     placeholder="08xxxxxxxxxx"
                                 />
                                 {formData.phone && !formData.phone.startsWith('08') && (
-                                    <p className="text-red-500 text-xs mt-1">Nomor harus dimulai dengan 08</p>
+                                    <p className="text-red-500 text-xs mt-1 font-bold">Nomor harus dimulai dengan 08</p>
+                                )}
+                                {formData.phone && formData.phone.startsWith('08') && formData.phone.length > 0 && formData.phone.length < 10 && (
+                                    <p className="text-red-500 text-xs mt-1 font-bold">Nomor minimal 10 digit (Format: 08xx...)</p>
                                 )}
                             </div>
                             <div>
@@ -715,7 +720,7 @@ Mohon konfirmasinya. Terima kasih.`;
                         <div className="mb-8">
                             <h3 className="font-bold text-dark mb-4">Metode Pembayaran</h3>
                             <div className="space-y-3">
-                                {['QRIS (Ovo/GoPay/Dana)', 'Transfer Bank BCA', 'Bayar di Tempat (Cash)'].map((method) => (
+                                {['QRIS (Ovo/GoPay/Dana)', 'Transfer Bank BCA'].map((method) => (
                                     <label key={method} className={`flex items-center p-4 rounded-xl border cursor-pointer transition-all
                                     ${paymentMethod === method ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-gray-200 hover:border-gray-300'}`}>
                                         <input

@@ -142,11 +142,18 @@ export default function LoginPage() {
                                 </div>
 
                                 {serverError && (
-                                    <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex items-center gap-3 animate-in fade-in slide-in-from-top duration-300">
-                                        <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        {serverError}
+                                    <div className="bg-red-50 border border-red-100 text-red-600 p-4 rounded-2xl mb-8 text-sm flex flex-col gap-2 animate-in fade-in slide-in-from-top duration-300">
+                                        <div className="flex items-center gap-3">
+                                            <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                            </svg>
+                                            <span className="font-medium">{serverError}</span>
+                                        </div>
+                                        {serverError.toLowerCase().includes('password') || serverError.toLowerCase().includes('credentials') || serverError.toLowerCase().includes('login failed') ? (
+                                            <div className="ml-8 text-xs text-red-500 font-bold">
+                                                Lupa password? <Link href="#" className="underline hover:text-red-700">Klik di sini untuk reset</Link>
+                                            </div>
+                                        ) : null}
                                     </div>
                                 )}
 
