@@ -119,10 +119,10 @@ export function AnimatedNavbar({
                 {/* Logo */}
                 <Link href="/" className="transition-transform hover:scale-105">
                     <Image
-                        src={logoSrc}
+                        src="/logo_square.png"
                         alt="PERABOX Logo"
                         width={160}
-                        height={90}
+                        height={160}
                         className="h-10 w-auto md:h-12 object-contain"
                         priority
                     />

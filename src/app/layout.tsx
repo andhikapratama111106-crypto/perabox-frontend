@@ -50,9 +50,9 @@ export const metadata: Metadata = {
         siteName: 'PERABOX',
         images: [
             {
-                url: '/perabox_icon.png',
-                width: 800,
-                height: 600,
+                url: '/logo_square.png',
+                width: 512,
+                height: 512,
                 alt: 'PERABOX Logo',
             },
         ],
@@ -60,10 +60,10 @@ export const metadata: Metadata = {
         type: 'website',
     },
     twitter: {
-        card: 'summary_large_image',
+        card: 'summary',
         title: 'PERABOX - Layanan Homecare Terpercaya',
         description: 'Solusi profesional untuk perawatan rumah Anda',
-        images: ['/perabox_icon.png'],
+        images: ['/logo_square.png'],
     },
     robots: {
         index: true,

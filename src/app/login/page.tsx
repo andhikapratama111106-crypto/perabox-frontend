@@ -107,13 +107,13 @@ export default function LoginPage() {
 
                                 <div className="relative z-10">
                                     <Link href="/" className="inline-block mb-12">
-                                        <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl flex items-center justify-center">
+                                        <div className="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border-2 border-white/20 mb-6 mx-auto">
                                             <Image
-                                                src="/perabox_icon.png"
+                                                src="/logo_square.png"
                                                 alt="PERABOX Logo"
-                                                width={160}
-                                                height={90}
-                                                className="h-12 w-auto"
+                                                width={100}
+                                                height={100}
+                                                className="w-full h-full object-contain p-2"
                                             />
                                         </div>
                                     </Link>

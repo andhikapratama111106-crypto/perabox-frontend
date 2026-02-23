@@ -140,10 +140,10 @@ export default function CustomerLayout({
                 <Link href="/" className="flex items-center gap-2">
                     <div className="transition-transform hover:scale-105">
                         <Image
-                            src="/perabox_icon.png"
+                            src="/logo_square.png"
                             alt="PERABOX Logo"
                             width={160}
-                            height={90}
+                            height={160}
                             className="h-10 w-auto md:h-12 object-contain"
                             priority
                         />
@@ -175,10 +175,10 @@ export default function CustomerLayout({
                         {/* Sidebar Logo */}
                         <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
                             <Image
-                                src="/perabox_icon.png"
+                                src="/logo_square.png"
                                 alt="PERABOX Icon"
                                 width={160}
-                                height={90}
+                                height={160}
                                 className="h-16 w-auto transition-transform hover:scale-110 duration-500 object-contain"
                                 priority
                             />
