@@ -77,15 +77,15 @@ export const metadata: Metadata = {
         },
     },
     icons: {
-        icon: '/favicon-32x32.png',
-        shortcut: '/favicon-16x16.png',
-        apple: '/apple-touch-icon.png',
+        icon: '/logo_square.png',
+        shortcut: '/logo_square.png',
+        apple: '/logo_square.png',
         other: [
             {
                 rel: 'icon',
                 type: 'image/png',
                 sizes: '32x32',
-                url: '/favicon-32x32.png',
+                url: '/logo_square.png',
             },
         ],
     },
