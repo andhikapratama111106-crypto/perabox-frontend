@@ -139,6 +139,31 @@ const Hero = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
                         </div>
+
+                        {/* Quick Service Shortcuts */}
+                        <div className="absolute top-6 right-6 z-30 flex flex-col gap-3">
+                            {[
+                                { name: 'Cleaning', icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10' },
+                                { name: 'Installation', icon: 'M11 4a2 2 0 114 0v1a2 2 0 012 2v3a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2v-1a2 2 0 012-2z' },
+                                { name: 'Repair', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z' },
+                            ].map((service, idx) => (
+                                <motion.button
+                                    key={service.name}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 1.2 + (idx * 0.1) }}
+                                    onClick={() => customSmoothScroll('#services')}
+                                    className="bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-white/50 flex items-center gap-3 group hover:bg-primary transition-all duration-300"
+                                >
+                                    <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={service.icon} />
+                                        </svg>
+                                    </div>
+                                    <span className="text-xs font-bold text-dark group-hover:text-white pr-2">{service.name}</span>
+                                </motion.button>
+                            ))}
+                        </div>
                     </div>
                     {/* Floating Info Card – breathe animation for real-time feel */}
                     <motion.div

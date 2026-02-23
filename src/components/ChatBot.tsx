@@ -22,12 +22,21 @@ const ChatBot = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
     const renderMessageContent = (content: string) => {
-        const parts = content.split(/(\*\*.*?\*\*)/g);
-        return parts.map((part, i) => {
-            if (part.startsWith('**') && part.endsWith('**')) {
-                return <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>;
-            }
-            return part;
+        const lines = content.split('\n');
+        return lines.map((line, lineIdx) => {
+            const isListItem = line.trim().startsWith('-') || /^\d+\./.test(line.trim());
+            const parts = line.split(/(\*\*.*?\*\*)/g);
+
+            return (
+                <div key={lineIdx} className={isListItem ? "ml-4 mb-1" : "mb-1"}>
+                    {parts.map((part, i) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                            return <strong key={i} className="font-bold">{part.slice(2, -2)}</strong>;
+                        }
+                        return part;
+                    })}
+                </div>
+            );
         });
     };
 

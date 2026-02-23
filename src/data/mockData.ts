@@ -16,7 +16,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-001',
         name: 'Irma Santoso',
-        photoUrl: '/technician_3.jpg',
+        photoUrl: '/perabot_avatar.png',
         rating: 4.9,
         reviewCount: 128,
         specialties: ['Service AC', 'Cuci AC'],
@@ -27,7 +27,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-002',
         name: 'Ahmad Rizki',
-        photoUrl: '/technician_7.jpg',
+        photoUrl: '/perabot_avatar.png',
         rating: 4.8,
         reviewCount: 95,
         specialties: ['Bongkar Pasang', 'Service Besar'],

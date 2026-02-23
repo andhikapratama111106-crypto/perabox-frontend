@@ -70,8 +70,8 @@ export default function BrandSlider() {
                                 <div
                                     className="flex items-center justify-center px-10 py-6 bg-white/60 backdrop-blur-sm border border-black/[0.04] shadow-sm rounded-3xl transition-all duration-700 ease-out hover:bg-white hover:shadow-xl hover:-translate-y-1"
                                     style={{
-                                        minWidth: '220px',
-                                        height: '110px',
+                                        minWidth: '260px',
+                                        height: '140px',
                                     }}
                                     title={brand.name}
                                 >
@@ -80,8 +80,8 @@ export default function BrandSlider() {
                                         alt={brand.name}
                                         className="w-auto object-contain opacity-75 hover:opacity-100 transition-opacity duration-700"
                                         style={{
-                                            height: '50px',
-                                            maxWidth: '180px',
+                                            height: '70px',
+                                            maxWidth: '220px',
                                             transform: brand.scale ? `scale(${brand.scale})` : 'none',
                                         }}
                                         onError={(e) => {
