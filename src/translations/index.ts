@@ -69,6 +69,17 @@ export const translations = {
             usageTerms: 'Usage Terms',
             serviceAgreement: 'Service Agreement',
             lastUpdated: 'Last Updated'
+        },
+        dashboard: {
+            title: 'Dashboard',
+            welcome: 'Welcome back! Here is what is happening with your services.',
+            totalBookings: 'Total Bookings',
+            pendingServices: 'Pending Services',
+            completedTasks: 'Completed Tasks',
+            unpaidInvoices: 'Unpaid Invoices',
+            recentBookings: 'Recent Bookings',
+            bookNow: 'Book New Service',
+            quickActions: 'Quick Actions'
         }
     },
     id: {
@@ -139,6 +150,17 @@ export const translations = {
             usageTerms: 'Ketentuan Penggunaan',
             serviceAgreement: 'Perjanjian Layanan',
             lastUpdated: 'Terakhir Diperbarui'
+        },
+        dashboard: {
+            title: 'Dasbor',
+            welcome: 'Selamat datang kembali! Inilah yang terjadi dengan layanan Anda.',
+            totalBookings: 'Total Pemesanan',
+            pendingServices: 'Layanan Mendatang',
+            completedTasks: 'Tugas Selesai',
+            unpaidInvoices: 'Tagihan Belum Dibayar',
+            recentBookings: 'Pemesanan Terbaru',
+            bookNow: 'Pesan Layanan Baru',
+            quickActions: 'Tindakan Cepat'
         }
     },
     es: {
@@ -209,6 +231,17 @@ export const translations = {
             usageTerms: 'Términos de Uso',
             serviceAgreement: 'Acuerdo de Servicio',
             lastUpdated: 'Última Actualización'
+        },
+        dashboard: {
+            title: 'Tablero',
+            welcome: '¡Bienvenido de nuevo! Esto es lo que está pasando con tus servicios.',
+            totalBookings: 'Total de Reservas',
+            pendingServices: 'Servicios Pendientes',
+            completedTasks: 'Tareas Completadas',
+            unpaidInvoices: 'Facturas Impagas',
+            recentBookings: 'Reservas Recientes',
+            bookNow: 'Reservar Nuevo Servicio',
+            quickActions: 'Acciones Rápidas'
         }
     },
     ja: {
@@ -279,6 +312,17 @@ export const translations = {
             usageTerms: '利用規約',
             serviceAgreement: 'サービス契約',
             lastUpdated: '最終更新日'
+        },
+        dashboard: {
+            title: 'ダッシュボード',
+            welcome: 'おかえりなさい！サービスの状況はこちらです。',
+            totalBookings: '総予約数',
+            pendingServices: '保留中のサービス',
+            completedTasks: '完了したタスク',
+            unpaidInvoices: '未払いの請求書',
+            recentBookings: '最近の予約',
+            bookNow: '新しいサービスを予約',
+            quickActions: 'クイックアクション'
         }
     },
     fr: {
@@ -349,6 +393,17 @@ export const translations = {
             usageTerms: 'Conditions d\'Utilisation',
             serviceAgreement: 'Contrat de Service',
             lastUpdated: 'Dernière Mise à Jour'
+        },
+        dashboard: {
+            title: 'Tableau de bord',
+            welcome: 'Bon retour ! Voici ce qui se passe avec vos services.',
+            totalBookings: 'Total des Réservations',
+            pendingServices: 'Services en Attente',
+            completedTasks: 'Tâches Terminées',
+            unpaidInvoices: 'Factures Impayées',
+            recentBookings: 'Réservations Récentes',
+            bookNow: 'Réserver un Nouveau Service',
+            quickActions: 'Actions Rapides'
         }
     }
 };
