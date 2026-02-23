@@ -172,6 +172,18 @@ export default function CustomerLayout({
                 {/* Sidebar Navigation */}
                 <aside className="w-full md:w-64 flex-shrink-0">
                     <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
+                        {/* Sidebar Logo */}
+                        <div className="px-4 py-6 mb-2 border-b border-gray-50 flex justify-center">
+                            <Image
+                                src="/perabox_icon.png"
+                                alt="PERABOX Icon"
+                                width={80}
+                                height={80}
+                                className="h-16 w-auto transition-transform hover:scale-110 duration-500"
+                                priority
+                            />
+                        </div>
+
                         <div className="space-y-1.5 mb-auto">
                             {sidebarItems.map((item) => {
                                 const isActive = pathname === item.href;
