@@ -126,7 +126,7 @@ export default function BookingPage() {
                 id: s.id,
                 title: s.name,
                 price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-                icon: "🔧",
+                icon: s.id === 'srv-1' ? "❄️" : s.id === 'srv-2' ? "🛠️" : s.id === 'srv-3' ? "💨" : s.id === 'srv-4' ? "🔧" : s.id === 'srv-5' ? "🚨" : "🛠️",
                 base_price: s.price
             }));
             setApiServices(mappedServices);
@@ -328,6 +328,35 @@ Mohon konfirmasinya. Terima kasih.`;
                         <div className="text-center mb-8">
                             <h1 className="text-2xl md:text-3xl font-bold text-dark mb-2">Pilih Teknisi Favoritmu</h1>
                             <p className="text-gray-500">Temukan teknisi terbaik disekitarmu dengan rating terpercaya</p>
+                        </div>
+
+                        {/* EMERGENCY DIRECT BUTTON */}
+                        <div className="mb-10 animate-in fade-in zoom-in duration-500">
+                            <button
+                                onClick={() => {
+                                    const firstTech = (technicians && technicians.length > 0) ? technicians[0] : mockTechnicians[0];
+                                    setSelectedTechnician(firstTech);
+                                    setSelectedDate(new Date().toISOString().split('T')[0]);
+                                    setSelectedTime('DIRECT (SEKARANG)');
+                                    setSelectedServices(['srv-5']);
+                                    setStep(5);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
+                                className="w-full bg-red-600 hover:bg-red-700 text-white p-6 rounded-[2rem] shadow-xl shadow-red-600/20 group transition-all transform hover:scale-[1.02] flex items-center justify-between border-4 border-red-100"
+                            >
+                                <div className="flex items-center gap-4 text-left">
+                                    <div className="bg-white/20 p-3 rounded-2xl group-hover:rotate-12 transition-transform">
+                                        <span className="text-3xl">🆘</span>
+                                    </div>
+                                    <div>
+                                        <p className="font-black text-xl tracking-tight uppercase">Butuh Layanan Darurat?</p>
+                                        <p className="text-red-100 text-sm font-medium">Klik untuk pesan langsung sekarang juga (Fast Response)</p>
+                                    </div>
+                                </div>
+                                <div className="bg-white/20 px-4 py-2 rounded-xl font-bold">
+                                    Pesan Sekarang
+                                </div>
+                            </button>
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
@@ -834,7 +863,8 @@ Mohon konfirmasinya. Terima kasih.`;
                                                 // Prepare final message with unique code included AND request for proof
                                                 const totalWithUnique = calculateTotal() + uniqueCode;
                                                 const serviceNames = selectedServices.map((id: string) => apiServices.find((s: Service) => s.id === id)?.title).join(', ');
-                                                const message = `Halo PERABOX, saya sudah transfer untuk order:\n- Layanan: ${serviceNames}\n- Waktu: ${selectedDate} jam ${selectedTime}\n- Lokasi: ${formData.address}\n\n*Total Transfer: Rp ${totalWithUnique.toLocaleString('id-ID')} (BCA)*\n*Kode Unik: ${uniqueCode}*\n\nBerikut bukti transfer saya (lampirkan foto):`;
+                                                const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT');
+                                                const message = `Halo PERABOX, saya ${isEmergency ? '*PERLU LAYANAN DARURAT*' : 'ingin konfirmasi transfer'} untuk order:\n- Layanan: ${serviceNames}\n- Waktu: ${selectedDate} jam ${selectedTime}\n- Lokasi: ${formData.address}\n\n*Total Transfer: Rp ${totalWithUnique.toLocaleString('id-ID')} (BCA)*\n*Kode Unik: ${uniqueCode}*${isEmergency ? '\n\n*STATUS: DARURAT / ASAP*' : ''}\n\nBerikut bukti transfer saya (lampirkan foto):`;
                                                 const centralNumber = '81234567894';
                                                 const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
                                                 window.open(waUrl, '_blank');

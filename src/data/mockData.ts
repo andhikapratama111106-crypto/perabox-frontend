@@ -153,11 +153,14 @@ export const mockTechnicians: Technician[] = [
 ];
 
 export const timeSlots = [
-    "09:00",
-    "11:00",
-    "13:00",
-    "15:00",
-    "17:00"
+    "08:00",
+    "10:00",
+    "12:00",
+    "14:00",
+    "16:00",
+    "18:00",
+    "20:00",
+    "22:00"
 ];
 
 export const serviceTypes = [
@@ -165,4 +168,5 @@ export const serviceTypes = [
     { id: 'srv-2', name: 'AC Installation', price: 300000 },
     { id: 'srv-3', name: 'Freon Refill', price: 200000 },
     { id: 'srv-4', name: 'AC Repair', price: 150000 },
+    { id: 'srv-5', name: 'Emergency Call (Direct)', price: 250000 },
 ];
