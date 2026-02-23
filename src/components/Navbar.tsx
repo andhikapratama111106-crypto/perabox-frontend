@@ -96,16 +96,14 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <Link href="/" className="transition-transform hover:scale-105">
-                    <div className="relative h-12 w-12 flex items-center justify-center">
-                        <Image
-                            src="/logo_square.png"
-                            alt="PERABOX Logo"
-                            width={48}
-                            height={48}
-                            className="object-contain"
-                            priority
-                        />
-                    </div>
+                    <Image
+                        src="/perabox_icon.png"
+                        alt="PERABOX Logo"
+                        width={160}
+                        height={90}
+                        className="h-10 w-auto md:h-12 object-contain"
+                        priority
+                    />
                 </Link>
 
                 {/* Desktop Menu */}
