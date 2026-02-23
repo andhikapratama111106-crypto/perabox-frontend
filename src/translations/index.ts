@@ -12,7 +12,8 @@ export const translations = {
             about: 'ABOUT',
             services: 'SERVICES',
             profile: 'PROFILE',
-            myProfile: 'My Profile'
+            myProfile: 'My Profile',
+            viewAll: 'View All'
         },
         sidebar: {
             myProfile: 'My Profile',
@@ -93,7 +94,8 @@ export const translations = {
             about: 'TENTANG',
             services: 'LAYANAN',
             profile: 'PROFIL',
-            myProfile: 'Profil Saya'
+            myProfile: 'Profil Saya',
+            viewAll: 'Lihat Semua'
         },
         sidebar: {
             myProfile: 'Profil Saya',
@@ -174,7 +176,8 @@ export const translations = {
             about: 'ACERCA DE',
             services: 'SERVICIOS',
             profile: 'PERFIL',
-            myProfile: 'Mi Perfil'
+            myProfile: 'Mi Perfil',
+            viewAll: 'Ver todo'
         },
         sidebar: {
             myProfile: 'Mi Perfil',
@@ -255,7 +258,8 @@ export const translations = {
             about: '私たちについて',
             services: 'サービス',
             profile: 'プロフィール',
-            myProfile: 'マイプロフィール'
+            myProfile: 'マイプロフィール',
+            viewAll: 'すべて表示'
         },
         sidebar: {
             myProfile: 'マイプロフィール',
@@ -336,7 +340,8 @@ export const translations = {
             about: 'À PROPOS',
             services: 'SERVICES',
             profile: 'PROFIL',
-            myProfile: 'Mon Profil'
+            myProfile: 'Mon Profil',
+            viewAll: 'Voir tout'
         },
         sidebar: {
             myProfile: 'Mon Profil',
