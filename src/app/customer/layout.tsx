@@ -138,13 +138,13 @@ export default function CustomerLayout({
             {/* Top Navbar */}
             <nav className="bg-white px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
                 <Link href="/" className="flex items-center gap-2">
-                    <div className="transition-transform hover:scale-105">
+                    <div className="flex-shrink-0 flex items-center h-12 w-12 justify-center">
                         <Image
-                            src="/perabox_icon.png"
+                            src="/logo_square.png"
                             alt="PERABOX Logo"
-                            width={160}
-                            height={90}
-                            className="h-10 w-auto md:h-12 object-contain"
+                            width={48}
+                            height={48}
+                            className="object-contain"
                             priority
                         />
                     </div>
@@ -175,11 +175,11 @@ export default function CustomerLayout({
                         {/* Sidebar Logo */}
                         <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
                             <Image
-                                src="/perabox_icon.png"
+                                src="/logo_square.png"
                                 alt="PERABOX Icon"
-                                width={160}
-                                height={90}
-                                className="h-16 w-auto transition-transform hover:scale-110 duration-500 object-contain"
+                                width={64}
+                                height={64}
+                                className="h-16 w-16 transition-transform hover:scale-110 duration-500 object-contain"
                                 priority
                             />
                         </div>
