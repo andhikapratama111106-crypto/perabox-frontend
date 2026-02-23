@@ -144,7 +144,7 @@ export default function CustomerLayout({
                             alt="PERABOX Logo"
                             width={160}
                             height={90}
-                            className="h-10 w-auto md:h-12"
+                            className="h-10 w-auto md:h-12 object-contain"
                             priority
                         />
                     </div>
@@ -162,7 +162,7 @@ export default function CustomerLayout({
                     ))}
                 </div>
                 <div className="flex items-center gap-4">
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm aspect-square">
                         <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="User" className="w-full h-full object-cover" />
                     </div>
                 </div>
@@ -173,13 +173,13 @@ export default function CustomerLayout({
                 <aside className="w-full md:w-64 flex-shrink-0">
                     <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
                         {/* Sidebar Logo */}
-                        <div className="px-4 py-6 mb-2 border-b border-gray-50 flex justify-center">
+                        <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Icon"
-                                width={80}
-                                height={80}
-                                className="h-16 w-auto transition-transform hover:scale-110 duration-500"
+                                width={160}
+                                height={90}
+                                className="h-16 w-auto transition-transform hover:scale-110 duration-500 object-contain"
                                 priority
                             />
                         </div>
