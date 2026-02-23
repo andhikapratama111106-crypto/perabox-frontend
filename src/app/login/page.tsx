@@ -130,7 +130,7 @@ export default function LoginPage() {
                                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=200" alt="User" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-bold">"Best service in town! Very professional."</p>
+                                        <p className="text-sm font-bold">&quot;Best service in town! Very professional.&quot;</p>
                                         <p className="text-xs text-white/60">Anindya Putri, Customer</p>
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@ export default function LoginPage() {
                                 </div>
 
                                 <div className="mt-12 text-center text-sm">
-                                    <span className="text-gray-500 font-medium">Don't have an account yet?</span>{' '}
+                                    <span className="text-gray-500 font-medium">Don&apos;t have an account yet?</span>{' '}
                                     <Link href="/register" className="text-primary font-extrabold hover:underline">Create account</Link>
                                 </div>
                             </div>

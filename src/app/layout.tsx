@@ -5,6 +5,7 @@ import '../styles/animations.css';
 
 
 import ChatBot from '../components/ChatBot';
+import { LanguageProvider } from '../context/LanguageContext';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
