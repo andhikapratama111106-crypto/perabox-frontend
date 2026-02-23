@@ -3,46 +3,48 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Features = () => {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+    const { t } = useLanguage();
 
     const features = [
         {
-            title: "Professional Service",
-            description: "Experienced and certified technicians for all your home needs.",
-            detail: "All PERABOX technicians go through a rigorous selection and training process. They are certified, background-checked, and equipped with professional tools. You can trust that every job will be done right the first time — from AC maintenance to full home repairs. We maintain a quality rating system so only the best technicians serve you.",
+            title: t('features.feature1Title'),
+            description: t('features.feature1Desc'),
+            detail: t('features.feature1Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: ["Certified technicians", "Background-checked", "Quality rating system", "Professional tools"]
+            highlights: t('features.feature1Highlights') as unknown as string[]
         },
         {
-            title: "Fair Pricing",
-            description: "Transparent costs with no hidden fees. Quality work at great value.",
-            detail: "We believe in complete price transparency. Before any work begins, you'll receive a detailed cost breakdown — no surprises, no hidden charges. Our pricing is competitive and benchmarked against market rates to ensure you always get the best value. Plus, we offer a satisfaction guarantee on every service.",
+            title: t('features.feature2Title'),
+            description: t('features.feature2Desc'),
+            detail: t('features.feature2Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: ["Upfront cost breakdown", "No hidden fees", "Market-competitive rates", "Satisfaction guarantee"]
+            highlights: t('features.feature2Highlights') as unknown as string[]
         },
         {
-            title: "24/7 Support",
-            description: "Always here to help you solve your home maintenance problems.",
-            detail: "Home emergencies don't follow a schedule — and neither do we. Our support team is available around the clock, every day of the year. Whether it's a midnight AC breakdown or a weekend plumbing issue, just reach out via WhatsApp, phone, or the app and we'll dispatch a technician to you as soon as possible.",
+            title: t('features.feature3Title'),
+            description: t('features.feature3Desc'),
+            detail: t('features.feature3Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: ["Available 365 days", "WhatsApp, phone & app", "Emergency dispatch", "Fast response times"]
+            highlights: t('features.feature3Highlights') as unknown as string[]
         }
     ];
 
@@ -55,13 +57,13 @@ const Features = () => {
             <div className="container mx-auto px-6">
                 <Reveal direction="up">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">Features</h2>
+                        <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">{t('features.sectionTitle')}</h2>
                         <p className="text-4xl md:text-5xl font-extrabold text-dark mb-6 leading-tight">
-                            Everything You Need for a <br />
-                            <span className="text-primary italic">Better Home</span>
+                            {t('features.mainHeading1')} <br />
+                            <span className="text-primary italic">{t('features.mainHeading2')}</span>
                         </p>
                         <p className="text-lg text-gray-500">
-                            We combine technology and human expertise to give you the best homecare experience you&apos;ve ever had.
+                            {t('features.description')}
                         </p>
                     </div>
                 </Reveal>
@@ -143,7 +145,7 @@ const Features = () => {
                                 {/* "Learn more" hint when collapsed */}
                                 {expandedIndex !== index && (
                                     <div className="mt-8 flex items-center gap-2 text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        Learn more
+                                        {t('features.learnMore')}
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                         </svg>

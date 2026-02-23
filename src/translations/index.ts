@@ -1,4 +1,5 @@
-export type Language = 'en' | 'id' | 'es' | 'ja' | 'fr';
+import { homeTranslations } from './home';
+export type Language = 'en' | 'id' | 'es' | 'ja' | 'zh';
 
 export const translations = {
     en: {
@@ -81,7 +82,8 @@ export const translations = {
             recentBookings: 'Recent Bookings',
             bookNow: 'Book New Service',
             quickActions: 'Quick Actions'
-        }
+        },
+        ...homeTranslations.en
     },
     id: {
         common: {
@@ -163,7 +165,8 @@ export const translations = {
             recentBookings: 'Pemesanan Terbaru',
             bookNow: 'Pesan Layanan Baru',
             quickActions: 'Tindakan Cepat'
-        }
+        },
+        ...homeTranslations.id
     },
     es: {
         common: {
@@ -245,7 +248,8 @@ export const translations = {
             recentBookings: 'Reservas Recientes',
             bookNow: 'Reservar Nuevo Servicio',
             quickActions: 'Acciones Rápidas'
-        }
+        },
+        ...homeTranslations.es
     },
     ja: {
         common: {
@@ -327,88 +331,90 @@ export const translations = {
             recentBookings: '最近の予約',
             bookNow: '新しいサービスを予約',
             quickActions: 'クイックアクション'
-        }
+        },
+        ...homeTranslations.ja
     },
-    fr: {
+    zh: {
         common: {
-            save: 'Enregistrer',
-            cancel: 'Annuler',
-            edit: 'Modifier',
-            logout: 'Déconnexion',
-            changeLanguage: 'Changer de langue',
-            home: 'ACCUEIL',
-            about: 'À PROPOS',
-            services: 'SERVICES',
-            profile: 'PROFIL',
-            myProfile: 'Mon Profil',
-            viewAll: 'Voir tout'
+            save: '保存',
+            cancel: '取消',
+            edit: '编辑',
+            logout: '登出',
+            changeLanguage: '改变语言',
+            home: '主页',
+            about: '关于',
+            services: '服务',
+            profile: '个人资料',
+            myProfile: '我的预资料',
+            viewAll: '查看全部'
         },
         sidebar: {
-            myProfile: 'Mon Profil',
-            security: 'Sécurité',
-            notification: 'Notification',
-            dashboard: 'Tableau de bord',
-            rate: 'Évaluer',
-            support: 'Aide et Support',
-            terms: 'Conditions Générales'
+            myProfile: '我的预资料',
+            security: '安全',
+            notification: '通知',
+            dashboard: '仪表板',
+            rate: '评分',
+            support: '帮助与支持',
+            terms: '条款和条件'
         },
         profile: {
-            identity: 'Identité',
-            personalInfo: 'Informations Personnelles',
-            address: 'Adresse',
-            firstName: 'Prénom',
-            lastName: 'Nom',
-            email: 'Adresse e-mail',
-            phone: 'Téléphone',
-            bio: 'Bio',
-            country: 'Pays',
-            street: 'Adresse',
-            postalCode: 'Code Postal',
-            taxId: 'Numéro fiscal',
-            fullName: 'Nom Complet',
-            location: 'Localisation'
+            identity: '身份',
+            personalInfo: '个人信息',
+            address: '地址',
+            firstName: '名字',
+            lastName: '姓氏',
+            email: '电子邮件地址',
+            phone: '电话',
+            bio: '简介',
+            country: '国家',
+            street: '街道地址',
+            postalCode: '邮政编码',
+            taxId: '税号',
+            fullName: '全名',
+            location: '位置'
         },
         rate: {
-            title: 'Évaluer notre service',
-            subtitle: 'Votre avis nous aide à nous améliorer',
-            overallExperience: 'Expérience Globale',
-            cleanliness: 'Propreté',
-            punctuality: 'Ponctualité',
-            professionalism: 'Professionnalisme',
-            comment: 'Commentaires supplémentaires',
-            submit: 'Envoyer l\'avis',
-            thankYou: 'Merci pour votre message !'
+            title: '评价我们的服务',
+            subtitle: '您的反馈有助于我们改进',
+            overallExperience: '总体体验',
+            cleanliness: '清洁度',
+            punctuality: '守时',
+            professionalism: '专业水平',
+            comment: '补充评论',
+            submit: '提交评论',
+            thankYou: '感谢您的反馈！'
         },
         support: {
-            title: 'Aide & Support',
-            subtitle: 'Nous sommes là pour vous aider',
-            contactUs: 'Contactez-nous',
-            faq: 'Questions Fréquemment Posées',
-            emailSupport: 'Support par Email',
-            phoneSupport: 'Support Téléphonique',
-            liveChat: 'Chat en direct',
-            message: 'Votre Message',
-            sendMessage: 'Envoyer le Message',
-            successMessage: 'Votre message a été envoyé avec succès !'
+            title: '帮助与支持',
+            subtitle: '我们在这里帮助您解决任何问题',
+            contactUs: '联系我们',
+            faq: '常见问题',
+            emailSupport: '电子邮件支持',
+            phoneSupport: '电话支持',
+            liveChat: '在线聊天',
+            message: '您的信息',
+            sendMessage: '发送信息',
+            successMessage: '您的信息已成功发送！'
         },
         terms: {
-            title: 'Conditions Générales',
-            subtitle: 'Veuillez lire attentivement nos conditions générales',
-            privacyPolicy: 'Politique de Confidentialité',
-            usageTerms: 'Conditions d\'Utilisation',
-            serviceAgreement: 'Contrat de Service',
-            lastUpdated: 'Dernière Mise à Jour'
+            title: '条款和条件',
+            subtitle: '请仔细阅读我们的条款和条件',
+            privacyPolicy: '隐私政策',
+            usageTerms: '使用条款',
+            serviceAgreement: '服务协议',
+            lastUpdated: '最后更新'
         },
         dashboard: {
-            title: 'Tableau de bord',
-            welcome: 'Bon retour ! Voici ce qui se passe avec vos services.',
-            totalBookings: 'Total des Réservations',
-            pendingServices: 'Services en Attente',
-            completedTasks: 'Tâches Terminées',
-            unpaidInvoices: 'Factures Impayées',
-            recentBookings: 'Réservations Récentes',
-            bookNow: 'Réserver un Nouveau Service',
-            quickActions: 'Actions Rapides'
-        }
+            title: '仪表板',
+            welcome: '欢迎回来！这是您的服务情况。',
+            totalBookings: '总预订量',
+            pendingServices: '待定服务',
+            completedTasks: '已完成的任务',
+            unpaidInvoices: '未付发票',
+            recentBookings: '最近预订',
+            bookNow: '预订新服务',
+            quickActions: '快速操作'
+        },
+        ...homeTranslations.zh
     }
 };

@@ -3,58 +3,40 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from './Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Services = () => {
     const [activeTab, setActiveTab] = useState(0);
+    const { t } = useLanguage();
 
     const services = [
         {
-            title: "AC Cleaning",
+            title: t('services.service1Title'),
             image: "/ac_cleaning.jpg",
-            headline: "Servis Cuci AC Profesional untuk Udara Lebih Sehat & Dingin Maksimal",
-            description: "Layanan pembersihan AC menyeluruh untuk menghilangkan debu, kotoran, jamur, dan bakteri yang menumpuk pada filter, evaporator, dan unit outdoor. Proses dilakukan dengan alat khusus agar AC kembali bekerja optimal, lebih hemat listrik, dan bebas bau tidak sedap.",
-            features: [
-                "Pembersihan filter & evaporator",
-                "Pembersihan unit outdoor",
-                "Cek tekanan freon",
-                "Pemeriksaan kelistrikan dasar",
-            ],
+            headline: t('services.service1Headline'),
+            description: t('services.service1Desc'),
+            features: t('services.service1Features') as unknown as string[],
         },
         {
-            title: "AC Installation",
+            title: t('services.service2Title'),
             image: "/ac_installation.jpg",
-            headline: "Pemasangan AC Aman, Presisi & Standar Teknis",
-            description: "Instalasi AC dilakukan oleh teknisi berpengalaman dengan pemasangan yang rapi dan sesuai standar keamanan. Kami memastikan posisi unit indoor dan outdoor optimal untuk sirkulasi udara dan performa maksimal.",
-            features: [
-                "Pemasangan unit indoor & outdoor",
-                "Pemasangan pipa & kabel standar",
-                "Vakum instalasi",
-                "Tes fungsi & kebocoran",
-            ],
+            headline: t('services.service2Headline'),
+            description: t('services.service2Desc'),
+            features: t('services.service2Features') as unknown as string[],
         },
         {
-            title: "AC Repair",
+            title: t('services.service3Title'),
             image: "/ac_repair.jpg",
-            headline: "Perbaikan AC Cepat & Tepat Sasaran",
-            description: "Mengatasi berbagai masalah AC seperti AC bocor, tidak dingin, berisik, atau mati total. Teknisi kami akan melakukan diagnosa mendalam untuk menemukan sumber masalah dan memberikan solusi perbaikan yang efektif.",
-            features: [
-                "Pengecekan kebocoran & kerusakan",
-                "Penggantian sparepart original",
-                "Perbaikan modul elektronik",
-                "Garansi servis",
-            ],
+            headline: t('services.service3Headline'),
+            description: t('services.service3Desc'),
+            features: t('services.service3Features') as unknown as string[],
         },
         {
-            title: "Freon Refill",
+            title: t('services.service4Title'),
             image: "/freon_refill.jpg",
-            headline: "Isi Ulang Freon Berkualitas",
-            description: "Layanan penambahan atau pengisian ulang freon (refrigerant) untuk mengembalikan kinerja pendinginan AC Anda. Kami menggunakan jenis freon yang sesuai dengan spesifikasi AC (R32, R410A, R22) agar AC kembali dingin maksimal.",
-            features: [
-                "Cek tekanan freon eksisting",
-                "Pengisian freon R32/R410A/R22",
-                "Cek kebocoran instalasi pipa",
-                "Optimalisasi suhu output",
-            ],
+            headline: t('services.service4Headline'),
+            description: t('services.service4Desc'),
+            features: t('services.service4Features') as unknown as string[],
         },
     ];
 
@@ -69,8 +51,8 @@ const Services = () => {
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 <Reveal>
                     <div className="text-center mb-16 md:mb-20">
-                        <span className="text-primary text-sm font-bold tracking-widest uppercase mb-3 block">Our Services</span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-dark mb-6">What Can We Do For You?</h2>
+                        <span className="text-primary text-sm font-bold tracking-widest uppercase mb-3 block">{t('services.sectionTitle')}</span>
+                        <h2 className="text-4xl md:text-5xl font-bold text-dark mb-6">{t('services.mainHeading')}</h2>
                         <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
                     </div>
                 </Reveal>

@@ -2,6 +2,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface BrandLogo {
     name: string;
@@ -25,6 +26,7 @@ const brands: BrandLogo[] = [
 export default function BrandSlider() {
     const sliderRef = useRef<HTMLDivElement>(null);
     const [isPaused, setIsPaused] = useState(false);
+    const { t } = useLanguage();
 
     // Triple duplication for smoother infinite loop
     const tripleBrands = [...brands, ...brands, ...brands];
@@ -42,12 +44,12 @@ export default function BrandSlider() {
         <section className="py-20 bg-white/50 overflow-hidden">
             <Reveal direction="up">
                 <div className="container mx-auto px-6 mb-12 text-center">
-                    <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">Our Partners</h2>
+                    <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">{t('brandSlider.sectionTitle')}</h2>
                     <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">
-                        Trusted by Leading Brands
+                        {t('brandSlider.mainHeading')}
                     </h2>
                     <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                        Backed by experienced technicians for various renowned AC brands
+                        {t('brandSlider.description')}
                     </p>
                 </div>
             </Reveal>

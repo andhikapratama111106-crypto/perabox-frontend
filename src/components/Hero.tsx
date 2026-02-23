@@ -8,6 +8,7 @@ import { customSmoothScroll } from '@/utils/scrollUtils';
 import { useReveal } from '@/hooks/useReveal';
 import { useParallax } from '@/hooks/useParallax';
 import { staggerContainer, splitLineReveal, fadeUp, reducedMotionVariants } from '@/utils/animationConfig';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Hero = () => {
     const { ref: heroRef, isVisible, prefersReduced } = useReveal<HTMLElement>({
@@ -20,10 +21,12 @@ const Hero = () => {
         clamp: [-60, 60],
     });
 
+    const { t } = useLanguage();
+
     const textVariants = prefersReduced ? reducedMotionVariants : splitLineReveal;
     const ctaVariants = prefersReduced ? reducedMotionVariants : fadeUp;
 
-    const headlineLines = ['The Smart Way to', 'Maintain Your Home.'];
+    const headlineLines = [t('hero.headlineLine1'), t('hero.headlineLine2')];
 
     return (
         <section id="home" ref={heroRef} className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
@@ -39,7 +42,7 @@ const Hero = () => {
                     {/* Badge */}
                     <Reveal direction="down" delay={0.1}>
                         <span className="inline-block px-4 py-1.5 bg-accent/10 text-accent font-bold rounded-full text-xs tracking-wider uppercase mb-6">
-                            #1 Homecare Platform in Indonesia
+                            {t('hero.badge')}
                         </span>
                     </Reveal>
 
@@ -69,8 +72,8 @@ const Hero = () => {
                     {/* Subtitle */}
                     <Reveal direction="up" delay={0.5}>
                         <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg leading-relaxed">
-                            Perabox provides professional home maintenance services at your fingertips. From AC repair to deep cleaning, we&apos;ve got you covered.
-                        </p>
+                            {t('hero.subtitle')}
+                        </p
                     </Reveal>
 
                     {/* CTA Buttons */}
@@ -82,7 +85,7 @@ const Hero = () => {
                         className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
                     >
                         <Link href="/book" className="group relative bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2">
-                            Let&apos;s Start
+                            {t('hero.letsStart')}
                             <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                             </svg>
@@ -91,7 +94,7 @@ const Hero = () => {
                             onClick={() => customSmoothScroll('#services')}
                             className="px-10 py-4 border-2 border-primary/20 text-dark font-bold hover:bg-primary/5 hover:border-primary/40 rounded-full transition-all flex items-center gap-2 group active:scale-95"
                         >
-                            Explore Services
+                            {t('hero.exploreServices')}
                             <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform"></span>
                         </button>
                     </motion.div>
@@ -107,7 +110,7 @@ const Hero = () => {
                                 ))}
                             </div>
                             <div className="text-sm">
-                                <span className="block font-bold text-dark">10,000+ Happy Customers</span>
+                                <span className="block font-bold text-dark">{t('hero.socialProof')}</span>
                                 <div className="flex items-center gap-1.5 mt-0.5">
                                     <div className="flex text-yellow-500">
                                         {[1, 2, 3, 4, 5].map((s) => (
@@ -139,6 +142,31 @@ const Hero = () => {
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
                         </div>
+
+                        {/* Quick Service Shortcuts */}
+                        <div className="absolute top-6 right-6 z-30 flex flex-col gap-3">
+                            {[
+                                { name: 'Cleaning', icon: 'M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10' },
+                                { name: 'Installation', icon: 'M11 4a2 2 0 114 0v1a2 2 0 012 2v3a2 2 0 01-2 2H7a2 2 0 01-2-2V7a2 2 0 012-2v-1a2 2 0 012-2z' },
+                                { name: 'Repair', icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z' },
+                            ].map((service, idx) => (
+                                <motion.button
+                                    key={service.name}
+                                    initial={{ opacity: 0, x: 20 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 1.2 + (idx * 0.1) }}
+                                    onClick={() => customSmoothScroll('#services')}
+                                    className="bg-white/90 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-white/50 flex items-center gap-3 group hover:bg-primary transition-all duration-300"
+                                >
+                                    <div className="w-8 h-8 bg-primary/10 text-primary rounded-lg flex items-center justify-center group-hover:bg-white/20 group-hover:text-white transition-colors">
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={service.icon} />
+                                        </svg>
+                                    </div>
+                                    <span className="text-xs font-bold text-dark group-hover:text-white pr-2">{service.name}</span>
+                                </motion.button>
+                            ))}
+                        </div>
                     </div>
                     {/* Floating Info Card – breathe animation for real-time feel */}
                     <motion.div
@@ -167,14 +195,14 @@ const Hero = () => {
                             </svg>
                         </div>
                         <div>
-                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Technician Status</p>
+                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{t('hero.techStatus')}</p>
                             <div className="flex items-center gap-2">
                                 {/* Pulsing live dot */}
                                 <span className="relative flex h-2.5 w-2.5">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                                     <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
                                 </span>
-                                <p className="text-dark font-bold">120+ Available Now</p>
+                                <p className="text-dark font-bold">{t('hero.availableNow')}</p>
                             </div>
                         </div>
                     </motion.div>

@@ -2,8 +2,10 @@
 
 import Image from 'next/image';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 const About = () => {
+    const { t } = useLanguage();
     return (
         <section id="about" className="py-20 bg-secondary">
             <div className="container mx-auto px-6">
@@ -20,19 +22,19 @@ const About = () => {
                     </Reveal>
 
                     <Reveal direction="right" delay={0.2} className="w-full md:w-1/2">
-                        <span className="text-sm uppercase tracking-wider text-gray-500 mb-2 block">About Us</span>
-                        <h2 className="text-3xl font-bold text-dark mb-6">Our Company</h2>
+                        <span className="text-sm uppercase tracking-wider text-gray-500 mb-2 block">{t('about.sectionTitle')}</span>
+                        <h2 className="text-3xl font-bold text-dark mb-6">{t('about.mainHeading')}</h2>
 
                         <p className="text-gray-600 mb-6 leading-relaxed">
-                            <span className="font-bold text-primary">PERABOX</span> is a homecare platform that connects users with trained technicians and furniture rental vendors quickly, safely, and transparently. We&apos;re here to make your life easier.
+                            <span className="font-bold text-primary">PERABOX</span>{t('about.description1')}
                         </p>
 
                         <p className="text-gray-600 mb-8">
-                            Our slogan is:
+                            {t('about.description2')}
                         </p>
 
                         <blockquote className="text-xl font-bold italic text-dark border-l-4 border-primary pl-4">
-                            &quot;Simple. Smooth. Secure.&quot;
+                            &quot;{t('about.slogan')}&quot;
                         </blockquote>
                     </Reveal>
                 </div>
