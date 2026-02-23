@@ -9,13 +9,14 @@ const About = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-12">
                     <Reveal direction="left" className="w-full md:w-1/2 flex justify-center">
-                        <Image
-                            src="/logo_square.png"
-                            alt="PERABOX Corporate Logo"
-                            width={160}
-                            height={160}
-                            className="h-16 w-auto mb-10 block grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
-                        />
+                        <div className="relative w-64 h-64 md:w-80 md:h-80">
+                            <Image
+                                src="/perabox_icon.png"
+                                alt="PERABOX Icon"
+                                fill
+                                className="object-contain"
+                            />
+                        </div>
                     </Reveal>
 
                     <Reveal direction="right" delay={0.2} className="w-full md:w-1/2">

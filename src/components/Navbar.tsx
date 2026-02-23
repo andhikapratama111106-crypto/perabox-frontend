@@ -98,10 +98,10 @@ const Navbar = () => {
                 <Link href="/" className="flex items-center gap-2 group">
                     <div className="transition-transform group-hover:scale-105">
                         <Image
-                            src="/logo_square.png"
+                            src="/perabox_icon.png"
                             alt="PERABOX Logo"
                             width={160}
-                            height={160}
+                            height={90}
                             className="h-10 w-auto md:h-12 object-contain"
                             priority
                         />
