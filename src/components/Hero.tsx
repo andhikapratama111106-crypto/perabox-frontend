@@ -73,7 +73,7 @@ const Hero = () => {
                     <Reveal direction="up" delay={0.5}>
                         <p className="text-lg md:text-xl text-gray-600 mb-10 max-w-lg leading-relaxed">
                             {t('hero.subtitle')}
-                        </p
+                        </p>
                     </Reveal>
 
                     {/* CTA Buttons */}

@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 // Forced refresh for Vercel build v1.1.1
 
 
@@ -49,6 +50,7 @@ const socialLinks = [
 ];
 
 const Footer = () => {
+    const { t } = useLanguage();
     return (
         <footer className="bg-secondary pt-20 pb-10">
             <div className="container mx-auto px-6">
@@ -66,7 +68,7 @@ const Footer = () => {
 
                         <div className="absolute inset-0 z-10 p-6 md:p-10 lg:p-16 flex flex-col justify-end">
                             <h2 className="text-3xl md:text-5xl font-bold text-white max-w-xl leading-tight">
-                                Simple. Smooth. Secure.
+                                {t('footer.slogan')}
                             </h2>
                         </div>
                     </div>
@@ -75,7 +77,7 @@ const Footer = () => {
                 {/* Footer Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16 px-4">
                     <div className="lg:col-span-2">
-                        <p className="text-sm text-gray-500 mb-6">Stay In touch</p>
+                        <p className="text-sm text-gray-500 mb-6">{t('footer.stayInTouch')}</p>
 
                         {/* Social Media Icons */}
                         <div className="flex gap-3">
@@ -96,10 +98,10 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">Company</h4>
+                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.company')}</h4>
                         <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="/#about" className="hover:text-primary transition-colors">About Us</Link></li>
-                            <li><Link href="/#services" className="hover:text-primary transition-colors">Services</Link></li>
+                            <li><Link href="/#about" className="hover:text-primary transition-colors">{t('footer.aboutUs')}</Link></li>
+                            <li><Link href="/#services" className="hover:text-primary transition-colors">{t('footer.services')}</Link></li>
                             <li><Link href="/blog" className="hover:text-primary transition-colors">Articles</Link></li>
                         </ul>
                     </div>
@@ -112,10 +114,10 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">Support</h4>
+                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.support')}</h4>
                         <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="/faq" className="hover:text-primary transition-colors">FAQ</Link></li>
-                            <li><Link href="/contact" className="hover:text-primary transition-colors">Contact Us</Link></li>
+                            <li><Link href="/faq" className="hover:text-primary transition-colors">{t('footer.faq')}</Link></li>
+                            <li><Link href="/contact" className="hover:text-primary transition-colors">{t('footer.contact')}</Link></li>
                             <li><Link href="/feedback" className="hover:text-primary transition-colors">Feedback</Link></li>
                         </ul>
                     </div>
@@ -161,13 +163,13 @@ const Footer = () => {
                 <div className="border-t border-gray-200 pt-8 mt-12">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                         <p className="text-[10px] text-gray-400 order-2 md:order-1 text-center md:text-left">
-                            {"\u00A9"} 2024 PERABOX. All rights reserved. (v1.1.1)
+                            {t('footer.allRightsReserved')} (v1.1.1)
                         </p>
 
                         <div className="flex flex-col md:flex-row items-center gap-6 order-1 md:order-2">
                             <div className="flex gap-6 text-[10px] text-gray-400">
-                                <Link href="#" className="hover:text-primary transition-colors">Terms & Conditions</Link>
-                                <Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link>
+                                <Link href="#" className="hover:text-primary transition-colors">{t('footer.termsOfService')}</Link>
+                                <Link href="#" className="hover:text-primary transition-colors">{t('footer.privacyPolicy')}</Link>
                             </div>
                         </div>
                     </div>

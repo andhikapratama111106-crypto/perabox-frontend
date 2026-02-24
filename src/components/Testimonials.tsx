@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState, useEffect, useCallback } from 'react';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Testimonial {
     name: string;
@@ -11,30 +12,6 @@ interface Testimonial {
     image: string;
     rating: number;
 }
-
-const testimonials: Testimonial[] = [
-    {
-        name: 'Yoga Arya Saputra',
-        role: 'Pelanggan Setia',
-        quote: 'PERABOX sangat membantu! Pelayanannya cepat, teknisinya rapi dan profesional. Harganya juga bersahabat. Pengalaman servis terbaik yang pernah saya rasakan.',
-        image: '/testimonial_person.jpg',
-        rating: 5,
-    },
-    {
-        name: 'Sari Dewi Anggraini',
-        role: 'Ibu Rumah Tangga',
-        quote: 'Sebagai ibu rumah tangga, saya butuh servis AC yang bisa diandalkan. PERABOX datang tepat waktu, teknisinya ramah, dan AC saya langsung dingin lagi. Sangat recommended!',
-        image: '/testimonial_housewife.png',
-        rating: 5,
-    },
-    {
-        name: 'Hj. Siti Rahayu',
-        role: 'Pensiunan',
-        quote: 'Di usia saya yang sudah tidak muda lagi, sangat terbantu dengan layanan PERABOX. Cukup pesan dari HP, teknisi langsung datang ke rumah. Pelayanannya sabar dan sangat sopan. Terima kasih PERABOX!',
-        image: '/testimonial_elderly.png',
-        rating: 5,
-    },
-];
 
 const StarRating = ({ count }: { count: number }) => (
     <div className="flex gap-1">
@@ -47,6 +24,31 @@ const StarRating = ({ count }: { count: number }) => (
 );
 
 const Testimonials = () => {
+    const { t } = useLanguage();
+    const testimonials: Testimonial[] = [
+        {
+            name: t('testimonials.t1Name'),
+            role: t('testimonials.t1Role'),
+            quote: t('testimonials.t1Quote'),
+            image: '/testimonial_person.jpg',
+            rating: 5,
+        },
+        {
+            name: t('testimonials.t2Name'),
+            role: t('testimonials.t2Role'),
+            quote: t('testimonials.t2Quote'),
+            image: '/testimonial_housewife.png',
+            rating: 5,
+        },
+        {
+            name: t('testimonials.t3Name'),
+            role: t('testimonials.t3Role'),
+            quote: t('testimonials.t3Quote'),
+            image: '/testimonial_elderly.png',
+            rating: 5,
+        },
+    ];
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -76,13 +78,13 @@ const Testimonials = () => {
                 <Reveal direction="up">
                     <div className="text-center mb-14">
                         <span className="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">
-                            Testimoni
+                            {t('testimonials.sectionTitle')}
                         </span>
                         <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">
-                            Apa Kata Pelanggan Kami
+                            {t('testimonials.mainHeading')}
                         </h2>
                         <p className="text-lg text-gray-500 max-w-2xl mx-auto">
-                            Kepuasan pelanggan adalah prioritas utama kami
+                            {t('testimonials.description')}
                         </p>
                     </div>
                 </Reveal>

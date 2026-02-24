@@ -2,27 +2,29 @@
 
 import { useRouter } from 'next/navigation';
 import { Reveal } from '@/components/Reveal/Reveal';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Discover = () => {
     const router = useRouter();
+    const { t } = useLanguage();
     const articles = [
         {
-            title: "Peralatan Perawatan AC: Wajib Dimiliki untuk Menjaga AC Tetap Optimal",
-            date: "November 22, 2023",
+            title: t('discover.article1Title'),
+            date: t('discover.article1Date'),
             image: "/article_handyman.png",
             slug: "/blog/peralatan-perawatan-ac",
             position: "center"
         },
         {
-            title: "Tahukah Anda? AC Anda \"Menangis\" Saat Terlalu Terbebani",
-            date: "August 20, 2023",
+            title: t('discover.article2Title'),
+            date: t('discover.article2Date'),
             image: "/article_ac_broken.png",
             slug: "/blog/ac-menangis",
             position: "top"
         },
         {
-            title: "Cara Memperbaiki AC yang Rusak: Langkah Mudah yang Bisa Anda Coba di Rumah",
-            date: "August 8, 2023",
+            title: t('discover.article3Title'),
+            date: t('discover.article3Date'),
             image: "/article_ac_unit.png",
             slug: "/blog/cara-memperbaiki-ac",
             position: "bottom"
@@ -34,8 +36,8 @@ const Discover = () => {
             <div className="container mx-auto px-6">
                 <Reveal direction="up">
                     <div className="text-center mb-12">
-                        <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">Let&apos;s Discover</h2>
-                        <p className="text-gray-500 text-sm">Explore newest and most updated informations here!</p>
+                        <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">{t('discover.sectionTitle')}</h2>
+                        <p className="text-gray-500 text-sm">{t('discover.description')}</p>
                     </div>
                 </Reveal>
 
@@ -62,7 +64,7 @@ const Discover = () => {
                             onClick={() => router.push('/blog')}
                             className="inline-block bg-dark hover:bg-black text-white px-8 py-3 rounded-full text-sm font-medium transition-colors"
                         >
-                            Visit All
+                            {t('discover.buttonText')}
                         </button>
                     </div>
                 </Reveal>
