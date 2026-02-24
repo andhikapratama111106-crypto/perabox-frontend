@@ -6,7 +6,7 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { customSmoothScroll } from '@/utils/scrollUtils';
-import LanguageSwitcher from './LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useLanguage } from '@/context/LanguageContext';
 
 const Navbar = () => {
