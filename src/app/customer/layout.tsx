@@ -9,6 +9,7 @@ import { motion } from 'framer-motion';
 
 import { useLanguage } from '@/context/LanguageContext';
 import { Language } from '@/translations';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export default function CustomerLayout({
     children,
@@ -162,6 +163,9 @@ export default function CustomerLayout({
                     ))}
                 </div>
                 <div className="flex items-center gap-4">
+                    <div className="hidden sm:block">
+                        <LanguageSwitcher />
+                    </div>
                     <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm aspect-square">
                         <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="User" className="w-full h-full object-cover" />
                     </div>

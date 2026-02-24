@@ -6,10 +6,13 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { customSmoothScroll } from '@/utils/scrollUtils';
+import LanguageSwitcher from './LanguageSwitcher';
+import { useLanguage } from '@/context/LanguageContext';
 
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname();
+    const { t } = useLanguage();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -75,9 +78,10 @@ const Navbar = () => {
 
 
     const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'Features', href: '#features' },
-        { name: 'About', href: '#about' },
+        { name: t('common.home') || 'Home', href: '#home' },
+        { name: t('common.features') || 'Features', href: '#features' },
+        { name: t('common.services') || 'Services', href: '#services' },
+        { name: t('common.about') || 'About', href: '#about' },
     ];
 
     const menuVariants = {
@@ -128,19 +132,21 @@ const Navbar = () => {
                         </a>
                     ))}
 
+                    <LanguageSwitcher />
+
                     {isLoggedIn ? (
                         <div className="flex items-center gap-6">
                             <Link
                                 href="/customer/profile"
                                 className="text-gray-700 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg px-2 py-1"
                             >
-                                PROFILE
+                                {t('common.profile') || 'PROFILE'}
                             </Link>
                             <button
                                 onClick={handleLogout}
                                 className="text-red-500 hover:text-red-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/50 rounded-lg px-2 py-1"
                             >
-                                LOGOUT
+                                {t('common.logout') || 'LOGOUT'}
                             </button>
                         </div>
                     ) : (
@@ -148,7 +154,7 @@ const Navbar = () => {
                             href="/login"
                             className="bg-primary hover:bg-primary/90 text-white px-8 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                         >
-                            LOGIN
+                            {t('common.login') || 'LOGIN'}
                         </Link>
                     )}
                 </div>
@@ -211,6 +217,9 @@ const Navbar = () => {
                                     {link.name.toUpperCase()}
                                 </a>
                             ))}
+                            <div className="flex px-4 py-2">
+                                <LanguageSwitcher />
+                            </div>
                             <div className="h-px bg-gray-100 my-2 mx-4" />
                             {isLoggedIn ? (
                                 <>
@@ -220,14 +229,14 @@ const Navbar = () => {
                                         className="text-gray-700 hover:text-primary py-3 px-4 hover:bg-primary/5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                                         role="menuitem"
                                     >
-                                        PROFILE
+                                        {t('common.profile') || 'PROFILE'}
                                     </Link>
                                     <button
                                         onClick={handleLogout}
                                         className="text-left text-red-500 hover:text-red-600 py-3 px-4 hover:bg-red-50 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/50"
                                         role="menuitem"
                                     >
-                                        LOGOUT
+                                        {t('common.logout') || 'LOGOUT'}
                                     </button>
                                 </>
                             ) : (
@@ -237,7 +246,7 @@ const Navbar = () => {
                                     className="bg-primary text-white px-6 py-4 rounded-2xl text-center shadow-lg shadow-primary/20 mt-2 active:scale-[0.98] transition-all"
                                     role="menuitem"
                                 >
-                                    LOGIN
+                                    {t('common.login') || 'LOGIN'}
                                 </Link>
                             )}
                         </div>
