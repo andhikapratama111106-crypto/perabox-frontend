@@ -18,6 +18,9 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         const savedLang = localStorage.getItem('app_language') as Language;
         if (savedLang && translations[savedLang]) {
             setLanguageState(savedLang);
+        } else {
+            localStorage.setItem('app_language', 'id');
+            setLanguageState('id');
         }
     }, []);
 

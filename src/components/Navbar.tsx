@@ -79,7 +79,7 @@ const Navbar = () => {
     const navLinks = [
         { name: t('common.home') || 'Home', href: '#home' },
         { name: t('common.services') || 'Services', href: '#services' },
-        { name: 'FEATURES', href: '#features' },
+        { name: t('common.features') || 'Features', href: '#features' },
         { name: t('common.about') || 'Tentang Kami', href: '#about' },
     ];
 
@@ -153,7 +153,7 @@ const Navbar = () => {
                             href="/login"
                             className="bg-primary hover:bg-primary/90 text-white px-8 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                         >
-                            LOGIN
+                            {t('common.login') || 'LOGIN'}
                         </Link>
                     )}
                 </div>
@@ -245,7 +245,7 @@ const Navbar = () => {
                                     className="bg-primary text-white px-6 py-4 rounded-2xl text-center shadow-lg shadow-primary/20 mt-2 active:scale-[0.98] transition-all"
                                     role="menuitem"
                                 >
-                                    LOGIN
+                                    {t('common.login') || 'LOGIN'}
                                 </Link>
                             )}
                         </div>

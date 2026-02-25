@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { Reveal } from '@/components/Reveal/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
+import { translations, Language } from '@/translations';
 // Forced refresh for Vercel build v1.1.1
 
 
@@ -50,7 +51,8 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const faqs = (translations[language as Language] as any)?.faqPage?.faqs || [];
     return (
         <footer className="bg-secondary pt-20 pb-10">
             <div className="container mx-auto px-6">
@@ -125,32 +127,14 @@ const Footer = () => {
 
                 {/* FAQ Section (Coursera-style reference) */}
                 <div className="border-t border-gray-100 pt-16 mb-16">
-                    <h3 className="text-xl font-bold text-dark mb-8">Frequently Asked Questions</h3>
+                    <h3 className="text-xl font-bold text-dark mb-8">{t('faqPage.pageTitle') || 'Frequently Asked Questions'}</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Apa itu PERABOX?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Platform homecare yang menghubungkan pengguna dengan teknisi terlatih untuk layanan AC dan rumah tangga.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Bagaimana cara memesan?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Klik 'Let&apos;s Start', pilih layanan, tentukan jadwal, dan teknisi kami akan datang ke lokasi Anda.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Apakah ada garansi?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Ya, setiap layanan memiliki garansi. Jika ada masalah, kami akan lakukan pengecekan ulang gratis.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Metode pembayaran?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Kami menerima QRIS, transfer bank, dan pembayaran tunai langsung kepada teknisi.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Area layanan?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Saat ini melayani area Jabodetabek dan sekitarnya, terus memperluas ke kota-kota lain.</p>
-                        </div>
-                        <div>
-                            <h4 className="font-bold text-sm text-dark mb-2">Pembatalan pesanan?</h4>
-                            <p className="text-xs text-gray-500 leading-relaxed">Bisa dibatalkan via WhatsApp customer service sebelum teknisi berangkat ke lokasi.</p>
-                        </div>
+                        {faqs.slice(0, 6).map((faq: { question: string, answer: string }, idx: number) => (
+                            <div key={idx}>
+                                <h4 className="font-bold text-sm text-dark mb-2">{faq.question}</h4>
+                                <p className="text-xs text-gray-500 leading-relaxed">{faq.answer}</p>
+                            </div>
+                        ))}
                     </div>
                     <div className="mt-8">
                         <Link href="/faq" className="text-primary text-xs font-bold hover:underline">

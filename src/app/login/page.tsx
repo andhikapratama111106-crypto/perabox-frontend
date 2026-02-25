@@ -120,7 +120,7 @@ export default function LoginPage() {
                         localStorage.setItem('access_token', data.access_token);
                         if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
                         setIsSuccess(true);
-                        router.push(data.role === 'admin' ? '/admin' : '/customer/profile');
+                        setTimeout(() => router.push(data.role === 'admin' ? '/admin' : '/customer/profile'), 1000);
                     } else {
                         // Fallback: get user info from Google directly
                         const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -135,7 +135,7 @@ export default function LoginPage() {
                         // Store access token so Navbar treats user as logged in
                         localStorage.setItem('access_token', tokenResponse.access_token);
                         setIsSuccess(true);
-                        router.push('/customer/profile');
+                        setTimeout(() => router.push('/customer/profile'), 1000);
                     }
                 } catch {
                     setServerError('Google login failed. Please try again.');

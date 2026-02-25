@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { useLanguage } from '@/context/LanguageContext';
 import { servicesAPI, bookingsAPI, techniciansAPI } from '@/lib/api';
 import { mockTechnicians, Technician, timeSlots, serviceTypes } from '@/data/mockData';
 import TechnicianCard from '@/components/booking/TechnicianCard';
@@ -19,6 +20,7 @@ interface Service {
 }
 
 export default function BookingPage() {
+    const { t } = useLanguage();
     const router = useRouter();
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false); // Start as false to show mock data instantly
@@ -326,8 +328,8 @@ Mohon konfirmasinya. Terima kasih.`;
                 {step === 1 && (
                     <div>
                         <div className="text-center mb-8">
-                            <h1 className="text-2xl md:text-3xl font-bold text-dark mb-2">Pilih Teknisi Favoritmu</h1>
-                            <p className="text-gray-500">Temukan teknisi terbaik disekitarmu dengan rating terpercaya</p>
+                            <h1 className="text-2xl md:text-3xl font-bold text-dark mb-2">{t('bookPage.title1')}</h1>
+                            <p className="text-gray-500">{t('bookPage.subtitle1')}</p>
                         </div>
 
                         {/* EMERGENCY DIRECT BUTTON */}
@@ -349,12 +351,12 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <span className="text-3xl">🆘</span>
                                     </div>
                                     <div>
-                                        <p className="font-black text-xl tracking-tight uppercase">Butuh Layanan Darurat?</p>
-                                        <p className="text-red-100 text-sm font-medium">Klik untuk pesan langsung sekarang juga (Fast Response)</p>
+                                        <p className="font-black text-xl tracking-tight uppercase">{t('bookPage.emergencyBtn')}</p>
+                                        <p className="text-red-100 text-sm font-medium">{t('bookPage.emergencySub')}</p>
                                     </div>
                                 </div>
                                 <div className="bg-white/20 px-4 py-2 rounded-xl font-bold">
-                                    Pesan Sekarang
+                                    {t('bookPage.emergencyAction')}
                                 </div>
                             </button>
                         </div>
@@ -382,12 +384,12 @@ Mohon konfirmasinya. Terima kasih.`;
                                 if (displayTechs.length === 0 && !loading) {
                                     return (
                                         <div className="col-span-full text-center py-10 bg-white rounded-3xl border-2 border-dashed border-gray-200">
-                                            <p className="text-gray-400 mb-4">Mohon maaf, teknisi belum tersedia saat ini (V2).</p>
+                                            <p className="text-gray-400 mb-4">{t('bookPage.noTechs')}</p>
                                             <button
                                                 onClick={() => fetchData()}
                                                 className="bg-primary/10 text-primary px-6 py-2 rounded-full font-bold hover:bg-primary/20 transition-all"
                                             >
-                                                Coba Lagi
+                                                {t('bookPage.tryAgain')}
                                             </button>
                                         </div>
                                     );
@@ -401,8 +403,8 @@ Mohon konfirmasinya. Terima kasih.`;
                                             <div className="col-span-full mb-4 px-6 py-3 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-700">
                                                 <span className="text-xl">✨</span>
                                                 <div>
-                                                    <p className="text-amber-800 text-sm font-bold">Menampilkan Teknisi Teratas</p>
-                                                    <p className="text-amber-700 text-xs">Pilih teknisi handal di bawah ini untuk memulai layanan Anda.</p>
+                                                    <p className="text-amber-800 text-sm font-bold">{t('bookPage.topTechs')}</p>
+                                                    <p className="text-amber-700 text-xs">{t('bookPage.topTechsSub')}</p>
                                                 </div>
                                             </div>
                                         )}
@@ -424,14 +426,14 @@ Mohon konfirmasinya. Terima kasih.`;
                 {/* STEP 2: SELECT SCHEDULE */}
                 {step === 2 && (
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8">
-                        <h2 className="text-2xl font-bold text-dark mb-6">Pilih Jadwal Kedatangan</h2>
+                        <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title2')}</h2>
 
                         {/* Selected Technician Confirmation */}
                         {selectedTechnician && (
                             <div className="flex items-center gap-3 mb-6 bg-primary/5 border border-primary/20 rounded-xl p-4">
                                 <img src={selectedTechnician.photoUrl} alt={selectedTechnician.name} className="w-10 h-10 rounded-full object-cover" />
                                 <div className="flex-1">
-                                    <p className="text-xs text-primary font-semibold uppercase tracking-wider">Teknisi Terpilih</p>
+                                    <p className="text-xs text-primary font-semibold uppercase tracking-wider">{t('bookPage.selectedTech')}</p>
                                     <p className="font-bold text-dark">{selectedTechnician.name}</p>
                                 </div>
                                 <span className="text-primary text-lg">✓</span>
@@ -439,7 +441,7 @@ Mohon konfirmasinya. Terima kasih.`;
                         )}
 
                         <div className="mb-6">
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Tanggal</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">{t('bookPage.selectDate')}</label>
                             <input
                                 type="date"
                                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
@@ -451,7 +453,7 @@ Mohon konfirmasinya. Terima kasih.`;
                         </div>
 
                         <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-2">Pilih Jam</label>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">{t('bookPage.selectTime')}</label>
                             <div className="grid grid-cols-3 gap-3">
                                 {timeSlots.map((time: string) => (
                                     <button
@@ -470,13 +472,13 @@ Mohon konfirmasinya. Terima kasih.`;
                         </div>
 
                         <div className="mt-8 flex justify-between">
-                            <button onClick={() => setStep(1)} className="text-gray-500 hover:text-dark">Kembali</button>
+                            <button onClick={() => setStep(1)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
                             <button
                                 onClick={handleScheduleSelect}
                                 disabled={!selectedDate || !selectedTime}
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all"
                             >
-                                Lanjut Pilih Layanan
+                                {t('bookPage.btnNextService')}
                             </button>
                         </div>
                     </div>
@@ -485,7 +487,7 @@ Mohon konfirmasinya. Terima kasih.`;
                 {/* STEP 3: SELECT SERVICE */}
                 {step === 3 && (
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8 animate-fade-in-up">
-                        <h2 className="text-2xl font-bold text-dark mb-6">Pilih Layanan</h2>
+                        <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title3')}</h2>
 
                         {/* Selected Technician & Schedule Confirmation - Combined Large Card */}
                         <div className="bg-white border border-gray-100 rounded-[2.5rem] p-6 mb-8 shadow-xl shadow-gray-200/50 flex flex-col gap-6">
@@ -506,9 +508,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                     </div>
 
                                     <div className="flex-1">
-                                        <p className="text-[10px] text-[#9C6D3F] font-black uppercase tracking-[0.2em] mb-1 opacity-80">
-                                            Teknisi Pilihan
-                                        </p>
+                                        {t('bookPage.selectedTech')}
                                         <h3 className="text-2xl font-black text-dark tracking-tight leading-tight">
                                             {selectedTechnician.name}
                                         </h3>
@@ -535,9 +535,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                 </div>
 
                                 <div className="flex-1 leading-tight">
-                                    <p className="text-[9px] text-gray-400 font-black uppercase tracking-[0.15em] mb-1">
-                                        Jadwal Kunjungan
-                                    </p>
+                                    {t('bookPage.visitSchedule')}
                                     <h4 className="font-black text-dark text-base">
                                         {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
                                     </h4>
@@ -571,7 +569,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                             {service.title}
                                         </h3>
                                         <div className="flex items-center gap-2">
-                                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">Mulai dari</span>
+                                            <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{t('bookPage.startFrom')}</span>
                                             <p className={`font-black text-lg ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-gray-600'}`}>
                                                 {service.price}
                                             </p>
@@ -597,19 +595,19 @@ Mohon konfirmasinya. Terima kasih.`;
                                 </div>
                             )) : (
                                 <div className="text-center py-20 bg-gray-50 rounded-[2rem] border-2 border-dashed border-gray-200">
-                                    <p className="text-gray-400 font-medium">Memuat daftar layanan...</p>
+                                    <p className="text-gray-400 font-medium">{t('bookPage.loadingServices')}</p>
                                 </div>
                             )}
                         </div>
 
                         <div className="mt-8 flex justify-between">
-                            <button onClick={() => setStep(2)} className="text-gray-500 hover:text-dark">Kembali</button>
+                            <button onClick={() => setStep(2)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
                             <button
                                 onClick={() => selectedServices.length > 0 && setStep(4)}
                                 disabled={selectedServices.length === 0}
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all"
                             >
-                                Isi Data Diri
+                                {t('bookPage.btnNextInfo')}
                             </button>
                         </div>
                     </div>
@@ -618,16 +616,16 @@ Mohon konfirmasinya. Terima kasih.`;
                 {/* STEP 4: USER FORM */}
                 {step === 4 && (
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8 animate-fade-in-up">
-                        <h2 className="text-2xl font-bold text-dark mb-6">Data Pemesan</h2>
+                        <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title4')}</h2>
 
                         <div className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.fullName')}</label>
                                 <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                                    value={formData.full_name} onChange={e => setFormData({ ...formData, full_name: e.target.value })} placeholder="Contoh: Budi Gunawan" />
+                                    value={formData.full_name} onChange={e => setFormData({ ...formData, full_name: e.target.value })} placeholder={t('bookPage.fullNamePlaceholder')} />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.whatsapp')}</label>
                                 <input
                                     type="tel"
                                     className={`w-full px-4 py-3 rounded-xl border outline-none focus:ring-2 focus:ring-primary/20 transition-all ${formData.phone && (!formData.phone.startsWith('08') || !/^\d+$/.test(formData.phone))
@@ -643,29 +641,29 @@ Mohon konfirmasinya. Terima kasih.`;
                                             setFormData({ ...formData, phone: val });
                                         }
                                     }}
-                                    placeholder="08xxxxxxxx"
+                                    placeholder={t('bookPage.whatsappPlaceholder')}
                                 />
                                 {formData.phone && !formData.phone.startsWith('08') && (
-                                    <p className="text-red-500 text-xs mt-1 font-bold">Nomor harus dimulai dengan 08</p>
+                                    <p className="text-red-500 text-xs mt-1 font-bold">{t('bookPage.whatsappErr1')}</p>
                                 )}
                                 {formData.phone && formData.phone.startsWith('08') && formData.phone.length > 0 && (formData.phone.length < 10 || formData.phone.length > 12) && (
-                                    <p className="text-red-500 text-xs mt-1 font-bold">Panjang nomor 10-12 digit (Format: 08xx...)</p>
+                                    <p className="text-red-500 text-xs mt-1 font-bold">{t('bookPage.whatsappErr2')}</p>
                                 )}
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.address')}</label>
                                 <textarea className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 min-h-[100px]"
-                                    value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} placeholder="Jl. Mawar No. 12, Jakarta Selatan..."></textarea>
+                                    value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} placeholder={t('bookPage.addressPlaceholder')}></textarea>
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Catatan Tambahan (Opsional)</label>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.notes')}</label>
                                 <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                                    value={formData.notes} onChange={e => setFormData({ ...formData, notes: e.target.value })} placeholder="AC Bocor, Parkir di depan..." />
+                                    value={formData.notes} onChange={e => setFormData({ ...formData, notes: e.target.value })} placeholder={t('bookPage.notesPlaceholder')} />
                             </div>
                         </div>
 
                         <div className="mt-8 flex justify-between">
-                            <button onClick={() => setStep(3)} className="text-gray-500 hover:text-dark">Kembali</button>
+                            <button onClick={() => setStep(3)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
                             <button
                                 onClick={() => {
                                     const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10 && formData.phone.length <= 12;
@@ -683,7 +681,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                 }
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all"
                             >
-                                Lanjut Pembayaran
+                                {t('bookPage.btnNextPayment')}
                             </button>
                         </div>
                     </div>
@@ -692,7 +690,7 @@ Mohon konfirmasinya. Terima kasih.`;
                 {/* STEP 5: CONFIRMATION & PAYMENT */}
                 {step === 5 && (
                     <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8 animate-fade-in-up">
-                        <h2 className="text-2xl font-bold text-dark mb-6">Konfirmasi Pesanan</h2>
+                        <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title5')}</h2>
 
                         {/* Booking Summary Card - REMASTERED TO MATCH SCREENSHOT */}
                         <div className="bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-2xl mb-8">
@@ -711,7 +709,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         </div>
                                     )}
                                     <div className="flex-1">
-                                        <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">Teknisi Pilihan</p>
+                                        <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">{t('bookPage.selectedTech')}</p>
                                         <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
                                         <div className="flex items-center gap-1.5">
                                             <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
@@ -732,7 +730,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <span className="text-xl font-black text-dark leading-none mt-1">17</span>
                                     </div>
                                     <div className="flex-1">
-                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">Jadwal Kunjungan</p>
+                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
                                         <h4 className="font-black text-dark text-xl leading-tight">
                                             {selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}
                                         </h4>
@@ -741,18 +739,18 @@ Mohon konfirmasinya. Terima kasih.`;
                                 </div>
 
                                 <div className="pt-8 border-t border-gray-100 space-y-6">
-                                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">Detail Biaya</p>
+                                    <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t('bookPage.costDetails')}</p>
 
                                     <div className="flex justify-between items-center text-lg font-bold text-gray-700">
-                                        <span>Estimasi Layanan ({selectedServices.length})</span>
+                                        <span>{t('bookPage.estService')} ({selectedServices.length})</span>
                                         <span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span>
                                     </div>
 
                                     <div className="flex justify-between items-end pt-4">
-                                        <span className="text-lg font-black text-dark mb-2">Total Estimasi</span>
+                                        <span className="text-lg font-black text-dark mb-2">{t('bookPage.estTotal')}</span>
                                         <div className="text-right">
                                             <span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">Rp {calculateTotal().toLocaleString('id-ID')}</span>
-                                            <span className="text-[10px] text-gray-400 font-medium italic tracking-wide">Sudah termasuk PPN & Biaya Layanan</span>
+                                            <span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -761,7 +759,7 @@ Mohon konfirmasinya. Terima kasih.`;
 
                         {/* Payment Method */}
                         <div className="mb-8">
-                            <h3 className="font-bold text-dark mb-4">Metode Pembayaran</h3>
+                            <h3 className="font-bold text-dark mb-4">{t('bookPage.paymentMethod')}</h3>
                             <div className="space-y-3">
                                 {['QRIS (Ovo/GoPay/Dana)', 'Transfer Bank BCA'].map((method) => (
                                     <label key={method} className={`flex items-center p-4 rounded-xl border cursor-pointer transition-all
@@ -781,13 +779,13 @@ Mohon konfirmasinya. Terima kasih.`;
                         </div>
 
                         <div className="mt-8 flex justify-between items-center">
-                            <button onClick={() => setStep(4)} className="text-gray-500 hover:text-dark">Kembali</button>
+                            <button onClick={() => setStep(4)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
                             <button
                                 onClick={handleCreateBooking}
                                 disabled={submitting || !paymentMethod}
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all shadow-lg hover:shadow-primary/30"
                             >
-                                {submitting ? 'Memproses...' : 'Konfirmasi & Pesan'}
+                                {submitting ? t('bookPage.btnProcess') : t('bookPage.btnConfirm')}
                             </button>
                         </div>
                     </div>
