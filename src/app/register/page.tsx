@@ -207,6 +207,7 @@ export default function RegisterPage() {
                                             value={formData.email}
                                             onChange={handleChange}
                                             onBlur={() => handleBlur('email')}
+                                            autoComplete="email"
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.email && errors.email ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
                                             placeholder="name@example.com"
                                             required
@@ -241,6 +242,7 @@ export default function RegisterPage() {
                                             value={formData.password}
                                             onChange={handleChange}
                                             onBlur={() => handleBlur('password')}
+                                            autoComplete="new-password"
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.password && errors.password ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
                                             placeholder="••••••••"
                                             required
@@ -258,6 +260,7 @@ export default function RegisterPage() {
                                             value={formData.confirm_password}
                                             onChange={handleChange}
                                             onBlur={() => handleBlur('confirm_password')}
+                                            autoComplete="new-password"
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.confirm_password && errors.confirm_password ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
                                             placeholder="••••••••"
                                             required
