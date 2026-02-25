@@ -140,46 +140,46 @@ const Hero = () => {
                                     target.src = "https://images.unsplash.com/photo-1581578731548-c64695cc6954?auto=format&fit=crop&q=80&w=1200";
                                 }}
                             />
-                            <div className="absolute inset-0 bg-gradient-to-t from-dark/40 to-transparent"></div>
                         </div>
-                        {/* Floating Info Card – breathe animation for real-time feel */}
-                        <motion.div
-                            className="absolute bottom-4 -left-8 z-30 bg-white p-6 rounded-2xl shadow-2xl flex items-center gap-4 border border-gray-100"
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{
-                                opacity: 1,
-                                y: 0,
-                                scale: [1, 1.03, 1],
-                                boxShadow: [
-                                    '0 25px 50px -12px rgba(0,0,0,0.15)',
-                                    '0 25px 60px -8px rgba(0,0,0,0.22)',
-                                    '0 25px 50px -12px rgba(0,0,0,0.15)',
-                                ],
-                            }}
-                            transition={{
-                                opacity: { delay: 1.0, duration: 0.5 },
-                                y: { delay: 1.0, duration: 0.5 },
-                                scale: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                                boxShadow: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                            }}
-                        >
-                            <div className="w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center">
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                </svg>
+                    </div>
+                    {/* Floating Info Card – breathe animation for real-time feel */}
+                    <motion.div
+                        className="absolute bottom-4 -left-8 z-30 bg-white p-6 rounded-2xl shadow-2xl flex items-center gap-4 border border-gray-100"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{
+                            opacity: 1,
+                            y: 0,
+                            scale: [1, 1.03, 1],
+                            boxShadow: [
+                                '0 25px 50px -12px rgba(0,0,0,0.15)',
+                                '0 25px 60px -8px rgba(0,0,0,0.22)',
+                                '0 25px 50px -12px rgba(0,0,0,0.15)',
+                            ],
+                        }}
+                        transition={{
+                            opacity: { delay: 1.0, duration: 0.5 },
+                            y: { delay: 1.0, duration: 0.5 },
+                            scale: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                            boxShadow: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                        }}
+                    >
+                        <div className="w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center">
+                            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{t('hero.techStatus')}</p>
+                            <div className="flex items-center gap-2">
+                                {/* Pulsing live dot */}
+                                <span className="relative flex h-2.5 w-2.5">
+                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                                </span>
+                                <p className="text-dark font-bold">{t('hero.availableNow')}</p>
                             </div>
-                            <div>
-                                <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{t('hero.techStatus')}</p>
-                                <div className="flex items-center gap-2">
-                                    {/* Pulsing live dot */}
-                                    <span className="relative flex h-2.5 w-2.5">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
-                                    </span>
-                                    <p className="text-dark font-bold">{t('hero.availableNow')}</p>
-                                </div>
-                            </div>
-                        </motion.div>
+                        </div>
+                    </motion.div>
                 </Reveal>
             </div>
         </section>
