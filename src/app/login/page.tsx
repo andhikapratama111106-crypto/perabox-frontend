@@ -84,9 +84,9 @@ export default function LoginPage() {
     };
 
     const handleGoogleLogin = useCallback(() => {
-        const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID;
-        if (!clientId) {
-            setServerError('Google login is not configured. Please contact support.');
+        const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
+        if (!clientId || clientId === 'your-client-id-here.apps.googleusercontent.com') {
+            setServerError('Please set a valid NEXT_PUBLIC_GOOGLE_CLIENT_ID in your Vercel Environment Variables and REDEPLOY.');
             return;
         }
         if (!window.google?.accounts?.oauth2) {

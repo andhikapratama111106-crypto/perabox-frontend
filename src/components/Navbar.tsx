@@ -77,7 +77,10 @@ const Navbar = () => {
     };
 
     const navLinks = [
+        { name: t('common.home') || 'Home', href: '#home' },
+        { name: t('common.services') || 'Services', href: '#services' },
         { name: 'FEATURES', href: '#features' },
+        { name: t('common.about') || 'Tentang Kami', href: '#about' },
     ];
 
     const menuVariants = {
@@ -242,7 +245,7 @@ const Navbar = () => {
                                     className="bg-primary text-white px-6 py-4 rounded-2xl text-center shadow-lg shadow-primary/20 mt-2 active:scale-[0.98] transition-all"
                                     role="menuitem"
                                 >
-                                    {t('common.login') || 'LOGIN'}
+                                    LOGIN
                                 </Link>
                             )}
                         </div>
