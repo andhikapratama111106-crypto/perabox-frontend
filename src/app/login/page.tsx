@@ -84,7 +84,7 @@ export default function LoginPage() {
     };
 
     const handleGoogleLogin = useCallback(() => {
-        const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
+        const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '684253633428-77beh414f242h85dvnc1isbu7sg8ok5l.apps.googleusercontent.com';
         if (!clientId || clientId === 'your-client-id-here.apps.googleusercontent.com') {
             setServerError('Please set a valid NEXT_PUBLIC_GOOGLE_CLIENT_ID in your Vercel Environment Variables and REDEPLOY.');
             return;
