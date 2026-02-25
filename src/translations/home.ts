@@ -147,6 +147,26 @@ export const homeTranslations = {
             "support": "Support",
             "allRightsReserved": "© 2024 PERABOX. All rights reserved.",
             "slogan": "Simple. Smooth. Secure."
+        },
+        "faqPage": {
+            "pageTitle": "Frequently Asked Questions",
+            "pageSubtitle": "Find answers to common questions about PERABOX services.",
+            "backToHome": "Back to Home",
+            "ctaQuestion": "Still have questions?",
+            "ctaBody": "Contact us, we are ready to help!",
+            "ctaButton": "Contact Us",
+            "faqs": [
+                { "question": "What is PERABOX?", "answer": "PERABOX is a homecare platform that connects users with trained technicians for AC and home maintenance services quickly, safely, and transparently." },
+                { "question": "What services does PERABOX offer?", "answer": "We currently provide AC Cleaning, AC Installation, AC Repair, and Freon Refill. More services coming soon." },
+                { "question": "How do I book a service?", "answer": "Click 'Let's Start' on the homepage, choose your service, set a schedule, and a technician will come to your location." },
+                { "question": "How much does PERABOX cost?", "answer": "Prices vary by service type and AC condition. We guarantee transparent pricing with no hidden fees." },
+                { "question": "Are PERABOX technicians certified?", "answer": "Yes. All technicians go through a strict selection process and receive regular training." },
+                { "question": "How long does the service take?", "answer": "AC Cleaning usually takes 45-60 minutes per unit. Installation takes 2-4 hours." },
+                { "question": "Is there a service guarantee?", "answer": "Yes. If a problem occurs after service, a technician will return for a free re-check." },
+                { "question": "Which areas does PERABOX serve?", "answer": "We currently serve the Jabodetabek area and surroundings, expanding to other cities." },
+                { "question": "What payment methods are accepted?", "answer": "We accept QRIS, bank transfer, and cash directly to the technician." },
+                { "question": "Can I cancel my order?", "answer": "You can cancel before the technician departs at no cost. Contact us via WhatsApp." }
+            ]
         }
     },
     "id": {
@@ -297,6 +317,26 @@ export const homeTranslations = {
             "support": "Dukungan",
             "allRightsReserved": "© 2024 PERABOX. Hak cipta dilindungi undang-undang.",
             "slogan": "Simple. Smooth. Secure."
+        },
+        "faqPage": {
+            "pageTitle": "Pertanyaan yang Sering Diajukan",
+            "pageSubtitle": "Temukan jawaban untuk pertanyaan umum seputar layanan PERABOX.",
+            "backToHome": "Kembali ke Beranda",
+            "ctaQuestion": "Masih punya pertanyaan?",
+            "ctaBody": "Hubungi kami, kami siap membantu!",
+            "ctaButton": "Hubungi Kami",
+            "faqs": [
+                { "question": "Apa itu PERABOX?", "answer": "PERABOX adalah platform homecare yang menghubungkan pengguna dengan teknisi terlatih untuk layanan perawatan AC dan rumah tangga secara cepat, aman, dan transparan." },
+                { "question": "Layanan apa saja yang tersedia?", "answer": "Kami menyediakan Cuci AC, Pemasangan AC, Perbaikan AC, dan Isi Freon. Layanan lainnya akan segera hadir." },
+                { "question": "Bagaimana cara memesan layanan?", "answer": "Klik 'Mulai Sekarang' di halaman utama, pilih layanan, tentukan jadwal, dan teknisi akan datang ke lokasi Anda." },
+                { "question": "Berapa biaya layanan PERABOX?", "answer": "Biaya bervariasi tergantung jenis servis. Kami menjamin harga transparan tanpa biaya tersembunyi." },
+                { "question": "Apakah teknisi PERABOX bersertifikat?", "answer": "Ya, semua teknisi kami melalui proses seleksi ketat dan mendapatkan pelatihan berkala." },
+                { "question": "Berapa lama waktu pengerjaan?", "answer": "Cuci AC: 45-60 menit per unit. Pemasangan: 2-4 jam. Perbaikan tergantung tingkat kerusakan." },
+                { "question": "Apakah ada garansi layanan?", "answer": "Ya. Jika ada masalah setelah servis, teknisi akan kembali untuk pengecekan ulang tanpa biaya tambahan." },
+                { "question": "Area mana saja yang dilayani?", "answer": "Saat ini kami melayani area Jabodetabek dan terus memperluas jangkauan ke kota-kota lain." },
+                { "question": "Metode pembayaran apa yang tersedia?", "answer": "Kami menerima QRIS, transfer bank, dan pembayaran tunai kepada teknisi." },
+                { "question": "Bisakah saya membatalkan pesanan?", "answer": "Anda dapat membatalkan sebelum teknisi berangkat tanpa biaya. Hubungi kami via WhatsApp." }
+            ]
         }
     },
     "es": {
@@ -447,6 +487,26 @@ export const homeTranslations = {
             "support": "Soporte",
             "allRightsReserved": "© 2024 PERABOX. Todos los derechos reservados.",
             "slogan": "Simple. Smooth. Secure."
+        },
+        "faqPage": {
+            "pageTitle": "Preguntas Frecuentes",
+            "pageSubtitle": "Encuentre respuestas a preguntas comunes sobre los servicios de PERABOX.",
+            "backToHome": "Volver al inicio",
+            "ctaQuestion": "¿Aún tiene preguntas?",
+            "ctaBody": "¡Contáctenos, estamos listos para ayudar!",
+            "ctaButton": "Contáctenos",
+            "faqs": [
+                { "question": "¿Qué es PERABOX?", "answer": "PERABOX es una plataforma de mantenimiento del hogar que conecta a usuarios con técnicos capacitados de forma rápida, segura y transparente." },
+                { "question": "¿Qué servicios ofrece PERABOX?", "answer": "Ofrecemos Limpieza de AC, Instalación de AC, Reparación de AC y Recarga de Freón. Más servicios próximamente." },
+                { "question": "¿Cómo reservo un servicio?", "answer": "Haga clic en 'Empezar' en la página de inicio, seleccione el servicio, fije un horario y un técnico irá a su ubicación." },
+                { "question": "¿Cuánto cuesta PERABOX?", "answer": "Los precios varían según el tipo de servicio. Garantizamos precios transparentes sin cargos ocultos." },
+                { "question": "¿Los técnicos de PERABOX están certificados?", "answer": "Sí. Todos pasan por un proceso de selección estricto y reciben capacitación periódica." },
+                { "question": "¿Cuánto tiempo tarda el servicio?", "answer": "Limpieza de AC: 45-60 min por unidad. Instalación: 2-4 horas. Reparación según el daño." },
+                { "question": "¿Existe garantía de servicio?", "answer": "Sí. Si hay algún problema tras el servicio, un técnico regresará para una revisión gratuita." },
+                { "question": "¿Qué áreas atiende PERABOX?", "answer": "Actualmente atendemos el área de Jabodetabek y alrededores, y nos expandimos continuamente." },
+                { "question": "¿Qué métodos de pago se aceptan?", "answer": "Aceptamos QRIS, transferencia bancaria y efectivo directamente al técnico." },
+                { "question": "¿Puedo cancelar mi pedido?", "answer": "Puede cancelar antes de que el técnico salga sin costo alguno. Contáctenos por WhatsApp." }
+            ]
         }
     },
     "ja": {
@@ -597,6 +657,26 @@ export const homeTranslations = {
             "support": "サポート",
             "allRightsReserved": "© 2024 PERABOX。無断転載を禁じます。",
             "slogan": "Simple. Smooth. Secure."
+        },
+        "faqPage": {
+            "pageTitle": "よくある質問",
+            "pageSubtitle": "PERABOXサービスに関するよくある質問への回答をご覧ください。",
+            "backToHome": "ホームに戻る",
+            "ctaQuestion": "まだご質問がありますか？",
+            "ctaBody": "お問い合わせください。喜んでお手伝いします！",
+            "ctaButton": "お問い合わせ",
+            "faqs": [
+                { "question": "PERABOXとは何ですか？", "answer": "PERABOXは、迅速・安全・透明にユーザーと訓練された技術者をつなぐホームケアプラットフォームです。" },
+                { "question": "PERABOXではどのようなサービスを提供していますか？", "answer": "現在、エアコンクリーニング、エアコン設置、エアコン修理、フロン補充を提供しています。" },
+                { "question": "サービスはどのように予約しますか？", "answer": "ホームページの「始める」をクリックし、サービスを選択し、スケジュールを設定すると技術者がお伺いします。" },
+                { "question": "料金はいくらですか？", "answer": "価格はサービスの種類とエアコンの状態によって異なります。隠れた費用はありません。" },
+                { "question": "技術者は認定されていますか？", "answer": "はい。すべての技術者は厳格な選考と定期的なトレーニングを受けています。" },
+                { "question": "サービスにはどのくらいの時間がかかりますか？", "answer": "エアコンクリーニングは1台あたり45〜60分。設置には約2〜4時間かかります。" },
+                { "question": "サービス保証はありますか？", "answer": "はい。サービス後に問題が発生した場合、技術者が無料で再チェックに戻ります。" },
+                { "question": "PERABOXのサービスエリアはどこですか？", "answer": "現在、Jabodetabek（ジャカルタ首都圏）とその周辺地域をカバーし、拡大中です。" },
+                { "question": "利用可能な支払い方法は？", "answer": "QRIS、銀行振込、技術者への現金払いが利用可能です。" },
+                { "question": "注文をキャンセルできますか？", "answer": "技術者が出発する前であれば、無料でキャンセルできます。WhatsAppでお問い合わせください。" }
+            ]
         }
     },
     "zh": {
@@ -747,6 +827,26 @@ export const homeTranslations = {
             "support": "支持",
             "allRightsReserved": "© 2024 PERABOX. 保留所有权利。",
             "slogan": "Simple. Smooth. Secure."
+        },
+        "faqPage": {
+            "pageTitle": "常见问题",
+            "pageSubtitle": "查找有关PERABOX服务的常见问题解答。",
+            "backToHome": "返回主页",
+            "ctaQuestion": "还有问题？",
+            "ctaBody": "联系我们，我们随时准备为您提供帮助！",
+            "ctaButton": "联系我们",
+            "faqs": [
+                { "question": "什么是PERABOX？", "answer": "PERABOX是一个家庭护理平台，快速、安全、透明地将用户与经过培训的技术人员联系起来。" },
+                { "question": "PERABOX提供哪些服务？", "answer": "目前我们提供空调清洗、空调安装、空调维修和氟利昂加注服务。更多服务即将推出。" },
+                { "question": "如何预约服务？", "answer": "点击主页上的"开始"，选择服务，设置时间，技术人员将上门服务。" },
+                { "question": "PERABOX收费多少？", "answer": "价格因服务类型和空调状况而异。我们保证价格透明，无隐藏费用。" },
+                { "question": "PERABOX的技术人员有认证吗？", "answer": "是的，所有技术人员都经过严格筛选并定期接受培训。" },
+                { "question": "服务需要多长时间？", "answer": "空调清洗每台约45-60分钟，安装约2-4小时，维修时间视损坏程度而定。" },
+                { "question": "有服务保证吗？", "answer": "是的。服务后如出现问题，技术人员将免费回来进行复查。" },
+                { "question": "PERABOX服务哪些地区？", "answer": "目前服务雅加达大都市区（Jabodetabek）及周边地区，并持续扩展到其他城市。" },
+                { "question": "接受哪些付款方式？", "answer": "我们接受QRIS、银行转账及工作完成后向技术人员现金付款。" },
+                { "question": "我可以取消订单吗？", "answer": "您可以在技术人员出发前免费取消订单。请通过WhatsApp联系我们的客服。" }
+            ]
         }
     }
 };

@@ -78,10 +78,7 @@ const Navbar = () => {
 
 
     const navLinks = [
-        { name: t('common.home') || 'Home', href: '#home' },
         { name: t('common.features') || 'Features', href: '#features' },
-        { name: t('common.services') || 'Services', href: '#services' },
-        { name: t('common.about') || 'About', href: '#about' },
     ];
 
     const menuVariants = {

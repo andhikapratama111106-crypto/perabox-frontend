@@ -1,48 +1,57 @@
+"use client";
+
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function FAQPage() {
-    const faqs = [
+    const { t } = useLanguage();
+
+    const faqs = t('faqPage.faqs') as unknown as { question: string; answer: string }[] | null;
+
+    const fallbackFaqs = [
         {
-            question: "Apa itu PERABOX?",
-            answer: "PERABOX adalah platform homecare yang menghubungkan pengguna dengan teknisi terlatih untuk layanan perawatan AC dan rumah tangga. Kami hadir untuk memudahkan Anda mendapatkan servis profesional dengan cepat, aman, dan transparan."
+            question: "What is PERABOX?",
+            answer: "PERABOX is a homecare platform that connects users with trained technicians for AC and home maintenance services quickly, safely, and transparently."
         },
         {
-            question: "Layanan apa saja yang tersedia di PERABOX?",
-            answer: "Saat ini kami menyediakan layanan AC Cleaning (Cuci AC), AC Installation (Pemasangan AC), AC Repair (Perbaikan AC), dan Freon Refill (Isi Ulang Freon). Layanan lainnya akan segera hadir."
+            question: "What services does PERABOX offer?",
+            answer: "We currently provide AC Cleaning, AC Installation, AC Repair, and Freon Refill. More services coming soon."
         },
         {
-            question: "Bagaimana cara memesan layanan?",
-            answer: "Anda bisa memesan layanan langsung melalui website kami dengan mengklik tombol 'Let's Start' di halaman utama. Pilih layanan yang diinginkan, tentukan jadwal, dan teknisi kami akan datang ke lokasi Anda."
+            question: "How do I book a service?",
+            answer: "Click 'Let's Start' on the homepage, choose your service, set a schedule, and a technician will come to your location."
         },
         {
-            question: "Berapa biaya layanan PERABOX?",
-            answer: "Biaya layanan bervariasi tergantung jenis servis dan kondisi AC Anda. Kami menjamin harga transparan tanpa biaya tersembunyi. Anda akan mendapatkan estimasi biaya sebelum pekerjaan dimulai."
+            question: "How much does PERABOX cost?",
+            answer: "Prices vary by service type and AC condition. We guarantee transparent pricing with no hidden fees."
         },
         {
-            question: "Apakah teknisi PERABOX bersertifikat?",
-            answer: "Ya, semua teknisi kami telah melalui proses seleksi ketat dan memiliki pengalaman di bidang servis AC. Mereka juga mendapatkan pelatihan berkala untuk memastikan kualitas layanan terbaik."
+            question: "Are PERABOX technicians certified?",
+            answer: "Yes. All our technicians go through a strict selection process and receive regular training."
         },
         {
-            question: "Berapa lama waktu pengerjaan?",
-            answer: "Waktu pengerjaan bervariasi tergantung jenis layanan. Cuci AC biasanya memakan waktu 45-60 menit per unit. Pemasangan AC sekitar 2-4 jam. Perbaikan tergantung tingkat kerusakan."
+            question: "How long does the service take?",
+            answer: "AC Cleaning usually takes 45-60 minutes per unit. Installation takes 2-4 hours. Repair time depends on damage level."
         },
         {
-            question: "Apakah ada garansi layanan?",
-            answer: "Ya, kami memberikan garansi untuk setiap layanan yang dilakukan. Jika terjadi masalah setelah servis, Anda bisa menghubungi kami dan teknisi akan kembali untuk pengecekan ulang tanpa biaya tambahan."
+            question: "Is there a service guarantee?",
+            answer: "Yes. If a problem occurs after service, a technician will return for a free re-check."
         },
         {
-            question: "Area mana saja yang dilayani PERABOX?",
-            answer: "Saat ini PERABOX melayani area Jabodetabek dan sekitarnya. Kami terus memperluas jangkauan layanan ke kota-kota lain di Indonesia."
+            question: "Which areas does PERABOX serve?",
+            answer: "We currently serve the Jabodetabek area and surroundings, expanding continuously."
         },
         {
-            question: "Bagaimana metode pembayaran yang tersedia?",
-            answer: "Kami menerima pembayaran melalui QRIS, transfer bank, dan pembayaran tunai langsung kepada teknisi setelah pekerjaan selesai."
+            question: "What payment methods are accepted?",
+            answer: "We accept QRIS, bank transfer, and cash directly to the technician after work is completed."
         },
         {
-            question: "Bagaimana jika saya perlu membatalkan pesanan?",
-            answer: "Anda dapat membatalkan pesanan sebelum teknisi berangkat ke lokasi Anda tanpa dikenakan biaya. Hubungi customer service kami melalui WhatsApp untuk proses pembatalan."
+            question: "Can I cancel my order?",
+            answer: "You can cancel before the technician departs at no cost. Contact our customer service via WhatsApp."
         },
     ];
+
+    const displayFaqs = Array.isArray(faqs) && faqs.length > 0 ? faqs : fallbackFaqs;
 
     return (
         <main className="min-h-screen bg-light">
@@ -53,13 +62,13 @@ export default function FAQPage() {
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        Kembali ke Beranda
+                        {t('faqPage.backToHome') || 'Back to Home'}
                     </Link>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-                        Pertanyaan yang Sering Diajukan
+                        {t('faqPage.pageTitle') || 'Frequently Asked Questions'}
                     </h1>
                     <p className="text-gray-400 text-lg mt-4 max-w-2xl">
-                        Temukan jawaban untuk pertanyaan umum seputar layanan PERABOX.
+                        {t('faqPage.pageSubtitle') || 'Find answers to common questions about PERABOX services.'}
                     </p>
                 </div>
             </div>
@@ -67,7 +76,7 @@ export default function FAQPage() {
             {/* FAQ List */}
             <div className="container mx-auto px-6 py-16 max-w-3xl">
                 <div className="space-y-4">
-                    {faqs.map((faq, index) => (
+                    {displayFaqs.map((faq, index) => (
                         <details
                             key={index}
                             className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
@@ -87,10 +96,10 @@ export default function FAQPage() {
 
                 {/* CTA */}
                 <div className="text-center mt-16 bg-secondary rounded-2xl p-10">
-                    <p className="text-gray-600 mb-2">Masih punya pertanyaan?</p>
-                    <p className="text-dark font-bold text-lg mb-6">Hubungi kami, kami siap membantu!</p>
+                    <p className="text-gray-600 mb-2">{t('faqPage.ctaQuestion') || 'Still have questions?'}</p>
+                    <p className="text-dark font-bold text-lg mb-6">{t('faqPage.ctaBody') || 'Contact us, we are ready to help!'}</p>
                     <Link href="/contact" className="inline-block bg-dark hover:bg-black text-white px-8 py-3 rounded-full text-sm font-medium transition-colors">
-                        Hubungi Kami
+                        {t('faqPage.ctaButton') || 'Contact Us'}
                     </Link>
                 </div>
             </div>
