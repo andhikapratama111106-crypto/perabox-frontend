@@ -76,9 +76,8 @@ const Navbar = () => {
         router.push('/login');
     };
 
-
     const navLinks = [
-        { name: t('common.features') || 'Features', href: '#features' },
+        { name: 'FEATURES', href: '#features' },
     ];
 
     const menuVariants = {

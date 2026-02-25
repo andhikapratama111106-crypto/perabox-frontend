@@ -89,23 +89,31 @@ export default function LoginPage() {
             setServerError('Google login is not configured. Please contact support.');
             return;
         }
-        if (!window.google?.accounts?.id) {
+        if (!window.google?.accounts?.oauth2) {
             setServerError('Google Sign-In is not ready yet. Please try again in a moment.');
             return;
         }
         setGoogleLoading(true);
         setServerError('');
 
-        window.google.accounts.id.initialize({
+        // Use oauth2 token client → opens proper Google account picker popup
+        const client = window.google.accounts.oauth2.initTokenClient({
             client_id: clientId,
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            callback: async (response: any) => {
+            scope: 'openid email profile',
+            prompt: 'select_account',
+            callback: async (tokenResponse: any) => {
+                if (tokenResponse.error) {
+                    setServerError('Google login was cancelled or failed.');
+                    setGoogleLoading(false);
+                    return;
+                }
                 try {
+                    // Try backend first
                     const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://perabox-backend.vercel.app';
                     const res = await fetch(`${apiUrl}/api/v1/auth/google`, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ credential: response.credential }),
+                        body: JSON.stringify({ access_token: tokenResponse.access_token }),
                     });
                     if (res.ok) {
                         const data = await res.json();
@@ -114,14 +122,18 @@ export default function LoginPage() {
                         setIsSuccess(true);
                         router.push(data.role === 'admin' ? '/admin' : '/customer/profile');
                     } else {
-                        // Fallback: decode JWT and store Google user info
-                        const payload = JSON.parse(atob(response.credential.split('.')[1]));
+                        // Fallback: get user info from Google directly
+                        const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
+                            headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+                        });
+                        const userInfo = await userRes.json();
                         localStorage.setItem('google_user', JSON.stringify({
-                            name: payload.name,
-                            email: payload.email,
-                            picture: payload.picture,
+                            name: userInfo.name,
+                            email: userInfo.email,
+                            picture: userInfo.picture,
                         }));
-                        localStorage.setItem('access_token', response.credential);
+                        // Store access token so Navbar treats user as logged in
+                        localStorage.setItem('access_token', tokenResponse.access_token);
                         setIsSuccess(true);
                         router.push('/customer/profile');
                     }
@@ -130,11 +142,13 @@ export default function LoginPage() {
                     setGoogleLoading(false);
                 }
             },
-            cancel_on_tap_outside: true,
+            error_callback: () => {
+                setServerError('Google login was cancelled.');
+                setGoogleLoading(false);
+            },
         });
 
-        window.google.accounts.id.prompt();
-        setTimeout(() => setGoogleLoading(false), 10000);
+        client.requestAccessToken();
     }, [router]);
 
     return (
