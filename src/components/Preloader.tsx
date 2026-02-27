@@ -17,7 +17,7 @@ export default function Preloader() {
             setIsLoading(false);
             finishPreloading();
             document.body.style.overflow = "auto";
-        }, 1600);
+        }, 1600); // Reveal faster per user request
 
         return () => {
             clearTimeout(timer);
@@ -33,7 +33,7 @@ export default function Preloader() {
                     className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-secondary overflow-hidden"
                     exit={{
                         clipPath: "inset(0 0 100% 0)", // Curtain up reveal
-                        transition: { duration: 0.8, ease: [0.77, 0, 0.175, 1] }
+                        transition: { duration: 0.8, ease: [0.77, 0, 0.175, 1] } // Faster transition
                     }}
                 >
                     {/* Ambient Glow */}
