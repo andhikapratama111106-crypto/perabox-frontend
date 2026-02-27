@@ -54,23 +54,37 @@ export default function Preloader() {
                         transition={{ duration: 0.6, ease: "easeOut" }}
                     >
                         <motion.div
+                            initial={{ scale: 0.5, opacity: 0, rotate: -5 }}
                             animate={{
-                                y: [0, -10, 0],
+                                scale: [0.5, 1.2, 1],
+                                opacity: [0, 1, 1],
+                                rotate: [-5, 5, 0]
                             }}
                             transition={{
-                                duration: 2,
-                                repeat: Infinity,
-                                ease: "easeInOut",
+                                duration: 1.2,
+                                ease: [0.25, 1, 0.5, 1], // Custom spring-like easing
                             }}
                         >
-                            <Image
-                                src="/perabox_icon.png"
-                                alt="PERABOX Preloader"
-                                width={120}
-                                height={120}
-                                className="object-contain drop-shadow-2xl"
-                                priority
-                            />
+                            <motion.div
+                                animate={{
+                                    scale: [1, 1.05, 1],
+                                }}
+                                transition={{
+                                    duration: 2,
+                                    repeat: Infinity,
+                                    ease: "easeInOut",
+                                    delay: 1.2 // Start pulsing after the initial zoom
+                                }}
+                            >
+                                <Image
+                                    src="/perabox_icon.png"
+                                    alt="PERABOX Preloader"
+                                    width={140}
+                                    height={140}
+                                    className="object-contain drop-shadow-2xl"
+                                    priority
+                                />
+                            </motion.div>
                         </motion.div>
                     </motion.div>
 
