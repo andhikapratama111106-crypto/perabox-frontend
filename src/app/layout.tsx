@@ -6,7 +6,9 @@ import '../styles/animations.css';
 
 import ChatBot from '../components/ChatBot';
 import Preloader from '../components/Preloader';
+import ScrollBlur from '../components/ScrollBlur';
 import { LanguageProvider } from '../context/LanguageContext';
+import React from 'react';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -165,9 +167,11 @@ export default function RootLayout({
             <body className="font-sans antialiased bg-secondary text-dark">
                 <Preloader />
                 <LanguageProvider>
-                    <div className="scroll-blur-content">
-                        {children}
-                    </div>
+                    <ScrollBlur>
+                        <div className="scroll-blur-content">
+                            {children}
+                        </div>
+                    </ScrollBlur>
                     <ChatBot />
                 </LanguageProvider>
             </body>
