@@ -171,12 +171,9 @@ const ChatBot = () => {
                                 className="absolute bottom-20 right-0 md:right-0 bg-primary text-white px-5 py-3 rounded-2xl shadow-xl cursor-pointer whitespace-nowrap mb-2 font-bold text-sm flex items-center gap-3 group border-2 border-white/20"
                             >
                                 <span className="max-w-[180px] md:max-w-none truncate md:whitespace-nowrap">{t('chatbot.proactiveMessage')}</span>
-                                <motion.span
-                                    animate={{ x: [0, 5, 0] }}
-                                    transition={{ repeat: Infinity, duration: 2 }}
-                                >
+                                <span>
                                     👋
-                                </motion.span>
+                                </span>
                                 <div className="absolute bottom-[-10px] right-6 w-0 h-0 border-l-[10px] border-l-transparent border-r-[10px] border-r-transparent border-t-[10px] border-t-primary"></div>
                             </motion.div>
                         )}
@@ -184,36 +181,8 @@ const ChatBot = () => {
 
                     {/* Chat Bubble Button */}
                     <div className="relative group w-14 h-14 md:w-16 md:h-16">
-                        {/* Smoother Ping Pulse Rings (Like technician status) */}
-                        {!isOpen && (
-                            <>
-                                <motion.div
-                                    animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
-                                    transition={{
-                                        repeat: Infinity,
-                                        duration: 2.5,
-                                        ease: "easeOut"
-                                    }}
-                                    style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/40 rounded-full -z-10 pointer-events-none"
-                                />
-                                <motion.div
-                                    animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
-                                    transition={{
-                                        repeat: Infinity,
-                                        duration: 2.5,
-                                        delay: 1.25,
-                                        ease: "easeOut"
-                                    }}
-                                    style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/40 rounded-full -z-10 pointer-events-none"
-                                />
-                            </>
-                        )}
 
                         <motion.button
-                            whileHover={{ scale: 1.1, rotate: 5 }}
-                            whileTap={{ scale: 0.9 }}
                             onClick={() => { setIsOpen(!isOpen); setShowProactive(false); }}
                             className="w-14 h-14 md:w-16 md:h-16 bg-primary text-white rounded-full shadow-2xl flex items-center justify-center cursor-pointer overflow-hidden relative border-4 border-white z-10"
                         >
@@ -246,22 +215,6 @@ const ChatBot = () => {
                                             height={80}
                                             className="w-[140%] h-[140%] max-w-none object-contain scale-125 translate-y-1"
                                         />
-                                        {/* Peeking animation for extra friendliness */}
-                                        <motion.div
-                                            className="absolute -top-4 -right-4 w-10 h-10 pointer-events-none"
-                                            animate={{
-                                                y: [0, -8, 0],
-                                                rotate: [0, 20, 0],
-                                                scale: [1, 1.2, 1]
-                                            }}
-                                            transition={{
-                                                repeat: Infinity,
-                                                duration: 3,
-                                                ease: "easeInOut"
-                                            }}
-                                        >
-                                            <span className="text-2xl drop-shadow-md">✨</span>
-                                        </motion.div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -295,23 +248,19 @@ const ChatBot = () => {
 
                                     <div className="flex items-center gap-4">
                                         <div className="w-12 h-12 md:w-14 md:h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white/20 overflow-hidden relative">
-                                            <motion.div
-                                                className="w-full h-full p-2"
-                                                animate={{ y: [0, -4, 0] }}
-                                                transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
-                                            >
+                                            <div className="w-full h-full p-2">
                                                 <Image
                                                     src="/perabot_mascot.png"
                                                     alt="Pera"
                                                     fill
                                                     className="object-contain scale-[1.65] translate-y-2"
                                                 />
-                                            </motion.div>
+                                            </div>
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2">
                                                 <h3 className="font-bold text-lg md:text-xl tracking-tight">{t('chatbot.headerTitle')}</h3>
-                                                <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,1)]"></span>
+                                                <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-green-400 rounded-full shadow-[0_0_10px_rgba(74,222,128,1)]"></span>
                                             </div>
                                             <p className="text-xs md:text-sm text-white/80 font-medium tracking-wide">Online</p>
                                         </div>
