@@ -3,9 +3,11 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
+import { useUIStore } from "@/store/uiStore";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
+    const finishPreloading = useUIStore((state) => state.finishPreloading);
 
     useEffect(() => {
         // Prevent scrolling while loading
@@ -14,6 +16,7 @@ export default function Preloader() {
         // Wait a bit to show the animation, then hide
         const timer = setTimeout(() => {
             setIsLoading(false);
+            finishPreloading();
             document.body.style.overflow = "auto";
         }, 2200);
 
@@ -21,7 +24,7 @@ export default function Preloader() {
             clearTimeout(timer);
             document.body.style.overflow = "auto";
         };
-    }, []);
+    }, [finishPreloading]);
 
     return (
         <AnimatePresence>
