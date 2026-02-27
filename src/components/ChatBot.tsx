@@ -184,40 +184,29 @@ const ChatBot = () => {
 
                     {/* Chat Bubble Button */}
                     <div className="relative group">
-                        {/* Smoother Liquid Pulse Rings */}
+                        {/* Smoother Ping Pulse Rings (Like technician status) */}
                         {!isOpen && (
                             <>
                                 <motion.div
-                                    animate={{ scale: [1, 1.5], opacity: [0.3, 0] }}
+                                    animate={{ scale: [1, 2], opacity: [0.5, 0] }}
                                     transition={{
                                         repeat: Infinity,
-                                        duration: 4,
-                                        ease: "easeInOut"
+                                        duration: 2,
+                                        ease: [0, 0, 0.2, 1]
                                     }}
                                     style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary rounded-full -z-10"
+                                    className="absolute inset-0 bg-primary/60 rounded-full -z-10"
                                 />
                                 <motion.div
-                                    animate={{ scale: [1, 1.8], opacity: [0.2, 0] }}
+                                    animate={{ scale: [1, 2], opacity: [0.5, 0] }}
                                     transition={{
                                         repeat: Infinity,
-                                        duration: 4,
-                                        delay: 1.3,
-                                        ease: "easeInOut"
+                                        duration: 2,
+                                        delay: 1,
+                                        ease: [0, 0, 0.2, 1]
                                     }}
                                     style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/40 rounded-full -z-10"
-                                />
-                                <motion.div
-                                    animate={{ scale: [1, 2.1], opacity: [0.1, 0] }}
-                                    transition={{
-                                        repeat: Infinity,
-                                        duration: 4,
-                                        delay: 2.6,
-                                        ease: "easeInOut"
-                                    }}
-                                    style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/20 rounded-full -z-10"
+                                    className="absolute inset-0 bg-primary/60 rounded-full -z-10"
                                 />
                             </>
                         )}
