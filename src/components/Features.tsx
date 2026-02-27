@@ -11,40 +11,40 @@ const Features = () => {
 
     const features = [
         {
-            title: t('features.feature1Title'),
-            description: t('features.feature1Desc'),
-            detail: t('features.feature1Detail'),
+            title: t('featuresSection.feature1Title'),
+            description: t('featuresSection.feature1Desc'),
+            detail: t('featuresSection.feature1Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: t('features.feature1Highlights') as unknown as string[]
+            highlights: t('featuresSection.feature1Highlights') as unknown as string[]
         },
         {
-            title: t('features.feature2Title'),
-            description: t('features.feature2Desc'),
-            detail: t('features.feature2Detail'),
+            title: t('featuresSection.feature2Title'),
+            description: t('featuresSection.feature2Desc'),
+            detail: t('featuresSection.feature2Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: t('features.feature2Highlights') as unknown as string[]
+            highlights: t('featuresSection.feature2Highlights') as unknown as string[]
         },
         {
-            title: t('features.feature3Title'),
-            description: t('features.feature3Desc'),
-            detail: t('features.feature3Detail'),
+            title: t('featuresSection.feature3Title'),
+            description: t('featuresSection.feature3Desc'),
+            detail: t('featuresSection.feature3Detail'),
             icon: (
                 <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
             ),
             color: "bg-[#8B5E3C]",
-            highlights: t('features.feature3Highlights') as unknown as string[]
+            highlights: t('featuresSection.feature3Highlights') as unknown as string[]
         }
     ];
 
@@ -57,13 +57,13 @@ const Features = () => {
             <div className="container mx-auto px-6">
                 <Reveal direction="up">
                     <div className="text-center max-w-3xl mx-auto mb-20">
-                        <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">{t('features.sectionTitle')}</h2>
+                        <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">{t('featuresSection.sectionTitle')}</h2>
                         <p className="text-4xl md:text-5xl font-extrabold text-dark mb-6 leading-tight">
-                            {t('features.mainHeading1')} <br />
-                            <span className="text-primary italic">{t('features.mainHeading2')}</span>
+                            {t('featuresSection.mainHeading1')} <br />
+                            <span className="text-primary italic">{t('featuresSection.mainHeading2')}</span>
                         </p>
                         <p className="text-lg text-gray-500">
-                            {t('features.description')}
+                            {t('featuresSection.description')}
                         </p>
                     </div>
                 </Reveal>
