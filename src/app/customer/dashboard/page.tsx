@@ -20,28 +20,28 @@ export default function CustomerDashboard() {
 
     const stats = [
         {
-            label: t('dashboard.totalBookings') || 'Total Bookings',
+            label: t('dashboardPage.totalBookings') || 'Total Bookings',
             value: '12',
             icon: <Calendar className="w-6 h-6 text-primary" />,
             color: 'bg-primary/10',
             trend: '+2 this month'
         },
         {
-            label: t('dashboard.pendingServices') || 'Pending Services',
+            label: t('dashboardPage.pendingServices') || 'Pending Services',
             value: '2',
             icon: <Clock className="w-6 h-6 text-amber-500" />,
             color: 'bg-amber-50',
             trend: 'Next: Oct 24'
         },
         {
-            label: t('dashboard.completedTasks') || 'Completed Tasks',
+            label: t('dashboardPage.completedTasks') || 'Completed Tasks',
             value: '10',
             icon: <CheckCircle2 className="w-6 h-6 text-green-500" />,
             color: 'bg-green-50',
             trend: '98% success'
         },
         {
-            label: t('dashboard.unpaidInvoices') || 'Unpaid Invoices',
+            label: t('dashboardPage.unpaidInvoices') || 'Unpaid Invoices',
             value: '0',
             icon: <AlertCircle className="w-6 h-6 text-red-500" />,
             color: 'bg-red-50',
@@ -83,10 +83,10 @@ export default function CustomerDashboard() {
                 <div>
                     <h1 className="text-3xl font-extrabold text-dark flex items-center gap-3">
                         <LayoutDashboard className="w-8 h-8 text-primary" />
-                        {t('dashboard.title') || 'Dashboard'}
+                        {t('dashboardPage.title') || 'Dashboard'}
                     </h1>
                     <p className="text-gray-500 mt-1 font-medium">
-                        {t('dashboard.welcome') || 'Welcome back! Here is what is happening with your services.'}
+                        {t('dashboardPage.welcome') || 'Welcome back! Here is what is happening with your services.'}
                     </p>
                 </div>
                 <motion.button
@@ -95,7 +95,7 @@ export default function CustomerDashboard() {
                     className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-2xl font-bold shadow-lg shadow-primary/20 transition-all hover:bg-primary/90"
                 >
                     <Plus className="w-5 h-5" />
-                    {t('dashboard.bookNow') || 'Book New Service'}
+                    {t('dashboardPage.bookNow') || 'Book New Service'}
                 </motion.button>
             </div>
 
@@ -127,10 +127,10 @@ export default function CustomerDashboard() {
                     <div className="flex items-center justify-between px-2">
                         <h2 className="text-xl font-bold text-dark flex items-center gap-2">
                             <History className="w-5 h-5 text-primary" />
-                            {t('dashboard.recentBookings') || 'Recent Bookings'}
+                            {t('dashboardPage.recentBookings') || 'Recent Bookings'}
                         </h2>
                         <button className="text-primary text-sm font-bold hover:underline flex items-center gap-1">
-                            {t('common.viewAll') || 'View All'}
+                            {t('viewAll') || 'View All'}
                             <ExternalLink className="w-3 h-3" />
                         </button>
                     </div>
@@ -174,7 +174,7 @@ export default function CustomerDashboard() {
                     <div className="space-y-4">
                         <h2 className="text-xl font-bold text-dark px-2 flex items-center gap-2">
                             <CreditCard className="w-5 h-5 text-primary" />
-                            {t('dashboard.quickActions') || 'Quick Actions'}
+                            {t('dashboardPage.quickActions') || 'Quick Actions'}
                         </h2>
                         <div className="grid grid-cols-1 gap-3">
                             <button className="flex items-center gap-4 bg-[#FDF8F3] hover:bg-[#FDF8F3]/80 p-4 rounded-2xl border border-primary/10 transition-all group">

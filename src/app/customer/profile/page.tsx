@@ -42,10 +42,42 @@ const CustomerProfile = () => {
     const fetchUserData = useCallback(async () => {
         try {
             setLoading(true);
+
+            // 1. Immediate fallback/initial load from localStorage if available
+            const savedGoogleUser = localStorage.getItem('google_user');
+            if (savedGoogleUser) {
+                const googleData = JSON.parse(savedGoogleUser);
+                const nameParts = (googleData.name || "").split(' ');
+
+                const localUser = {
+                    name: googleData.name || '',
+                    role: 'Customer',
+                    location: 'Indonesia',
+                    avatar: googleData.picture || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
+                    firstName: nameParts[0] || '',
+                    lastName: nameParts.slice(1).join(' ') || '',
+                    email: googleData.email || '',
+                    phone: '',
+                    bio: '',
+                    address: {
+                        country: 'Indonesia',
+                        street: '',
+                        postalCode: '',
+                        taxId: '',
+                    }
+                };
+
+                setUser(localUser);
+                setFormData(localUser);
+                setLoading(false); // Immediate render without loading spinner
+            } else {
+                setLoading(true);
+            }
+
             const response = await authAPI.getCurrentUser();
             const data = response.data;
 
-            // Map backend data to local state
+            // 2. Map backend data to local state (overwrites google_user if successful)
             const nameParts = data.full_name.split(' ');
             const mappedUser = {
                 name: data.full_name,
@@ -56,7 +88,7 @@ const CustomerProfile = () => {
                 lastName: nameParts.slice(1).join(' ') || '',
                 email: data.email,
                 phone: data.phone,
-                bio: '', // Bio not in basic user response yet
+                bio: '',
                 address: {
                     country: 'Indonesia',
                     street: '',
@@ -67,9 +99,13 @@ const CustomerProfile = () => {
 
             setUser(mappedUser);
             setFormData(mappedUser);
+            setError('');
         } catch (err: any) {
             console.error('Failed to fetch user profile:', err);
-            setError('Could not load profile data');
+            // If we have google_user, don't show error screen, just continue with local data
+            if (!localStorage.getItem('google_user')) {
+                setError('Could not load profile data');
+            }
         } finally {
             setLoading(false);
         }
@@ -115,9 +151,9 @@ const CustomerProfile = () => {
             // Validation
             if (field === 'phone') {
                 if (value && !value.startsWith('08')) {
-                    setError('Nomor telepon harus dimulai dengan 08');
+                    setError(t('profilePage.phoneStartError'));
                 } else if (value && (value.length < 10 || value.length > 12)) {
-                    setError('Nomor telepon harus 10-12 digit');
+                    setError(t('profilePage.phoneLengthError'));
                 } else {
                     setError('');
                 }
@@ -136,13 +172,13 @@ const CustomerProfile = () => {
     if (error) {
         return (
             <div className="bg-red-50 border border-red-100 text-red-600 p-8 rounded-2xl text-center">
-                <p className="font-bold text-lg mb-2">{t('common.error')}</p>
+                <p className="font-bold text-lg mb-2">{t('error')}</p>
                 <p>{error}</p>
                 <button
                     onClick={() => fetchUserData()}
                     className="mt-4 px-6 py-2 bg-primary text-white rounded-xl hover:bg-primary/90 transition-colors"
                 >
-                    {t('common.tryAgain')}
+                    {t('tryAgain')}
                 </button>
             </div>
         );
@@ -150,7 +186,7 @@ const CustomerProfile = () => {
 
     return (
         <div className="space-y-6 animate-fade-in-up pb-10">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('common.myProfile')}</h1>
+            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('myProfile')}</h1>
 
             {/* Top Card: Identity */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
@@ -166,14 +202,14 @@ const CustomerProfile = () => {
                                     value={formData.name}
                                     onChange={(e) => handleChange(e, 'name')}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                    placeholder="Full Name"
+                                    placeholder={t('profilePage.fullName')}
                                 />
                                 <input
                                     type="text"
                                     value={formData.location}
                                     onChange={(e) => handleChange(e, 'location')}
                                     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                    placeholder="Location"
+                                    placeholder={t('profilePage.location')}
                                 />
                             </div>
                         ) : (
@@ -191,12 +227,12 @@ const CustomerProfile = () => {
                 <div className="flex gap-2 self-end md:self-center">
                     {editMode.identity ? (
                         <>
-                            <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
-                            <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
+                            <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                            <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
                         </>
                     ) : (
                         <button onClick={() => handleEdit('identity')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                            {t('common.edit')}
+                            {t('edit')}
                         </button>
                     )}
                 </div>
@@ -205,16 +241,16 @@ const CustomerProfile = () => {
             {/* Middle Card: Personal Information */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">{t('profile.personalInfo')}</h3>
+                    <h3 className="text-lg font-bold text-gray-800">{t('profilePage.personalInfo')}</h3>
                     <div className="flex gap-2">
                         {editMode.personal ? (
                             <>
-                                <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
-                                <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
+                                <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                                <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
                             </>
                         ) : (
                             <button onClick={() => handleEdit('personal')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                {t('common.edit')}
+                                {t('edit')}
                             </button>
                         )}
                     </div>
@@ -222,7 +258,7 @@ const CustomerProfile = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.firstName')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.firstName')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.firstName} onChange={(e) => handleChange(e, 'firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -230,7 +266,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.lastName')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.lastName')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.lastName} onChange={(e) => handleChange(e, 'lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -238,7 +274,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.email')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.email')}</label>
                         {editMode.personal ? (
                             <input type="email" value={formData.email} onChange={(e) => handleChange(e, 'email')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -246,7 +282,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.phone')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.phone')}</label>
                         {editMode.personal ? (
                             <input type="tel" value={formData.phone} onChange={(e) => handleChange(e, 'phone')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -254,7 +290,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div className="md:col-span-2">
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.bio')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.bio')}</label>
                         {editMode.personal ? (
                             <input type="text" value={formData.bio} onChange={(e) => handleChange(e, 'bio')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -267,16 +303,16 @@ const CustomerProfile = () => {
             {/* Bottom Card: Address */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
                 <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">{t('profile.address')}</h3>
+                    <h3 className="text-lg font-bold text-gray-800">{t('profilePage.address')}</h3>
                     <div className="flex gap-2">
                         {editMode.address ? (
                             <>
-                                <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('common.save')}</button>
-                                <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('common.cancel')}</button>
+                                <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                                <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
                             </>
                         ) : (
                             <button onClick={() => handleEdit('address')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                {t('common.edit')}
+                                {t('edit')}
                             </button>
                         )}
                     </div>
@@ -284,7 +320,7 @@ const CustomerProfile = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.country')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.country')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.country} onChange={(e) => handleChange(e, 'address', 'country')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -292,7 +328,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.street')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.street')}</label>
                         {editMode.address ? (
                             <textarea rows={2} value={formData.address.street} onChange={(e) => handleChange(e, 'address', 'street')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" />
                         ) : (
@@ -300,7 +336,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.postalCode')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.postalCode')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.postalCode} onChange={(e) => handleChange(e, 'address', 'postalCode')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (
@@ -308,7 +344,7 @@ const CustomerProfile = () => {
                         )}
                     </div>
                     <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profile.taxId')}</label>
+                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.taxId')}</label>
                         {editMode.address ? (
                             <input type="text" value={formData.address.taxId} onChange={(e) => handleChange(e, 'address', 'taxId')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
                         ) : (

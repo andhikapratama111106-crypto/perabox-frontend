@@ -77,10 +77,10 @@ const Navbar = () => {
     };
 
     const navLinks = [
-        { name: t('common.home') || 'Home', href: '#home' },
-        { name: t('common.services') || 'Services', href: '#services' },
-        { name: t('common.features') || 'Features', href: '#features' },
-        { name: t('common.about') || 'Tentang Kami', href: '#about' },
+        { name: t('home') || 'Home', href: '#home' },
+        { name: t('services') || 'Services', href: '#services' },
+        { name: t('features') || 'Features', href: '#features' },
+        { name: t('about') || 'Tentang Kami', href: '#about' },
     ];
 
     const menuVariants = {
@@ -139,13 +139,13 @@ const Navbar = () => {
                                 href="/customer/profile"
                                 className="text-gray-700 hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg px-2 py-1"
                             >
-                                {t('common.profile') || 'PROFILE'}
+                                {t('profile') || 'PROFILE'}
                             </Link>
                             <button
                                 onClick={handleLogout}
                                 className="text-red-500 hover:text-red-600 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/50 rounded-lg px-2 py-1"
                             >
-                                {t('common.logout') || 'LOGOUT'}
+                                {t('logout') || 'LOGOUT'}
                             </button>
                         </div>
                     ) : (
@@ -153,7 +153,7 @@ const Navbar = () => {
                             href="/login"
                             className="bg-primary hover:bg-primary/90 text-white px-8 py-2.5 rounded-full transition-all shadow-md hover:shadow-lg active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2"
                         >
-                            {t('common.login') || 'LOGIN'}
+                            {t('login') || 'LOGIN'}
                         </Link>
                     )}
                 </div>
@@ -228,14 +228,14 @@ const Navbar = () => {
                                         className="text-gray-700 hover:text-primary py-3 px-4 hover:bg-primary/5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
                                         role="menuitem"
                                     >
-                                        {t('common.profile') || 'PROFILE'}
+                                        {t('profile') || 'PROFILE'}
                                     </Link>
                                     <button
                                         onClick={handleLogout}
                                         className="text-left text-red-500 hover:text-red-600 py-3 px-4 hover:bg-red-50 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500/50"
                                         role="menuitem"
                                     >
-                                        {t('common.logout') || 'LOGOUT'}
+                                        {t('logout') || 'LOGOUT'}
                                     </button>
                                 </>
                             ) : (
@@ -245,7 +245,7 @@ const Navbar = () => {
                                     className="bg-primary text-white px-6 py-4 rounded-2xl text-center shadow-lg shadow-primary/20 mt-2 active:scale-[0.98] transition-all"
                                     role="menuitem"
                                 >
-                                    {t('common.login') || 'LOGIN'}
+                                    {t('login') || 'LOGIN'}
                                 </Link>
                             )}
                         </div>

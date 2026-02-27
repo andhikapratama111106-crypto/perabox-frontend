@@ -1,15 +1,17 @@
 "use client";
 
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { authAPI } from '@/lib/api';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function RegisterPage() {
+    const { t } = useLanguage();
     const router = useRouter();
     const [formData, setFormData] = useState({
         full_name: '',
@@ -35,7 +37,7 @@ export default function RegisterPage() {
         if (name === 'phone') {
             value = value.replace(/[^\d]/g, '');
         }
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev: typeof formData) => ({ ...prev, [name]: value }));
     };
 
     // Client-side validation
@@ -43,38 +45,38 @@ export default function RegisterPage() {
         const errs = { full_name: '', email: '', phone: '', password: '', confirm_password: '' };
 
         if (!formData.full_name) {
-            errs.full_name = 'Full name is required';
+            errs.full_name = t('registerPage.fullNameRequired') || 'Full name is required';
         }
 
         if (!formData.email) {
-            errs.email = 'Email is required';
+            errs.email = t('registerPage.emailRequired') || 'Email is required';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-            errs.email = 'Invalid email format';
+            errs.email = t('registerPage.emailInvalid') || 'Invalid email format';
         }
 
         if (!formData.phone) {
-            errs.phone = 'Phone number is required';
+            errs.phone = t('registerPage.phoneRequired') || 'Phone number is required';
         } else if (!formData.phone.startsWith('08')) {
-            errs.phone = 'Phone number must start with 08';
+            errs.phone = t('registerPage.phoneStart') || 'Phone number must start with 08';
         } else if (formData.phone.length < 10) {
-            errs.phone = 'Phone number must be at least 10 digits';
+            errs.phone = t('registerPage.phoneMin') || 'Phone number must be at least 10 digits';
         }
 
         if (!formData.password) {
-            errs.password = 'Password is required';
+            errs.password = t('registerPage.passwordRequired') || 'Password is required';
         } else if (formData.password.length < 8) {
-            errs.password = 'Password must be at least 8 characters';
+            errs.password = t('registerPage.passwordMin') || 'Password must be at least 8 characters';
         }
 
         if (formData.password !== formData.confirm_password) {
-            errs.confirm_password = 'Passwords do not match';
+            errs.confirm_password = t('registerPage.passwordMismatch') || 'Passwords do not match';
         }
 
         return errs;
-    }, [formData]);
+    }, [formData, t]);
 
     const handleBlur = (field: string) => {
-        setTouched(prev => ({ ...prev, [field]: true }));
+        setTouched((prev: typeof touched) => ({ ...prev, [field]: true }));
     };
 
     const handleRegister = async (e: React.FormEvent) => {
@@ -109,7 +111,7 @@ export default function RegisterPage() {
         } catch (err: any) {
             console.error(err);
             const detail = err.response?.data?.detail;
-            setServerError(typeof detail === 'string' ? detail : 'Registration failed. Please try again.');
+            setServerError(typeof detail === 'string' ? detail : t('registerPage.regFailed') || 'Registration failed. Please try again.');
         } finally {
             setLoading(false);
         }
@@ -149,11 +151,11 @@ export default function RegisterPage() {
                                         </div>
                                     </Link>
                                     <h2 className="text-4xl font-extrabold leading-tight mb-6">
-                                        Join the Perabox <br />
-                                        <span className="text-accent italic">Family today.</span>
+                                        {t('registerPage.brandingTitle1')} <br />
+                                        <span className="text-accent italic">{t('registerPage.brandingTitle2')}</span>
                                     </h2>
                                     <p className="text-primary-foreground/80 text-lg max-w-sm">
-                                        Experience the best home maintenance service with just a few clicks.
+                                        {t('registerPage.brandingSubtitle')}
                                     </p>
                                 </div>
                             </div>
@@ -161,8 +163,8 @@ export default function RegisterPage() {
                             {/* Right: Register Form */}
                             <div className="p-8 md:p-16 lg:p-20">
                                 <div className="mb-10 text-center lg:text-left">
-                                    <h1 className="text-3xl font-extrabold text-dark mb-3">Create Account</h1>
-                                    <p className="text-gray-500 font-medium">Sign up to get started.</p>
+                                    <h1 className="text-3xl font-extrabold text-dark mb-3">{t('registerPage.title')}</h1>
+                                    <p className="text-gray-500 font-medium">{t('registerPage.subtitle')}</p>
                                 </div>
 
                                 {serverError && (
@@ -181,7 +183,7 @@ export default function RegisterPage() {
                                 <form onSubmit={handleRegister} className="space-y-4">
                                     {/* Full Name */}
                                     <div className="space-y-2">
-                                        <label htmlFor="full_name" className="block text-sm font-bold text-dark ml-1">Full Name</label>
+                                        <label htmlFor="full_name" className="block text-sm font-bold text-dark ml-1">{t('registerPage.fullNameLabel')}</label>
                                         <input
                                             id="full_name"
                                             name="full_name"
@@ -190,7 +192,7 @@ export default function RegisterPage() {
                                             onChange={handleChange}
                                             onBlur={() => handleBlur('full_name')}
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.full_name && errors.full_name ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
-                                            placeholder="John Doe"
+                                            placeholder={t('registerPage.fullNamePlaceholder') || "John Doe"}
                                             required
                                             aria-required="true"
                                         />
@@ -199,7 +201,7 @@ export default function RegisterPage() {
 
                                     {/* Email */}
                                     <div className="space-y-2">
-                                        <label htmlFor="email" className="block text-sm font-bold text-dark ml-1">Email Address</label>
+                                        <label htmlFor="email" className="block text-sm font-bold text-dark ml-1">{t('registerPage.emailLabel')}</label>
                                         <input
                                             id="email"
                                             name="email"
@@ -217,7 +219,7 @@ export default function RegisterPage() {
 
                                     {/* Phone */}
                                     <div className="space-y-2">
-                                        <label htmlFor="phone" className="block text-sm font-bold text-dark ml-1">Phone Number</label>
+                                        <label htmlFor="phone" className="block text-sm font-bold text-dark ml-1">{t('registerPage.phoneLabel')}</label>
                                         <input
                                             id="phone"
                                             name="phone"
@@ -226,7 +228,7 @@ export default function RegisterPage() {
                                             onChange={handleChange}
                                             onBlur={() => handleBlur('phone')}
                                             className={`w-full px-6 py-4 rounded-[1.25rem] border ${touched.phone && errors.phone ? 'border-red-400 bg-red-50/30' : 'border-gray-200 focus:border-primary'} outline-none transition-all font-medium text-dark`}
-                                            placeholder="08123456789"
+                                            placeholder={t('registerPage.phonePlaceholder') || "08123456789"}
                                             required
                                         />
                                         {touched.phone && errors.phone && <p className="text-xs text-red-500 font-bold ml-1">{errors.phone}</p>}
@@ -234,7 +236,7 @@ export default function RegisterPage() {
 
                                     {/* Password */}
                                     <div className="space-y-2">
-                                        <label htmlFor="password" className="block text-sm font-bold text-dark ml-1">Password</label>
+                                        <label htmlFor="password" className="block text-sm font-bold text-dark ml-1">{t('registerPage.passwordLabel')}</label>
                                         <input
                                             id="password"
                                             name="password"
@@ -252,7 +254,7 @@ export default function RegisterPage() {
 
                                     {/* Confirm Password */}
                                     <div className="space-y-2">
-                                        <label htmlFor="confirm_password" className="block text-sm font-bold text-dark ml-1">Confirm Password</label>
+                                        <label htmlFor="confirm_password" className="block text-sm font-bold text-dark ml-1">{t('registerPage.confirmPasswordLabel')}</label>
                                         <input
                                             id="confirm_password"
                                             name="confirm_password"
@@ -274,13 +276,13 @@ export default function RegisterPage() {
                                         disabled={loading || (Object.values(touched).some(t => t) && Object.values(errors).some(error => error !== ''))}
                                         className="w-full bg-primary hover:bg-primary/90 disabled:opacity-50 text-white font-extrabold py-4 px-6 rounded-2xl transition-all shadow-xl mt-4"
                                     >
-                                        {loading ? 'Creating Account...' : 'Create Account'}
+                                        {loading ? t('registerPage.creating') : t('registerPage.createBtn')}
                                     </motion.button>
                                 </form>
 
                                 <div className="mt-8 text-center text-sm">
-                                    <span className="text-gray-500 font-medium">Already have an account?</span>{' '}
-                                    <Link href="/login" className="text-primary font-extrabold hover:underline">Log in</Link>
+                                    <span className="text-gray-500 font-medium">{t('registerPage.haveAccount')}</span>{' '}
+                                    <Link href="/login" className="text-primary font-extrabold hover:underline">{t('registerPage.login')}</Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -296,8 +298,8 @@ export default function RegisterPage() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h2 className="text-4xl font-extrabold text-dark mb-4">Welcome aboard!</h2>
-                            <p className="text-xl text-gray-500 font-medium">Setting up your experience...</p>
+                            <h2 className="text-4xl font-extrabold text-dark mb-4">{t('registerPage.successTitle')}</h2>
+                            <p className="text-xl text-gray-500 font-medium">{t('registerPage.successSubtitle')}</p>
                         </motion.div>
                     )}
                 </AnimatePresence>
@@ -306,7 +308,7 @@ export default function RegisterPage() {
             {/* Minimal Footer for Auth Pages */}
             <div className="py-8 px-6 text-center">
                 <p className="text-[10px] text-gray-400">
-                    © 2024 PERABOX. All rights reserved.
+                    {t('footer.allRightsReserved')}
                 </p>
             </div>
         </main>

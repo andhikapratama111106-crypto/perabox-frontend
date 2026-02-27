@@ -1,5 +1,12 @@
 export const homeTranslations = {
     "en": {
+        "home": "HOME",
+        "services": "SERVICES",
+        "features": "Feature",
+        "about": "ABOUT",
+        "login": "Login",
+        "profile": "PROFILE",
+        "logout": "LOGOUT",
         "hero": {
             "badge": "#1 Homecare Platform in Indonesia",
             "headlineLine1": "The Smart Way to",
@@ -11,7 +18,7 @@ export const homeTranslations = {
             "techStatus": "Technician Status",
             "availableNow": "120+ Available Now"
         },
-        "features": {
+        "featuresSection": {
             "sectionTitle": "Features",
             "mainHeading1": "Everything You Need for a",
             "mainHeading2": "Better Home",
@@ -45,7 +52,7 @@ export const homeTranslations = {
             ],
             "learnMore": "Learn more"
         },
-        "about": {
+        "aboutSection": {
             "sectionTitle": "About Us",
             "mainHeading": "Our Company",
             "description1": " is a homecare platform that connects users with trained technicians and furniture rental vendors quickly, safely, and transparently. We're here to make your life easier.",
@@ -57,7 +64,7 @@ export const homeTranslations = {
             "mainHeading": "Trusted by Leading Brands",
             "description": "Backed by experienced technicians for various renowned AC brands"
         },
-        "services": {
+        "servicesSection": {
             "sectionTitle": "Our Services",
             "mainHeading": "What Can We Do For You?",
             "service1Title": "AC Cleaning",
@@ -151,6 +158,7 @@ export const homeTranslations = {
         "faqPage": {
             "pageTitle": "Frequently Asked Questions",
             "pageSubtitle": "Find answers to common questions about PERABOX services.",
+            "seeAllFaq": "See all FAQs →",
             "backToHome": "Back to Home",
             "ctaQuestion": "Still have questions?",
             "ctaBody": "Contact us, we are ready to help!",
@@ -209,10 +217,91 @@ export const homeTranslations = {
             "taxInc": "Includes VAT & Service Feess",
             "paymentMethod": "Payment Method",
             "btnProcess": "Processing...",
-            "btnConfirm": "Confirm & Order"
+            "btnConfirm": "Confirm & Order",
+            "months": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"],
+            "paymentQRIS": "QRIS (Ovo/GoPay/Dana)",
+            "paymentBCA": "Bank Transfer BCA",
+            "transferTotal": "Transfer Total",
+            "transferNote": "*Please transfer exactly until {code} (last 3 digits) for automatic verification",
+            "accountNumber": "Account Number",
+            "copy": "COPY",
+            "accountName": "Account Name",
+            "confirmPayment": "Confirm & Send Proof of Transfer",
+            "backToDetails": "Back to Order Details",
+            "orderReceived": "Order Received!",
+            "thankYouTech": "Thank you! Your order has been forwarded to",
+            "qrisSuccess": " QRIS payment successfully verified.",
+            "bcaSuccess": " Please send proof of transfer if needed.",
+            "waSuccess": " Please complete payment as instructed on WhatsApp.",
+            "backToHome": "Back to Home",
+            "btnNext": "Next"
+        },
+        "loginPage": {
+            "title": "Welcome Home!",
+            "subtitle": "Please enter your details to sign in.",
+            "emailLabel": "Email Address",
+            "passwordLabel": "Password",
+            "forgotPassword": "Forgot password?",
+            "signInBtn": "Sign in",
+            "signingIn": "Signing in...",
+            "orContinue": "Or continue with",
+            "googleLogin": "Login with Google",
+            "connecting": "Connecting...",
+            "noAccount": "Don't have an account yet?",
+            "createAccount": "Create account",
+            "brandingTitle1": "The best way to manage",
+            "brandingTitle2": "your",
+            "brandingTitle3": "home maintenance.",
+            "brandingSubtitle": "Join thousands of satisfied homeowners who trust Perabox for their homecare needs.",
+            "testimonialText": "\"Best service in town! Very professional.\"",
+            "testimonialAuthor": "Anindya Putri, Customer",
+            "successTitle": "Welcome back!",
+            "successSubtitle": "Authenticating your account...",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Invalid email format",
+            "passwordRequired": "Password is required",
+            "passwordMin": "Password must be at least 8 characters",
+            "loginFailed": "Login failed. Please check your credentials."
+        },
+        "registerPage": {
+            "title": "Create Account",
+            "subtitle": "Sign up to get started.",
+            "fullNameLabel": "Full Name",
+            "fullNamePlaceholder": "John Doe",
+            "emailLabel": "Email Address",
+            "phoneLabel": "Phone Number",
+            "passwordLabel": "Password",
+            "confirmPasswordLabel": "Confirm Password",
+            "createBtn": "Create Account",
+            "creating": "Creating Account...",
+            "haveAccount": "Already have an account?",
+            "login": "Log in",
+            "brandingTitle1": "Join the Perabox",
+            "brandingTitle2": "Family today.",
+            "brandingSubtitle": "Experience the best home maintenance service with just a few clicks.",
+            "phonePlaceholder": "08123456789",
+            "successTitle": "Welcome aboard!",
+            "successSubtitle": "Setting up your experience...",
+            "fullNameRequired": "Full name is required",
+            "emailRequired": "Email is required",
+            "emailInvalid": "Invalid email format",
+            "phoneRequired": "Phone number is required",
+            "phoneStart": "Phone number must start with 08",
+            "phoneMin": "Phone number must be at least 10 digits",
+            "passwordRequired": "Password is required",
+            "passwordMin": "Password must be at least 8 characters",
+            "passwordMismatch": "Passwords do not match",
+            "regFailed": "Registration failed. Please try again."
         }
     },
     "id": {
+        "home": "BERANDA",
+        "services": "LAYANAN",
+        "features": "Fitur",
+        "about": "TENTANG",
+        "login": "Masuk",
+        "profile": "PROFIL",
+        "logout": "KELUAR",
         "hero": {
             "badge": "Platform Perawatan Rumah #1 di Indonesia",
             "headlineLine1": "Cara Cerdas Merawat",
@@ -224,7 +313,7 @@ export const homeTranslations = {
             "techStatus": "Status Teknisi",
             "availableNow": "120+ Tersedia Saat Ini"
         },
-        "features": {
+        "featuresSection": {
             "sectionTitle": "Fitur",
             "mainHeading1": "Semua yang Anda butuhkan untuk",
             "mainHeading2": "Rumah yang Lebih Baik",
@@ -258,7 +347,7 @@ export const homeTranslations = {
             ],
             "learnMore": "Pelajari lebih lanjut"
         },
-        "about": {
+        "aboutSection": {
             "sectionTitle": "Tentang Kami",
             "mainHeading": "Perusahaan Kami",
             "description1": " adalah platform perawatan rumah yang menghubungkan pengguna dengan teknisi terlatih dan vendor penyewaan peralatan secara cepat, aman, dan transparan. Kami hadir untuk membuat hidup Anda lebih mudah.",
@@ -270,7 +359,7 @@ export const homeTranslations = {
             "mainHeading": "Dipercaya oleh Merek Terkemuka",
             "description": "Didukung oleh teknisi berpengalaman untuk berbagai merek AC ternama"
         },
-        "services": {
+        "servicesSection": {
             "sectionTitle": "Layanan Kami",
             "mainHeading": "Apa yang Bisa Kami Lakukan Untuk Anda?",
             "service1Title": "Cuci AC",
@@ -364,12 +453,13 @@ export const homeTranslations = {
         "faqPage": {
             "pageTitle": "Pertanyaan yang Sering Diajukan",
             "pageSubtitle": "Temukan jawaban untuk pertanyaan umum seputar layanan PERABOX.",
+            "seeAllFaq": "Lihat semua FAQ →",
             "backToHome": "Kembali ke Beranda",
             "ctaQuestion": "Masih punya pertanyaan?",
             "ctaBody": "Hubungi kami, kami siap membantu!",
             "ctaButton": "Hubungi Kami",
             "faqs": [
-                { "question": "Apa itu PERABOX?", "answer": "PERABOX adalah platform homecare yang menghubungkan pengguna dengan teknisi terlatih untuk layanan perawatan AC dan rumah tangga secara cepat, aman, dan transparan." },
+                { "question": "Apa itu PERABOX?", "answer": "PERABOX adalah platform homecare that menghubungkan pengguna dengan teknisi terlatih untuk layanan perawatan AC dan rumah tangga secara cepat, aman, dan transparan." },
                 { "question": "Layanan apa saja yang tersedia?", "answer": "Kami menyediakan Cuci AC, Pemasangan AC, Perbaikan AC, dan Isi Freon. Layanan lainnya akan segera hadir." },
                 { "question": "Bagaimana cara memesan layanan?", "answer": "Klik 'Mulai Sekarang' di halaman utama, pilih layanan, tentukan jadwal, dan teknisi akan datang ke lokasi Anda." },
                 { "question": "Berapa biaya layanan PERABOX?", "answer": "Biaya bervariasi tergantung jenis servis. Kami menjamin harga transparan tanpa biaya tersembunyi." },
@@ -422,10 +512,91 @@ export const homeTranslations = {
             "taxInc": "Sudah termasuk PPN & Biaya Layanan",
             "paymentMethod": "Metode Pembayaran",
             "btnProcess": "Memproses...",
-            "btnConfirm": "Konfirmasi & Pesan"
+            "btnConfirm": "Konfirmasi & Pesan",
+            "months": ["JAN", "FEB", "MAR", "APR", "MEI", "JUN", "JUL", "AGU", "SEP", "OKT", "NOV", "DES"],
+            "paymentQRIS": "QRIS (Ovo/GoPay/Dana)",
+            "paymentBCA": "Transfer Bank BCA",
+            "transferTotal": "Total Transfer",
+            "transferNote": "*Mohon transfer tepat hingga {code} (3 digit terakhir) untuk verifikasi otomatis",
+            "accountNumber": "Nomor Rekening",
+            "copy": "SALIN",
+            "accountName": "Atas Nama",
+            "confirmPayment": "Konfirmasi & Kirim Bukti Transfer",
+            "backToDetails": "Kembali ke Detail Pesanan",
+            "orderReceived": "Pesanan Diterima!",
+            "thankYouTech": "Terima kasih! Pesananmu telah diteruskan ke",
+            "qrisSuccess": " Pembayaran QRIS berhasil diverifikasi.",
+            "bcaSuccess": " Silakan kirim bukti transfer jika diperlukan.",
+            "waSuccess": " Silakan selesaikan pembayaran sesuai instruksi di WhatsApp.",
+            "backToHome": "Kembali ke Beranda",
+            "btnNext": "Lanjut"
+        },
+        "loginPage": {
+            "title": "Selamat Datang!",
+            "subtitle": "Silakan masukkan detail Anda untuk masuk.",
+            "emailLabel": "Alamat Email",
+            "passwordLabel": "Kata Sandi",
+            "forgotPassword": "Lupa kata sandi?",
+            "signInBtn": "Masuk",
+            "signingIn": "Sedang masuk...",
+            "orContinue": "Atau lanjutkan dengan",
+            "googleLogin": "Masuk dengan Google",
+            "connecting": "Menghubungkan...",
+            "noAccount": "Belum punya akun?",
+            "createAccount": "Buat akun",
+            "brandingTitle1": "Cara terbaik untuk mengelola",
+            "brandingTitle2": "pemeliharaan",
+            "brandingTitle3": "rumah Anda.",
+            "brandingSubtitle": "Bergabunglah dengan ribuan pemilik rumah puas yang mempercayai Perabox.",
+            "testimonialText": "\"Layanan terbaik di kota! Sangat profesional.\"",
+            "testimonialAuthor": "Anindya Putri, Pelanggan",
+            "successTitle": "Selamat datang kembali!",
+            "successSubtitle": "Sedang mengautentikasi akun Anda...",
+            "emailRequired": "Email wajib diisi",
+            "emailInvalid": "Format email tidak valid",
+            "passwordRequired": "Kata sandi wajib diisi",
+            "passwordMin": "Kata sandi minimal 8 karakter",
+            "loginFailed": "Gagal masuk. Silakan periksa kredensial Anda."
+        },
+        "registerPage": {
+            "title": "Buat Akun",
+            "subtitle": "Daftar untuk memulai.",
+            "fullNameLabel": "Nama Lengkap",
+            "fullNamePlaceholder": "Budi Gunawan",
+            "emailLabel": "Alamat Email",
+            "phoneLabel": "Nomor Telepon",
+            "passwordLabel": "Kata Sandi",
+            "confirmPasswordLabel": "Konfirmasi Kata Sandi",
+            "createBtn": "Buat Akun",
+            "creating": "Sedang membuat akun...",
+            "haveAccount": "Sudah punya akun?",
+            "login": "Masuk",
+            "brandingTitle1": "Bergabung dengan",
+            "brandingTitle2": "Keluarga Perabox.",
+            "brandingSubtitle": "Rasakan layanan pemeliharaan rumah terbaik hanya dengan beberapa klik.",
+            "phonePlaceholder": "08123456789",
+            "successTitle": "Selamat bergabung!",
+            "successSubtitle": "Sedang menyiapkan akun Anda...",
+            "fullNameRequired": "Nama lengkap wajib diisi",
+            "emailRequired": "Email wajib diisi",
+            "emailInvalid": "Format email tidak valid",
+            "phoneRequired": "Nomor telepon wajib diisi",
+            "phoneStart": "Nomor telepon harus dimulai dengan 08",
+            "phoneMin": "Nomor telepon minimal 10 digit",
+            "passwordRequired": "Kata sandi wajib diisi",
+            "passwordMin": "Kata sandi minimal 8 karakter",
+            "passwordMismatch": "Kata sandi tidak cocok",
+            "regFailed": "Pendaftaran gagal. Silakan coba lagi."
         }
     },
     "es": {
+        "home": "INICIO",
+        "services": "SERVICIOS",
+        "features": "Función",
+        "about": "SOBRE NOSOTROS",
+        "login": "Entrar",
+        "profile": "PERFIL",
+        "logout": "CERRAR SESIÓN",
         "hero": {
             "badge": "Plataforma de mantenimiento del hogar #1",
             "headlineLine1": "La forma inteligente de cuidar",
@@ -437,7 +608,7 @@ export const homeTranslations = {
             "techStatus": "Estado del técnico",
             "availableNow": "Más de 120 disponibles"
         },
-        "features": {
+        "featuresSection": {
             "sectionTitle": "Características",
             "mainHeading1": "Todo lo que necesitas para un",
             "mainHeading2": "Hogar Mejor",
@@ -453,7 +624,7 @@ export const homeTranslations = {
             ],
             "feature2Title": "Precio Justo",
             "feature2Desc": "Costos transparentes sin cargos ocultos.",
-            "feature2Detail": "Creemos en la total transparencia de precios. Antes de que comience cualquier trabajo, recibirá un desglose detallado de los costos.",
+            "feature2Detail": "Creemos en la total transparencia de precios. Antes de que conience cualquier trabajo, recibirá un desglose detallado de los costos.",
             "feature2Highlights": [
                 "Desglose de costos iniciales",
                 "Sin cargos ocultos",
@@ -471,7 +642,7 @@ export const homeTranslations = {
             ],
             "learnMore": "Aprender más"
         },
-        "about": {
+        "aboutSection": {
             "sectionTitle": "Sobre Nosotros",
             "mainHeading": "Nuestra Compañía",
             "description1": "PERABOX es una plataforma de mantenimiento del hogar que conecta a los usuarios con técnicos capacitados rápidamente y de manera segura. Estamos aquí para facilitar su vida.",
@@ -483,7 +654,7 @@ export const homeTranslations = {
             "mainHeading": "Con la confianza de marcas líderes",
             "description": "Respaldado por técnicos experimentados para varias reconocidas marcas de aire acondicionado"
         },
-        "services": {
+        "servicesSection": {
             "sectionTitle": "Nuestros Servicios",
             "mainHeading": "¿Qué podemos hacer por usted?",
             "service1Title": "Limpieza de AC",
@@ -556,7 +727,7 @@ export const homeTranslations = {
             "t2Role": "Ama de casa",
             "t2Quote": "Como ama de casa, necesito un servicio confiable. Llegaron a tiempo, el técnico fue amable y mi aire acondicionado volvió a enfriar.",
             "t3Name": "Hj. Siti Rahayu",
-            "t3Role": "Pensionista",
+            "t3Role": "Pensioniste",
             "t3Quote": "A mi edad, me ayuda mucho este servicio. Simplemente pido por teléfono y el técnico viene a casa."
         },
         "footer": {
@@ -577,13 +748,14 @@ export const homeTranslations = {
         "faqPage": {
             "pageTitle": "Preguntas Frecuentes",
             "pageSubtitle": "Encuentre respuestas a preguntas comunes sobre los servicios de PERABOX.",
+            "seeAllFaq": "Ver todas las FAQ →",
             "backToHome": "Volver al inicio",
             "ctaQuestion": "¿Aún tiene preguntas?",
             "ctaBody": "¡Contáctenos, estamos listos para ayudar!",
             "ctaButton": "Contáctenos",
             "faqs": [
                 { "question": "¿Qué es PERABOX?", "answer": "PERABOX es una plataforma de mantenimiento del hogar que conecta a usuarios con técnicos capacitados de forma rápida, segura y transparente." },
-                { "question": "¿Qué servicios ofrece PERABOX?", "answer": "Ofrecemos Limpieza de AC, Instalación de AC, Reparación de AC y Recarga de Freón. Más servicios próximamente." },
+                { "question": "¿Qué servicios ofrece PERABOX?", "answer": "Ofrecemos Limpieza de AC, Instalación de AC, Reparación de AC y Recarga de Freon. Más servicios próximamente." },
                 { "question": "¿Cómo reservo un servicio?", "answer": "Haga clic en 'Empezar' en la página de inicio, seleccione el servicio, fije un horario y un técnico irá a su ubicación." },
                 { "question": "¿Cuánto cuesta PERABOX?", "answer": "Los precios varían según el tipo de servicio. Garantizamos precios transparentes sin cargos ocultos." },
                 { "question": "¿Los técnicos de PERABOX están certificados?", "answer": "Sí. Todos pasan por un proceso de selección estricto y reciben capacitación periódica." },
@@ -607,7 +779,7 @@ export const homeTranslations = {
             "title2": "Elige tu horario de visita",
             "selectedTech": "Técnico seleccionado",
             "selectDate": "Seleccionar fecha",
-            "dateError": "Por favor, selecciona una fecha entre 2025 y 2030.",
+            "dateError": "Por favor, selecciona una fecha entre 2025 and 2030.",
             "selectTime": "Seleccionar hora",
             "btnBack": "Volver",
             "btnNextService": "Continuar al servicio",
@@ -635,10 +807,91 @@ export const homeTranslations = {
             "taxInc": "Incluye IVA y tarifas de servicio",
             "paymentMethod": "Método de pago",
             "btnProcess": "Procesando...",
-            "btnConfirm": "Confirmar y ordenar"
+            "btnConfirm": "Confirmar y ordenar",
+            "months": ["ENE", "FEB", "MAR", "ABR", "MAY", "JUN", "JUL", "AGO", "SEP", "OCT", "NOV", "DIC"],
+            "paymentQRIS": "QRIS (Ovo/GoPay/Dana)",
+            "paymentBCA": "Transferencia Bancaria BCA",
+            "transferTotal": "Total a Transferir",
+            "transferNote": "*Por favor transfiera exactamente hasta {code} (últimos 3 dígitos) para verificación automática",
+            "accountNumber": "Número de Cuenta",
+            "copy": "COPIAR",
+            "accountName": "Nombre de la Cuenta",
+            "confirmPayment": "Confirmar y Enviar Comprobante",
+            "backToDetails": "Volver a Detalles del Pedido",
+            "orderReceived": "¡Pedido Recibido!",
+            "thankYouTech": "¡Gracias! Tu pedido ha sido enviado a",
+            "qrisSuccess": " Pago QRIS verificado con éxito.",
+            "bcaSuccess": " Por favor envía el comprobante de transferencia si es necesario.",
+            "waSuccess": " Por favor completa el pago como se indica en WhatsApp.",
+            "backToHome": "Volver al Inicio",
+            "btnNext": "Siguiente"
+        },
+        "loginPage": {
+            "title": "¡Bienvenido a casa!",
+            "subtitle": "Por favor, introduce tus datos para iniciar sesión.",
+            "emailLabel": "Correo electrónico",
+            "passwordLabel": "Contraseña",
+            "forgotPassword": "¿Olvidaste tu contraseña?",
+            "signInBtn": "Iniciar sesión",
+            "signingIn": "Iniciando sesión...",
+            "orContinue": "O continuar con",
+            "googleLogin": "Iniciar sesión con Google",
+            "connecting": "Conectando...",
+            "noAccount": "¿Aún no tienes una cuenta?",
+            "createAccount": "Crear cuenta",
+            "brandingTitle1": "La mejor forma de gestionar",
+            "brandingTitle2": "tu",
+            "brandingTitle3": "mantenimiento del hogar.",
+            "brandingSubtitle": "Únete a miles de propietarios satisfechos que confían en Perabox para sus necesidades de cuidado del hogar.",
+            "testimonialText": "\"¡El mejor servicio de la ciudad! Muy profesional.\"",
+            "testimonialAuthor": "Anindya Putri, Cliente",
+            "successTitle": "¡Bienvenido de nuevo!",
+            "successSubtitle": "Autenticando tu cuenta...",
+            "emailRequired": "El correo electrónico es obligatorio",
+            "emailInvalid": "Formato de correo electrónico no válido",
+            "passwordRequired": "La contraseña es obligatoria",
+            "passwordMin": "La contraseña debe tener al menos 8 caracteres",
+            "loginFailed": "Error al iniciar sesión. Por favor, compruebe sus credenciales."
+        },
+        "registerPage": {
+            "title": "Crear cuenta",
+            "subtitle": "Regístrate para comenzar.",
+            "fullNameLabel": "Nombre completo",
+            "fullNamePlaceholder": "Juan Pérez",
+            "emailLabel": "Correo electrónico",
+            "phoneLabel": "Número de teléfono",
+            "passwordLabel": "Contraseña",
+            "confirmPasswordLabel": "Confirmar contraseña",
+            "createBtn": "Crear cuenta",
+            "creating": "Creando cuenta...",
+            "haveAccount": "¿Ya tienes una cuenta?",
+            "login": "Iniciar sesión",
+            "brandingTitle1": "Únete a la Familia",
+            "brandingTitle2": "Perabox hoy.",
+            "brandingSubtitle": "Experimenta el mejor servicio de mantenimiento del hogar con solo unos pocos clics.",
+            "phonePlaceholder": "08123456789",
+            "successTitle": "¡Bienvenido a bordo!",
+            "successSubtitle": "Configurando tu experiencia...",
+            "fullNameRequired": "El nombre completo es obligatorio",
+            "emailRequired": "El correo electrónico es obligatorio",
+            "emailInvalid": "Formato de correo electrónico no válido",
+            "phoneRequired": "El número de teléfono es obligatorio",
+            "phoneStart": "El número de teléfono debe comenzar con 08",
+            "phoneMin": "El número de teléfono debe tener al menos 10 dígitos",
+            "passwordRequired": "La contraseña es obligatoria",
+            "passwordMin": "La contraseña debe tener al menos 8 caracteres",
+            "passwordMismatch": "Las contraseñas no coinciden",
+            "regFailed": "Error en el registro. Por favor, inténtelo de nuevo."
         }
     },
     "ja": {
+        "home": "ホーム",
+        "services": "サービス",
+        "features": "機能",
+        "about": "私たちについて",
+        "login": "ログイン",
+        "profile": "プロフィール",
+        "logout": "ログアウト",
         "hero": {
             "badge": "インドネシアNo.1のホームケアプラットフォーム",
             "headlineLine1": "家をスマートに",
@@ -650,7 +903,7 @@ export const homeTranslations = {
             "techStatus": "技術者の状況",
             "availableNow": "現在120人以上が対応可能"
         },
-        "features": {
+        "featuresSection": {
             "sectionTitle": "特徴",
             "mainHeading1": "より良い家のための",
             "mainHeading2": "すべてがここに",
@@ -684,7 +937,7 @@ export const homeTranslations = {
             ],
             "learnMore": "詳細を見る"
         },
-        "about": {
+        "aboutSection": {
             "sectionTitle": "私たちについて",
             "mainHeading": "会社概要",
             "description1": "PERABOXは、訓練を受けた技術者とユーザーを迅速かつ安全につなぐホームケアプラットフォームです。",
@@ -696,7 +949,7 @@ export const homeTranslations = {
             "mainHeading": "トップブランドからの信頼",
             "description": "様々な有名エアコンブランドの経験豊富な技術者がサポートします"
         },
-        "services": {
+        "servicesSection": {
             "sectionTitle": "サービス",
             "mainHeading": "私たちにできること",
             "service1Title": "エアコンクリーニング",
@@ -790,6 +1043,7 @@ export const homeTranslations = {
         "faqPage": {
             "pageTitle": "よくある質問",
             "pageSubtitle": "PERABOXサービスに関するよくある質問への回答をご覧ください。",
+            "seeAllFaq": "すべてのFAQを表示 →",
             "backToHome": "ホームに戻る",
             "ctaQuestion": "まだご質問がありますか？",
             "ctaBody": "お問い合わせください。喜んでお手伝いします！",
@@ -799,12 +1053,7 @@ export const homeTranslations = {
                 { "question": "PERABOXではどのようなサービスを提供していますか？", "answer": "現在、エアコンクリーニング、エアコン設置、エアコン修理、フロン補充を提供しています。" },
                 { "question": "サービスはどのように予約しますか？", "answer": "ホームページの「始める」をクリックし、サービスを選択し、スケジュールを設定すると技術者がお伺いします。" },
                 { "question": "料金はいくらですか？", "answer": "価格はサービスの種類とエアコンの状態によって異なります。隠れた費用はありません。" },
-                { "question": "技術者は認定されていますか？", "answer": "はい。すべての技術者は厳格な選考と定期的なトレーニングを受けています。" },
-                { "question": "サービスにはどのくらいの時間がかかりますか？", "answer": "エアコンクリーニングは1台あたり45〜60分。設置には約2〜4時間かかります。" },
-                { "question": "サービス保証はありますか？", "answer": "はい。サービス後に問題が発生した場合、技術者が無料で再チェックに戻ります。" },
-                { "question": "PERABOXのサービスエリアはどこですか？", "answer": "現在、Jabodetabek（ジャカルタ首都圏）とその周辺地域をカバーし、拡大中です。" },
-                { "question": "利用可能な支払い方法は？", "answer": "QRIS、銀行振込、技術者への現金払いが利用可能です。" },
-                { "question": "注文をキャンセルできますか？", "answer": "技術者が出発する前であれば、無料でキャンセルできます。WhatsAppでお問い合わせください。" }
+                { "question": "技術者は認定されていますか？", "answer": "はい。すべての技術者は厳格な選考と定期的なトレーニングを受けています。" }
             ]
         },
         "bookPage": {
@@ -848,10 +1097,91 @@ export const homeTranslations = {
             "taxInc": "付加価値税とサービス料が含まれています",
             "paymentMethod": "お支払い方法",
             "btnProcess": "処理中...",
-            "btnConfirm": "確認して注文する"
+            "btnConfirm": "確認して注文する",
+            "months": ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"],
+            "paymentQRIS": "QRIS (Ovo/GoPay/Dana)",
+            "paymentBCA": "BCA銀行振込",
+            "transferTotal": "転送合計",
+            "transferNote": "*自動確認のため、{code}（最後の3桁）まできちんと転送してください",
+            "accountNumber": "口座番号",
+            "copy": "コピー",
+            "accountName": "口座名義",
+            "confirmPayment": "確認して転送証明を送信",
+            "backToDetails": "注文の詳細に戻る",
+            "orderReceived": "注文を受け付けました！",
+            "thankYouTech": "ありがとうございます！あなたの注文はに転送されました",
+            "qrisSuccess": " QRIS決済が正常に確認されました。",
+            "bcaSuccess": " 必要に応じて振込証明書を送信してください。",
+            "waSuccess": " WhatsAppの指示に従って支払いを完了してください。",
+            "backToHome": "ホームに戻る",
+            "btnNext": "次へ"
+        },
+        "loginPage": {
+            "title": "おかえりなさい！",
+            "subtitle": "詳細を入力してログインしてください。",
+            "emailLabel": "メールアドレス",
+            "passwordLabel": "パスワード",
+            "forgotPassword": "パスワードをお忘れですか？",
+            "signInBtn": "ログイン",
+            "signingIn": "ログイン中...",
+            "orContinue": "または次で続行",
+            "googleLogin": "Googleでログイン",
+            "connecting": "接続中...",
+            "noAccount": "まだアカウントをお持ちではありませんか？",
+            "createAccount": "アカウント作成",
+            "brandingTitle1": "最高の方法で管理する",
+            "brandingTitle2": "あなたの",
+            "brandingTitle3": "家のメンテナンス。",
+            "brandingSubtitle": "ホームケアのニーズにPeraboxを信頼している何千人もの満足している住宅所有者に加わりましょう。",
+            "testimonialText": "「街で最高のサービス！非常にプロフェッショナルです。」",
+            "testimonialAuthor": "アニンディア・プトリ、顧客",
+            "successTitle": "おかえりなさい！",
+            "successSubtitle": "アカウントを認証中...",
+            "emailRequired": "メールアドレスが必要です",
+            "emailInvalid": "無効なメール形式です",
+            "passwordRequired": "パスワードが必要です",
+            "passwordMin": "パスワードは少なくとも8文字である必要があります",
+            "loginFailed": "ログインに失敗しました。資格情報を確認してください。"
+        },
+        "registerPage": {
+            "title": "アカウント作成",
+            "subtitle": "開始するにはサインアップしてください。",
+            "fullNameLabel": "フルネーム",
+            "fullNamePlaceholder": "山田太郎",
+            "emailLabel": "メールアドレス",
+            "phoneLabel": "電話番号",
+            "passwordLabel": "パスワード",
+            "confirmPasswordLabel": "パスワードの確認",
+            "createBtn": "アカウントを作成",
+            "creating": "アカウントを作成中...",
+            "haveAccount": "すでにアカウントをお持ちですか？",
+            "login": "ログイン",
+            "brandingTitle1": "Peraboxファミリーに",
+            "brandingTitle2": "今日参加しましょう。",
+            "brandingSubtitle": "数回クリックするだけで、最高のホームメンテナンスサービスを体験できます。",
+            "phonePlaceholder": "08123456789",
+            "successTitle": "ようこそ！",
+            "successSubtitle": "体験を設定中...",
+            "fullNameRequired": "フルネームが必要です",
+            "emailRequired": "メールアドレスが必要です",
+            "emailInvalid": "無効なメール形式です",
+            "phoneRequired": "電話番号が必要です",
+            "phoneStart": "電話番号は08で始まる必要があります",
+            "phoneMin": "電話番号は少なくとも10桁である必要があります",
+            "passwordRequired": "パスワードが必要です",
+            "passwordMin": "パスワードは少なくとも8文字である必要があります",
+            "passwordMismatch": "パスワードが一致しません",
+            "regFailed": "登録に失敗しました。もう一度お試しください。"
         }
     },
     "zh": {
+        "home": "首页",
+        "services": "服务",
+        "features": "功能",
+        "about": "关于我们",
+        "login": "登录",
+        "profile": "个人资料",
+        "logout": "退出登录",
         "hero": {
             "badge": "印度尼西亚排名第一的家庭护理平台",
             "headlineLine1": "维护您房屋的",
@@ -863,7 +1193,7 @@ export const homeTranslations = {
             "techStatus": "技术人员状态",
             "availableNow": "120+ 可用人员"
         },
-        "features": {
+        "featuresSection": {
             "sectionTitle": "功能",
             "mainHeading1": "打造美好家园的",
             "mainHeading2": "首选方式",
@@ -897,7 +1227,7 @@ export const homeTranslations = {
             ],
             "learnMore": "了解更多"
         },
-        "about": {
+        "aboutSection": {
             "sectionTitle": "关于我们",
             "mainHeading": "我们的公司",
             "description1": "PERABOX 是一个家庭护理平台，可快速安全地将用户与经过培训的技术人员联系起来。我们在这里让您的生活更轻松。",
@@ -909,7 +1239,7 @@ export const homeTranslations = {
             "mainHeading": "深受领先品牌的信赖",
             "description": "由经验丰富的技术人员为各种知名空调品牌提供支持"
         },
-        "services": {
+        "servicesSection": {
             "sectionTitle": "我们的服务",
             "mainHeading": "我们能为您做些什么？",
             "service1Title": "空调清洗",
@@ -1003,6 +1333,7 @@ export const homeTranslations = {
         "faqPage": {
             "pageTitle": "常见问题",
             "pageSubtitle": "查找有关PERABOX服务的常见问题解答。",
+            "seeAllFaq": "查看所有常见问题 →",
             "backToHome": "返回主页",
             "ctaQuestion": "还有问题？",
             "ctaBody": "联系我们，我们随时准备为您提供帮助！",
@@ -1012,12 +1343,7 @@ export const homeTranslations = {
                 { "question": "PERABOX提供哪些服务？", "answer": "目前我们提供空调清洗、空调安装、空调维修和氟利昂加注服务。更多服务即将推出。" },
                 { "question": "如何预约服务？", "answer": "点击主页上的'开始'，选择服务，设置时间，技术人员将上门服务。" },
                 { "question": "PERABOX收费多少？", "answer": "价格因服务类型和空调状况而异。我们保证价格透明，无隐藏费用。" },
-                { "question": "PERABOX的技术人员有认证吗？", "answer": "是的，所有技术人员都经过严格筛选并定期接受培训。" },
-                { "question": "服务需要多长时间？", "answer": "空调清洗每台约45-60分钟，安装约2-4小时，维修时间视损坏程度而定。" },
-                { "question": "有服务保证吗？", "answer": "是的。服务后如出现问题，技术人员将免费回来进行复查。" },
-                { "question": "PERABOX服务哪些地区？", "answer": "目前服务雅加达大都市区（Jabodetabek）及周边地区，并持续扩展到其他城市。" },
-                { "question": "接受哪些付款方式？", "answer": "我们接受QRIS、银行转账及工作完成后向技术人员现金付款。" },
-                { "question": "我可以取消订单吗？", "answer": "您可以在技术人员出发前免费取消订单。请通过WhatsApp联系我们的客服。" }
+                { "question": "PERABOX的技术人员有认证吗？", "answer": "是的，所有技术人员都经过严格筛选并定期接受培训。" }
             ]
         },
         "bookPage": {
@@ -1061,7 +1387,81 @@ export const homeTranslations = {
             "taxInc": "包含增值税和服务费",
             "paymentMethod": "付款方式",
             "btnProcess": "处理中...",
-            "btnConfirm": "确认并下单"
+            "btnConfirm": "确认并下单",
+            "months": ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            "paymentQRIS": "QRIS (Ovo/GoPay/Dana)",
+            "paymentBCA": "BCA 银行转账",
+            "transferTotal": "转帐总额",
+            "transferNote": "*请务必转账至 {code}（最后 3 位数字）以便自动核查",
+            "accountNumber": "账号",
+            "copy": "复制",
+            "accountName": "账户名",
+            "confirmPayment": "确认并发送转账凭证",
+            "backToDetails": "返回订单详情",
+            "orderReceived": "订单已收到！",
+            "thankYouTech": "谢谢！您的订单已转发至",
+            "qrisSuccess": " QRIS 付款已成功验证。",
+            "bcaSuccess": " 如有需要，请发送转账凭证。",
+            "waSuccess": " 请按照 WhatsApp 上的指示完成付款。",
+            "backToHome": "返回首页",
+            "btnNext": "下一步"
+        },
+        "loginPage": {
+            "title": "欢迎回来！",
+            "subtitle": "请输入您的详细信息以登录。",
+            "emailLabel": "电子邮件地址",
+            "passwordLabel": "密码",
+            "forgotPassword": "忘记密码？",
+            "signInBtn": "登录",
+            "signingIn": "正在登录...",
+            "orContinue": "或继续使用",
+            "googleLogin": "使用 Google 登录",
+            "connecting": "正在连接...",
+            "noAccount": "还没有账号？",
+            "createAccount": "创建账号",
+            "brandingTitle1": "管理您的",
+            "brandingTitle2": "家庭维护的",
+            "brandingTitle3": "最佳方式。",
+            "brandingSubtitle": "加入成千上万信任 Perabox 满足其家居护理需求的满意业主的行列。",
+            "testimonialText": "“镇上最好的服务！非常专业。”",
+            "testimonialAuthor": "Anindya Putri，客户",
+            "successTitle": "欢迎回来！",
+            "successSubtitle": "正在验证您的账户...",
+            "emailRequired": "电子邮件是必填项",
+            "emailInvalid": "电子邮件格式无效",
+            "passwordRequired": "密码是必填项",
+            "passwordMin": "密码至少需要 8 个字符",
+            "loginFailed": "登录失败。请检查您的凭据。"
+        },
+        "registerPage": {
+            "title": "创建账号",
+            "subtitle": "注册以开始。",
+            "fullNameLabel": "全名",
+            "fullNamePlaceholder": "张三",
+            "emailLabel": "电子邮件地址",
+            "phoneLabel": "电话号码",
+            "passwordLabel": "密码",
+            "confirmPasswordLabel": "确认密码",
+            "createBtn": "创建账号",
+            "creating": "正在创建账号...",
+            "haveAccount": "已有账号？",
+            "login": "登录",
+            "brandingTitle1": "今天加入",
+            "brandingTitle2": "Perabox 大家庭。",
+            "brandingSubtitle": "只需点击几下即可体验最佳的家庭维护服务。",
+            "phonePlaceholder": "08123456789",
+            "successTitle": "欢迎加入！",
+            "successSubtitle": "正在设置您的体验...",
+            "fullNameRequired": "全名是必填项",
+            "emailRequired": "电子邮件是必填项",
+            "emailInvalid": "电子邮件格式无效",
+            "phoneRequired": "电话号码是必填项",
+            "phoneStart": "电话号码必须以 08 开头",
+            "phoneMin": "电话号码至少需要 10 位数字",
+            "passwordRequired": "密码是必填项",
+            "passwordMin": "密码至少需要 8 个字符",
+            "passwordMismatch": "密码不匹配",
+            "regFailed": "注册失败。请稍后再试。"
         }
     }
 };

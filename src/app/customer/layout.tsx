@@ -120,10 +120,10 @@ export default function CustomerLayout({
     ];
 
     const navLinks = [
-        { name: t('common.home'), href: '/' },
-        { name: t('common.about'), href: '/#about' },
-        { name: t('common.services'), href: '/#services' },
-        { name: t('common.profile'), href: '/customer/profile' },
+        { name: t('home'), href: '/' },
+        { name: t('about'), href: '/#about' },
+        { name: t('services'), href: '/#services' },
+        { name: t('profile'), href: '/customer/profile' },
     ];
 
     const languages: { code: Language; name: string; flag: string }[] = [
@@ -218,7 +218,7 @@ export default function CustomerLayout({
                             >
                                 <span className="flex items-center gap-2">
                                     <span className="text-lg">{languages.find(l => l.code === language)?.flag}</span>
-                                    {t('common.changeLanguage')}
+                                    {t('changeLanguage')}
                                 </span>
                                 <svg className={`w-4 h-4 transition-transform ${isLangOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
                             </button>
@@ -254,7 +254,7 @@ export default function CustomerLayout({
                                 }}
                                 className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-colors font-bold"
                             >
-                                {t('common.logout')}
+                                {t('logout')}
                             </button>
                         </div>
                     </div>

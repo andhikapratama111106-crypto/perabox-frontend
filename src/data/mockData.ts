@@ -16,7 +16,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-001',
         name: 'Irma Santoso',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_1.jpg',
         rating: 4.9,
         reviewCount: 128,
         specialties: ['Service AC', 'Cuci AC'],
@@ -27,7 +27,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-002',
         name: 'Ahmad Rizki',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_2.jpg',
         rating: 4.8,
         reviewCount: 95,
         specialties: ['Bongkar Pasang', 'Service Besar'],
@@ -38,7 +38,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-003',
         name: 'Dedi Kurniawan',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_3.jpg',
         rating: 4.7,
         reviewCount: 64,
         specialties: ['Cuci AC', 'Freon Refill'],
@@ -49,7 +49,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-004',
         name: 'Sari Wulandari',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_4.jpg',
         rating: 5.0,
         reviewCount: 42,
         specialties: ['Cuci AC', 'Perbaikan Ringan'],
@@ -60,7 +60,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-005',
         name: 'Lestari Putri',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_5.jpg',
         rating: 4.8,
         reviewCount: 110,
         specialties: ['Bongkar Pasang', 'Instalasi'],
@@ -71,7 +71,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-006',
         name: 'Dewi Anggraini',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_6.jpg',
         rating: 4.9,
         reviewCount: 88,
         specialties: ['Cleaning & Maintenance'],
@@ -82,7 +82,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-007',
         name: 'Siti Aminah',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_7.jpg',
         rating: 4.6,
         reviewCount: 56,
         specialties: ['Service AC', 'Isi Freon'],
@@ -93,7 +93,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-008',
         name: 'Andi Wijaya',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_8.jpg',
         rating: 4.8,
         reviewCount: 72,
         specialties: ['Service AC', 'Cuci AC'],
@@ -105,7 +105,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-009',
         name: 'Rudi Tabuti',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_9.jpg',
         rating: 4.9,
         reviewCount: 88,
         specialties: ['Service AC', 'Isi Freon'],
@@ -117,7 +117,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-010',
         name: 'Deni Setiawan',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_10.jpg',
         rating: 4.7,
         reviewCount: 54,
         specialties: ['Service AC', 'Bongkar Pasang'],
@@ -129,7 +129,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-011',
         name: 'Indah Permata',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_11.jpg',
         rating: 4.8,
         reviewCount: 38,
         specialties: ['Service AC', 'Listrik'],
@@ -141,7 +141,7 @@ export const mockTechnicians: Technician[] = [
     {
         id: 'tech-012',
         name: 'Citra Kirana',
-        photoUrl: '/perabot_avatar.png',
+        photoUrl: '/technician_12.jpg',
         rating: 4.9,
         reviewCount: 65,
         specialties: ['Kebersihan', 'Plambing'],

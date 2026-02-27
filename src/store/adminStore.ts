@@ -1,5 +1,22 @@
 import { create } from 'zustand';
 import { bookingsAPI, adminAPI } from '@/lib/api';
+import { mockTechnicians } from '@/data/mockData';
+
+// Map mock data to admin API format for consistent fallback
+const mockTechsAsAdmin = mockTechnicians.map((t) => ({
+    id: t.id,
+    user_name: t.name,
+    user_email: `${t.id}@perabox.id`,
+    user_phone: t.phone,
+    avatar_url: t.photoUrl,
+    rating_average: t.rating,
+    total_jobs: t.reviewCount,
+    specializations: t.specialties,
+    experience_years: parseInt(t.experience || '3'),
+    bio: t.bio || '',
+    is_available: true,
+    has_signed_contract: true,
+}));
 
 interface AdminState {
     stats: {
@@ -31,11 +48,11 @@ export const useAdminStore = create<AdminState>((set, get) => ({
     stats: {
         totalOrders: 0,
         pendingOrders: 0,
-        activeTechnicians: 0,
+        activeTechnicians: mockTechsAsAdmin.length,
         revenue: 0,
     },
     recentBookings: [],
-    technicians: [],
+    technicians: mockTechsAsAdmin, // Initialize with mock data so page renders instantly
     orders: [],
     isLoading: false,
     lastFetched: {
@@ -93,12 +110,20 @@ export const useAdminStore = create<AdminState>((set, get) => ({
         set({ isLoading: true });
         try {
             const response = await adminAPI.getTechnicians();
-            set({
-                technicians: response.data || [],
-                lastFetched: { ...get().lastFetched, technicians: now }
-            });
+            const apiTechs = response.data || [];
+            // Only replace data if API returned actual results
+            if (apiTechs.length > 0) {
+                set({
+                    technicians: apiTechs,
+                    lastFetched: { ...get().lastFetched, technicians: now }
+                });
+            } else {
+                // API returned empty — keep existing mock data, just mark as fetched
+                set({ lastFetched: { ...get().lastFetched, technicians: now } });
+            }
         } catch (error) {
             console.error("Store: Failed to fetch technicians", error);
+            // Keep existing mock data on error — don't clear the state
         } finally {
             set({ isLoading: false });
         }

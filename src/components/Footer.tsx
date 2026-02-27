@@ -138,7 +138,7 @@ const Footer = () => {
                     </div>
                     <div className="mt-8">
                         <Link href="/faq" className="text-primary text-xs font-bold hover:underline">
-                            See all FAQs →
+                            {t('faqPage.seeAllFaq')}
                         </Link>
                     </div>
                 </div>

@@ -10,17 +10,17 @@ const TermsPage = () => {
 
     const sections = [
         {
-            title: t('terms.usageTerms'),
+            title: t('termsPage.usageTerms'),
             icon: <FileText className="w-5 h-5" />,
             content: "Welcome to PERABOX. By using our services, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern PERABOX's relationship with you in relation to this website and our services."
         },
         {
-            title: t('terms.serviceAgreement'),
+            title: t('termsPage.serviceAgreement'),
             icon: <FileCheck className="w-5 h-5" />,
             content: "We provide professional AC services including cleaning, repair, and installation. Our technicians are trained to provide high-quality services. Completion times may vary based on the complexity of the task and on-site conditions."
         },
         {
-            title: t('terms.privacyPolicy'),
+            title: t('termsPage.privacyPolicy'),
             icon: <Shield className="w-5 h-5" />,
             content: "Your privacy is important to us. We collect personal information only when necessary to provide our services. We do not share your personal data with third parties except as required by law or to facilitate your service booking."
         }
@@ -29,8 +29,8 @@ const TermsPage = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up pb-12">
             <div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('terms.title')}</h1>
-                <p className="text-gray-500">{t('terms.subtitle')}</p>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('termsPage.title')}</h1>
+                <p className="text-gray-500">{t('termsPage.subtitle')}</p>
             </div>
 
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -43,7 +43,7 @@ const TermsPage = () => {
                     </div>
                     <div className="flex items-center gap-2 text-sm text-gray-400">
                         <Clock className="w-4 h-4" />
-                        <span>{t('terms.lastUpdated')}: Oct 2023</span>
+                        <span>{t('termsPage.lastUpdated')}: Oct 2023</span>
                     </div>
                 </div>
 

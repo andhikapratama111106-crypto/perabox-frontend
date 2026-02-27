@@ -26,16 +26,14 @@ export default function BookingPage() {
     const [loading, setLoading] = useState(false); // Start as false to show mock data instantly
     const [submitting, setSubmitting] = useState(false);
 
-    // Booking Data State
-    const [technicians, setTechnicians] = useState<Technician[]>(mockTechnicians); // Initialize with mock
+    // Booking Data State — initialized with mock data for instant display, no flicker
+    const [technicians, setTechnicians] = useState<Technician[]>(mockTechnicians);
     const [selectedTechnician, setSelectedTechnician] = useState<Technician | null>(null);
-    const [fetchError, setFetchError] = useState<string | null>(null);
-    const [isUsingMockData, setIsUsingMockData] = useState(true); // Default to true since we start with mock
     const tzOffset = new Date().getTimezoneOffset() * 60000;
     const todayStr = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
-    const [selectedDate, setSelectedDate] = useState(todayStr); // Sync to today
+    const [selectedDate, setSelectedDate] = useState(todayStr);
     const [selectedTime, setSelectedTime] = useState('');
-    const [selectedServices, setSelectedServices] = useState<string[]>([]); // Service IDs
+    const [selectedServices, setSelectedServices] = useState<string[]>([]);
     const [formData, setFormData] = useState({
         full_name: '',
         phone: '',
@@ -45,107 +43,50 @@ export default function BookingPage() {
     const [paymentMethod, setPaymentMethod] = useState('');
     const [showQRIS, setShowQRIS] = useState(false);
     const [currentPaymentId, setCurrentPaymentId] = useState('');
-    const [uniqueCode] = useState(() => Math.floor(Math.random() * 999) + 1); // Random 1-999
+    const [uniqueCode] = useState(() => Math.floor(Math.random() * 999) + 1);
 
-    // Load available services (initialized with mock data for instant display)
+    // Services — initialized with mock data for instant display
     const [apiServices, setApiServices] = useState<Service[]>(
         serviceTypes.map((s) => ({
             id: s.id,
             title: s.name,
             price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-            icon: "🔧",
+            icon: s.id === 'srv-1' ? "❄️" : s.id === 'srv-2' ? "🛠️" : s.id === 'srv-3' ? "💨" : s.id === 'srv-4' ? "🔧" : "🚨",
             base_price: s.price
         }))
     );
 
-    const fetchData = async (isInitial = false) => {
-        // ONLY set loading to true if we genuinely have NO data yet.
-        // Since we initialize with mockTechnicians, technicians.length should be > 0.
-        if (technicians.length === 0) {
-            setLoading(true);
-        }
-        setFetchError(null);
-
-        console.log("[Perabox Debug] Initializing data fetch... Current tech count:", technicians.length);
-
-        try {
-            console.log("[Perabox Debug] Fetching technicians from API...");
-            const techResponse = await techniciansAPI.getAvailable();
-            console.log("[Perabox Debug] API response received. Status:", techResponse.status);
-
-            const apiTechs = techResponse.data?.map((t: any) => ({
-                id: t.id,
-                name: t.user_name,
-                specialty: t.specializations?.[0] || 'General',
-                rating: Number(t.rating_average) || 5.0,
-                reviewCount: t.total_jobs || 0,
-                price: 'On Request',
-                basePrice: 50000,
-                photoUrl: t.avatar_url || '/technician_1.jpg',
-                experience: `${t.experience_years || 5} Tahun`, // 5 tahun default
-                specialties: t.specializations || [],
-                phone: t.user_phone,
-                bio: t.bio
-            })) || [];
-
-            console.log(`[Perabox Debug] API returned ${apiTechs.length} technicians.`);
-
-            if (apiTechs.length > 0) {
-                console.log("[Perabox Debug] Updating state with live technicians.");
-                setTechnicians(apiTechs);
-                setIsUsingMockData(false);
-            } else {
-                console.warn("[Perabox Debug] API returned EMPTY list. Respecting mock data fallback.");
-                // If technicians is already mockTechnicians (checked by length), we don't need to do anything.
-                // But let's ensure it's not empty.
-                if (technicians.length === 0) {
-                    setTechnicians(mockTechnicians);
-                }
-                setIsUsingMockData(true);
-            }
-
-            // Always update services from mock/local regardless of technician API
-            const mappedServices = serviceTypes.map((s) => ({
-                id: s.id,
-                title: s.name,
-                price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-                icon: "🔧",
-                base_price: s.price
-            }));
-            setApiServices(mappedServices);
-
-        } catch (error: any) {
-            console.error("[Perabox Debug] API fetch failed:", error.message);
-            setIsUsingMockData(true);
-
-            // Critical safeguard: if something wiped the state and the API failed, restore mock data
-            if (technicians.length === 0) {
-                console.warn("[Perabox Debug] State was empty and API failed. Restoring mock data.");
-                setTechnicians(mockTechnicians);
-            }
-
-            const mappedServices = serviceTypes.map((s) => ({
-                id: s.id,
-                title: s.name,
-                price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
-                icon: s.id === 'srv-1' ? "❄️" : s.id === 'srv-2' ? "🛠️" : s.id === 'srv-3' ? "💨" : s.id === 'srv-4' ? "🔧" : s.id === 'srv-5' ? "🚨" : "🛠️",
-                base_price: s.price
-            }));
-            setApiServices(mappedServices);
-        } finally {
-            setLoading(false);
-        }
-    };
-
+    // Silent background upgrade — only replaces if API returns real data, never flickers
     useEffect(() => {
-        fetchData(true);
+        const silentUpgrade = async () => {
+            try {
+                const techResponse = await techniciansAPI.getAvailable();
+                const apiTechs = techResponse.data?.map((t: any) => ({
+                    id: t.id,
+                    name: t.user_name,
+                    specialty: t.specializations?.[0] || 'General',
+                    rating: Number(t.rating_average) || 5.0,
+                    reviewCount: t.total_jobs || 0,
+                    price: 'On Request',
+                    basePrice: 50000,
+                    photoUrl: t.avatar_url || '/perabot_avatar.png',
+                    experience: `${t.experience_years || 5} Tahun`,
+                    specialties: t.specializations || [],
+                    phone: t.user_phone,
+                    bio: t.bio
+                })) || [];
 
-        // Optional: Check auth
-        const token = localStorage.getItem('access_token');
-        if (!token) {
-            console.log("[Perabox Debug] User not logged in, but allowing tech browsing.");
-        }
-    }, [router]);
+                if (apiTechs.length > 0) {
+                    setTechnicians(apiTechs);
+                }
+                // If API returns empty, keep mock data — no state change = no flicker
+            } catch {
+                // Silently fail — mock data stays, no flicker
+            }
+        };
+
+        silentUpgrade();
+    }, []);
     // Step Handlers
     const handleTechnicianSelect = (tech: Technician) => {
         setSelectedTechnician(tech);
@@ -386,7 +327,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <div className="col-span-full text-center py-10 bg-white rounded-3xl border-2 border-dashed border-gray-200">
                                             <p className="text-gray-400 mb-4">{t('bookPage.noTechs')}</p>
                                             <button
-                                                onClick={() => fetchData()}
+                                                onClick={() => window.location.reload()}
                                                 className="bg-primary/10 text-primary px-6 py-2 rounded-full font-bold hover:bg-primary/20 transition-all"
                                             >
                                                 {t('bookPage.tryAgain')}
@@ -399,7 +340,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                 return (
                                     <>
                                         {/* Dynamic Banner to inform user if we are showing top picks (Mock) */}
-                                        {(isUsingMockData || technicians.length === 0) && displayTechs.length > 0 && (
+                                        {displayTechs.length > 0 && (
                                             <div className="col-span-full mb-4 px-6 py-3 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-700">
                                                 <span className="text-xl">✨</span>
                                                 <div>
@@ -814,38 +755,38 @@ Mohon konfirmasinya. Terima kasih.`;
                                     <div className="flex items-center justify-center gap-2 mb-1">
                                         <span className="text-2xl font-black tracking-tight">PERABOX</span>
                                     </div>
-                                    <h3 className="text-lg font-bold">Transfer Bank BCA</h3>
-                                    <p className="text-white/80 text-sm">Selesaikan pembayaran untuk konfirmasi pesanan</p>
+                                    <h3 className="text-lg font-bold">{t('bookPage.paymentBCA')}</h3>
+                                    <p className="text-white/80 text-sm">{t('bookPage.subtitle5') || 'Selesaikan pembayaran untuk konfirmasi pesanan'}</p>
                                 </div>
 
                                 <div className="p-8">
                                     <div className="text-center mb-6">
-                                        <p className="text-gray-500 text-sm uppercase font-bold tracking-wider mb-2">Total Transfer</p>
+                                        <p className="text-gray-500 text-sm uppercase font-bold tracking-wider mb-2">{t('bookPage.transferTotal')}</p>
                                         <div className="bg-blue-50 rounded-xl p-4 border border-blue-100 inline-block">
                                             <h4 className="text-3xl font-black text-blue-600">
                                                 Rp {(calculateTotal() + uniqueCode).toLocaleString('id-ID')}
                                             </h4>
                                             <p className="text-xs text-blue-500 mt-1 font-medium bg-blue-100/50 px-2 py-1 rounded inline-block">
-                                                *Mohon transfer tepat hingga {uniqueCode} (3 digit terakhir) untuk verifikasi otomatis
+                                                {t('bookPage.transferNote').replace('{code}', uniqueCode.toString())}
                                             </p>
                                         </div>
                                     </div>
 
                                     <div className="space-y-4 mb-8">
                                         <div>
-                                            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Nomor Rekening</p>
+                                            <p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountNumber')}</p>
                                             <div className="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-200">
                                                 <span className="font-mono font-bold text-lg text-dark">888888888</span>
                                                 <button
                                                     onClick={() => navigator.clipboard.writeText('888888888')}
                                                     className="text-blue-500 text-xs font-bold hover:text-blue-600"
                                                 >
-                                                    SALIN
+                                                    {t('bookPage.copy')}
                                                 </button>
                                             </div>
                                         </div>
                                         <div>
-                                            <p className="text-xs text-gray-400 font-bold uppercase mb-1">Atas Nama</p>
+                                            <p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountName')}</p>
                                             <div className="bg-gray-50 p-3 rounded-xl border border-gray-200">
                                                 <span className="font-bold text-dark">PT PERABOX MANDIRI SEJAHTERA</span>
                                             </div>
@@ -869,13 +810,13 @@ Mohon konfirmasinya. Terima kasih.`;
                                             }}
                                             className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"
                                         >
-                                            <span className="text-xl">📤</span> Konfirmasi & Kirim Bukti Transfer
+                                            <span className="text-xl">📤</span> {t('bookPage.confirmPayment')}
                                         </button>
                                         <button
                                             onClick={() => setStep(5)}
                                             className="w-full mt-3 text-gray-400 hover:text-gray-600 font-medium py-2 rounded-xl transition-all text-sm"
                                         >
-                                            Kembali ke Detail Pesanan
+                                            {t('bookPage.backToDetails')}
                                         </button>
                                     </div>
                                 </div>
@@ -890,20 +831,20 @@ Mohon konfirmasinya. Terima kasih.`;
                         <div className="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6 text-4xl">
                             ✓
                         </div>
-                        <h2 className="text-2xl font-bold text-dark mb-2">Pesanan Diterima!</h2>
+                        <h2 className="text-2xl font-bold text-dark mb-2">{t('bookPage.orderReceived')}</h2>
                         <p className="text-gray-500 mb-8">
-                            Terima kasih! Pesananmu telah diteruskan ke <strong>{selectedTechnician?.name}</strong>.
+                            {t('bookPage.thankYouTech')} <strong>{selectedTechnician?.name}</strong>.
                             {paymentMethod.includes('QRIS')
-                                ? ' Pembayaran QRIS berhasil diverifikasi.'
+                                ? t('bookPage.qrisSuccess')
                                 : paymentMethod.includes('BCA')
-                                    ? ' Silakan kirim bukti transfer jika diperlukan.'
-                                    : ' Silakan selesaikan pembayaran sesuai instruksi di WhatsApp.'}
+                                    ? t('bookPage.bcaSuccess')
+                                    : t('bookPage.waSuccess')}
                         </p>
                         <button
                             onClick={() => router.push('/')}
                             className="bg-gray-100 hover:bg-gray-200 text-dark px-8 py-3 rounded-full font-bold transition-all w-full"
                         >
-                            Kembali ke Beranda
+                            {t('bookPage.backToHome')}
                         </button>
                     </div>
                 )}
@@ -925,17 +866,17 @@ Mohon konfirmasinya. Terima kasih.`;
                                 disabled={!selectedDate || !selectedTime}
                                 className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold"
                             >
-                                Lanjut
+                                {t('bookPage.btnNext')}
                             </button>
                         )}
                         {step === 3 && (
                             <button onClick={() => selectedServices.length > 0 && setStep(4)} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
-                                Lanjut
+                                {t('bookPage.btnNext')}
                             </button>
                         )}
                         {step === 4 && (
                             <button onClick={() => formData.full_name && formData.phone && formData.address && setStep(5)} disabled={!formData.full_name || !formData.phone || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
-                                Lanjut
+                                {t('bookPage.btnNext')}
                             </button>
                         )}
                     </div>

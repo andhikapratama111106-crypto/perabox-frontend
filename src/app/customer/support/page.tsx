@@ -24,19 +24,19 @@ const SupportPage = () => {
     const contactMethods = [
         {
             icon: <Mail className="w-6 h-6 text-blue-500" />,
-            title: t('support.emailSupport'),
+            title: t('supportPage.emailSupport'),
             value: 'support@perabox.com',
             link: 'mailto:support@perabox.com'
         },
         {
             icon: <Phone className="w-6 h-6 text-green-500" />,
-            title: t('support.phoneSupport'),
+            title: t('supportPage.phoneSupport'),
             value: '+62 812-3456-7890',
             link: 'tel:+6281234567890'
         },
         {
             icon: <MessageSquare className="w-6 h-6 text-purple-500" />,
-            title: t('support.liveChat'),
+            title: t('supportPage.liveChat'),
             value: 'Start Chat',
             link: '#'
         }
@@ -45,8 +45,8 @@ const SupportPage = () => {
     return (
         <div className="max-w-4xl mx-auto space-y-8 animate-fade-in-up">
             <div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('support.title')}</h1>
-                <p className="text-gray-500">{t('support.subtitle')}</p>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('supportPage.title')}</h1>
+                <p className="text-gray-500">{t('supportPage.subtitle')}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -71,7 +71,7 @@ const SupportPage = () => {
                 <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 h-full">
                     <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                         <Send className="w-5 h-5 text-primary" />
-                        {t('support.contactUs')}
+                        {t('supportPage.contactUs')}
                     </h2>
 
                     {isSent ? (
@@ -81,7 +81,7 @@ const SupportPage = () => {
                             className="bg-green-50 border border-green-100 rounded-xl p-6 text-center"
                         >
                             <CheckCircle2 className="w-12 h-12 text-green-500 mx-auto mb-4" />
-                            <h3 className="text-lg font-bold text-green-800 mb-2">{t('support.successMessage')}</h3>
+                            <h3 className="text-lg font-bold text-green-800 mb-2">{t('supportPage.successMessage')}</h3>
                             <button
                                 onClick={() => setIsSent(false)}
                                 className="text-green-600 font-medium hover:underline text-sm"
@@ -93,7 +93,7 @@ const SupportPage = () => {
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                                    {t('support.message')}
+                                    {t('supportPage.message')}
                                 </label>
                                 <textarea
                                     required
@@ -108,7 +108,7 @@ const SupportPage = () => {
                                 className="w-full py-4 bg-primary text-white rounded-xl font-bold shadow-lg shadow-primary/20 hover:bg-primary/90 transition-all flex items-center justify-center gap-2"
                             >
                                 <Send className="w-5 h-5" />
-                                {t('support.sendMessage')}
+                                {t('supportPage.sendMessage')}
                             </button>
                         </form>
                     )}
@@ -118,7 +118,7 @@ const SupportPage = () => {
                 <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col">
                     <h2 className="text-xl font-bold text-gray-800 mb-6 flex items-center gap-2">
                         <HelpCircle className="w-5 h-5 text-blue-500" />
-                        {t('support.faq')}
+                        {t('supportPage.faq')}
                     </h2>
 
                     <div className="space-y-4 flex-grow">

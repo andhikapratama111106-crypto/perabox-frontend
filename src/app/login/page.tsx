@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { authAPI } from '@/lib/api';
 import Navbar from '@/components/Navbar';
+import { useLanguage } from '@/context/LanguageContext';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -16,6 +17,7 @@ declare global {
 }
 
 export default function LoginPage() {
+    const { t } = useLanguage();
     const router = useRouter();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -41,14 +43,14 @@ export default function LoginPage() {
     const errors = useMemo(() => {
         const errs = { email: '', password: '' };
         if (!email) {
-            errs.email = 'Email is required';
+            errs.email = t('loginPage.emailRequired') || 'Email is required';
         } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-            errs.email = 'Invalid email format';
+            errs.email = t('loginPage.emailInvalid') || 'Invalid email format';
         }
         if (!password) {
-            errs.password = 'Password is required';
+            errs.password = t('loginPage.passwordRequired') || 'Password is required';
         } else if (password.length < 8) {
-            errs.password = 'Password must be at least 8 characters';
+            errs.password = t('loginPage.passwordMin') || 'Password must be at least 8 characters';
         }
         return errs;
     }, [email, password]);
@@ -77,7 +79,7 @@ export default function LoginPage() {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
             const detail = err.response?.data?.detail;
-            setServerError(typeof detail === 'string' ? detail : 'Login failed. Please check your credentials.');
+            setServerError(typeof detail === 'string' ? detail : t('loginPage.loginFailed') || 'Login failed. Please check your credentials.');
         } finally {
             setLoading(false);
         }
@@ -119,8 +121,18 @@ export default function LoginPage() {
                         const data = await res.json();
                         localStorage.setItem('access_token', data.access_token);
                         if (data.refresh_token) localStorage.setItem('refresh_token', data.refresh_token);
+
+                        // Cache user info from backend response for immediate profile display
+                        if (data.user) {
+                            localStorage.setItem('google_user', JSON.stringify({
+                                name: data.user.full_name,
+                                email: data.user.email,
+                                picture: data.user.avatar_url,
+                            }));
+                        }
+
                         setIsSuccess(true);
-                        setTimeout(() => router.push(data.role === 'admin' ? '/admin' : '/customer/profile'), 1000);
+                        router.push(data.user?.role === 'admin' ? '/admin' : '/customer/profile');
                     } else {
                         // Fallback: get user info from Google directly
                         const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -135,9 +147,10 @@ export default function LoginPage() {
                         // Store access token so Navbar treats user as logged in
                         localStorage.setItem('access_token', tokenResponse.access_token);
                         setIsSuccess(true);
-                        setTimeout(() => router.push('/customer/profile'), 1000);
+                        router.push('/customer/profile');
                     }
-                } catch {
+                } catch (err) {
+                    console.error("Google login error:", err);
                     setServerError('Google login failed. Please try again.');
                     setGoogleLoading(false);
                 }
@@ -177,11 +190,11 @@ export default function LoginPage() {
                                         </div>
                                     </Link>
                                     <h2 className="text-4xl font-extrabold leading-tight mb-6">
-                                        The best way to manage <br />
-                                        your <span className="text-accent italic">home maintenance.</span>
+                                        {t('loginPage.brandingTitle1')} <br />
+                                        {t('loginPage.brandingTitle2')} <span className="text-accent italic">{t('loginPage.brandingTitle3')}</span>
                                     </h2>
                                     <p className="text-white/80 text-lg max-w-sm">
-                                        Join thousands of satisfied homeowners who trust Perabox for their homecare needs.
+                                        {t('loginPage.brandingSubtitle')}
                                     </p>
                                 </div>
                                 <div className="relative z-10 flex items-center gap-4 bg-white/10 backdrop-blur-sm p-6 rounded-[2rem] border border-white/20">
@@ -190,8 +203,8 @@ export default function LoginPage() {
                                         <img src="https://i.pravatar.cc/100?img=47" alt="Customer" className="w-full h-full object-cover" />
                                     </div>
                                     <div>
-                                        <p className="text-sm font-bold">&quot;Best service in town! Very professional.&quot;</p>
-                                        <p className="text-xs text-white/60">Anindya Putri, Customer</p>
+                                        <p className="text-sm font-bold">{t('loginPage.testimonialText')}</p>
+                                        <p className="text-xs text-white/60">{t('loginPage.testimonialAuthor')}</p>
                                     </div>
                                 </div>
                             </div>
@@ -199,8 +212,8 @@ export default function LoginPage() {
                             {/* Right: Login Form */}
                             <div className="p-8 md:p-16 lg:p-20">
                                 <div className="mb-10 text-center lg:text-left">
-                                    <h1 className="text-3xl font-extrabold text-dark mb-3">Welcome Home!</h1>
-                                    <p className="text-gray-500 font-medium">Please enter your details to sign in.</p>
+                                    <h1 className="text-3xl font-extrabold text-dark mb-3">{t('loginPage.title')}</h1>
+                                    <p className="text-gray-500 font-medium">{t('loginPage.subtitle')}</p>
                                 </div>
 
                                 {serverError && (
@@ -214,7 +227,7 @@ export default function LoginPage() {
 
                                 <form onSubmit={handleLogin} className="space-y-6">
                                     <div className="space-y-2">
-                                        <label htmlFor="email" className="block text-sm font-bold text-dark ml-1">Email Address</label>
+                                        <label htmlFor="email" className="block text-sm font-bold text-dark ml-1">{t('loginPage.emailLabel')}</label>
                                         <input
                                             id="email"
                                             name="email"
@@ -232,8 +245,8 @@ export default function LoginPage() {
 
                                     <div className="space-y-2">
                                         <div className="flex justify-between items-center ml-1">
-                                            <label htmlFor="password" className="block text-sm font-bold text-dark">Password</label>
-                                            <Link href="#" className="text-xs font-bold text-primary hover:text-primary/80 transition-colors">Forgot password?</Link>
+                                            <label htmlFor="password" className="block text-sm font-bold text-dark">{t('loginPage.passwordLabel')}</label>
+                                            <Link href="#" className="text-xs font-bold text-primary hover:text-primary/80 transition-colors">{t('loginPage.forgotPassword')}</Link>
                                         </div>
                                         <div className="relative">
                                             <input
@@ -268,16 +281,16 @@ export default function LoginPage() {
                                         {loading ? (
                                             <span className="flex items-center justify-center gap-2">
                                                 <svg className="animate-spin h-5 w-5 text-white" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                                                Signing in...
+                                                {t('loginPage.signingIn')}
                                             </span>
-                                        ) : 'Sign in'}
+                                        ) : t('loginPage.signInBtn')}
                                     </motion.button>
                                 </form>
 
                                 <div className="mt-10">
                                     <div className="relative mb-6">
                                         <div className="absolute inset-0 flex items-center"><div className="w-full border-t border-gray-100"></div></div>
-                                        <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-4 text-gray-400 font-bold">Or continue with</span></div>
+                                        <div className="relative flex justify-center text-xs uppercase"><span className="bg-white px-4 text-gray-400 font-bold">{t('loginPage.orContinue')}</span></div>
                                     </div>
                                     <button
                                         type="button"
@@ -295,13 +308,13 @@ export default function LoginPage() {
                                                 <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335" />
                                             </svg>
                                         )}
-                                        {googleLoading ? 'Connecting...' : 'Login with Google'}
+                                        {googleLoading ? t('loginPage.connecting') : t('loginPage.googleLogin')}
                                     </button>
                                 </div>
 
                                 <div className="mt-10 text-center text-sm">
-                                    <span className="text-gray-500 font-medium">Don&apos;t have an account yet?</span>{' '}
-                                    <Link href="/register" className="text-primary font-extrabold hover:underline">Create account</Link>
+                                    <span className="text-gray-500 font-medium">{t('loginPage.noAccount')}</span>{' '}
+                                    <Link href="/register" className="text-primary font-extrabold hover:underline">{t('loginPage.createAccount')}</Link>
                                 </div>
                             </div>
                         </motion.div>
@@ -317,15 +330,15 @@ export default function LoginPage() {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
                                 </svg>
                             </div>
-                            <h2 className="text-4xl font-extrabold text-dark mb-4">Welcome back!</h2>
-                            <p className="text-xl text-gray-500 font-medium">Authenticating your account...</p>
+                            <h2 className="text-4xl font-extrabold text-dark mb-4">{t('loginPage.successTitle')}</h2>
+                            <p className="text-xl text-gray-500 font-medium">{t('loginPage.successSubtitle')}</p>
                         </motion.div>
                     )}
                 </AnimatePresence>
             </div>
 
             <div className="py-8 px-6 text-center">
-                <p className="text-[10px] text-gray-400">© 2024 PERABOX. All rights reserved.</p>
+                <p className="text-[10px] text-gray-400">{t('footer.allRightsReserved')}</p>
             </div>
         </main>
     );

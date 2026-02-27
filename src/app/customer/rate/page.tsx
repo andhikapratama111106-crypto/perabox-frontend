@@ -46,8 +46,8 @@ const RatePage = () => {
                     >
                         <Star
                             className={`w-8 h-8 ${star <= (hoveredStar[category] || (ratings as any)[category])
-                                    ? 'fill-yellow-400 text-yellow-400'
-                                    : 'text-gray-200'
+                                ? 'fill-yellow-400 text-yellow-400'
+                                : 'text-gray-200'
                                 } transition-colors duration-200`}
                         />
                     </motion.button>
@@ -59,8 +59,8 @@ const RatePage = () => {
     return (
         <div className="max-w-2xl mx-auto animate-fade-in-up">
             <div className="mb-8">
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('rate.title')}</h1>
-                <p className="text-gray-500">{t('rate.subtitle')}</p>
+                <h1 className="text-2xl font-bold text-gray-800 mb-2">{t('ratePage.title')}</h1>
+                <p className="text-gray-500">{t('ratePage.subtitle')}</p>
             </div>
 
             <AnimatePresence mode="wait">
@@ -74,15 +74,15 @@ const RatePage = () => {
                         className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100"
                     >
                         <div className="space-y-2 mb-8">
-                            <StarRating category="overall" label={t('rate.overallExperience')} />
-                            <StarRating category="cleanliness" label={t('rate.cleanliness')} />
-                            <StarRating category="punctuality" label={t('rate.punctuality')} />
-                            <StarRating category="professionalism" label={t('rate.professionalism')} />
+                            <StarRating category="overall" label={t('ratePage.overallExperience')} />
+                            <StarRating category="cleanliness" label={t('ratePage.cleanliness')} />
+                            <StarRating category="punctuality" label={t('ratePage.punctuality')} />
+                            <StarRating category="professionalism" label={t('ratePage.professionalism')} />
                         </div>
 
                         <div className="mb-8">
                             <label className="block text-gray-700 font-medium mb-3">
-                                {t('rate.comment')}
+                                {t('ratePage.comment')}
                             </label>
                             <textarea
                                 value={comment}
@@ -98,12 +98,12 @@ const RatePage = () => {
                             type="submit"
                             disabled={ratings.overall === 0}
                             className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${ratings.overall > 0
-                                    ? 'bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90'
-                                    : 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                                ? 'bg-primary text-white shadow-lg shadow-primary/20 hover:bg-primary/90'
+                                : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                 }`}
                         >
                             <Send className="w-5 h-5" />
-                            {t('rate.submit')}
+                            {t('ratePage.submit')}
                         </motion.button>
                     </motion.form>
                 ) : (
@@ -117,7 +117,7 @@ const RatePage = () => {
                             <CheckCircle2 className="w-10 h-10 text-green-500" />
                         </div>
                         <h2 className="text-2xl font-bold text-gray-800 mb-2">
-                            {t('rate.thankYou')}
+                            {t('ratePage.thankYou')}
                         </h2>
                         <p className="text-gray-500 mb-8">
                             Redirecting you to dashboard...

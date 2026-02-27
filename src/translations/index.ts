@@ -3,19 +3,19 @@ export type Language = 'en' | 'id' | 'es' | 'ja' | 'zh';
 
 export const translations = {
     en: {
-        common: {
-            save: 'Save',
-            cancel: 'Cancel',
-            edit: 'Edit',
-            logout: 'Log Out',
-            changeLanguage: 'Change Language',
-            home: 'HOME',
-            about: 'ABOUT',
-            services: 'SERVICES',
-            profile: 'PROFILE',
-            myProfile: 'My Profile',
-            viewAll: 'View All'
-        },
+        save: 'Save',
+        cancel: 'Cancel',
+        edit: 'Edit',
+        logout: 'Log Out',
+        changeLanguage: 'Change Language',
+        home: 'HOME',
+        about: 'ABOUT',
+        services: 'SERVICES',
+        profile: 'PROFILE',
+        myProfile: 'My Profile',
+        viewAll: 'View All',
+        error: 'Error',
+        tryAgain: 'Try Again',
         sidebar: {
             myProfile: 'My Profile',
             security: 'Security',
@@ -25,58 +25,30 @@ export const translations = {
             support: 'Help & Support',
             terms: 'Terms & Conditions'
         },
-        profile: {
-            identity: 'Identity',
+        profilePage: {
             personalInfo: 'Personal Information',
-            address: 'Address',
             firstName: 'First Name',
             lastName: 'Last Name',
-            email: 'Email address',
-            phone: 'Phone',
+            email: 'Email Address',
+            phone: 'Phone Number',
             bio: 'Bio',
+            address: 'Address',
             country: 'Country',
-            street: 'Address',
+            street: 'Street',
             postalCode: 'Postal Code',
             taxId: 'TAX ID',
             fullName: 'Full Name',
-            location: 'Location'
+            location: 'Location',
+            phoneStartError: 'Phone number must start with 08',
+            phoneLengthError: 'Phone number must be 10-12 digits'
         },
-        rate: {
+        ratePage: {
             title: 'Rate Our Service',
-            subtitle: 'Your feedback helps us improve',
-            overallExperience: 'Overall Experience',
-            cleanliness: 'Cleanliness',
-            punctuality: 'Punctuality',
-            professionalism: 'Professionalism',
-            comment: 'Additional Comments',
+            desc: 'Your feedback helps us improve our homecare services.',
+            selectService: 'Select Service',
+            rating: 'Rating',
+            comment: 'Detailed Review',
             submit: 'Submit Review',
-            thankYou: 'Thank you for your feedback!'
-        },
-        support: {
-            title: 'Help & Support',
-            subtitle: 'We are here to help you with any issues',
-            contactUs: 'Contact Us',
-            faq: 'Frequently Asked Questions',
-            emailSupport: 'Email Support',
-            phoneSupport: 'Phone Support',
-            liveChat: 'Live Chat',
-            message: 'Your Message',
-            sendMessage: 'Send Message',
-            successMessage: 'Your message has been sent successfully!'
-        },
-        terms: {
-            title: 'Terms & Conditions',
-            subtitle: 'Please read our terms and conditions carefully',
-            privacyPolicy: 'Privacy Policy',
-            usageTerms: 'Usage Terms',
-            serviceAgreement: 'Service Agreement',
-            lastUpdated: 'Last Updated'
-        },
-        dashboard: {
-            title: 'Dashboard',
-            welcome: 'Welcome back! Here is what is happening with your services.',
-            totalBookings: 'Total Bookings',
-            pendingServices: 'Pending Services',
             completedTasks: 'Completed Tasks',
             unpaidInvoices: 'Unpaid Invoices',
             recentBookings: 'Recent Bookings',
@@ -86,19 +58,19 @@ export const translations = {
         ...homeTranslations.en
     },
     id: {
-        common: {
-            save: 'Simpan',
-            cancel: 'Batal',
-            edit: 'Ubah',
-            logout: 'Keluar',
-            changeLanguage: 'Ganti Bahasa',
-            home: 'BERANDA',
-            about: 'TENTANG',
-            services: 'LAYANAN',
-            profile: 'PROFIL',
-            myProfile: 'Profil Saya',
-            viewAll: 'Lihat Semua'
-        },
+        save: 'Simpan',
+        cancel: 'Batal',
+        edit: 'Ubah',
+        logout: 'Keluar',
+        changeLanguage: 'Ganti Bahasa',
+        home: 'BERANDA',
+        about: 'TENTANG',
+        services: 'LAYANAN',
+        profile: 'PROFIL',
+        myProfile: 'Profil Saya',
+        viewAll: 'Lihat Semua',
+        error: 'Kesalahan',
+        tryAgain: 'Coba Lagi',
         sidebar: {
             myProfile: 'Profil Saya',
             security: 'Keamanan',
@@ -108,7 +80,7 @@ export const translations = {
             support: 'Bantuan & Dukungan',
             terms: 'Syarat & Ketentuan'
         },
-        profile: {
+        profilePage: {
             identity: 'Identitas',
             personalInfo: 'Informasi Pribadi',
             address: 'Alamat',
@@ -122,9 +94,11 @@ export const translations = {
             postalCode: 'Kode Pos',
             taxId: 'ID Pajak',
             fullName: 'Nama Lengkap',
-            location: 'Lokasi'
+            location: 'Lokasi',
+            phoneStartError: 'Nomor telepon harus dimulai dengan 08',
+            phoneLengthError: 'Nomor telepon harus 10-12 digit'
         },
-        rate: {
+        ratePage: {
             title: 'Berikan Nilai untuk Layanan Kami',
             subtitle: 'Masukan Anda membantu kami meningkatkan layanan',
             overallExperience: 'Pengalaman Keseluruhan',
@@ -135,7 +109,7 @@ export const translations = {
             submit: 'Kirim Ulasan',
             thankYou: 'Terima kasih atas masukan Anda!'
         },
-        support: {
+        supportPage: {
             title: 'Bantuan & Dukungan',
             subtitle: 'Kami di sini untuk membantu Anda dengan masalah apa pun',
             contactUs: 'Hubungi Kami',
@@ -147,7 +121,7 @@ export const translations = {
             sendMessage: 'Kirim Pesan',
             successMessage: 'Pesan Anda telah berhasil dikirim!'
         },
-        terms: {
+        termsPage: {
             title: 'Syarat & Ketentuan',
             subtitle: 'Harap baca syarat dan ketentuan kami dengan seksama',
             privacyPolicy: 'Kebijakan Privasi',
@@ -155,7 +129,7 @@ export const translations = {
             serviceAgreement: 'Perjanjian Layanan',
             lastUpdated: 'Terakhir Diperbarui'
         },
-        dashboard: {
+        dashboardPage: {
             title: 'Dasbor',
             welcome: 'Selamat datang kembali! Inilah yang terjadi dengan layanan Anda.',
             totalBookings: 'Total Pemesanan',
@@ -165,23 +139,24 @@ export const translations = {
             recentBookings: 'Pemesanan Terbaru',
             bookNow: 'Pesan Layanan Baru',
             quickActions: 'Tindakan Cepat'
-        },
+        }
+        ,
         ...homeTranslations.id
     },
     es: {
-        common: {
-            save: 'Guardar',
-            cancel: 'Cancelar',
-            edit: 'Editar',
-            logout: 'Cerrar sesión',
-            changeLanguage: 'Cambiar idioma',
-            home: 'INICIO',
-            about: 'ACERCA DE',
-            services: 'SERVICIOS',
-            profile: 'PERFIL',
-            myProfile: 'Mi Perfil',
-            viewAll: 'Ver todo'
-        },
+        save: 'Guardar',
+        cancel: 'Cancelar',
+        edit: 'Editar',
+        logout: 'Cerrar sesión',
+        changeLanguage: 'Cambiar idioma',
+        home: 'INICIO',
+        about: 'ACERCA DE',
+        services: 'SERVICIOS',
+        profile: 'PERFIL',
+        myProfile: 'Mi Perfil',
+        viewAll: 'Ver todo',
+        error: 'Error',
+        tryAgain: 'Intentar de nuevo',
         sidebar: {
             myProfile: 'Mi Perfil',
             security: 'Seguridad',
@@ -191,7 +166,7 @@ export const translations = {
             support: 'Ayuda y Soporte',
             terms: 'Términos y Condiciones'
         },
-        profile: {
+        profilePage: {
             identity: 'Identidad',
             personalInfo: 'Información Personal',
             address: 'Dirección',
@@ -205,9 +180,11 @@ export const translations = {
             postalCode: 'Código Postal',
             taxId: 'ID Fiscal',
             fullName: 'Nombre Completo',
-            location: 'Ubicación'
+            location: 'Ubicación',
+            phoneStartError: 'El número de teléfono debe comenzar con 08',
+            phoneLengthError: 'El número de teléfono debe tener entre 10 y 12 dígitos'
         },
-        rate: {
+        ratePage: {
             title: 'Califica Nuestro Servicio',
             subtitle: 'Tus comentarios nos ayudan a mejorar',
             overallExperience: 'Experiencia General',
@@ -218,7 +195,7 @@ export const translations = {
             submit: 'Enviar Reseña',
             thankYou: '¡Gracias por tus comentarios!'
         },
-        support: {
+        supportPage: {
             title: 'Ayuda y Soporte',
             subtitle: 'Estamos aquí para ayudarte con cualquier problema',
             contactUs: 'Contáctanos',
@@ -230,7 +207,7 @@ export const translations = {
             sendMessage: 'Enviar Mensaje',
             successMessage: '¡Tu mensaje ha sido enviado con éxito!'
         },
-        terms: {
+        termsPage: {
             title: 'Términos y Condiciones',
             subtitle: 'Por favor, lee nuestros términos y condiciones cuidadosamente',
             privacyPolicy: 'Política de Privacidad',
@@ -238,7 +215,7 @@ export const translations = {
             serviceAgreement: 'Acuerdo de Servicio',
             lastUpdated: 'Última Actualización'
         },
-        dashboard: {
+        dashboardPage: {
             title: 'Tablero',
             welcome: '¡Bienvenido de nuevo! Esto es lo que está pasando con tus servicios.',
             totalBookings: 'Total de Reservas',
@@ -248,23 +225,24 @@ export const translations = {
             recentBookings: 'Reservas Recientes',
             bookNow: 'Reservar Nuevo Servicio',
             quickActions: 'Acciones Rápidas'
-        },
+        }
+        ,
         ...homeTranslations.es
     },
     ja: {
-        common: {
-            save: '保存',
-            cancel: 'キャンセル',
-            edit: '編集',
-            logout: 'ログアウト',
-            changeLanguage: '言語変更',
-            home: 'ホーム',
-            about: '私たちについて',
-            services: 'サービス',
-            profile: 'プロフィール',
-            myProfile: 'マイプロフィール',
-            viewAll: 'すべて表示'
-        },
+        save: '保存',
+        cancel: 'キャンセル',
+        edit: '編集',
+        logout: 'ログアウト',
+        changeLanguage: '言語変更',
+        home: 'ホーム',
+        about: '私たちについて',
+        services: 'サービス',
+        profile: 'プロフィール',
+        myProfile: 'マイプロフィール',
+        viewAll: 'すべて表示',
+        error: 'エラー',
+        tryAgain: '再試行',
         sidebar: {
             myProfile: 'マイプロフィール',
             security: 'セキュリティ',
@@ -274,7 +252,7 @@ export const translations = {
             support: 'ヘルプとサポート',
             terms: '利用規約'
         },
-        profile: {
+        profilePage: {
             identity: '身元',
             personalInfo: '個人情報',
             address: '住所',
@@ -288,9 +266,11 @@ export const translations = {
             postalCode: '郵便番号',
             taxId: '納税者番号',
             fullName: 'フルネーム',
-            location: '場所'
+            location: '場所',
+            phoneStartError: '電話番号は08で始まる必要があります',
+            phoneLengthError: '電話番号は10〜12桁である必要があります'
         },
-        rate: {
+        ratePage: {
             title: 'サービスの評価',
             subtitle: 'お客様のフィードバックは改善に役立ちます',
             overallExperience: '総合的な体験',
@@ -301,7 +281,7 @@ export const translations = {
             submit: 'レビューを送信',
             thankYou: 'フィードバックありがとうございます！'
         },
-        support: {
+        supportPage: {
             title: 'ヘルプとサポート',
             subtitle: 'いかなる問題もお手伝いします',
             contactUs: 'お問い合わせ',
@@ -313,7 +293,7 @@ export const translations = {
             sendMessage: 'メッセージを送信',
             successMessage: 'メッセージが正常に送信されました！'
         },
-        terms: {
+        termsPage: {
             title: '利用規約',
             subtitle: '利用規約をよくお読みください',
             privacyPolicy: 'プライバシーポリシー',
@@ -321,7 +301,7 @@ export const translations = {
             serviceAgreement: 'サービス契約',
             lastUpdated: '最終更新日'
         },
-        dashboard: {
+        dashboardPage: {
             title: 'ダッシュボード',
             welcome: 'おかえりなさい！サービスの状況はこちらです。',
             totalBookings: '総予約数',
@@ -331,23 +311,24 @@ export const translations = {
             recentBookings: '最近の予約',
             bookNow: '新しいサービスを予約',
             quickActions: 'クイックアクション'
-        },
+        }
+        ,
         ...homeTranslations.ja
     },
     zh: {
-        common: {
-            save: '保存',
-            cancel: '取消',
-            edit: '编辑',
-            logout: '登出',
-            changeLanguage: '改变语言',
-            home: '主页',
-            about: '关于',
-            services: '服务',
-            profile: '个人资料',
-            myProfile: '我的预资料',
-            viewAll: '查看全部'
-        },
+        save: '保存',
+        cancel: '取消',
+        edit: '编辑',
+        logout: '登出',
+        changeLanguage: '改变语言',
+        home: '主页',
+        about: '关于',
+        services: '服务',
+        profile: '个人资料',
+        myProfile: '我的预资料',
+        viewAll: '查看全部',
+        error: '错误',
+        tryAgain: '重试',
         sidebar: {
             myProfile: '我的预资料',
             security: '安全',
@@ -357,7 +338,7 @@ export const translations = {
             support: '帮助与支持',
             terms: '条款和条件'
         },
-        profile: {
+        profilePage: {
             identity: '身份',
             personalInfo: '个人信息',
             address: '地址',
@@ -371,9 +352,11 @@ export const translations = {
             postalCode: '邮政编码',
             taxId: '税号',
             fullName: '全名',
-            location: '位置'
+            location: '位置',
+            phoneStartError: '电话号码必须以 08 开头',
+            phoneLengthError: '电话号码必须为 10-12 位数字'
         },
-        rate: {
+        ratePage: {
             title: '评价我们的服务',
             subtitle: '您的反馈有助于我们改进',
             overallExperience: '总体体验',
@@ -384,7 +367,7 @@ export const translations = {
             submit: '提交评论',
             thankYou: '感谢您的反馈！'
         },
-        support: {
+        supportPage: {
             title: '帮助与支持',
             subtitle: '我们在这里帮助您解决任何问题',
             contactUs: '联系我们',
@@ -396,7 +379,7 @@ export const translations = {
             sendMessage: '发送信息',
             successMessage: '您的信息已成功发送！'
         },
-        terms: {
+        termsPage: {
             title: '条款和条件',
             subtitle: '请仔细阅读我们的条款和条件',
             privacyPolicy: '隐私政策',
@@ -404,7 +387,7 @@ export const translations = {
             serviceAgreement: '服务协议',
             lastUpdated: '最后更新'
         },
-        dashboard: {
+        dashboardPage: {
             title: '仪表板',
             welcome: '欢迎回来！这是您的服务情况。',
             totalBookings: '总预订量',
@@ -414,7 +397,8 @@ export const translations = {
             recentBookings: '最近预订',
             bookNow: '预订新服务',
             quickActions: '快速操作'
-        },
+        }
+        ,
         ...homeTranslations.zh
     }
 };
