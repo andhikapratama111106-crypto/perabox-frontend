@@ -163,29 +163,32 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Mobile Menu Button */}
-                <button
-                    ref={hamburgerRef}
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                    className="md:hidden relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg"
-                    aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-                    aria-expanded={isMobileMenuOpen}
-                    aria-haspopup="true"
-                    aria-controls="mobile-nav"
-                >
-                    <span
-                        className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-                            }`}
-                    />
-                    <span
-                        className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''
-                            }`}
-                    />
-                    <span
-                        className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                            }`}
-                    />
-                </button>
+                {/* Mobile Actions (Language + Hamburger) */}
+                <div className="flex md:hidden items-center gap-4">
+                    <LanguageSwitcher />
+                    <button
+                        ref={hamburgerRef}
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                        className="relative w-10 h-10 flex flex-col items-center justify-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg"
+                        aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+                        aria-expanded={isMobileMenuOpen}
+                        aria-haspopup="true"
+                        aria-controls="mobile-nav"
+                    >
+                        <span
+                            className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                                }`}
+                        />
+                        <span
+                            className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? 'opacity-0' : ''
+                                }`}
+                        />
+                        <span
+                            className={`block w-6 h-0.5 bg-dark transition-all duration-300 ${isMobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                                }`}
+                        />
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu Dropdown */}
@@ -221,9 +224,6 @@ const Navbar = () => {
                                     {link.name.toUpperCase()}
                                 </a>
                             ))}
-                            <div className="flex px-4 py-2">
-                                <LanguageSwitcher />
-                            </div>
                             <div className="h-px bg-gray-100 my-2 mx-4" />
                             {isLoggedIn ? (
                                 <>
