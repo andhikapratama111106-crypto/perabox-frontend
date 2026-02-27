@@ -18,7 +18,6 @@ const ChatBot = () => {
     const isFinishedPreloading = useUIStore((state: any) => state.isFinishedPreloading);
     const [isOpen, setIsOpen] = useState(false);
     const [showProactive, setShowProactive] = useState(false);
-    const [showTooltip, setShowTooltip] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { role: 'model', content: t('chatbot.initialMessage') }
     ]);
@@ -34,13 +33,8 @@ const ChatBot = () => {
                 setShowProactive(true);
             }, 5000);
 
-            const tooltipTimer = setTimeout(() => {
-                setShowTooltip(true);
-            }, 8000);
-
             return () => {
                 clearTimeout(proactiveTimer);
-                clearTimeout(tooltipTimer);
             };
         }
     }, [isOpen]);
@@ -190,22 +184,6 @@ const ChatBot = () => {
 
                     {/* Chat Bubble Button */}
                     <div className="relative group">
-                        {/* Interactive Tooltip */}
-                        <AnimatePresence>
-                            {showTooltip && !isOpen && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
-                                    className="absolute bottom-20 right-0 mb-2 w-48 bg-white text-secondary px-4 py-2 rounded-2xl shadow-xl text-xs font-semibold border border-primary/10 whitespace-normal text-center pointer-events-auto cursor-pointer"
-                                    onClick={() => { setIsOpen(true); setShowTooltip(false); }}
-                                >
-                                    {t('chatbot.proactiveMessage')}
-                                    {/* Triangle pointer */}
-                                    <div className="absolute -bottom-1 right-6 w-2 h-2 bg-white border-b border-r border-primary/10 rotate-45" />
-                                </motion.div>
-                            )}
-                        </AnimatePresence>
                         {/* Pulse Rings */}
                         {!isOpen && (
                             <>
