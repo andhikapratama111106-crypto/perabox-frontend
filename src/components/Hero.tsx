@@ -9,6 +9,7 @@ import { useReveal } from '@/hooks/useReveal';
 import { useParallax } from '@/hooks/useParallax';
 import { staggerContainer, splitLineReveal, fadeUp, reducedMotionVariants } from '@/utils/animationConfig';
 import { useLanguage } from '@/context/LanguageContext';
+import HoloLine from '@/components/HoloLine';
 
 const Hero = () => {
     const { ref: heroRef, isVisible, prefersReduced } = useReveal<HTMLElement>({
@@ -54,13 +55,16 @@ const Hero = () => {
                         className="mb-8"
                     >
                         {headlineLines.map((line, i) => (
-                            <div key={i} className="overflow-hidden">
+                            <div key={i} className="relative overflow-hidden">
                                 <motion.h1
                                     variants={textVariants}
                                     className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark leading-[1.1]"
                                 >
                                     {i === 1 ? (
-                                        <span className="text-primary italic">{line}</span>
+                                        <span className="relative text-primary italic">
+                                            {line}
+                                            <HoloLine className="absolute -bottom-1 left-0 opacity-50" color="var(--primary)" />
+                                        </span>
                                     ) : (
                                         line
                                     )}
@@ -172,10 +176,11 @@ const Hero = () => {
                         <div>
                             <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">{t('hero.techStatus')}</p>
                             <div className="flex items-center gap-2">
-                                {/* Pulsing live dot */}
-                                <span className="relative flex h-2.5 w-2.5">
+                                {/* Pulsing live dot - Enhanced Glow */}
+                                <span className="relative flex h-3 w-3">
                                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                                    <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-40 blur-sm"></span>
+                                    <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.8)]"></span>
                                 </span>
                                 <p className="text-dark font-bold">{t('hero.availableNow')}</p>
                             </div>

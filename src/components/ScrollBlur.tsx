@@ -18,16 +18,32 @@ export default function ScrollBlur({ children }: { children: React.ReactNode }) 
     // Only blur when scrolling down (positive velocity).
     const blurAmount = useTransform(smoothVelocity, [-2000, 0, 2000], [0, 0, 4]);
 
+    // Transform velocity into vertical scale (1 to 1.02) - McLaren-style "kinetic stretch"
+    const scaleY = useTransform(smoothVelocity, [-2000, 0, 2000], [0.99, 1, 1.02]);
+
     useEffect(() => {
-        const unsubscribe = blurAmount.on("change", (latest) => {
-            // Update CSS variable on document root for high performance
+        const unsubscribeBlur = blurAmount.on("change", (latest) => {
             document.documentElement.style.setProperty('--scroll-blur', `${latest}px`);
         });
-        return () => unsubscribe();
-    }, [blurAmount]);
+        const unsubscribeScale = scaleY.on("change", (latest) => {
+            document.documentElement.style.setProperty('--scroll-scale-y', `${latest}`);
+        });
+        return () => {
+            unsubscribeBlur();
+            unsubscribeScale();
+        };
+    }, [blurAmount, scaleY]);
 
     return (
-        <div className="scroll-blur-content" style={{ filter: 'blur(var(--scroll-blur, 0px))', willChange: 'filter' }}>
+        <div
+            className="scroll-blur-content"
+            style={{
+                filter: 'blur(var(--scroll-blur, 0px))',
+                transform: 'scaleY(var(--scroll-scale-y, 1))',
+                willChange: 'filter, transform',
+                transformOrigin: 'center'
+            }}
+        >
             {children}
         </div>
     );

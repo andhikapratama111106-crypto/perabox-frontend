@@ -48,6 +48,18 @@ const Services = () => {
             <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/50 to-transparent pointer-events-none" />
             <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
 
+            {/* Hexagonal Lamborghini-style Watermark */}
+            <div className="absolute top-20 left-10 w-64 h-64 opacity-[0.03] pointer-events-none rotate-12">
+                <svg viewBox="0 0 100 100" className="w-full h-full text-primary fill-current">
+                    <path d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z" />
+                </svg>
+            </div>
+            <div className="absolute bottom-40 right-20 w-80 h-80 opacity-[0.02] pointer-events-none -rotate-12">
+                <svg viewBox="0 0 100 100" className="w-full h-full text-primary fill-current">
+                    <path d="M50 0 L93.3 25 L93.3 75 L50 100 L6.7 75 L6.7 25 Z" />
+                </svg>
+            </div>
+
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 <Reveal>
                     <div className="text-center mb-16 md:mb-20">
