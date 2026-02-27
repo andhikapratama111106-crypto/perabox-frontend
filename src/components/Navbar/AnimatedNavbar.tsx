@@ -4,6 +4,7 @@ import React, { useEffect, useState, useCallback, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useUIStore } from '@/store/uiStore';
 
 /* ───────── Types ───────── */
 interface NavLink {
@@ -35,6 +36,7 @@ export function AnimatedNavbar({
     const [mobileOpen, setMobileOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const hamburgerRef = useRef<HTMLButtonElement>(null);
+    const { resetPreloading } = useUIStore();
 
     /* ─── Scroll Detection ─── */
     useEffect(() => {
@@ -117,7 +119,11 @@ export function AnimatedNavbar({
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="transition-transform hover:scale-105">
+                <Link
+                    href="/"
+                    className="transition-all"
+                    onClick={() => resetPreloading()}
+                >
                     <Image
                         src="/perabox_icon.png"
                         alt="PERABOX Logo"

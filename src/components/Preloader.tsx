@@ -6,24 +6,28 @@ import Image from "next/image";
 import { useUIStore } from "@/store/uiStore";
 
 export default function Preloader() {
-    const [isLoading, setIsLoading] = useState(true);
+    const isFinishedPreloading = useUIStore((state: any) => state.isFinishedPreloading);
     const finishPreloading = useUIStore((state: any) => state.finishPreloading);
+    const [isLoading, setIsLoading] = useState(!isFinishedPreloading);
 
     useEffect(() => {
-        // Prevent scrolling while loading
-        document.body.style.overflow = "hidden";
+        if (!isFinishedPreloading) {
+            setIsLoading(true);
+            // Prevent scrolling while loading
+            document.body.style.overflow = "hidden";
 
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-            finishPreloading();
-            document.body.style.overflow = "auto";
-        }, 1600); // Reveal faster per user request
+            const timer = setTimeout(() => {
+                setIsLoading(false);
+                finishPreloading();
+                document.body.style.overflow = "auto";
+            }, 1600); // Reveal faster per user request
 
-        return () => {
-            clearTimeout(timer);
-            document.body.style.overflow = "auto";
-        };
-    }, [finishPreloading]);
+            return () => {
+                clearTimeout(timer);
+                document.body.style.overflow = "auto";
+            };
+        }
+    }, [isFinishedPreloading, finishPreloading]);
 
     return (
         <AnimatePresence mode="wait">
@@ -52,11 +56,7 @@ export default function Preloader() {
 
                     {/* Logo Branding */}
                     <div className="relative z-10 flex flex-col items-center">
-                        <motion.div
-                            initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                            animate={{ opacity: 1, scale: 1, y: 0 }}
-                            transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-                        >
+                        <div className="opacity-100">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX"
@@ -65,7 +65,7 @@ export default function Preloader() {
                                 className="object-contain"
                                 priority
                             />
-                        </motion.div>
+                        </div>
                     </div>
 
                     {/* Background Decorative Text */}

@@ -183,30 +183,30 @@ const ChatBot = () => {
                     </AnimatePresence>
 
                     {/* Chat Bubble Button */}
-                    <div className="relative group">
+                    <div className="relative group w-14 h-14 md:w-16 md:h-16">
                         {/* Smoother Ping Pulse Rings (Like technician status) */}
                         {!isOpen && (
                             <>
                                 <motion.div
-                                    animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+                                    animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
                                     transition={{
                                         repeat: Infinity,
-                                        duration: 2,
-                                        ease: [0, 0, 0.2, 1]
+                                        duration: 2.5,
+                                        ease: "easeOut"
                                     }}
                                     style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/60 rounded-full -z-10"
+                                    className="absolute inset-0 bg-primary/40 rounded-full -z-10 pointer-events-none"
                                 />
                                 <motion.div
-                                    animate={{ scale: [1, 2], opacity: [0.5, 0] }}
+                                    animate={{ scale: [1, 1.6], opacity: [0.5, 0] }}
                                     transition={{
                                         repeat: Infinity,
-                                        duration: 2,
-                                        delay: 1,
-                                        ease: [0, 0, 0.2, 1]
+                                        duration: 2.5,
+                                        delay: 1.25,
+                                        ease: "easeOut"
                                     }}
                                     style={{ transformOrigin: 'center', willChange: 'transform, opacity' }}
-                                    className="absolute inset-0 bg-primary/60 rounded-full -z-10"
+                                    className="absolute inset-0 bg-primary/40 rounded-full -z-10 pointer-events-none"
                                 />
                             </>
                         )}

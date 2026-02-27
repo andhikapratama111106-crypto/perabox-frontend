@@ -13,23 +13,14 @@ const About = () => {
                 <div className="flex flex-col md:flex-row items-center gap-12">
                     <Reveal direction="left" className="w-full md:w-1/2 flex justify-center">
                         <div className="relative w-64 h-64 md:w-96 md:h-96">
-                            <motion.div
-                                className="w-full h-full"
-                                animate={{ y: [0, -12, 0], scale: [1, 1.03, 1] }}
-                                transition={{
-                                    duration: 4,
-                                    repeat: Infinity,
-                                    ease: "easeInOut"
-                                }}
-                                style={{ willChange: 'transform' }}
-                            >
+                            <div className="w-full h-full">
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX Icon"
                                     fill
                                     className="object-contain"
                                 />
-                            </motion.div>
+                            </div>
                         </div>
                     </Reveal>
 

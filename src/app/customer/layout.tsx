@@ -10,6 +10,7 @@ import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
 import { Language } from '@/translations';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
+import { useUIStore } from '@/store/uiStore';
 
 export default function CustomerLayout({
     children,
@@ -138,8 +139,12 @@ export default function CustomerLayout({
         <div className="min-h-screen bg-gray-50 font-sans text-dark flex flex-col">
             {/* Top Navbar */}
             <nav className="bg-white px-6 py-4 flex justify-between items-center sticky top-0 z-50 shadow-sm">
-                <Link href="/" className="flex items-center gap-2">
-                    <div className="transition-transform hover:scale-105">
+                <Link
+                    href="/"
+                    className="flex items-center gap-2"
+                    onClick={() => useUIStore.getState().resetPreloading()}
+                >
+                    <div>
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
@@ -183,7 +188,7 @@ export default function CustomerLayout({
                                 alt="PERABOX Icon"
                                 width={160}
                                 height={90}
-                                className="h-16 w-auto transition-transform hover:scale-110 duration-500 object-contain"
+                                className="h-16 w-auto object-contain"
                                 priority
                             />
                         </div>

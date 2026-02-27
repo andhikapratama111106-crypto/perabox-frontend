@@ -8,11 +8,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { customSmoothScroll } from '@/utils/scrollUtils';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useLanguage } from '@/context/LanguageContext';
+import { useUIStore } from '@/store/uiStore';
 
 const Navbar = () => {
     const router = useRouter();
     const pathname = usePathname();
     const { t } = useLanguage();
+    const { resetPreloading } = useUIStore();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
@@ -98,11 +100,12 @@ const Navbar = () => {
             aria-label="Main navigation"
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
-                <Link href="/" className="transition-transform hover:scale-105">
-                    <motion.div
-                        animate={{ y: [0, -5, 0], scale: [1, 1.04, 1] }}
-                        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
-                    >
+                <Link
+                    href="/"
+                    className="transition-all"
+                    onClick={() => resetPreloading()}
+                >
+                    <div className="flex items-center">
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
@@ -111,7 +114,7 @@ const Navbar = () => {
                             className="h-10 w-auto md:h-12 object-contain"
                             priority
                         />
-                    </motion.div>
+                    </div>
                 </Link>
 
                 {/* Desktop Menu */}

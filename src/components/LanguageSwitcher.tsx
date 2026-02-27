@@ -6,8 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Language } from '@/translations';
 
 const languages = [
-    { code: 'en', label: 'EN', name: 'English' },
     { code: 'id', label: 'ID', name: 'Indonesia' },
+    { code: 'en', label: 'EN', name: 'English' },
     { code: 'zh', label: 'ZH', name: '中文' },
     { code: 'ja', label: 'JA', name: '日本語' },
     { code: 'es', label: 'ES', name: 'Español' }
