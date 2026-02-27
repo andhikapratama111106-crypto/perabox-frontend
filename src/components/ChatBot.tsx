@@ -262,11 +262,11 @@ const ChatBot = () => {
                                         className="w-full h-full flex items-center justify-center relative p-0"
                                     >
                                         <Image
-                                            src="/perabot_mascot_clean.png"
+                                            src="/perabot_mascot.png"
                                             alt="Pera Mascot"
                                             width={80}
                                             height={80}
-                                            className="w-[125%] h-[125%] max-w-none object-contain scale-110"
+                                            className="w-[140%] h-[140%] max-w-none object-contain scale-125 -translate-y-1"
                                         />
                                         {/* Peeking animation for extra friendliness */}
                                         <motion.div
@@ -323,10 +323,10 @@ const ChatBot = () => {
                                                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                                             >
                                                 <Image
-                                                    src="/perabot_mascot_clean.png"
+                                                    src="/perabot_mascot.png"
                                                     alt="Pera"
                                                     fill
-                                                    className="object-contain scale-110 p-1"
+                                                    className="object-contain scale-[1.65] -translate-y-2"
                                                 />
                                             </motion.div>
                                         </div>
@@ -353,10 +353,10 @@ const ChatBot = () => {
                                             {msg.role === 'model' && (
                                                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex-shrink-0 relative overflow-hidden border border-primary/20 mt-1">
                                                     <Image
-                                                        src="/perabot_mascot_clean.png"
+                                                        src="/perabot_mascot.png"
                                                         alt="Pera"
                                                         fill
-                                                        className="object-contain scale-110 p-0.5"
+                                                        className="object-contain scale-[1.65] -translate-y-1"
                                                     />
                                                 </div>
                                             )}
