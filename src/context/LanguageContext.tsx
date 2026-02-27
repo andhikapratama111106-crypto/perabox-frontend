@@ -15,13 +15,13 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     const [language, setLanguageState] = useState<Language>('id');
 
     useEffect(() => {
-        const savedLang = localStorage.getItem('app_language') as Language;
-        if (savedLang && translations[savedLang]) {
-            setLanguageState(savedLang);
+        const savedLang = localStorage.getItem('app_language');
+        if (savedLang && translations[savedLang as Language]) {
+            setLanguageState(savedLang as Language);
         } else {
-            // Default to Indonesian
-            localStorage.setItem('app_language', 'id');
+            // Force Indonesian as absolute default
             setLanguageState('id');
+            localStorage.setItem('app_language', 'id');
         }
     }, []);
 
