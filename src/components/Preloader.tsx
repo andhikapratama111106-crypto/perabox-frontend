@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useUIStore } from "@/store/uiStore";
 
 export default function Preloader() {
+    const [count, setCount] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const finishPreloading = useUIStore((state: any) => state.finishPreloading);
 
@@ -13,130 +14,123 @@ export default function Preloader() {
         // Prevent scrolling while loading
         document.body.style.overflow = "hidden";
 
-        // Wait a bit to show the animation, then hide
-        const timer = setTimeout(() => {
-            setIsLoading(false);
-            finishPreloading();
-            document.body.style.overflow = "auto";
-        }, 2200);
+        // Sophisticated counter logic
+        let start = 0;
+        const duration = 2200; // Total duration
+        const interval = 20; // Update frequency
+        const step = 100 / (duration / interval);
+
+        const counterTimer = setInterval(() => {
+            start += step;
+            if (start >= 100) {
+                setCount(100);
+                clearInterval(counterTimer);
+
+                // Slight delay at 100% before exit
+                setTimeout(() => {
+                    setIsLoading(false);
+                    finishPreloading();
+                    document.body.style.overflow = "auto";
+                }, 400);
+            } else {
+                setCount(Math.floor(start));
+            }
+        }, interval);
 
         return () => {
-            clearTimeout(timer);
+            clearInterval(counterTimer);
             document.body.style.overflow = "auto";
         };
     }, [finishPreloading]);
 
     return (
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
             {isLoading && (
                 <motion.div
-                    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-secondary"
-                    initial={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                    key="preloader"
+                    className="fixed inset-0 z-[10000] flex flex-col items-center justify-center bg-[#050505] overflow-hidden"
+                    exit={{
+                        clipPath: "inset(0 0 100% 0)", // Curtain up reveal
+                        transition: { duration: 1, ease: [0.77, 0, 0.175, 1] }
+                    }}
                 >
-                    {/* Pulsing blurred background circle */}
+                    {/* Ambient Glow */}
                     <motion.div
-                        className="absolute w-64 h-64 bg-primary/20 rounded-full blur-3xl"
+                        className="absolute w-[500px] h-[500px] bg-primary/10 rounded-full blur-[120px]"
                         animate={{
-                            scale: [1, 1.5, 1],
-                            opacity: [0.3, 0.6, 0.3],
+                            scale: [1, 1.2, 1],
+                            opacity: [0.3, 0.5, 0.3],
                         }}
                         transition={{
-                            duration: 2,
+                            duration: 4,
                             repeat: Infinity,
                             ease: "easeInOut",
                         }}
                     />
 
-                    {/* Logo container */}
-                    <motion.div
-                        className="relative z-10"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, ease: "easeOut" }}
-                    >
+                    {/* Logo and Branding */}
+                    <div className="relative z-10 flex flex-col items-center">
                         <motion.div
-                            initial={{ scale: 0.5, opacity: 0, rotate: -5 }}
-                            animate={{
-                                scale: [0.5, 1.2, 1],
-                                opacity: [0, 1, 1],
-                                rotate: [-5, 5, 0]
-                            }}
-                            transition={{
-                                duration: 1.2,
-                                ease: [0.25, 1, 0.5, 1], // Custom spring-like easing
-                            }}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 1.2, ease: "easeOut" }}
+                            className="mb-12"
                         >
-                            <motion.div
-                                animate={{
-                                    scale: [1, 1.05, 1],
-                                }}
-                                transition={{
-                                    duration: 2,
-                                    repeat: Infinity,
-                                    ease: "easeInOut",
-                                    delay: 1.2 // Start pulsing after the initial zoom
-                                }}
-                            >
-                                <Image
-                                    src="/perabox_icon.png"
-                                    alt="PERABOX Preloader"
-                                    width={140}
-                                    height={140}
-                                    className="object-contain drop-shadow-2xl"
-                                    priority
-                                />
-                            </motion.div>
+                            <Image
+                                src="/perabox_icon.png"
+                                alt="PERABOX"
+                                width={80}
+                                height={80}
+                                className="object-contain brightness-0 invert opacity-40 "
+                                priority
+                            />
                         </motion.div>
-                    </motion.div>
 
-                    {/* Loading Text and dots */}
-                    <motion.div
-                        className="mt-8 flex items-center gap-1 z-10"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.4, duration: 0.6 }}
-                    >
-                        <span className="text-primary font-bold tracking-widest text-sm uppercase">
-                            MENYIAPKAN
-                        </span>
-                        <div className="flex gap-1 ml-1">
-                            {[0, 1, 2].map((i) => (
-                                <motion.div
-                                    key={i}
-                                    className="w-1.5 h-1.5 bg-primary rounded-full"
-                                    animate={{
-                                        y: ["0%", "-50%", "0%"],
-                                        opacity: [0.3, 1, 0.3],
-                                    }}
-                                    transition={{
-                                        duration: 0.8,
-                                        repeat: Infinity,
-                                        delay: i * 0.15,
-                                        ease: "easeInOut",
-                                    }}
-                                />
-                            ))}
+                        {/* Large Digital Counter */}
+                        <div className="relative overflow-hidden h-24 sm:h-32 flex items-center justify-center">
+                            <motion.span
+                                initial={{ y: 20, opacity: 0 }}
+                                animate={{ y: 0, opacity: 1 }}
+                                className="text-7xl sm:text-9xl font-extrabold text-white/90 tracking-tighter tabular-nums"
+                            >
+                                {count.toString().padStart(2, '0')}
+                            </motion.span>
+                            <span className="text-xl sm:text-2xl font-bold text-primary ml-2 mb-8">%</span>
                         </div>
-                    </motion.div>
 
-                    {/* Progress Bar Line */}
-                    <motion.div
-                        className="absolute bottom-20 w-48 h-1 bg-gray-200 rounded-full overflow-hidden"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                    >
+                        {/* Subtle Tagline */}
                         <motion.div
-                            className="h-full bg-primary"
-                            initial={{ width: "0%" }}
-                            animate={{ width: "100%" }}
-                            transition={{ duration: 2, ease: "circOut" }}
-                        />
-                    </motion.div>
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: [0, 1, 0.5] }}
+                            transition={{ delay: 0.5, duration: 1.5 }}
+                            className="mt-4 flex flex-col items-center"
+                        >
+                            <span className="text-[10px] sm:text-xs text-white/30 tracking-[0.5em] uppercase font-bold">
+                                Initializing Premium Service
+                            </span>
+
+                            {/* Scanning line indicator */}
+                            <div className="mt-8 w-40 h-[1px] bg-white/10 relative overflow-hidden">
+                                <motion.div
+                                    className="absolute inset-0 bg-primary"
+                                    initial={{ x: "-100%" }}
+                                    animate={{ x: `${count - 100}%` }}
+                                    transition={{ type: "tween", ease: "linear" }}
+                                />
+                            </div>
+                        </motion.div>
+                    </div>
+
+                    {/* Background Decorative Text (Ferrari-style watermark) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.02] select-none">
+                        <span className="text-[20vw] font-black tracking-tighter whitespace-nowrap">
+                            PERABOX
+                        </span>
+                    </div>
                 </motion.div>
             )}
         </AnimatePresence>
+    );
+}
     );
 }
