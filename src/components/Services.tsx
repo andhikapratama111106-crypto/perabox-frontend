@@ -11,32 +11,32 @@ const Services = () => {
 
     const services = [
         {
-            title: t('services.service1Title'),
+            title: t('servicesSection.service1Title'),
             image: "/ac_cleaning.jpg",
-            headline: t('services.service1Headline'),
-            description: t('services.service1Desc'),
-            features: t('services.service1Features') as unknown as string[],
+            headline: t('servicesSection.service1Headline'),
+            description: t('servicesSection.service1Desc'),
+            features: t('servicesSection.service1Features') as unknown as string[],
         },
         {
-            title: t('services.service2Title'),
+            title: t('servicesSection.service2Title'),
             image: "/ac_installation.jpg",
-            headline: t('services.service2Headline'),
-            description: t('services.service2Desc'),
-            features: t('services.service2Features') as unknown as string[],
+            headline: t('servicesSection.service2Headline'),
+            description: t('servicesSection.service2Desc'),
+            features: t('servicesSection.service2Features') as unknown as string[],
         },
         {
-            title: t('services.service3Title'),
+            title: t('servicesSection.service3Title'),
             image: "/ac_repair.jpg",
-            headline: t('services.service3Headline'),
-            description: t('services.service3Desc'),
-            features: t('services.service3Features') as unknown as string[],
+            headline: t('servicesSection.service3Headline'),
+            description: t('servicesSection.service3Desc'),
+            features: t('servicesSection.service3Features') as unknown as string[],
         },
         {
-            title: t('services.service4Title'),
+            title: t('servicesSection.service4Title'),
             image: "/freon_refill.jpg",
-            headline: t('services.service4Headline'),
-            description: t('services.service4Desc'),
-            features: t('services.service4Features') as unknown as string[],
+            headline: t('servicesSection.service4Headline'),
+            description: t('servicesSection.service4Desc'),
+            features: t('servicesSection.service4Features') as unknown as string[],
         },
     ];
 
@@ -51,8 +51,8 @@ const Services = () => {
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 <Reveal>
                     <div className="text-center mb-16 md:mb-20">
-                        <span className="text-primary text-sm font-bold tracking-widest uppercase mb-3 block">{t('services.sectionTitle')}</span>
-                        <h2 className="text-4xl md:text-5xl font-bold text-dark mb-6">{t('services.mainHeading')}</h2>
+                        <span className="text-primary text-sm font-bold tracking-widest uppercase mb-3 block">{t('servicesSection.sectionTitle')}</span>
+                        <h2 className="text-4xl md:text-5xl font-bold text-dark mb-6">{t('servicesSection.mainHeading')}</h2>
                         <div className="w-20 h-1.5 bg-primary mx-auto rounded-full" />
                     </div>
                 </Reveal>
