@@ -18,6 +18,7 @@ const ChatBot = () => {
     const isFinishedPreloading = useUIStore((state: any) => state.isFinishedPreloading);
     const [isOpen, setIsOpen] = useState(false);
     const [showProactive, setShowProactive] = useState(false);
+    const [showTooltip, setShowTooltip] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { role: 'model', content: t('chatbot.initialMessage') }
     ]);
@@ -26,12 +27,22 @@ const ChatBot = () => {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     const messagesEndRef = useRef<HTMLDivElement>(null);
 
-    // Show proactive bubble after 3 seconds
+    // Show proactive triggers after delay
     useEffect(() => {
-        const timer = setTimeout(() => {
-            if (!isOpen) setShowProactive(true);
-        }, 5000);
-        return () => clearTimeout(timer);
+        if (!isOpen) {
+            const proactiveTimer = setTimeout(() => {
+                setShowProactive(true);
+            }, 5000);
+
+            const tooltipTimer = setTimeout(() => {
+                setShowTooltip(true);
+            }, 8000);
+
+            return () => {
+                clearTimeout(proactiveTimer);
+                clearTimeout(tooltipTimer);
+            };
+        }
     }, [isOpen]);
 
     const renderMessageContent = (content: string) => {
@@ -179,6 +190,22 @@ const ChatBot = () => {
 
                     {/* Chat Bubble Button */}
                     <div className="relative group">
+                        {/* Interactive Tooltip */}
+                        <AnimatePresence>
+                            {showTooltip && !isOpen && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
+                                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    className="absolute bottom-20 right-0 mb-2 w-48 bg-white text-secondary px-4 py-2 rounded-2xl shadow-xl text-xs font-semibold border border-primary/10 whitespace-normal text-center pointer-events-auto cursor-pointer"
+                                    onClick={() => { setIsOpen(true); setShowTooltip(false); }}
+                                >
+                                    {t('chatbot.proactiveMessage')}
+                                    {/* Triangle pointer */}
+                                    <div className="absolute -bottom-1 right-6 w-2 h-2 bg-white border-b border-r border-primary/10 rotate-45" />
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                         {/* Pulse Rings */}
                         {!isOpen && (
                             <>
@@ -232,29 +259,30 @@ const ChatBot = () => {
                                         initial={{ opacity: 0, scale: 0.5 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.5 }}
-                                        className="w-full h-full flex items-center justify-center relative p-1.5"
+                                        className="w-full h-full flex items-center justify-center relative p-0"
                                     >
                                         <Image
-                                            src="/perabot_mascot.png"
+                                            src="/perabot_mascot_clean.png"
                                             alt="Pera Mascot"
-                                            width={64}
-                                            height={64}
-                                            className="w-full h-full object-contain"
+                                            width={80}
+                                            height={80}
+                                            className="w-[125%] h-[125%] max-w-none object-contain scale-110"
                                         />
                                         {/* Peeking animation for extra friendliness */}
                                         <motion.div
-                                            className="absolute -top-4 -right-4 w-8 h-8 pointer-events-none"
+                                            className="absolute -top-4 -right-4 w-10 h-10 pointer-events-none"
                                             animate={{
-                                                y: [0, -5, 0],
-                                                rotate: [0, 15, 0]
+                                                y: [0, -8, 0],
+                                                rotate: [0, 20, 0],
+                                                scale: [1, 1.2, 1]
                                             }}
                                             transition={{
                                                 repeat: Infinity,
-                                                duration: 2.5,
+                                                duration: 3,
                                                 ease: "easeInOut"
                                             }}
                                         >
-                                            <span className="text-xl">✨</span>
+                                            <span className="text-2xl drop-shadow-md">✨</span>
                                         </motion.div>
                                     </motion.div>
                                 )}
@@ -295,10 +323,10 @@ const ChatBot = () => {
                                                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                                             >
                                                 <Image
-                                                    src="/perabot_avatar.png"
+                                                    src="/perabot_mascot_clean.png"
                                                     alt="Pera"
                                                     fill
-                                                    className="object-cover p-1"
+                                                    className="object-contain scale-110 p-1"
                                                 />
                                             </motion.div>
                                         </div>
@@ -325,10 +353,10 @@ const ChatBot = () => {
                                             {msg.role === 'model' && (
                                                 <div className="w-8 h-8 rounded-lg bg-primary/10 flex-shrink-0 relative overflow-hidden border border-primary/20 mt-1">
                                                     <Image
-                                                        src="/perabot_avatar.png"
+                                                        src="/perabot_mascot_clean.png"
                                                         alt="Pera"
                                                         fill
-                                                        className="object-cover"
+                                                        className="object-contain scale-110 p-0.5"
                                                     />
                                                 </div>
                                             )}
