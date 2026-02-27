@@ -5,6 +5,7 @@ import '../styles/animations.css';
 
 
 import ChatBot from '../components/ChatBot';
+import Preloader from '../components/Preloader';
 import { LanguageProvider } from '../context/LanguageContext';
 
 /* ───────── Font Subsets ───────── */
@@ -162,6 +163,7 @@ export default function RootLayout({
                 />
             </head>
             <body className="font-sans antialiased bg-secondary text-dark">
+                <Preloader />
                 <LanguageProvider>
                     <div className="scroll-blur-content">
                         {children}
