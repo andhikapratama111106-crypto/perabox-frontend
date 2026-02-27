@@ -180,13 +180,24 @@ const ChatBot = () => {
                         {!isOpen && (
                             <>
                                 <motion.div
-                                    animate={{ scale: [1, 1.5], opacity: [0.5, 0] }}
-                                    transition={{ repeat: Infinity, duration: 2 }}
+                                    animate={{ scale: [1, 1.4], opacity: [0.4, 0] }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        duration: 3,
+                                        ease: "easeOut"
+                                    }}
+                                    style={{ willChange: 'transform, opacity' }}
                                     className="absolute inset-0 bg-primary rounded-full -z-10"
                                 />
                                 <motion.div
-                                    animate={{ scale: [1, 1.8], opacity: [0.3, 0] }}
-                                    transition={{ repeat: Infinity, duration: 2, delay: 0.5 }}
+                                    animate={{ scale: [1, 1.7], opacity: [0.2, 0] }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        duration: 3,
+                                        delay: 1.5,
+                                        ease: "easeOut"
+                                    }}
+                                    style={{ willChange: 'transform, opacity' }}
                                     className="absolute inset-0 bg-primary/50 rounded-full -z-10"
                                 />
                             </>

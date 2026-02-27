@@ -159,9 +159,10 @@ const Hero = () => {
                         transition={{
                             opacity: { delay: 1.0, duration: 0.5 },
                             y: { delay: 1.0, duration: 0.5 },
-                            scale: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
-                            boxShadow: { delay: 1.5, duration: 3, repeat: Infinity, ease: 'easeInOut' },
+                            scale: { delay: 1.5, duration: 4, repeat: Infinity, ease: 'easeInOut' },
+                            boxShadow: { delay: 1.5, duration: 4, repeat: Infinity, ease: 'easeInOut' },
                         }}
+                        style={{ willChange: 'transform, box-shadow' }}
                     >
                         <div className="w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

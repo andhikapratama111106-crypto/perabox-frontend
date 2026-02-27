@@ -16,7 +16,12 @@ const About = () => {
                             <motion.div
                                 className="w-full h-full"
                                 animate={{ y: [0, -12, 0], scale: [1, 1.03, 1] }}
-                                transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
+                                transition={{
+                                    duration: 4,
+                                    repeat: Infinity,
+                                    ease: "easeInOut"
+                                }}
+                                style={{ willChange: 'transform' }}
                             >
                                 <Image
                                     src="/perabox_icon.png"
