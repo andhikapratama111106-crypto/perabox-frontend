@@ -15,8 +15,8 @@ export default function ScrollBlur({ children }: { children: React.ReactNode }) 
     });
 
     // Transform velocity into blur amount (0px to 4px)
-    // Most users scroll between 0 and 2000px/s. Bugatti effect is subtle.
-    const blurAmount = useTransform(smoothVelocity, [-2000, 0, 2000], [4, 0, 4]);
+    // Only blur when scrolling down (positive velocity).
+    const blurAmount = useTransform(smoothVelocity, [-2000, 0, 2000], [0, 0, 4]);
 
     useEffect(() => {
         const unsubscribe = blurAmount.on("change", (latest) => {
