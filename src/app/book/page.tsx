@@ -26,8 +26,8 @@ export default function BookingPage() {
     const [loading, setLoading] = useState(false); // Start as false to show mock data instantly
     const [submitting, setSubmitting] = useState(false);
 
-    // Booking Data State — initialized with mock data for instant display, no flicker
-    const [technicians, setTechnicians] = useState<Technician[]>(mockTechnicians);
+    // Simplified: always use mock data to prevent auto-refresh issues
+    const technicians = mockTechnicians;
     const [selectedTechnician, setSelectedTechnician] = useState<Technician | null>(null);
     const tzOffset = new Date().getTimezoneOffset() * 60000;
     const todayStr = new Date(Date.now() - tzOffset).toISOString().split('T')[0];
@@ -55,38 +55,6 @@ export default function BookingPage() {
             base_price: s.price
         }))
     );
-
-    // Silent background upgrade — only replaces if API returns real data, never flickers
-    useEffect(() => {
-        const silentUpgrade = async () => {
-            try {
-                const techResponse = await techniciansAPI.getAvailable();
-                const apiTechs = techResponse.data?.map((t: any) => ({
-                    id: t.id,
-                    name: t.user_name,
-                    specialty: t.specializations?.[0] || 'General',
-                    rating: Number(t.rating_average) || 5.0,
-                    reviewCount: t.total_jobs || 0,
-                    price: 'On Request',
-                    basePrice: 50000,
-                    photoUrl: t.avatar_url || '/perabot_avatar.png',
-                    experience: `${t.experience_years || 5} Tahun`,
-                    specialties: t.specializations || [],
-                    phone: t.user_phone,
-                    bio: t.bio
-                })) || [];
-
-                if (apiTechs.length > 0) {
-                    setTechnicians(apiTechs);
-                }
-                // If API returns empty, keep mock data — no state change = no flicker
-            } catch {
-                // Silently fail — mock data stays, no flicker
-            }
-        };
-
-        silentUpgrade();
-    }, []);
     // Step Handlers
     const handleTechnicianSelect = (tech: Technician) => {
         setSelectedTechnician(tech);

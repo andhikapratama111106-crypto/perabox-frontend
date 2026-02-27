@@ -113,7 +113,7 @@ const Services = () => {
                             </div>
 
                             {/* Detail Text — crossfade (no layout shift) */}
-                            <div className="w-full md:w-1/2 p-8 md:p-12 relative overflow-hidden flex-shrink-0 flex items-center min-h-[500px] md:min-h-0">
+                            <div className="w-full md:w-1/2 p-6 md:p-12 relative overflow-hidden flex-shrink-0 flex items-center min-h-[400px] md:min-h-0">
                                 <AnimatePresence mode="wait" initial={false}>
                                     <motion.div
                                         key={activeTab}

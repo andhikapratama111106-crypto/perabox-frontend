@@ -57,7 +57,7 @@ const Hero = () => {
                             <div key={i} className="overflow-hidden">
                                 <motion.h1
                                     variants={textVariants}
-                                    className="text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark leading-[1.1]"
+                                    className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-dark leading-[1.1]"
                                 >
                                     {i === 1 ? (
                                         <span className="text-primary italic">{line}</span>

@@ -15,13 +15,15 @@ import {
 } from 'lucide-react';
 import { useLanguage } from '@/context/LanguageContext';
 
+import { mockTechnicians, serviceTypes } from '@/data/mockData';
+
 export default function CustomerDashboard() {
     const { t } = useLanguage();
 
     const stats = [
         {
             label: t('dashboardPage.totalBookings') || 'Total Bookings',
-            value: '12',
+            value: mockTechnicians.length.toString(),
             icon: <Calendar className="w-6 h-6 text-primary" />,
             color: 'bg-primary/10',
             trend: '+2 this month'
@@ -52,26 +54,26 @@ export default function CustomerDashboard() {
     const recentBookings = [
         {
             id: 'BK-7892',
-            service: 'AC Cleaning Service',
+            service: serviceTypes[0].name + ' Service',
             date: 'Oct 20, 2024',
             status: 'Completed',
-            price: 'IDR 150.000',
+            price: `IDR ${serviceTypes[0].price.toLocaleString('id-ID')}`,
             statusColor: 'text-green-600 bg-green-50'
         },
         {
             id: 'BK-8901',
-            service: 'AC Repair (Leaks)',
+            service: serviceTypes[3].name + ' (Leaks)',
             date: 'Oct 24, 2024',
             status: 'Scheduled',
-            price: 'IDR 450.000',
+            price: `IDR ${serviceTypes[3].price.toLocaleString('id-ID')}`,
             statusColor: 'text-primary bg-primary/10'
         },
         {
             id: 'BK-9012',
-            service: 'AC Installation',
+            service: serviceTypes[1].name,
             date: 'Nov 02, 2024',
             status: 'Pending',
-            price: 'IDR 850.000',
+            price: `IDR ${serviceTypes[1].price.toLocaleString('id-ID')}`,
             statusColor: 'text-amber-600 bg-amber-50'
         }
     ];
