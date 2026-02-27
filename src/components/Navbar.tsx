@@ -99,14 +99,19 @@ const Navbar = () => {
         >
             <div className="container mx-auto px-6 flex justify-between items-center">
                 <Link href="/" className="transition-transform hover:scale-105">
-                    <Image
-                        src="/perabox_icon.png"
-                        alt="PERABOX Logo"
-                        width={160}
-                        height={90}
-                        className="h-10 w-auto md:h-12 object-contain"
-                        priority
-                    />
+                    <motion.div
+                        animate={{ y: [0, -5, 0], scale: [1, 1.04, 1] }}
+                        transition={{ duration: 2.8, repeat: Infinity, ease: "easeInOut" }}
+                    >
+                        <Image
+                            src="/perabox_icon.png"
+                            alt="PERABOX Logo"
+                            width={160}
+                            height={90}
+                            className="h-10 w-auto md:h-12 object-contain"
+                            priority
+                        />
+                    </motion.div>
                 </Link>
 
                 {/* Desktop Menu */}
