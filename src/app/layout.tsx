@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import '../styles/globals.css';
 import '../styles/animations.css';
-
+import { Analytics } from '@vercel/analytics/next';
 
 import ChatBot from '../components/ChatBot';
 import Preloader from '../components/Preloader';
@@ -170,6 +170,7 @@ export default function RootLayout({
                     </div>
                     <ChatBot />
                 </LanguageProvider>
+                <Analytics />
             </body>
         </html>
     );
