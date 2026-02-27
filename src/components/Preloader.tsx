@@ -7,7 +7,7 @@ import { useUIStore } from "@/store/uiStore";
 
 export default function Preloader() {
     const [isLoading, setIsLoading] = useState(true);
-    const finishPreloading = useUIStore((state) => state.finishPreloading);
+    const finishPreloading = useUIStore((state: any) => state.finishPreloading);
 
     useEffect(() => {
         // Prevent scrolling while loading

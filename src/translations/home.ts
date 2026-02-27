@@ -18,6 +18,12 @@ export const homeTranslations = {
             "techStatus": "Technician Status",
             "availableNow": "120+ Available Now"
         },
+        "chatbot": {
+            "proactiveMessage": "How can Pera help you today?",
+            "headerTitle": "Chat with Pera",
+            "initialMessage": "Hello! I'm Pera, your technician assistant. Ready to help with all your home needs. How can I help you?",
+            "bookingRedirectMessage": "Sure! I'll redirect you to the booking page right away. Please wait a moment..."
+        },
         "featuresSection": {
             "sectionTitle": "Features",
             "mainHeading1": "Everything You Need for a",
@@ -312,6 +318,12 @@ export const homeTranslations = {
             "socialProof": "10,000+ Pelanggan Puas",
             "techStatus": "Status Teknisi",
             "availableNow": "120+ Tersedia Saat Ini"
+        },
+        "chatbot": {
+            "proactiveMessage": "Ada yang bisa Pera bantu?",
+            "headerTitle": "Chat dengan Pera",
+            "initialMessage": "Halo! Saya Pera, asisten teknisi Anda. Siap membantu segala kebutuhan rumah Anda. Ada yang bisa saya bantu?",
+            "bookingRedirectMessage": "Tentu! Saya akan langsung mengarahkan Anda ke halaman pemesanan. Mohon tunggu sebentar..."
         },
         "featuresSection": {
             "sectionTitle": "Fitur",
@@ -608,6 +620,12 @@ export const homeTranslations = {
             "techStatus": "Estado del técnico",
             "availableNow": "Más de 120 disponibles"
         },
+        "chatbot": {
+            "proactiveMessage": "¿Cómo puede ayudarte Pera hoy?",
+            "headerTitle": "Chatea con Pera",
+            "initialMessage": "¡Hola! Soy Pera, tu asistente técnico. Listo para ayudarte con todas las necesidades de tu hogar. ¿En qué posso ayudarte?",
+            "bookingRedirectMessage": "¡Claro! Te redirigiré a la página de reservas de inmediato. Por favor, espera un momento..."
+        },
         "featuresSection": {
             "sectionTitle": "Características",
             "mainHeading1": "Todo lo que necesitas para un",
@@ -903,6 +921,12 @@ export const homeTranslations = {
             "techStatus": "技術者の状況",
             "availableNow": "現在120人以上が対応可能"
         },
+        "chatbot": {
+            "proactiveMessage": "ペラが何かお手伝いしましょうか？",
+            "headerTitle": "ペラとチャット",
+            "initialMessage": "こんにちは！私はあなたの技術アシスタント、ペラです。あなたの家のあらゆるニーズをお手伝いする準備ができています。何かお手伝いしましょうか？",
+            "bookingRedirectMessage": "承知いたしました！すぐに予約ページにご案内します。少々お待ちください..."
+        },
         "featuresSection": {
             "sectionTitle": "特徴",
             "mainHeading1": "より良い家のための",
@@ -1192,6 +1216,12 @@ export const homeTranslations = {
             "socialProof": "10,000+ 满意的客户",
             "techStatus": "技术人员状态",
             "availableNow": "120+ 可用人员"
+        },
+        "chatbot": {
+            "proactiveMessage": "Pera 有什么可以帮您的吗？",
+            "headerTitle": "与 Pera 聊天",
+            "initialMessage": "您好！我是 Pera，您的技术助理。随时准备为您提供家居方面的帮助。有什么我可以帮您的吗？",
+            "bookingRedirectMessage": "没问题！我将立即为您转到预订页面。请稍候..."
         },
         "featuresSection": {
             "sectionTitle": "功能",

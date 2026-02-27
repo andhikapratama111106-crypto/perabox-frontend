@@ -2,8 +2,10 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useUIStore } from '@/store/uiStore';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface Message {
     role: 'user' | 'model';
@@ -12,11 +14,12 @@ interface Message {
 
 const ChatBot = () => {
     const router = useRouter();
-    const isFinishedPreloading = useUIStore((state) => state.isFinishedPreloading);
+    const { t } = useLanguage();
+    const isFinishedPreloading = useUIStore((state: any) => state.isFinishedPreloading);
     const [isOpen, setIsOpen] = useState(false);
     const [showProactive, setShowProactive] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
-        { role: 'model', content: 'Halo! Saya Pera, asisten teknisi Anda. Siap membantu segala kebutuhan rumah Anda. Ada yang bisa saya bantu?' }
+        { role: 'model', content: t('chatbot.initialMessage') }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -84,7 +87,7 @@ const ChatBot = () => {
         const userMessage = input.trim();
         setInput('');
         if (textareaRef.current) textareaRef.current.style.height = 'auto';
-        setMessages(prev => [...prev, { role: 'user', content: userMessage }]);
+        setMessages((prev: Message[]) => [...prev, { role: 'user', content: userMessage }]);
         setIsLoading(true);
 
         // Check for booking intent
@@ -93,9 +96,9 @@ const ChatBot = () => {
 
         if (hasIntent) {
             setTimeout(() => {
-                setMessages(prev => [...prev, {
+                setMessages((prev: Message[]) => [...prev, {
                     role: 'model',
-                    content: 'Tentu! Saya akan langsung mengarahkan Anda ke halaman pemesanan. Mohon tunggu sebentar...'
+                    content: t('chatbot.bookingRedirectMessage')
                 }]);
 
                 setTimeout(() => {
@@ -133,11 +136,11 @@ const ChatBot = () => {
             }
 
             const data = await response.json();
-            setMessages(prev => [...prev, { role: 'model', content: data.response }]);
+            setMessages((prev: Message[]) => [...prev, { role: 'model', content: data.response }]);
         } catch (error: any) {
             console.error('Chat Error:', error);
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://perabox-backend.vercel.app';
-            setMessages(prev => [...prev, { role: 'model', content: `Wah, sepertinya saya sedang kesulitan terhubung ke pusat (${apiUrl}). Detail: ${error.message}` }]);
+            setMessages((prev: Message[]) => [...prev, { role: 'model', content: `Wah, sepertinya saya sedang kesulitan terhubung ke pusat (${apiUrl}). Detail: ${error.message}` }]);
         } finally {
             setIsLoading(false);
         }
@@ -162,7 +165,7 @@ const ChatBot = () => {
                                 onClick={() => { setIsOpen(true); setShowProactive(false); }}
                                 className="absolute bottom-20 right-0 md:right-0 bg-primary text-white px-5 py-3 rounded-2xl shadow-xl cursor-pointer whitespace-nowrap mb-2 font-bold text-sm flex items-center gap-3 group border-2 border-white/20"
                             >
-                                <span className="max-w-[180px] md:max-w-none truncate md:whitespace-nowrap">Ada yang bisa Pera bantu?</span>
+                                <span className="max-w-[180px] md:max-w-none truncate md:whitespace-nowrap">{t('chatbot.proactiveMessage')}</span>
                                 <motion.span
                                     animate={{ x: [0, 5, 0] }}
                                     transition={{ repeat: Infinity, duration: 2 }}
@@ -229,11 +232,30 @@ const ChatBot = () => {
                                         initial={{ opacity: 0, scale: 0.5 }}
                                         animate={{ opacity: 1, scale: 1 }}
                                         exit={{ opacity: 0, scale: 0.5 }}
-                                        className="w-full h-full flex items-center justify-center"
+                                        className="w-full h-full flex items-center justify-center relative p-1.5"
                                     >
-                                        <svg className="w-7 h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-                                        </svg>
+                                        <Image
+                                            src="/perabot_mascot.png"
+                                            alt="Pera Mascot"
+                                            width={64}
+                                            height={64}
+                                            className="w-full h-full object-contain"
+                                        />
+                                        {/* Peeking animation for extra friendliness */}
+                                        <motion.div
+                                            className="absolute -top-4 -right-4 w-8 h-8 pointer-events-none"
+                                            animate={{
+                                                y: [0, -5, 0],
+                                                rotate: [0, 15, 0]
+                                            }}
+                                            transition={{
+                                                repeat: Infinity,
+                                                duration: 2.5,
+                                                ease: "easeInOut"
+                                            }}
+                                        >
+                                            <span className="text-xl">✨</span>
+                                        </motion.div>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
@@ -266,22 +288,26 @@ const ChatBot = () => {
                                     </div>
 
                                     <div className="flex items-center gap-4">
-                                        <div className="w-12 h-12 md:w-14 md:h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white/20 overflow-hidden">
+                                        <div className="w-12 h-12 md:w-14 md:h-14 bg-white/20 rounded-2xl flex items-center justify-center shadow-lg border-2 border-white/20 overflow-hidden relative">
                                             <motion.div
+                                                className="w-full h-full p-2"
                                                 animate={{ y: [0, -4, 0] }}
                                                 transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
                                             >
-                                                <svg className="w-7 h-7 md:w-8 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                                </svg>
+                                                <Image
+                                                    src="/perabot_avatar.png"
+                                                    alt="Pera"
+                                                    fill
+                                                    className="object-cover p-1"
+                                                />
                                             </motion.div>
                                         </div>
                                         <div>
                                             <div className="flex items-center gap-2">
-                                                <h3 className="font-bold text-lg md:text-xl tracking-tight">Pera</h3>
+                                                <h3 className="font-bold text-lg md:text-xl tracking-tight">{t('chatbot.headerTitle')}</h3>
                                                 <span className="w-2 h-2 md:w-2.5 md:h-2.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,1)]"></span>
                                             </div>
-                                            <p className="text-xs md:text-sm text-white/80 font-medium">Asisten Teknis Anda</p>
+                                            <p className="text-xs md:text-sm text-white/80 font-medium tracking-wide">Online</p>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -294,8 +320,18 @@ const ChatBot = () => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.1 * index }}
                                             key={index}
-                                            className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                                            className={`flex items-start gap-3 ${msg.role === 'user' ? 'flex-row-reverse' : 'justify-start'}`}
                                         >
+                                            {msg.role === 'model' && (
+                                                <div className="w-8 h-8 rounded-lg bg-primary/10 flex-shrink-0 relative overflow-hidden border border-primary/20 mt-1">
+                                                    <Image
+                                                        src="/perabot_avatar.png"
+                                                        alt="Pera"
+                                                        fill
+                                                        className="object-cover"
+                                                    />
+                                                </div>
+                                            )}
                                             <div className={`p-3 md:p-4 rounded-2xl text-xs md:text-sm leading-relaxed ${msg.role === 'user'
                                                 ? 'bg-primary text-white rounded-tr-none shadow-md shadow-primary/10'
                                                 : 'bg-white text-dark shadow-sm border border-gray-100 rounded-tl-none font-medium'
