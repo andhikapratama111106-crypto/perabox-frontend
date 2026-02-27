@@ -150,7 +150,7 @@ export default function CustomerLayout({
                             alt="PERABOX Logo"
                             width={160}
                             height={90}
-                            className="h-10 w-auto md:h-12 object-contain"
+                            className="h-12 w-auto md:h-14 object-contain"
                             priority
                         />
                     </div>
@@ -188,7 +188,7 @@ export default function CustomerLayout({
                                 alt="PERABOX Icon"
                                 width={160}
                                 height={90}
-                                className="h-16 w-auto object-contain"
+                                className="h-20 w-auto object-contain"
                                 priority
                             />
                         </div>
