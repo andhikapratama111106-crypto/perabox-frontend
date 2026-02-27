@@ -266,7 +266,7 @@ const ChatBot = () => {
                                             alt="Pera Mascot"
                                             width={80}
                                             height={80}
-                                            className="w-[140%] h-[140%] max-w-none object-contain scale-125 -translate-y-1"
+                                            className="w-[140%] h-[140%] max-w-none object-contain scale-125 translate-y-1"
                                         />
                                         {/* Peeking animation for extra friendliness */}
                                         <motion.div
@@ -326,7 +326,7 @@ const ChatBot = () => {
                                                     src="/perabot_mascot.png"
                                                     alt="Pera"
                                                     fill
-                                                    className="object-contain scale-[1.65] -translate-y-2"
+                                                    className="object-contain scale-[1.65] translate-y-2"
                                                 />
                                             </motion.div>
                                         </div>
@@ -356,7 +356,7 @@ const ChatBot = () => {
                                                         src="/perabot_mascot.png"
                                                         alt="Pera"
                                                         fill
-                                                        className="object-contain scale-[1.65] -translate-y-1"
+                                                        className="object-contain scale-[1.65] translate-y-1"
                                                     />
                                                 </div>
                                             )}
