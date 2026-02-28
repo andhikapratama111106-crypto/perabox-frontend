@@ -60,9 +60,9 @@ export default function Preloader() {
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX"
-                                width={160}
-                                height={160}
-                                className="object-contain"
+                                width={320}
+                                height={180}
+                                className="h-16 md:h-20 w-auto object-contain"
                                 priority
                             />
                         </div>

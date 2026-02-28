@@ -15,9 +15,10 @@ const About = () => {
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Icon"
-                                width={600}
-                                height={338}
+                                width={640}
+                                height={360}
                                 className="object-contain w-full h-auto shadow-sm"
+                                style={{ aspectRatio: '16/9' }}
                             />
                         </div>
                     </Reveal>
