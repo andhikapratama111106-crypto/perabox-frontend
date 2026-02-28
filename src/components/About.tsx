@@ -11,12 +11,13 @@ const About = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-12">
                     <Reveal direction="left" className="w-full md:w-1/2 flex justify-center">
-                        <div className="relative w-72 h-72 md:w-96 md:h-96">
+                        <div className="relative flex items-center justify-center w-72 md:w-96">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Icon"
-                                fill
-                                className="object-contain"
+                                width={384}
+                                height={384}
+                                className="object-contain w-full h-auto"
                             />
                         </div>
                     </Reveal>
