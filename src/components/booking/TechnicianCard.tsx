@@ -9,7 +9,7 @@ interface TechnicianCardProps {
     priority?: boolean;
 }
 
-export default function TechnicianCard({ technician, onSelect, selected, priority = false }: TechnicianCardProps) {
+export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSelect, selected, priority = false }) => {
     return (
         <div
             onClick={() => onSelect(technician)}

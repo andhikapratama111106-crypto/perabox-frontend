@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
 export default function FAQPage() {
     const { t } = useLanguage();
-
-    const faqs = t('faqPage.faqs') as unknown as { question: string; answer: string }[] | null;
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     const fallbackFaqs = [
         {
@@ -51,11 +52,12 @@ export default function FAQPage() {
         },
     ];
 
+    const faqs = t('faqPage.faqs') as unknown as { question: string; answer: string }[] | null;
     const displayFaqs = Array.isArray(faqs) && faqs.length > 0 ? faqs : fallbackFaqs;
 
     return (
         <main className="min-h-screen bg-light">
-            {/* Header */}
+            {/* Header omitted for brevity in target content, but keeping structure */}
             <div className="bg-dark text-white py-20">
                 <div className="container mx-auto px-6">
                     <Link href="/" className="inline-flex items-center text-sm text-gray-300 hover:text-white mb-6 transition-colors">
@@ -73,26 +75,46 @@ export default function FAQPage() {
                 </div>
             </div>
 
-            {/* FAQ List */}
             <div className="container mx-auto px-6 py-16 max-w-3xl">
                 <div className="space-y-4">
                     {displayFaqs.map((faq, index) => (
-                        <details
+                        <div
                             key={index}
-                            className="group bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
+                            className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden"
                         >
-                            <summary className="flex items-center justify-between cursor-pointer p-6 md:p-8 hover:bg-gray-50 transition-colors list-none">
+                            <button
+                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                                className="w-full flex items-center justify-between cursor-pointer p-6 md:p-8 hover:bg-gray-50 transition-colors text-left"
+                            >
                                 <h3 className="font-bold text-dark text-lg pr-4">{faq.question}</h3>
-                                <svg className="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <motion.svg
+                                    animate={{ rotate: openIndex === index ? 180 : 0 }}
+                                    className="w-5 h-5 text-primary flex-shrink-0"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                >
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </summary>
-                            <div className="px-6 pb-6 md:px-8 md:pb-8">
-                                <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
-                            </div>
-                        </details>
+                                </motion.svg>
+                            </button>
+                            <AnimatePresence>
+                                {openIndex === index && (
+                                    <motion.div
+                                        initial={{ height: 0, opacity: 0 }}
+                                        animate={{ height: 'auto', opacity: 1 }}
+                                        exit={{ height: 0, opacity: 0 }}
+                                        transition={{ duration: 0.3, ease: 'easeInOut' }}
+                                    >
+                                        <div className="px-6 pb-6 md:px-8 md:pb-8">
+                                            <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+                                        </div>
+                                    </motion.div>
+                                )}
+                            </AnimatePresence>
+                        </div>
                     ))}
                 </div>
+                {/* CTA omitted ... */}
 
                 {/* CTA */}
                 <div className="text-center mt-16 bg-secondary rounded-2xl p-10">

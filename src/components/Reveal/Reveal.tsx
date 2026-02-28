@@ -14,8 +14,8 @@ import {
 } from '@/utils/animationConfig';
 
 /* ───────── Types ───────── */
-export interface RevealProps extends UseRevealOptions {
-    children: React.ReactNode;
+export interface RevealProps extends UseRevealOptions, React.HTMLAttributes<HTMLElement> {
+    children?: React.ReactNode;
     className?: string;
     /** Animation direction. Default 'up' */
     direction?: 'up' | 'down' | 'left' | 'right' | 'none';
@@ -26,7 +26,7 @@ export interface RevealProps extends UseRevealOptions {
     /** Custom Framer Motion variants (overrides direction) */
     variants?: Variants;
     /** HTML tag for the wrapper. Default 'div' */
-    as?: any;
+    as?: keyof React.JSX.IntrinsicElements;
     /** Disable all animation via data attribute */
     'data-no-animations'?: boolean;
 }
@@ -79,7 +79,7 @@ export function Reveal({
     const totalDelay = delay + computedDelay / 1000; // convert ms → sec
 
     // Build motion component
-    const MotionComp = (motion as any)[as || 'div'] || motion.div;
+    const MotionComp = (motion as any)[as as string] || motion.div;
 
     return (
         <MotionComp

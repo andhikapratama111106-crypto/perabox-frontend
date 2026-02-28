@@ -7,7 +7,7 @@ import Features from "@/components/Features";
 import OurCompany from "@/components/OurCompany";
 import BrandSlider from "@/components/BrandSlider";
 import About from "@/components/About";
-import Services from "@/components/Services";
+import { Services } from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Discover from "@/components/Discover";
 import Testimonials from "@/components/Testimonials";

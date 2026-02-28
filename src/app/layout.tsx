@@ -5,10 +5,12 @@ import '../styles/animations.css';
 
 
 import ChatBot from '../components/ChatBot';
+import BackToTop from '../components/BackToTop';
 import Preloader from '../components/Preloader';
 import ScrollBlur from '../components/ScrollBlur';
 import { LanguageProvider } from '../context/LanguageContext';
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -128,7 +130,7 @@ export default function RootLayout({
                             "image": "https://perabox.vercel.app/perabox_icon.png",
                             "@id": "https://perabox.vercel.app",
                             "url": "https://perabox.vercel.app",
-                            "telephone": "+628123456789",
+                            "telephone": "+6281234567894",
                             "address": {
                                 "@type": "PostalAddress",
                                 "streetAddress": "Jl. Kemerdekaan No. 123",
@@ -152,8 +154,8 @@ export default function RootLayout({
                                     "Saturday",
                                     "Sunday"
                                 ],
-                                "opens": "00:00",
-                                "closes": "23:59"
+                                "opens": "08:00",
+                                "closes": "22:00"
                             },
                             "sameAs": [
                                 "https://facebook.com/perabox",
@@ -169,10 +171,20 @@ export default function RootLayout({
                 <LanguageProvider>
                     <ScrollBlur>
                         <div className="scroll-blur-content">
-                            {children}
+                            <AnimatePresence mode="wait">
+                                <motion.main
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -10 }}
+                                    transition={{ duration: 0.4, ease: "easeOut" }}
+                                >
+                                    {children}
+                                </motion.main>
+                            </AnimatePresence>
                         </div>
                     </ScrollBlur>
                     <ChatBot />
+                    <BackToTop />
                 </LanguageProvider>
             </body>
         </html>

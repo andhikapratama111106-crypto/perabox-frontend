@@ -1,7 +1,7 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-    const baseUrl = 'https://perabox.vercel.app'
+    const baseUrl = 'https://perabox.vercel.app';
 
     return [
         {
@@ -11,22 +11,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
             priority: 1,
         },
         {
-            url: `${baseUrl}/#about`,
+            url: `${baseUrl}/faq`,
             lastModified: new Date(),
             changeFrequency: 'monthly',
             priority: 0.8,
         },
         {
-            url: `${baseUrl}/#services`,
+            url: `${baseUrl}/login`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
-            priority: 0.8,
+            changeFrequency: 'yearly',
+            priority: 0.5,
+        },
+        {
+            url: `${baseUrl}/register`,
+            lastModified: new Date(),
+            changeFrequency: 'yearly',
+            priority: 0.5,
         },
         {
             url: `${baseUrl}/book`,
             lastModified: new Date(),
-            changeFrequency: 'always',
+            changeFrequency: 'monthly',
             priority: 0.9,
         },
-    ]
+    ];
 }

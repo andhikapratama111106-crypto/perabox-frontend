@@ -101,26 +101,28 @@ const Footer = () => {
 
                     <div>
                         <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.company')}</h4>
-                        <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="/#about" className="hover:text-primary transition-colors">{t('footer.aboutUs')}</Link></li>
-                            <li><Link href="/#services" className="hover:text-primary transition-colors">{t('footer.services')}</Link></li>
-                            <li><Link href="/blog" className="hover:text-primary transition-colors">Articles</Link></li>
+                        <ul className="space-y-4 text-sm">
+                            <li><Link href="/faq" className="text-gray-400 hover:text-primary transition-colors duration-300">FAQ</Link></li>
+                            <li><Link href="/terms" className="text-gray-400 hover:text-primary transition-colors duration-300">Terms of Service</Link></li>
+                            <li><Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">Privacy Policy</Link></li>
+                            <li><Link href="/contact" className="text-gray-400 hover:text-primary transition-colors duration-300">Contact Support</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">Join Us</h4>
                         <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="#" className="hover:text-primary transition-colors">Vendor Partner</Link></li>
+                            <li><Link href="/vendor-registration" className="hover:text-primary transition-colors">Vendor Partner</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.support')}</h4>
-                        <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="/faq" className="hover:text-primary transition-colors">{t('footer.faq')}</Link></li>
-                            <li><Link href="/contact" className="hover:text-primary transition-colors">{t('footer.contact')}</Link></li>
-                            <li><Link href="/feedback" className="hover:text-primary transition-colors">Feedback</Link></li>
+                        <ul className="space-y-4 text-sm">
+                            <li><Link href="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">About Us</Link></li>
+                            <li><Link href="/services" className="text-gray-400 hover:text-primary transition-colors duration-300">Services</Link></li>
+                            <li><Link href="/booking" className="text-gray-400 hover:text-primary transition-colors duration-300">Book Technician</Link></li>
+                            <li><Link href="/vendor-registration" className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm italic">Become a Vendor Partner</Link></li>
                         </ul>
                     </div>
                 </div>

@@ -25,5 +25,9 @@
     ],
     "theme_color": "#9C6D3F",
     "background_color": "#ffffff",
-    "display": "standalone"
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "orientation": "portrait",
+    "description": "Layanan perbaikan dan perawatan rumah terpercaya di Indonesia. AC Cleaning, AC Repair, dan layanan profesional lainnya."
 }

@@ -10,6 +10,7 @@ import { useParallax } from '@/hooks/useParallax';
 import { staggerContainer, splitLineReveal, fadeUp, reducedMotionVariants } from '@/utils/animationConfig';
 import { useLanguage } from '@/context/LanguageContext';
 import HoloLine from '@/components/HoloLine';
+import { MagneticButton } from '@/components/MagneticButton';
 
 const Hero = () => {
     const { ref: heroRef, isVisible, prefersReduced } = useReveal<HTMLElement>({
@@ -88,19 +89,23 @@ const Hero = () => {
                         transition={{ delay: 0.7 }}
                         className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
                     >
-                        <Link href="/book" className="group relative bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2">
-                            {t('hero.letsStart')}
-                            <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                            </svg>
-                        </Link>
-                        <button
-                            onClick={() => customSmoothScroll('#services')}
-                            className="px-10 py-4 border-2 border-primary/20 text-dark font-bold hover:bg-primary/5 hover:border-primary/40 rounded-full transition-all flex items-center gap-2 group active:scale-95"
-                        >
-                            {t('hero.exploreServices')}
-                            <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform"></span>
-                        </button>
+                        <MagneticButton>
+                            <Link href="/book" className="group relative bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2">
+                                {t('hero.letsStart')}
+                                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </Link>
+                        </MagneticButton>
+                        <MagneticButton>
+                            <button
+                                onClick={() => customSmoothScroll('#services')}
+                                className="px-10 py-4 border-2 border-primary/20 text-dark font-bold hover:bg-primary/5 hover:border-primary/40 rounded-full transition-all flex items-center gap-2 group active:scale-95"
+                            >
+                                {t('hero.exploreServices')}
+                                <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform"></span>
+                            </button>
+                        </MagneticButton>
                     </motion.div>
 
                     {/* Social proof */}
@@ -139,6 +144,7 @@ const Hero = () => {
                                 fill
                                 className="object-cover object-[40%_35%] scale-[1.35]"
                                 priority
+                                sizes="(max-width: 1024px) 100vw, 50vw"
                                 onError={(e) => {
                                     const target = e.target as HTMLImageElement;
                                     target.src = "https://images.unsplash.com/photo-1581578731548-c64695cc6954?auto=format&fit=crop&q=80&w=1200";

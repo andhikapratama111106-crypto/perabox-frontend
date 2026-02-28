@@ -7,8 +7,14 @@ import Footer from '@/components/Footer';
 import { useLanguage } from '@/context/LanguageContext';
 import { servicesAPI, bookingsAPI, techniciansAPI } from '@/lib/api';
 import { mockTechnicians, Technician, timeSlots, serviceTypes } from '@/data/mockData';
-import TechnicianCard from '@/components/booking/TechnicianCard';
+import { TechnicianCard } from '@/components/booking/TechnicianCard';
 import QRISModal from '@/components/booking/QRISModal';
+import dynamic from 'next/dynamic';
+
+const MapPicker = dynamic(() => import('@/components/MapPicker'), {
+    ssr: false,
+    loading: () => <div className="h-[300px] w-full bg-gray-100 animate-pulse rounded-2xl border-2 border-dashed border-gray-200 flex items-center justify-center text-gray-400 font-bold uppercase tracking-widest">Loading Map...</div>
+});
 
 // Extend Service interface for mock data compatibility
 interface Service {
@@ -561,8 +567,18 @@ Mohon konfirmasinya. Terima kasih.`;
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.address')}</label>
-                                <textarea className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 min-h-[100px]"
-                                    value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} placeholder={t('bookPage.addressPlaceholder')}></textarea>
+                                <MapPicker
+                                    onAddressSelect={(addr) => setFormData(prev => ({ ...prev, address: addr }))}
+                                    initialAddress={formData.address}
+                                />
+                                <div className="mt-4">
+                                    <textarea
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 min-h-[80px] text-sm"
+                                        value={formData.address}
+                                        onChange={e => setFormData({ ...formData, address: e.target.value })}
+                                        placeholder={t('bookPage.addressPlaceholder')}
+                                    />
+                                </div>
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.notes')}</label>

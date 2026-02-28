@@ -5,11 +5,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Reveal } from './Reveal/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
 
-const Services = () => {
+interface Service {
+    title: string;
+    image: string;
+    headline: string;
+    description: string;
+    features: string[];
+}
+
+export const Services: React.FC = () => {
     const [activeTab, setActiveTab] = useState(0);
     const { t } = useLanguage();
 
-    const services = [
+    const services: Service[] = [
         {
             title: t('servicesSection.service1Title'),
             image: "/ac_cleaning.jpg",

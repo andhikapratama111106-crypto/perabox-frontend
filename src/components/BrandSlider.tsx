@@ -120,7 +120,7 @@ export default function BrandSlider() {
                 .marquee-track {
                     display: inline-flex;
                     gap: 60px;
-                    animation: marquee 45s linear infinite;
+                    animation: marquee 80s linear infinite;
                     will-change: transform;
                 }
 

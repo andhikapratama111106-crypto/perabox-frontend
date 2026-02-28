@@ -3,6 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { Reveal } from '@/components/Reveal/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
+import Image from 'next/image';
 
 const Discover = () => {
     const router = useRouter();
@@ -13,21 +14,18 @@ const Discover = () => {
             date: t('discover.article1Date'),
             image: "/article_handyman.png",
             slug: "/blog/peralatan-perawatan-ac",
-            position: "center"
         },
         {
             title: t('discover.article2Title'),
             date: t('discover.article2Date'),
             image: "/article_ac_broken.png",
             slug: "/blog/ac-menangis",
-            position: "top"
         },
         {
             title: t('discover.article3Title'),
             date: t('discover.article3Date'),
             image: "/article_ac_unit.png",
             slug: "/blog/cara-memperbaiki-ac",
-            position: "bottom"
         }
     ];
 
@@ -43,14 +41,22 @@ const Discover = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                     {articles.map((article, index) => (
-                        <Reveal key={index} direction="up" delay={index * 0.15} staggerIndex={index} staggerDelay={100}>
+                        <Reveal key={index} direction="up" delay={index * 0.15}>
                             <div
-                                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow cursor-pointer block"
+                                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow cursor-pointer block group"
                                 onClick={() => article.slug !== "#" && router.push(article.slug)}
                             >
-                                <div className="h-48 bg-cover" style={{ backgroundImage: `url(${article.image})`, backgroundPosition: article.position || 'center' }}></div>
+                                <div className="h-48 relative overflow-hidden">
+                                    <Image
+                                        src={article.image}
+                                        alt={article.title}
+                                        fill
+                                        className="object-cover transition-transform duration-500 group-hover:scale-110"
+                                        sizes="(max-width: 768px) 100vw, 33vw"
+                                    />
+                                </div>
                                 <div className="p-6">
-                                    <h3 className="font-bold text-dark mb-2 line-clamp-2 min-h-[3rem]">{article.title}</h3>
+                                    <h3 className="font-bold text-dark mb-2 line-clamp-2 min-h-[3rem] group-hover:text-primary transition-colors">{article.title}</h3>
                                     <p className="text-xs text-gray-400">{article.date}</p>
                                 </div>
                             </div>
@@ -68,8 +74,8 @@ const Discover = () => {
                         </button>
                     </div>
                 </Reveal>
-            </div>
-        </section>
+            </div >
+        </section >
     );
 };
 
