@@ -106,7 +106,7 @@ const Navbar = () => {
                     onClick={() => resetPreloading()}
                 >
                     <div className="flex items-center">
-                        <div className="h-16 md:h-20 aspect-[16/9] relative">
+                        <div className="h-16 md:h-20 aspect-square relative">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Logo"

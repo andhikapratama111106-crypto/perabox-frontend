@@ -124,7 +124,7 @@ export function AnimatedNavbar({
                     className="transition-all"
                     onClick={() => resetPreloading()}
                 >
-                    <div className="h-16 md:h-20 aspect-[16/9] relative">
+                    <div className="h-16 md:h-20 aspect-square relative">
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
