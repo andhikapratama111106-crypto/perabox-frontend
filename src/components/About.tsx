@@ -30,7 +30,7 @@ const About = () => {
                     {/* Right: Content */}
                     <Reveal direction="right" delay={0.2} className="w-full lg:w-1/2">
                         <div className="text-left">
-                            <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">Our Story</span>
+                            <span className="text-primary font-bold tracking-[0.2em] uppercase text-sm mb-4 block">About Us</span>
                             <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-dark mb-8 leading-[1.1] tracking-tighter">
                                 {t('aboutSection.mainHeading')}
                             </h2>
