@@ -112,6 +112,7 @@ const Navbar = () => {
                             width={160}
                             height={90}
                             className="h-12 w-auto md:h-14 object-contain"
+                            style={{ aspectRatio: '16/9' }}
                             priority
                         />
                     </div>

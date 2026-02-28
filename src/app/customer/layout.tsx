@@ -132,7 +132,7 @@ export default function CustomerLayout({
         { code: 'id', name: 'Indonesia', flag: '🇮🇩' },
         { code: 'es', name: 'Español', flag: '🇪🇸' },
         { code: 'ja', name: '日本語', flag: '🇯🇵' },
-        { code: 'fr', name: 'Français', flag: '🇫🇷' },
+        { code: 'zh', name: '中文', flag: '🇨🇳' },
     ];
 
     return (
@@ -151,6 +151,7 @@ export default function CustomerLayout({
                             width={160}
                             height={90}
                             className="h-12 w-auto md:h-14 object-contain"
+                            style={{ aspectRatio: '16/9' }}
                             priority
                         />
                     </div>
@@ -189,6 +190,7 @@ export default function CustomerLayout({
                                 width={160}
                                 height={90}
                                 className="h-20 w-auto object-contain"
+                                style={{ aspectRatio: '16/9' }}
                                 priority
                             />
                         </div>

@@ -147,6 +147,7 @@ export default function RegisterPage() {
                                                 width={160}
                                                 height={90}
                                                 className="h-12 w-auto"
+                                                style={{ aspectRatio: '16/9' }}
                                             />
                                         </div>
                                     </Link>
