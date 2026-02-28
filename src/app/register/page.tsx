@@ -141,13 +141,13 @@ export default function RegisterPage() {
                                 <div className="relative z-10">
                                     <Link href="/" className="inline-block mb-12">
                                         <div className="bg-white/90 backdrop-blur p-4 rounded-2xl shadow-xl flex items-center justify-center">
-                                            <div className="w-[120px] relative overflow-hidden">
-                                                <div style={{ paddingBottom: '56.25%' }}></div>
+                                            <div className="h-12 aspect-[16/9] relative">
                                                 <Image
                                                     src="/perabox_icon.png"
                                                     alt="PERABOX Logo"
                                                     fill
-                                                    className="absolute inset-0 object-contain"
+                                                    className="object-contain"
+                                                    style={{ aspectRatio: '16/9' }}
                                                 />
                                             </div>
                                         </div>

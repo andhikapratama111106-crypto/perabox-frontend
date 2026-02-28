@@ -106,17 +106,14 @@ const Navbar = () => {
                     onClick={() => resetPreloading()}
                 >
                     <div className="flex items-center">
-                        <div className="h-12 md:h-14 w-auto relative">
-                            <div className="w-[85px] md:w-[100px] relative overflow-hidden">
-                                <div style={{ paddingBottom: '56.25%' }}></div>
-                                <Image
-                                    src="/perabox_icon.png"
-                                    alt="PERABOX Logo"
-                                    fill
-                                    className="absolute inset-0 object-contain"
-                                    priority
-                                />
-                            </div>
+                        <div className="h-12 md:h-14 aspect-[16/9] relative">
+                            <Image
+                                src="/perabox_icon.png"
+                                alt="PERABOX Logo"
+                                fill
+                                className="object-contain"
+                                priority
+                            />
                         </div>
                     </div>
                 </Link>

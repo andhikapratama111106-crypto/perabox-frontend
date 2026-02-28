@@ -11,13 +11,12 @@ const About = () => {
             <div className="container mx-auto px-6">
                 <div className="flex flex-col md:flex-row items-center gap-12">
                     <Reveal direction="left" className="w-full md:w-1/2 flex justify-center">
-                        <div className="w-full max-w-[440px] relative shadow-sm rounded-2xl overflow-hidden">
-                            <div style={{ paddingBottom: '56.25%' }}></div>
+                        <div className="w-full max-w-[440px] aspect-[16/9] relative shadow-sm rounded-2xl overflow-hidden">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Icon"
                                 fill
-                                className="absolute inset-0 object-contain"
+                                className="object-contain"
                                 priority
                             />
                         </div>

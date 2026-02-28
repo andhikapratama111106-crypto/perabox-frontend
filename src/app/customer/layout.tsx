@@ -145,13 +145,13 @@ export default function CustomerLayout({
                     onClick={() => useUIStore.getState().resetPreloading()}
                 >
                     <div>
-                        <div className="w-[85px] md:w-[100px] relative overflow-hidden">
-                            <div style={{ paddingBottom: '56.25%' }}></div>
+                        <div className="h-12 md:h-14 aspect-[16/9] relative">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Logo"
                                 fill
-                                className="absolute inset-0 object-contain"
+                                className="object-contain"
+                                style={{ aspectRatio: '16/9' }}
                                 priority
                             />
                         </div>
@@ -183,14 +183,15 @@ export default function CustomerLayout({
                 {/* Sidebar Navigation */}
                 <aside className="w-full md:w-64 flex-shrink-0">
                     <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
+                        {/* Sidebar Logo */}
                         <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
-                            <div className="w-[142px] relative overflow-hidden">
-                                <div style={{ paddingBottom: '56.25%' }}></div>
+                            <div className="h-20 aspect-[16/9] relative">
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX Icon"
                                     fill
-                                    className="absolute inset-0 object-contain"
+                                    className="object-contain"
+                                    style={{ aspectRatio: '16/9' }}
                                     priority
                                 />
                             </div>

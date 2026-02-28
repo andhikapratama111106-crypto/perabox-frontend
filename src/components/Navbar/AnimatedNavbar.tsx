@@ -124,13 +124,12 @@ export function AnimatedNavbar({
                     className="transition-all"
                     onClick={() => resetPreloading()}
                 >
-                    <div className="w-[85px] md:w-[100px] relative overflow-hidden">
-                        <div style={{ paddingBottom: '56.25%' }}></div>
+                    <div className="h-12 md:h-14 aspect-[16/9] relative">
                         <Image
                             src="/perabox_icon.png"
                             alt="PERABOX Logo"
                             fill
-                            className="absolute inset-0 object-contain"
+                            className="object-contain"
                             priority
                         />
                     </div>
