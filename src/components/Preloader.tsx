@@ -57,7 +57,7 @@ export default function Preloader() {
                     {/* Logo Branding */}
                     <div className="relative z-10 flex flex-col items-center">
                         <div className="opacity-100">
-                            <div className="w-56 md:w-72 aspect-[16/9] relative">
+                            <div className="w-40 md:w-56 aspect-[16/9] relative">
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX"
