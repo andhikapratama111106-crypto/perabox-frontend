@@ -91,3 +91,4 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
         </div>
     );
 }
+export default TechnicianCard;

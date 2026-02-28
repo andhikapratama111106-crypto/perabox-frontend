@@ -568,7 +568,7 @@ Mohon konfirmasinya. Terima kasih.`;
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.address')}</label>
                                 <MapPicker
-                                    onAddressSelect={(addr) => setFormData(prev => ({ ...prev, address: addr }))}
+                                    onAddressSelect={(addr, lat, lng) => setFormData(prev => ({ ...prev, address: addr }))}
                                     initialAddress={formData.address}
                                 />
                                 <div className="mt-4">
