@@ -57,12 +57,13 @@ export default function Preloader() {
                     {/* Logo Branding */}
                     <div className="relative z-10 flex flex-col items-center">
                         <div className="opacity-100">
-                            <div className="w-40 md:w-56 aspect-[16/9] relative">
+                            <div className="w-40 md:w-56 relative overflow-hidden">
+                                <div style={{ paddingBottom: '56.25%' }}></div>
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX"
                                     fill
-                                    className="object-contain"
+                                    className="absolute inset-0 object-contain"
                                     priority
                                 />
                             </div>
