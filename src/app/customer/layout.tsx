@@ -145,15 +145,16 @@ export default function CustomerLayout({
                     onClick={() => useUIStore.getState().resetPreloading()}
                 >
                     <div>
-                        <Image
-                            src="/perabox_icon.png"
-                            alt="PERABOX Logo"
-                            width={160}
-                            height={90}
-                            className="h-12 w-auto md:h-14 object-contain"
-                            style={{ aspectRatio: '16/9' }}
-                            priority
-                        />
+                        <div className="h-12 md:h-14 aspect-[16/9] relative">
+                            <Image
+                                src="/perabox_icon.png"
+                                alt="PERABOX Logo"
+                                fill
+                                className="object-contain"
+                                style={{ aspectRatio: '16/9' }}
+                                priority
+                            />
+                        </div>
                     </div>
                 </Link>
                 <div className="hidden md:flex items-center gap-8">
@@ -184,15 +185,16 @@ export default function CustomerLayout({
                     <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
                         {/* Sidebar Logo */}
                         <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
-                            <Image
-                                src="/perabox_icon.png"
-                                alt="PERABOX Icon"
-                                width={160}
-                                height={90}
-                                className="h-20 w-auto object-contain"
-                                style={{ aspectRatio: '16/9' }}
-                                priority
-                            />
+                            <div className="h-20 aspect-[16/9] relative">
+                                <Image
+                                    src="/perabox_icon.png"
+                                    alt="PERABOX Icon"
+                                    fill
+                                    className="object-contain"
+                                    style={{ aspectRatio: '16/9' }}
+                                    priority
+                                />
+                            </div>
                         </div>
 
                         <div className="space-y-1.5 mb-auto">

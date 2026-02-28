@@ -124,15 +124,15 @@ export function AnimatedNavbar({
                     className="transition-all"
                     onClick={() => resetPreloading()}
                 >
-                    <Image
-                        src="/perabox_icon.png"
-                        alt="PERABOX Logo"
-                        width={160}
-                        height={90}
-                        className="h-12 w-auto md:h-14 object-contain"
-                        style={{ aspectRatio: '16/9' }}
-                        priority
-                    />
+                    <div className="h-12 md:h-14 aspect-[16/9] relative">
+                        <Image
+                            src="/perabox_icon.png"
+                            alt="PERABOX Logo"
+                            fill
+                            className="object-contain"
+                            priority
+                        />
+                    </div>
                 </Link>
 
                 {/* Desktop Links */}
