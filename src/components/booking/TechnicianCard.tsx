@@ -53,7 +53,7 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
 
                 {technician.bio && (
                     <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70">
-                        "{technician.bio}"
+                        &quot;{technician.bio}&quot;
                     </p>
                 )}
 
