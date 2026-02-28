@@ -276,64 +276,66 @@ Mohon konfirmasinya. Terima kasih.`;
                             </button>
                         </div>
 
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-                            {/* ROBUST INSTANT LOAD LOGIC */}
-                            {(() => {
-                                // 1. Determine data source. Always fallback to mockTechnicians if state is empty.
-                                const displayTechs = (technicians && technicians.length > 0) ? technicians : (mockTechnicians || []);
+                        <div className="max-h-[480px] overflow-y-auto pr-1 rounded-2xl scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                                {/* ROBUST INSTANT LOAD LOGIC */}
+                                {(() => {
+                                    // 1. Determine data source. Always fallback to mockTechnicians if state is empty.
+                                    const displayTechs = (technicians && technicians.length > 0) ? technicians : (mockTechnicians || []);
 
-                                // 2. Handle the "True Empty" state (loading initiated and NO data available yet)
-                                // We show Skeletons instead of a spinner or "No technician" message for a better UX.
-                                if (loading && displayTechs.length === 0) {
-                                    return Array(8).fill(0).map((_, i) => (
-                                        <div key={`skeleton-${i}`} className="bg-white rounded-3xl p-4 animate-pulse border-2 border-transparent shadow-sm">
-                                            <div className="aspect-[4/5] bg-gray-100 rounded-2xl mb-4 shadow-inner" />
-                                            <div className="h-4 bg-gray-100 rounded-full w-3/4 mb-2" />
-                                            <div className="h-3 bg-gray-50 rounded-full w-1/2 mb-4" />
-                                            <div className="h-10 bg-gray-50 rounded-xl w-full" />
-                                        </div>
-                                    ));
-                                }
-
-                                // 3. Handle the "Actual Empty" state (fetch completed and still NO data found anywhere)
-                                if (displayTechs.length === 0 && !loading) {
-                                    return (
-                                        <div className="col-span-full text-center py-10 bg-white rounded-3xl border-2 border-dashed border-gray-200">
-                                            <p className="text-gray-400 mb-4">{t('bookPage.noTechs')}</p>
-                                            <button
-                                                onClick={() => window.location.reload()}
-                                                className="bg-primary/10 text-primary px-6 py-2 rounded-full font-bold hover:bg-primary/20 transition-all"
-                                            >
-                                                {t('bookPage.tryAgain')}
-                                            </button>
-                                        </div>
-                                    );
-                                }
-
-                                // 4. Render the Technicians (Mock or Live)
-                                return (
-                                    <>
-                                        {/* Dynamic Banner to inform user if we are showing top picks (Mock) */}
-                                        {displayTechs.length > 0 && (
-                                            <div className="col-span-full mb-4 px-6 py-3 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-700">
-                                                <span className="text-xl">✨</span>
-                                                <div>
-                                                    <p className="text-amber-800 text-sm font-bold">{t('bookPage.topTechs')}</p>
-                                                    <p className="text-amber-700 text-xs">{t('bookPage.topTechsSub')}</p>
-                                                </div>
+                                    // 2. Handle the "True Empty" state (loading initiated and NO data available yet)
+                                    // We show Skeletons instead of a spinner or "No technician" message for a better UX.
+                                    if (loading && displayTechs.length === 0) {
+                                        return Array(8).fill(0).map((_, i) => (
+                                            <div key={`skeleton-${i}`} className="bg-white rounded-3xl p-4 animate-pulse border-2 border-transparent shadow-sm">
+                                                <div className="aspect-[4/5] bg-gray-100 rounded-2xl mb-4 shadow-inner" />
+                                                <div className="h-4 bg-gray-100 rounded-full w-3/4 mb-2" />
+                                                <div className="h-3 bg-gray-50 rounded-full w-1/2 mb-4" />
+                                                <div className="h-10 bg-gray-50 rounded-xl w-full" />
                                             </div>
-                                        )}
-                                        {displayTechs.map((tech: Technician, index: number) => (
-                                            <TechnicianCard
-                                                key={tech.id}
-                                                technician={tech}
-                                                onSelect={handleTechnicianSelect}
-                                                priority={index < 4}
-                                            />
-                                        ))}
-                                    </>
-                                );
-                            })()}
+                                        ));
+                                    }
+
+                                    // 3. Handle the "Actual Empty" state (fetch completed and still NO data found anywhere)
+                                    if (displayTechs.length === 0 && !loading) {
+                                        return (
+                                            <div className="col-span-full text-center py-10 bg-white rounded-3xl border-2 border-dashed border-gray-200">
+                                                <p className="text-gray-400 mb-4">{t('bookPage.noTechs')}</p>
+                                                <button
+                                                    onClick={() => window.location.reload()}
+                                                    className="bg-primary/10 text-primary px-6 py-2 rounded-full font-bold hover:bg-primary/20 transition-all"
+                                                >
+                                                    {t('bookPage.tryAgain')}
+                                                </button>
+                                            </div>
+                                        );
+                                    }
+
+                                    // 4. Render the Technicians (Mock or Live)
+                                    return (
+                                        <>
+                                            {/* Dynamic Banner to inform user if we are showing top picks (Mock) */}
+                                            {displayTechs.length > 0 && (
+                                                <div className="col-span-full mb-4 px-6 py-3 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-700">
+                                                    <span className="text-xl">✨</span>
+                                                    <div>
+                                                        <p className="text-amber-800 text-sm font-bold">{t('bookPage.topTechs')}</p>
+                                                        <p className="text-amber-700 text-xs">{t('bookPage.topTechsSub')}</p>
+                                                    </div>
+                                                </div>
+                                            )}
+                                            {displayTechs.map((tech: Technician, index: number) => (
+                                                <TechnicianCard
+                                                    key={tech.id}
+                                                    technician={tech}
+                                                    onSelect={handleTechnicianSelect}
+                                                    priority={index < 4}
+                                                />
+                                            ))}
+                                        </>
+                                    );
+                                })()}
+                            </div>
                         </div>
                     </div>
                 )}
