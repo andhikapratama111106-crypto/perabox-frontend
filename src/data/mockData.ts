@@ -39,7 +39,7 @@ export const mockTechnicians: Technician[] = [
     },
     {
         id: 'tech-003',
-        name: 'Dedi Kurniawan',
+        name: 'Dewi Lestari',
         photoUrl: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=400&auto=format&fit=crop',
         rating: 4.7,
         reviewCount: 64,
