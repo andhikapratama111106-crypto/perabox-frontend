@@ -145,12 +145,13 @@ export default function CustomerLayout({
                     onClick={() => useUIStore.getState().resetPreloading()}
                 >
                     <div>
-                        <div className="h-16 md:h-18 aspect-square relative">
+                        <div className="h-12 md:h-14 aspect-[16/9] relative">
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Logo"
                                 fill
                                 className="object-contain"
+                                style={{ aspectRatio: '16/9' }}
                                 priority
                             />
                         </div>
@@ -184,12 +185,13 @@ export default function CustomerLayout({
                     <div className="bg-white rounded-[2rem] p-5 shadow-sm h-full flex flex-col border border-gray-100">
                         {/* Sidebar Logo */}
                         <div className="px-4 py-8 mb-2 border-b border-gray-50 flex justify-center">
-                            <div className="h-24 aspect-square relative">
+                            <div className="h-20 aspect-[16/9] relative">
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX Icon"
                                     fill
                                     className="object-contain"
+                                    style={{ aspectRatio: '16/9' }}
                                     priority
                                 />
                             </div>
