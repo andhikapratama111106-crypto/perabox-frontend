@@ -15,140 +15,147 @@ export interface Technician {
 export const mockTechnicians: Technician[] = [
     {
         id: 'tech-001',
-        name: 'Irma Santoso',
-        photoUrl: '/technician_1.jpg',
+        name: 'Budi Santoso',
+        photoUrl: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?q=80&w=400&auto=format&fit=crop',
         rating: 4.9,
         reviewCount: 128,
         specialties: ['Service AC', 'Cuci AC'],
         basePrice: 75000,
         phone: '6281234567890',
-        bio: 'Berpengalaman lebih dari 5 tahun dalam menangani berbagai jenis kerusakan AC. Cepat, rapi, dan jujur.'
+        experience: '8 Tahun',
+        bio: 'Spesialis sistem pendingin udara dengan sertifikasi BNSP. Mengutamakan ketepatan dan efisiensi.'
     },
     {
         id: 'tech-002',
-        name: 'Ahmad Rizki',
-        photoUrl: '/technician_2.jpg',
+        name: 'Rahmat Hidayat',
+        photoUrl: 'https://images.unsplash.com/photo-1544717297-fa234a74a5fc?q=80&w=400&auto=format&fit=crop',
         rating: 4.8,
         reviewCount: 95,
         specialties: ['Bongkar Pasang', 'Service Besar'],
         basePrice: 150000,
         phone: '6281234567891',
-        bio: 'Spesialis bongkar pasang AC dengan pengerjaan yang presisi untuk semua merk AC.'
+        experience: '10 Tahun',
+        bio: 'Ahli dalam bongkar pasang unit AC untuk hunian maupun gedung perkantoran.'
     },
     {
         id: 'tech-003',
         name: 'Dedi Kurniawan',
-        photoUrl: '/technician_3.jpg',
+        photoUrl: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=400&auto=format&fit=crop',
         rating: 4.7,
         reviewCount: 64,
         specialties: ['Cuci AC', 'Freon Refill'],
         basePrice: 85000,
         phone: '6281234567892',
-        bio: 'Ahli dalam perawatan rutin AC dan pengisian freon. Mengutamakan kepuasan pelanggan.'
+        experience: '5 Tahun',
+        bio: 'Menguasai teknik perawatan unit AC agar hemat energi dan tetap dingin maksimal.'
     },
     {
         id: 'tech-004',
-        name: 'Sari Wulandari',
-        photoUrl: '/technician_4.jpg',
+        name: 'Siska Wulandari',
+        photoUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop',
         rating: 5.0,
         reviewCount: 42,
-        specialties: ['Cuci AC', 'Perbaikan Ringan'],
+        specialties: ['Layanan Pembersihan', 'Deep Cleaning'],
         basePrice: 75000,
         phone: '6281234567893',
-        bio: 'Teknisi ramah dan teliti dalam pengerjaan pembersihan unit AC agar tetap dingin maksimal.'
+        experience: '6 Tahun',
+        bio: 'Sangat teliti dalam pengerjaan pembersihan interior dan perawatan homecare.'
     },
     {
         id: 'tech-005',
-        name: 'Lestari Putri',
-        photoUrl: '/technician_5.jpg',
+        name: 'Anton Setiawan',
+        photoUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop',
         rating: 4.8,
         reviewCount: 110,
-        specialties: ['Bongkar Pasang', 'Instalasi'],
+        specialties: ['Listrik', 'Instalasi'],
         basePrice: 150000,
         phone: '6281234567894',
-        bio: 'Multi-skill teknisi dengan jam terbang tinggi. Solusi lengkap untuk urusan rumah Anda.'
+        experience: '7 Tahun',
+        bio: 'Teknisi multi-skill yang handal dalam perbaikan sistem kelistrikan dan pipa air.'
     },
     {
         id: 'tech-006',
-        name: 'Dewi Anggraini',
-        photoUrl: '/technician_6.jpg',
+        name: 'Maya Putri',
+        photoUrl: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=400&auto=format&fit=crop',
         rating: 4.9,
         reviewCount: 88,
-        specialties: ['Cleaning & Maintenance'],
+        specialties: ['Cleaning Service', 'Maintenance'],
         basePrice: 80000,
         phone: '6281234567895',
-        bio: 'Ahli instalasi dan perbaikan sistem kelistrikan bangunan. Aman dan bersertifikat.'
+        experience: '4 Tahun',
+        bio: 'Berpengalaman dalam mengelola kebersihan unit apartemen dan rumah tinggal.'
     },
     {
         id: 'tech-007',
-        name: 'Siti Aminah',
-        photoUrl: '/technician_7.jpg',
+        name: 'Siti Rahayu',
+        photoUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=400&auto=format&fit=crop',
         rating: 4.6,
         reviewCount: 56,
-        specialties: ['Service AC', 'Isi Freon'],
+        specialties: ['Sanitasi', 'Homecare'],
         basePrice: 85000,
         phone: '6281234567896',
-        bio: 'Cekatan dalam memberikan layanan pembersihan rumah secara menyeluruh.'
+        experience: '5 Tahun',
+        bio: 'Spesialis sanitasi dan pembersihan sudut-sudut sulit di area dapur dan kamar mandi.'
     },
     {
         id: 'tech-008',
-        name: 'Andi Wijaya',
-        photoUrl: '/technician_8.jpg',
+        name: 'Hadi Wijaya',
+        photoUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop',
         rating: 4.8,
         reviewCount: 72,
-        specialties: ['Service AC', 'Cuci AC'],
+        specialties: ['Service AC', 'Isi Freon'],
         basePrice: 75000,
         phone: '628123456789b',
         experience: '4 Tahun',
-        bio: 'Siap membantu Anda mencuci AC agar performa unit kembali seperti baru dengan pengerjaan bersih.'
+        bio: 'Fokus pada hasil pengerjaan yang bersih tanpa meninggalkan bekas kotoran.'
     },
     {
         id: 'tech-009',
-        name: 'Rudi Tabuti',
-        photoUrl: '/technician_9.jpg',
+        name: 'Feri Irawan',
+        photoUrl: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=400&auto=format&fit=crop',
         rating: 4.9,
         reviewCount: 88,
-        specialties: ['Service AC', 'Isi Freon'],
+        specialties: ['Teknisi Listrik', 'CCTV'],
         basePrice: 100000,
         phone: '628123456789c',
         experience: '6 Tahun',
-        bio: 'Memberikan garansi pengerjaan untuk setiap perbaikan AC. Handal dan terpercaya.'
+        bio: 'Ahli dalam perbaikan arus pendek dan instalasi perangkat keamanan rumah.'
     },
     {
         id: 'tech-010',
-        name: 'Deni Setiawan',
-        photoUrl: '/technician_10.jpg',
+        name: 'Yoga Pratama',
+        photoUrl: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop',
         rating: 4.7,
         reviewCount: 54,
-        specialties: ['Service AC', 'Bongkar Pasang'],
+        specialties: ['Plambing', 'Pompa Air'],
         basePrice: 150000,
         phone: '628123456789d',
-        experience: '5 Tahun',
-        bio: 'Berpengalaman dalam instalasi unit AC baru baik split maupun central.'
+        experience: '9 Tahun',
+        bio: 'Solusi cepat untuk masalah bocoran pipa dan perbaikan pompa air yang mati total.'
     },
     {
         id: 'tech-011',
-        name: 'Indah Permata',
-        photoUrl: '/technician_11.jpg',
+        name: 'Agus Salim',
+        photoUrl: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=400&auto=format&fit=crop',
         rating: 4.8,
         reviewCount: 38,
-        specialties: ['Service AC', 'Listrik'],
+        specialties: ['Cat Dinding', 'Handyman'],
         basePrice: 120000,
         phone: '628123456789e',
-        experience: '3 Tahun',
-        bio: 'Mengerjakan perbaikan AC dan instalasi listrik dengan standar keamanan tinggi.'
+        experience: '12 Tahun',
+        bio: 'Senior handyman yang menguasai berbagai pekerjaan sipil ringan untuk rumah Anda.'
     },
     {
         id: 'tech-012',
-        name: 'Citra Kirana',
-        photoUrl: '/technician_12.jpg',
+        name: 'Arif Maulana',
+        photoUrl: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop',
         rating: 4.9,
         reviewCount: 65,
-        specialties: ['Kebersihan', 'Plambing'],
+        specialties: ['Home Security', 'Smart Home'],
         basePrice: 80000,
         phone: '628123456789f',
-        experience: '4 Tahun',
-        bio: 'Layanan homecare terpercaya untuk kebersihan dan perbaikan pipa air bocor.'
+        experience: '3 Tahun',
+        bio: 'Membantu modernisasi hunian Anda dengan instalasi perangkat smart home terkini.'
     }
 ];
 

@@ -432,7 +432,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <div className="flex items-center gap-1.5 mt-1">
                                             <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
                                             <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-none">
-                                                {selectedTechnician.specialty}
+                                                {selectedTechnician.experience} Experience
                                             </p>
                                         </div>
                                     </div>
@@ -640,7 +640,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
                                         <div className="flex items-center gap-1.5">
                                             <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
-                                            <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">{selectedTechnician?.specialty}</p>
+                                            <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">{selectedTechnician?.experience} Experience</p>
                                         </div>
                                     </div>
                                 </div>
