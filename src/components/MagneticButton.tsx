@@ -43,7 +43,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
             animate={{ x: position.x, y: position.y }}
-            transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+            transition={{ type: "spring", stiffness: 300, damping: 18, mass: 0.08 }}
         >
             {children}
         </motion.div>

@@ -89,22 +89,45 @@ const Hero = () => {
                         transition={{ delay: 0.7 }}
                         className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
                     >
-                        <MagneticButton>
-                            <Link href="/book" className="group relative bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-full transition-all shadow-xl hover:shadow-2xl active:scale-95 flex items-center gap-2">
-                                {t('hero.letsStart')}
-                                <svg className="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                </svg>
-                            </Link>
-                        </MagneticButton>
-                        <MagneticButton>
-                            <button
-                                onClick={() => customSmoothScroll('#services')}
-                                className="px-10 py-4 border-2 border-primary/20 text-dark font-bold hover:bg-primary/5 hover:border-primary/40 rounded-full transition-all flex items-center gap-2 group active:scale-95"
+                        {/* Primary CTA — shimmer + glow */}
+                        <MagneticButton distance={0.35}>
+                            <motion.div
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 0.96 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
                             >
-                                {t('hero.exploreServices')}
-                                <span className="w-1.5 h-1.5 bg-accent rounded-full group-hover:scale-150 transition-transform"></span>
-                            </button>
+                                <Link
+                                    href="/book"
+                                    className="group relative overflow-hidden bg-primary text-white font-extrabold py-4 px-10 rounded-full flex items-center gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(156,109,63,0.45)] transition-shadow duration-300"
+                                >
+                                    {/* Shimmer sweep */}
+                                    <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-[-20deg]" />
+                                    <span className="relative z-10">{t('hero.letsStart')}</span>
+                                    <svg className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                    </svg>
+                                </Link>
+                            </motion.div>
+                        </MagneticButton>
+
+                        {/* Secondary CTA — slide fill */}
+                        <MagneticButton distance={0.35}>
+                            <motion.button
+                                whileHover={{ scale: 1.04 }}
+                                whileTap={{ scale: 0.96 }}
+                                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                                onClick={() => customSmoothScroll('#services')}
+                                className="group relative overflow-hidden px-10 py-4 border-2 border-primary/30 text-dark font-extrabold rounded-full flex items-center gap-2.5 hover:border-primary/60 transition-colors duration-300"
+                            >
+                                {/* Sliding fill background */}
+                                <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out bg-primary/8 rounded-full" />
+                                <span className="relative z-10">{t('hero.exploreServices')}</span>
+                                <motion.span
+                                    animate={{ scale: [1, 1.5, 1] }}
+                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                    className="relative z-10 w-2 h-2 bg-accent rounded-full"
+                                />
+                            </motion.button>
                         </MagneticButton>
                     </motion.div>
 
