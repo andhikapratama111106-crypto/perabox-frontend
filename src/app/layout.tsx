@@ -10,7 +10,7 @@ import Preloader from '../components/Preloader';
 import ScrollBlur from '../components/ScrollBlur';
 import { LanguageProvider } from '../context/LanguageContext';
 import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import PageTransition from '../components/PageTransition';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -171,16 +171,9 @@ export default function RootLayout({
                 <LanguageProvider>
                     <ScrollBlur>
                         <div className="scroll-blur-content">
-                            <AnimatePresence mode="wait">
-                                <motion.main
-                                    initial={{ opacity: 0, y: 10 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    exit={{ opacity: 0, y: -10 }}
-                                    transition={{ duration: 0.4, ease: "easeOut" }}
-                                >
-                                    {children}
-                                </motion.main>
-                            </AnimatePresence>
+                            <PageTransition>
+                                {children}
+                            </PageTransition>
                         </div>
                     </ScrollBlur>
                     <ChatBot />
