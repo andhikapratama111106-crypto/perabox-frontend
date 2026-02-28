@@ -462,7 +462,7 @@ Mohon konfirmasinya. Terima kasih.`;
                         </div>
 
                         <div className="grid grid-cols-1 gap-4">
-                            {apiServices.length > 0 ? apiServices.map(service => (
+                            {apiServices.length > 0 ? apiServices.map((service: Service) => (
                                 <div
                                     key={service.id}
                                     onClick={() => handleServiceToggle(service.id)}
@@ -537,7 +537,7 @@ Mohon konfirmasinya. Terima kasih.`;
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.fullName')}</label>
                                 <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                                    value={formData.full_name} onChange={e => setFormData({ ...formData, full_name: e.target.value })} placeholder={t('bookPage.fullNamePlaceholder')} />
+                                    value={formData.full_name} onChange={(e: any) => setFormData({ ...formData, full_name: e.target.value })} placeholder={t('bookPage.fullNamePlaceholder')} />
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.whatsapp')}</label>
@@ -548,7 +548,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         : 'border-gray-200 focus:border-primary'
                                         }`}
                                     value={formData.phone}
-                                    onChange={e => {
+                                    onChange={(e: any) => {
                                         const val = e.target.value.replace(/[^\d]/g, '');
                                         // Allow up to 13 digits (08 + 11 digits) in input to not block typing completely,
                                         // but validation messages will enforce the specific rule
@@ -568,14 +568,14 @@ Mohon konfirmasinya. Terima kasih.`;
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.address')}</label>
                                 <MapPicker
-                                    onAddressSelect={(addr, lat, lng) => setFormData(prev => ({ ...prev, address: addr }))}
+                                    onAddressSelect={(addr: string, lat: number, lng: number) => setFormData((prev: any) => ({ ...prev, address: addr }))}
                                     initialAddress={formData.address}
                                 />
                                 <div className="mt-4">
                                     <textarea
                                         className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 min-h-[80px] text-sm"
                                         value={formData.address}
-                                        onChange={e => setFormData({ ...formData, address: e.target.value })}
+                                        onChange={(e: any) => setFormData({ ...formData, address: e.target.value })}
                                         placeholder={t('bookPage.addressPlaceholder')}
                                     />
                                 </div>
@@ -583,7 +583,7 @@ Mohon konfirmasinya. Terima kasih.`;
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.notes')}</label>
                                 <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                                    value={formData.notes} onChange={e => setFormData({ ...formData, notes: e.target.value })} placeholder={t('bookPage.notesPlaceholder')} />
+                                    value={formData.notes} onChange={(e: any) => setFormData({ ...formData, notes: e.target.value })} placeholder={t('bookPage.notesPlaceholder')} />
                             </div>
                         </div>
 
@@ -694,7 +694,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                             name="payment"
                                             value={method}
                                             checked={paymentMethod === method}
-                                            onChange={(e) => setPaymentMethod(e.target.value)}
+                                            onChange={(e: any) => setPaymentMethod(e.target.value)}
                                             className="w-5 h-5 text-primary focus:ring-primary"
                                         />
                                         <span className="ml-3 font-medium text-gray-700">{method}</span>
