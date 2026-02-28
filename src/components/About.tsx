@@ -15,9 +15,9 @@ const About = () => {
                             <Image
                                 src="/perabox_icon.png"
                                 alt="PERABOX Icon"
-                                width={384}
-                                height={384}
-                                className="object-contain w-full h-auto"
+                                width={600}
+                                height={338}
+                                className="object-contain w-full h-auto shadow-sm"
                             />
                         </div>
                     </Reveal>
