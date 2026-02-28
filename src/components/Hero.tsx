@@ -10,7 +10,6 @@ import { useParallax } from '@/hooks/useParallax';
 import { staggerContainer, splitLineReveal, fadeUp, reducedMotionVariants } from '@/utils/animationConfig';
 import { useLanguage } from '@/context/LanguageContext';
 import HoloLine from '@/components/HoloLine';
-import { MagneticButton } from '@/components/MagneticButton';
 
 const Hero = () => {
     const { ref: heroRef, isVisible, prefersReduced } = useReveal<HTMLElement>({
@@ -90,45 +89,41 @@ const Hero = () => {
                         className="flex flex-col sm:flex-row gap-4 items-start sm:items-center"
                     >
                         {/* Primary CTA — shimmer + glow */}
-                        <MagneticButton distance={0.35}>
-                            <motion.div
-                                whileHover={{ scale: 1.04 }}
-                                whileTap={{ scale: 0.96 }}
-                                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                        <motion.div
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                        >
+                            <Link
+                                href="/book"
+                                className="group relative overflow-hidden bg-primary text-white font-extrabold py-4 px-10 rounded-full flex items-center gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(156,109,63,0.45)] transition-shadow duration-300"
                             >
-                                <Link
-                                    href="/book"
-                                    className="group relative overflow-hidden bg-primary text-white font-extrabold py-4 px-10 rounded-full flex items-center gap-2 shadow-[0_8px_30px_rgba(0,0,0,0.15)] hover:shadow-[0_12px_40px_rgba(156,109,63,0.45)] transition-shadow duration-300"
-                                >
-                                    {/* Shimmer sweep */}
-                                    <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-[-20deg]" />
-                                    <span className="relative z-10">{t('hero.letsStart')}</span>
-                                    <svg className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                                    </svg>
-                                </Link>
-                            </motion.div>
-                        </MagneticButton>
+                                {/* Shimmer sweep */}
+                                <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out bg-gradient-to-r from-transparent via-white/25 to-transparent skew-x-[-20deg]" />
+                                <span className="relative z-10">{t('hero.letsStart')}</span>
+                                <svg className="relative z-10 w-5 h-5 transition-transform duration-300 group-hover:translate-x-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                            </Link>
+                        </motion.div>
 
                         {/* Secondary CTA — slide fill */}
-                        <MagneticButton distance={0.35}>
-                            <motion.button
-                                whileHover={{ scale: 1.04 }}
-                                whileTap={{ scale: 0.96 }}
-                                transition={{ type: 'spring', stiffness: 400, damping: 20 }}
-                                onClick={() => customSmoothScroll('#services')}
-                                className="group relative overflow-hidden px-10 py-4 border-2 border-primary/30 text-dark font-extrabold rounded-full flex items-center gap-2.5 hover:border-primary/60 transition-colors duration-300"
-                            >
-                                {/* Sliding fill background */}
-                                <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out bg-primary/8 rounded-full" />
-                                <span className="relative z-10">{t('hero.exploreServices')}</span>
-                                <motion.span
-                                    animate={{ scale: [1, 1.5, 1] }}
-                                    transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                                    className="relative z-10 w-2 h-2 bg-accent rounded-full"
-                                />
-                            </motion.button>
-                        </MagneticButton>
+                        <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+                            onClick={() => customSmoothScroll('#services')}
+                            className="group relative overflow-hidden px-10 py-4 border-2 border-primary/30 text-dark font-extrabold rounded-full flex items-center gap-2.5 hover:border-primary/60 transition-colors duration-300"
+                        >
+                            {/* Sliding fill background */}
+                            <span className="pointer-events-none absolute inset-0 -translate-x-full group-hover:translate-x-0 transition-transform duration-400 ease-out bg-primary/8 rounded-full" />
+                            <span className="relative z-10">{t('hero.exploreServices')}</span>
+                            <motion.span
+                                animate={{ scale: [1, 1.5, 1] }}
+                                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                                className="relative z-10 w-2 h-2 bg-accent rounded-full"
+                            />
+                        </motion.button>
                     </motion.div>
 
                     {/* Social proof */}
