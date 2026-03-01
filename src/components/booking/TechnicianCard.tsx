@@ -36,14 +36,6 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                         <span className="text-sm font-black text-dark">{technician.rating}</span>
                         <span className="text-[10px] text-gray-400 font-bold">({technician.reviewCount})</span>
                     </div>
-                    {/* Experience Badge */}
-                    {technician.experience && (
-                        <div className="absolute bottom-3 left-3 bg-[#9C6D3F]/90 backdrop-blur-md px-3 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border border-white/20">
-                            <span className="text-[10px] text-white font-black uppercase tracking-widest">
-                                {technician.experience}
-                            </span>
-                        </div>
-                    )}
                 </div>
             </div>
 
@@ -53,6 +45,11 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                         ${selected || 'group-hover:text-[#9C6D3F]'} text-dark`}>
                         {technician.name}
                     </h3>
+                    {technician.experience && (
+                        <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1 block">
+                            {technician.experience} Pengalaman
+                        </span>
+                    )}
                 </div>
 
                 {technician.bio && (
