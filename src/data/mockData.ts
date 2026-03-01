@@ -15,7 +15,7 @@ export interface Technician {
 export const mockTechnicians: Technician[] = [
     {
         id: 'tech-001',
-        name: 'Irma Santoso',
+        name: 'Indra Santoso',
         photoUrl: '/technician_3.jpg',
         rating: 4.9,
         reviewCount: 128,
@@ -99,7 +99,7 @@ export const mockTechnicians: Technician[] = [
     },
     {
         id: 'tech-008',
-        name: 'Andi Wijaya',
+        name: 'Andini Wijaya',
         photoUrl: '/technician_8.jpg',
         rating: 4.8,
         reviewCount: 72,
