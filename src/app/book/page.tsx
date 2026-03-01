@@ -280,8 +280,8 @@ Mohon konfirmasinya. Terima kasih.`;
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                                 {/* ROBUST INSTANT LOAD LOGIC */}
                                 {(() => {
-                                    // 1. Determine data source. Always fallback to mockTechnicians if state is empty.
-                                    const displayTechs = (technicians && technicians.length > 0) ? technicians : (mockTechnicians || []);
+                                    // 1. Always use the central technicians list (mocked to mockTechnicians on line 36)
+                                    const displayTechs = technicians || [];
 
                                     // 2. Handle the "True Empty" state (loading initiated and NO data available yet)
                                     // We show Skeletons instead of a spinner or "No technician" message for a better UX.
@@ -311,24 +311,9 @@ Mohon konfirmasinya. Terima kasih.`;
                                         );
                                     }
 
-                                    // 4. Render the Technicians (Mock or Live)
+                                    // 2. Render the Technicians
                                     return (
                                         <>
-                                            {/* Dynamic Banner Subtle Info */}
-                                            {displayTechs.length > 0 && (
-                                                <div className="col-span-full mb-6 px-6 py-4 bg-white border border-gray-100 rounded-3xl flex items-center justify-between shadow-sm animate-in fade-in slide-in-from-top-2 duration-700">
-                                                    <div className="flex items-center gap-4">
-                                                        <div className="w-10 h-10 bg-amber-50 rounded-2xl flex items-center justify-center text-xl">✨</div>
-                                                        <div>
-                                                            <p className="text-dark text-sm font-black tracking-tight">{t('bookPage.topTechs')}</p>
-                                                            <p className="text-gray-400 text-xs font-medium">{t('bookPage.topTechsSub')}</p>
-                                                        </div>
-                                                    </div>
-                                                    <div className="hidden md:block">
-                                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">{displayTechs.length} Professionals Available</span>
-                                                    </div>
-                                                </div>
-                                            )}
                                             {displayTechs.map((tech: Technician, index: number) => (
                                                 <TechnicianCard
                                                     key={tech.id}
