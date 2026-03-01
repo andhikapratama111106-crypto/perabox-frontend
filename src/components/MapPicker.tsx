@@ -36,6 +36,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
     const [address, setAddress] = useState(initialAddress || '');
     const [searchQuery, setSearchQuery] = useState('');
     const [isSearching, setIsSearching] = useState(false);
+    const [isLocating, setIsLocating] = useState(false);
     const mapRef = useRef<L.Map | null>(null);
 
     // Geocoding function using Nominatim
@@ -82,39 +83,85 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
         }
     };
 
+    const handleUseMyLocation = () => {
+        if (!("geolocation" in navigator)) {
+            alert("Geolocation is not supported by your browser");
+            return;
+        }
+
+        setIsLocating(true);
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const { latitude, longitude } = position.coords;
+                const newCenter: L.LatLngExpression = [latitude, longitude];
+                setCenter(newCenter);
+                reverseGeocode(latitude, longitude);
+                if (mapRef.current) {
+                    mapRef.current.setView(newCenter, 16);
+                }
+                setIsLocating(false);
+            },
+            (error) => {
+                console.error("Error getting location", error);
+                setIsLocating(false);
+                alert("Gagal mendapatkan lokasi. Pastikan izin lokasi aktif.");
+            },
+            { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
+        );
+    };
+
     // Initialize with user location if possible
     useEffect(() => {
         if ("geolocation" in navigator && !initialAddress) {
-            navigator.geolocation.getCurrentPosition((position) => {
-                const { latitude, longitude } = position.coords;
-                setCenter([latitude, longitude]);
-                reverseGeocode(latitude, longitude);
-            });
+            handleUseMyLocation();
         }
     }, []);
 
     return (
         <div className="flex flex-col gap-4 w-full">
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="flex gap-2">
-                <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                    placeholder="Cari lokasi anda..."
-                    className="flex-1 px-4 py-2 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
-                />
+            {/* Search Bar & Location Button */}
+            <div className="flex flex-col gap-2">
+                <form onSubmit={handleSearch} className="flex gap-2">
+                    <div className="relative flex-1">
+                        <input
+                            type="text"
+                            value={searchQuery}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
+                            placeholder="Cari lokasi anda..."
+                            className="w-full pl-10 pr-4 py-3 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-sm font-medium"
+                        />
+                        <svg className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </div>
+                    <button
+                        type="submit"
+                        disabled={isSearching}
+                        className="bg-dark hover:bg-dark/90 text-white px-6 py-3 rounded-2xl font-bold transition-all text-sm disabled:opacity-50 shadow-lg shadow-dark/10"
+                    >
+                        {isSearching ? '...' : 'Cari'}
+                    </button>
+                </form>
+
                 <button
-                    type="submit"
-                    disabled={isSearching}
-                    className="bg-primary hover:bg-primary/90 text-white px-4 py-2 rounded-xl font-bold transition-all text-sm disabled:opacity-50"
+                    type="button"
+                    onClick={handleUseMyLocation}
+                    disabled={isLocating}
+                    className="flex items-center justify-center gap-2 w-full py-3 bg-white border border-gray-200 rounded-2xl text-sm font-bold text-dark hover:bg-gray-50 transition-all shadow-sm active:scale-[0.98] disabled:opacity-50"
                 >
-                    {isSearching ? '...' : 'Cari'}
+                    {isLocating ? (
+                        <div className="w-4 h-4 border-2 border-primary border-t-transparent rounded-full animate-spin" />
+                    ) : (
+                        <svg className="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                        </svg>
+                    )}
+                    Gunakan Lokasi Saat Ini
                 </button>
-            </form>
+            </div>
 
             {/* Map Container */}
-            <div className="relative h-[300px] w-full rounded-2xl overflow-hidden border-2 border-gray-100 shadow-inner group">
+            <div className="relative h-[300px] w-full rounded-[2.5rem] overflow-hidden border-2 border-white shadow-2xl group ring-1 ring-gray-100">
                 <MapContainer
                     center={center}
                     zoom={15}
@@ -122,9 +169,10 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                     ref={mapRef}
                     zoomControl={false}
                 >
+                    {/* Low Fidelity Gojek Style Map (CartoDB Positron) */}
                     <TileLayer
-                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
                     />
                     <MapController onPositionChange={(newCenter) => {
                         reverseGeocode(newCenter.lat, newCenter.lng);
@@ -134,32 +182,36 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                 {/* Fixed Center Pin (Gojek Style) */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-full z-[1000] pointer-events-none mb-4">
                     <div className="relative flex flex-col items-center">
-                        <div className="w-10 h-10 bg-primary rounded-full border-4 border-white shadow-xl flex items-center justify-center animate-bounce">
-                            <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <div className="w-12 h-12 bg-primary rounded-full border-4 border-white shadow-2xl flex items-center justify-center animate-bounce-slow">
+                            <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                             </svg>
                         </div>
-                        <div className="w-2 h-2 bg-dark/20 rounded-full blur-[1px] mt-1" />
+                        <div className="w-3 h-1 bg-dark/20 rounded-full blur-[2px] mt-1 pulse-shadow" />
                     </div>
                 </div>
 
                 {/* Floating Map Help */}
-                <div className="absolute bottom-4 left-4 z-[1000] bg-white/90 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm pointer-events-none">
-                    <p className="text-[10px] font-bold text-gray-500 uppercase tracking-widest">Geser peta untuk menentukan titik</p>
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] bg-dark/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-2xl pointer-events-none transition-all group-hover:opacity-100">
+                    <p className="text-[9px] font-black text-white uppercase tracking-widest text-center whitespace-nowrap">Geser peta untuk menentukan titik</p>
                 </div>
             </div>
 
             {/* Selected Address Display */}
             {address && (
-                <div className="p-3 bg-gray-50 rounded-xl border border-gray-100 flex items-start gap-2">
-                    <svg className="w-4 h-4 text-primary mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                    </svg>
-                    <p className="text-xs text-gray-600 leading-tight">
-                        <span className="font-bold text-dark block mb-1">Lokasi Terpilih:</span>
-                        {address}
-                    </p>
+                <div className="p-4 bg-[#FDF8F3] rounded-3xl border border-[#9C6D3F]/10 flex items-start gap-3 shadow-sm">
+                    <div className="w-8 h-8 rounded-xl bg-[#9C6D3F]/10 flex items-center justify-center shrink-0">
+                        <svg className="w-4 h-4 text-[#9C6D3F]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                        <p className="text-[10px] font-black text-[#9C6D3F] uppercase tracking-wider mb-0.5">Titik Lokasi Terpilih</p>
+                        <p className="text-xs text-dark font-medium leading-relaxed truncate-2-lines">
+                            {address}
+                        </p>
+                    </div>
                 </div>
             )}
         </div>

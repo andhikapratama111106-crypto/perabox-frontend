@@ -232,8 +232,8 @@ Mohon konfirmasinya. Terima kasih.`;
         <main className="min-h-screen bg-gray-50 pb-20">
             <Navbar />
 
-            {/* Steps Progress */}
-            <div className="pt-24">
+            {/* Steps Progress - Integrated with Navbar spacing */}
+            <div className="pt-20">
                 {renderProgressBar()}
             </div>
 
@@ -276,7 +276,7 @@ Mohon konfirmasinya. Terima kasih.`;
                             </button>
                         </div>
 
-                        <div className="max-h-[480px] overflow-y-auto pr-1 rounded-2xl scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                        <div className="rounded-2xl pr-1">
                             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
                                 {/* ROBUST INSTANT LOAD LOGIC */}
                                 {(() => {
@@ -314,13 +314,18 @@ Mohon konfirmasinya. Terima kasih.`;
                                     // 4. Render the Technicians (Mock or Live)
                                     return (
                                         <>
-                                            {/* Dynamic Banner to inform user if we are showing top picks (Mock) */}
+                                            {/* Dynamic Banner Subtle Info */}
                                             {displayTechs.length > 0 && (
-                                                <div className="col-span-full mb-4 px-6 py-3 bg-amber-50 border border-amber-100 rounded-2xl flex items-center gap-3 animate-in fade-in slide-in-from-top-2 duration-700">
-                                                    <span className="text-xl">✨</span>
-                                                    <div>
-                                                        <p className="text-amber-800 text-sm font-bold">{t('bookPage.topTechs')}</p>
-                                                        <p className="text-amber-700 text-xs">{t('bookPage.topTechsSub')}</p>
+                                                <div className="col-span-full mb-6 px-6 py-4 bg-white border border-gray-100 rounded-3xl flex items-center justify-between shadow-sm animate-in fade-in slide-in-from-top-2 duration-700">
+                                                    <div className="flex items-center gap-4">
+                                                        <div className="w-10 h-10 bg-amber-50 rounded-2xl flex items-center justify-center text-xl">✨</div>
+                                                        <div>
+                                                            <p className="text-dark text-sm font-black tracking-tight">{t('bookPage.topTechs')}</p>
+                                                            <p className="text-gray-400 text-xs font-medium">{t('bookPage.topTechsSub')}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div className="hidden md:block">
+                                                        <span className="text-[10px] font-bold text-gray-300 uppercase tracking-widest">{displayTechs.length} Professionals Available</span>
                                                     </div>
                                                 </div>
                                             )}
