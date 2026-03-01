@@ -111,7 +111,7 @@ export const mockTechnicians: Technician[] = [
     },
     {
         id: 'tech-009',
-        name: 'Bambang Subiakto',
+        name: 'Bella Subiakto',
         photoUrl: '/technician_9.jpg',
         rating: 4.9,
         reviewCount: 88,
