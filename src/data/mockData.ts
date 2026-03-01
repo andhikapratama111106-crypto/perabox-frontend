@@ -23,7 +23,7 @@ export const mockTechnicians: Technician[] = [
         basePrice: 75000,
         phone: '6281234567890',
         experience: '8 Tahun',
-        bio: 'Spesialis sistem pendingin udara dengan sertifikasi BNSP. Mengutamakan ketepatan dan efisiensi.'
+        bio: 'Spesialis sistem pendingin udara dengan sertifikasi BNSP. Mengutamakan ketepatan dan efisiensi dalam setiap pengerjaan.'
     },
     {
         id: 'tech-002',
@@ -31,11 +31,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_7.jpg',
         rating: 4.8,
         reviewCount: 95,
-        specialties: ['Bongkar Pasang', 'Service Besar'],
+        specialties: ['Service AC', 'Bongkar Pasang'],
         basePrice: 150000,
         phone: '6281234567891',
         experience: '10 Tahun',
-        bio: 'Ahli dalam bongkar pasang unit AC untuk hunian maupun gedung perkantoran.'
+        bio: 'Ahli dalam pengerjaan bongkar pasang unit AC untuk hunian maupun gedung perkantoran dengan standar profesional.'
     },
     {
         id: 'tech-003',
@@ -43,11 +43,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_6.jpg',
         rating: 4.7,
         reviewCount: 64,
-        specialties: ['Cuci AC', 'Freon Refill'],
+        specialties: ['Cuci AC', 'Isi Freon'],
         basePrice: 85000,
         phone: '6281234567892',
         experience: '5 Tahun',
-        bio: 'Menguasai teknik perawatan unit AC agar hemat energi dan tetap dingin maksimal.'
+        bio: 'Menguasai teknik perawatan rutin unit AC agar tetap hemat energi dan memberikan kesejukan maksimal.'
     },
     {
         id: 'tech-004',
@@ -55,11 +55,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_1.jpg',
         rating: 5.0,
         reviewCount: 42,
-        specialties: ['Layanan Pembersihan', 'Deep Cleaning'],
+        specialties: ['Cuci AC', 'Deep Cleaning'],
         basePrice: 75000,
         phone: '6281234567893',
         experience: '6 Tahun',
-        bio: 'Sangat teliti dalam pengerjaan pembersihan interior dan perawatan homecare.'
+        bio: 'Sangat teliti dalam pembersihan menyeluruh unit AC untuk memastikan udara yang dihasilkan bersih dan sehat.'
     },
     {
         id: 'tech-005',
@@ -67,11 +67,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_2.jpg',
         rating: 4.8,
         reviewCount: 110,
-        specialties: ['Listrik', 'Instalasi'],
+        specialties: ['Service AC', 'Instalasi'],
         basePrice: 150000,
         phone: '6281234567894',
         experience: '7 Tahun',
-        bio: 'Teknisi multi-skill yang handal dalam perbaikan sistem kelistrikan dan pipa air.'
+        bio: 'Berpengalaman luas dalam menangani berbagai kendala teknis pada unit AC tipe split maupun inverter.'
     },
     {
         id: 'tech-006',
@@ -79,11 +79,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_4.jpg',
         rating: 4.9,
         reviewCount: 88,
-        specialties: ['Cleaning Service', 'Maintenance'],
+        specialties: ['Cuci AC', 'Maintenance'],
         basePrice: 80000,
         phone: '6281234567895',
         experience: '4 Tahun',
-        bio: 'Berpengalaman dalam mengelola kebersihan unit apartemen dan rumah tinggal.'
+        bio: 'Fokus pada perawatan preventif untuk memperpanjang usia pakai unit AC Anda dengan pengerjaan yang rapi.'
     },
     {
         id: 'tech-007',
@@ -91,11 +91,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_5.jpg',
         rating: 4.6,
         reviewCount: 56,
-        specialties: ['Sanitasi', 'Homecare'],
+        specialties: ['Cuci AC', 'Service Rutin'],
         basePrice: 85000,
         phone: '6281234567896',
         experience: '5 Tahun',
-        bio: 'Spesialis sanitasi dan pembersihan sudut-sudut sulit di area dapur dan kamar mandi.'
+        bio: 'Spesialis perawatan rutin AC yang menjamin setiap sudut unit dibersihkan dengan sempurna dan bebas kuman.'
     },
     {
         id: 'tech-008',
@@ -107,43 +107,43 @@ export const mockTechnicians: Technician[] = [
         basePrice: 75000,
         phone: '628123456789b',
         experience: '4 Tahun',
-        bio: 'Fokus pada hasil pengerjaan yang bersih tanpa meninggalkan bekas kotoran.'
+        bio: 'Memastikan tekanan freon AC Anda selalu optimal untuk pendinginan yang efisien dan hemat listrik.'
     },
     {
         id: 'tech-009',
-        name: 'Rudi Tabuti',
+        name: 'Bambang Subiakto',
         photoUrl: '/technician_9.jpg',
         rating: 4.9,
         reviewCount: 88,
-        specialties: ['Teknisi Listrik', 'CCTV'],
+        specialties: ['Service AC', 'Perbaikan'],
         basePrice: 100000,
         phone: '628123456789c',
         experience: '6 Tahun',
-        bio: 'Ahli dalam perbaikan arus pendek dan instalasi perangkat keamanan rumah.'
+        bio: 'Teknisi handal untuk mendiagnosa dan memperbaiki kerusakan modul elektronik pada unit AC modern.'
     },
     {
         id: 'tech-010',
-        name: 'Deni Setiawan',
+        name: 'Hadi Prayitno',
         photoUrl: '/technician_10.jpg',
         rating: 4.7,
         reviewCount: 54,
-        specialties: ['Plambing', 'Pompa Air'],
+        specialties: ['Service AC', 'Bongkar Pasang'],
         basePrice: 150000,
         phone: '628123456789d',
         experience: '9 Tahun',
-        bio: 'Solusi cepat untuk masalah bocoran pipa dan perbaikan pompa air yang mati total.'
+        bio: 'Ahli dalam instalasi unit AC baru dengan penataan pipa yang estetik dan performa yang terjamin.'
     },
     {
         id: 'tech-011',
-        name: 'Indah Permata',
+        name: 'Rian Hidayat',
         photoUrl: '/technician_11.jpg',
         rating: 4.8,
         reviewCount: 38,
-        specialties: ['Cat Dinding', 'Handyman'],
+        specialties: ['Service AC', 'Cuci AC'],
         basePrice: 120000,
         phone: '628123456789e',
         experience: '12 Tahun',
-        bio: 'Senior handyman yang menguasai berbagai pekerjaan sipil ringan untuk rumah Anda.'
+        bio: 'Senior teknisi AC yang mengutamakan kepuasan pelanggan melalui pengerjaan yang jujur dan transparan.'
     },
     {
         id: 'tech-012',
@@ -151,11 +151,11 @@ export const mockTechnicians: Technician[] = [
         photoUrl: '/technician_12.jpg',
         rating: 4.9,
         reviewCount: 65,
-        specialties: ['Home Security', 'Smart Home'],
+        specialties: ['Service AC', 'Isi Freon'],
         basePrice: 80000,
         phone: '628123456789f',
         experience: '3 Tahun',
-        bio: 'Membantu modernisasi hunian Anda dengan instalasi perangkat smart home terkini.'
+        bio: 'Teknisi berdedikasi tinggi yang selalu siap memberikan solusi tepat untuk masalah AC yang kurang dingin.'
     }
 ];
 

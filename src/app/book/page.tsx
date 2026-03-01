@@ -276,8 +276,8 @@ Mohon konfirmasinya. Terima kasih.`;
                             </button>
                         </div>
 
-                        <div className="rounded-2xl pr-1">
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+                        <div className="rounded-2xl pr-1 pb-10">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 items-stretch">
                                 {/* ROBUST INSTANT LOAD LOGIC */}
                                 {(() => {
                                     // 1. Always use the central technicians list (mocked to mockTechnicians on line 36)
@@ -361,20 +361,35 @@ Mohon konfirmasinya. Terima kasih.`;
 
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-2">{t('bookPage.selectTime')}</label>
-                            <div className="grid grid-cols-3 gap-3">
-                                {timeSlots.map((time: string) => (
-                                    <button
-                                        key={time}
-                                        onClick={() => setSelectedTime(time)}
-                                        className={`py-3 px-4 rounded-xl border transition-all text-sm font-medium
-                                            ${selectedTime === time
-                                                ? 'bg-primary text-white border-primary shadow-lg shadow-primary/30 transform scale-105'
-                                                : 'bg-white text-gray-600 border-gray-200 hover:border-primary/50 hover:bg-gray-50'
-                                            }`}
-                                    >
-                                        {time}
-                                    </button>
-                                ))}
+                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                                {(() => {
+                                    const now = new Date();
+                                    const isToday = selectedDate === now.toISOString().split('T')[0];
+                                    const currentHour = now.getHours();
+                                    const currentMinute = now.getMinutes();
+
+                                    return timeSlots.map((time: string) => {
+                                        const [slotHour, slotMinute] = time.split(':').map(Number);
+                                        const isPast = isToday && (slotHour < currentHour || (slotHour === currentHour && slotMinute <= currentMinute));
+
+                                        return (
+                                            <button
+                                                key={time}
+                                                type="button"
+                                                disabled={isPast}
+                                                onClick={() => setSelectedTime(time)}
+                                                className={`py-3 rounded-2xl font-bold transition-all border-2 ${selectedTime === time
+                                                    ? 'bg-primary border-primary text-white shadow-lg shadow-primary/20 scale-[0.98]'
+                                                    : isPast
+                                                        ? 'bg-gray-50 border-gray-100 text-gray-300 cursor-not-allowed'
+                                                        : 'bg-white border-gray-100 text-dark hover:border-primary/30 hover:bg-primary/5'
+                                                    }`}
+                                            >
+                                                {time}
+                                            </button>
+                                        );
+                                    });
+                                })()}
                             </div>
                         </div>
 
