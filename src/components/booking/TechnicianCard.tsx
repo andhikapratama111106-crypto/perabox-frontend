@@ -26,12 +26,12 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                         src={technician.photoUrl}
                         alt={technician.name}
                         fill
-                        className="object-cover transition-transform duration-700 group-hover:scale-110"
+                        className="object-cover object-top transition-transform duration-700 group-hover:scale-110"
                         priority={priority}
                         sizes="(max-width: 768px) 50vw, 25vw"
                     />
                     {/* Rating Badge */}
-                    <div className="absolute top-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border border-gray-100">
+                    <div className="absolute bottom-3 right-3 bg-white/95 backdrop-blur-md px-2.5 py-1.5 rounded-xl flex items-center gap-1.5 shadow-lg border border-gray-100 z-10">
                         <span className="text-yellow-500 text-xs">★</span>
                         <span className="text-sm font-black text-dark">{technician.rating}</span>
                         <span className="text-[10px] text-gray-400 font-bold">({technician.reviewCount})</span>
