@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { paymentAPI } from '@/lib/api';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface QRISModalProps {
     paymentId: string;
@@ -12,6 +13,17 @@ interface QRISModalProps {
 }
 
 export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInline = false }: QRISModalProps) {
+    const { t } = useLanguage();
+    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
+    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat(currencyCode, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(price);
+    };
+
     const [qrisData, setQrisData] = useState<any>(null);
     const [loading, setLoading] = useState(true);
     const [verifying, setVerifying] = useState(false);
@@ -69,11 +81,11 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
             if (response.data.status === 'paid') {
                 onSuccess();
             } else {
-                alert("Pembayaran belum terdeteksi. Silakan coba lagi setelah membayar.");
+                alert(t('bookPage.qris.notDetected') || "Pembayaran belum terdeteksi. Silakan coba lagi setelah membayar.");
             }
         } catch (error) {
             console.error("Verification failed", error);
-            alert("Kesalahan verifikasi. Silakan coba lagi.");
+            alert(t('bookPage.qris.error') || "Kesalahan verifikasi. Silakan coba lagi.");
         } finally {
             setVerifying(false);
         }
@@ -86,22 +98,22 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
                 <div className="flex items-center justify-center gap-2 mb-1">
                     <span className="text-2xl font-black tracking-tight">PERABOX</span>
                 </div>
-                <h3 className="text-lg font-bold">Pembayaran QRIS</h3>
-                <p className="text-white/80 text-sm">Scan kode untuk selesaikan pesanan</p>
+                <h3 className="text-lg font-bold">{t('bookPage.qris.title') || 'Pembayaran QRIS'}</h3>
+                <p className="text-white/80 text-sm">{t('bookPage.qris.subtitle') || 'Scan kode untuk selesaikan pesanan'}</p>
             </div>
 
             <div className="p-8">
                 {loading ? (
                     <div className="flex flex-col items-center justify-center py-10">
                         <div className="w-10 h-10 border-4 border-primary border-t-transparent rounded-full animate-spin"></div>
-                        <p className="mt-4 text-gray-500">Menyiapkan QR Code...</p>
+                        <p className="mt-4 text-gray-500">{t('bookPage.qris.loading') || 'Menyiapkan QR Code...'}</p>
                     </div>
                 ) : (
                     <>
                         {/* Amount */}
                         <div className="text-center mb-6">
-                            <p className="text-gray-500 text-sm uppercase font-bold tracking-wider">Total Pembayaran</p>
-                            <h4 className="text-3xl font-black text-dark">Rp {amount.toLocaleString('id-ID')}</h4>
+                            <p className="text-gray-500 text-sm uppercase font-bold tracking-wider">{t('bookPage.qris.total') || 'Total Pembayaran'}</p>
+                            <h4 className="text-3xl font-black text-dark">{currencySymbol}{formatPrice(amount)}</h4>
                         </div>
 
                         {/* QR Code */}
@@ -113,7 +125,7 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
                                     className="w-64 h-64 object-contain"
                                 />
                                 {!qrisData?.qr_url && (
-                                    <p className="text-center text-xs text-gray-400 mt-2">QR Code Simulasi</p>
+                                    <p className="text-center text-xs text-gray-400 mt-2">{t('bookPage.qris.qrCodeSimulated') || 'QR Code Simulasi'}</p>
                                 )}
                             </div>
                         </div>
@@ -123,14 +135,14 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
                             <div className="flex items-center gap-3">
                                 <div className="text-2xl">⏳</div>
                                 <div>
-                                    <p className="text-[10px] text-gray-400 font-bold uppercase">Selesaikan dalam</p>
+                                    <p className="text-[10px] text-gray-400 font-bold uppercase">{t('bookPage.qris.finishIn') || 'Selesaikan dalam'}</p>
                                     <p className={`text-lg font-mono font-bold ${timeLeft < 300 ? 'text-red-500' : 'text-primary'}`}>
                                         {formatTime(timeLeft)}
                                     </p>
                                 </div>
                             </div>
                             <div className="text-right">
-                                <p className="text-[10px] text-gray-400 font-bold uppercase">ID Pembayaran</p>
+                                <p className="text-[10px] text-gray-400 font-bold uppercase">{t('bookPage.qris.paymentId') || 'ID Pembayaran'}</p>
                                 <p className="text-xs font-mono text-gray-600">{paymentId.split('-')[0].toUpperCase()}</p>
                             </div>
                         </div>
@@ -151,20 +163,20 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
                                 {verifying ? (
                                     <>
                                         <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                                        <span>Memverifikasi...</span>
+                                        <span>{t('bookPage.qris.verifying') || 'Memverifikasi...'}</span>
                                     </>
-                                ) : 'Saya Sudah Bayar'}
+                                ) : (t('bookPage.qris.btnPaid') || 'Saya Sudah Bayar')}
                             </button>
                             <button
                                 onClick={onClose}
                                 className="w-full text-gray-400 hover:text-gray-600 font-medium py-2 rounded-xl transition-all text-sm"
                             >
-                                {timeLeft === 0 ? 'Kembali' : 'Kembali ke Detail Pesanan'}
+                                {timeLeft === 0 ? (t('bookPage.btnBack') || 'Kembali') : (t('bookPage.qris.btnBack') || 'Kembali ke Detail Pesanan')}
                             </button>
                         </div>
 
                         <p className="mt-6 text-[10px] text-center text-gray-400">
-                            Kode QR dapat dipindai menggunakan GoPay, OVO, Dana, LinkAja, BCA Mobile & aplikasi perbankan lainnya.
+                            {t('bookPage.qris.instruction') || 'Kode QR dapat dipindai menggunakan GoPay, OVO, Dana, LinkAja, BCA Mobile & aplikasi perbankan lainnya.'}
                         </p>
                     </>
                 )}

@@ -15,6 +15,15 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
 
     const experienceLabel = t('bookPage.experienceLabel') || 'Pengalaman';
     const startFromLabel = t('bookPage.startFrom') || 'Mulai dari';
+    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
+    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat(currencyCode, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(price);
+    };
 
     return (
         <div
@@ -49,7 +58,7 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                 <div className="flex-none">
                     <h3 className={`font-black text-xl leading-tight transition-colors duration-300
                         ${selected || 'group-hover:text-[#9C6D3F]'} text-dark`}>
-                        {technician.name}
+                        {t(`bookPage.techNames.${technician.id}`) || technician.name}
                     </h3>
                     {technician.experience && (
                         <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1 block">
@@ -62,7 +71,7 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                 {technician.bio && (
                     <div className="flex-none overflow-hidden" style={{ height: '3rem' }}>
                         <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70">
-                            &quot;{technician.bio}&quot;
+                            &quot;{t(`bookPage.techBios.${technician.id}`) || technician.bio}&quot;
                         </p>
                     </div>
                 )}
@@ -93,7 +102,7 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                     <div className="flex flex-col">
                         <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">{startFromLabel}</span>
                         <span className={`font-black text-lg transition-colors ${selected ? 'text-[#9C6D3F]' : 'text-dark'}`}>
-                            Rp{technician.basePrice.toLocaleString('id-ID')}
+                            {currencySymbol}{formatPrice(technician.basePrice)}
                         </span>
                     </div>
                     <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300

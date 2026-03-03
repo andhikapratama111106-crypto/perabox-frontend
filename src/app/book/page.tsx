@@ -25,7 +25,28 @@ interface Service {
 }
 
 export default function BookingPage() {
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
+    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
+    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+
+    const formatPrice = (price: number) => {
+        return new Intl.NumberFormat(currencyCode, {
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 0
+        }).format(price);
+    };
+
+    const getServiceLabel = (id: string) => {
+        const keyMap: any = {
+            'srv-1': 'acCleaning',
+            'srv-2': 'acInstallation',
+            'srv-3': 'freonRefill',
+            'srv-4': 'acRepair',
+            'srv-5': 'emergencyCall'
+        };
+        const key = keyMap[id];
+        return key ? t(`bookPage.serviceNames.${key}`) : '';
+    };
     const router = useRouter();
     const [step, setStep] = useState(1);
     const [loading, setLoading] = useState(false); // Start as false to show mock data instantly
@@ -54,8 +75,8 @@ export default function BookingPage() {
     const [apiServices, setApiServices] = useState<Service[]>(
         serviceTypes.map((s) => ({
             id: s.id,
-            title: s.name,
-            price: `Rp ${Number(s.price).toLocaleString('id-ID')}`,
+            title: getServiceLabel(s.id) || s.name,
+            price: `${currencySymbol}${formatPrice(Number(s.price))}`,
             icon: s.id === 'srv-1' ? "❄️" : s.id === 'srv-2' ? "🛠️" : s.id === 'srv-3' ? "💨" : s.id === 'srv-4' ? "🔧" : "🚨",
             base_price: s.price
         }))
@@ -112,13 +133,23 @@ export default function BookingPage() {
 
         try {
             const mainServiceId = selectedServices[0];
-            const serviceNames = selectedServices.map((id: string) => apiServices.find((s: Service) => s.id === id)?.title).join(', ');
+            const serviceNames = selectedServices.map((id: string) => {
+                const s = apiServices.find((sv: Service) => sv.id === id);
+                if (!s) return id;
+                return id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') :
+                    id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') :
+                        id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') :
+                            id === 'srv-4' ? t('bookPage.serviceNames.acRepair') :
+                                id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') :
+                                    s.title;
+            }).join(', ');
+
             const detailedNotes = `
-                [BOOKING VIA APP]
-                Teknisi: ${selectedTechnician.name}
-                Layanan Tambahan: ${serviceNames}
-                Metode Bayar: ${paymentMethod}
-                Catatan User: ${formData.notes}
+${t('bookPage.wa.summaryHeader')}
+${t('bookPage.wa.summaryTech')}: ${selectedTechnician.name}
+${t('bookPage.wa.summaryAddon')}: ${serviceNames}
+${t('bookPage.wa.summaryPay')}: ${paymentMethod}
+${t('bookPage.wa.summaryNotes')}: ${formData.notes}
             `;
 
             const isUUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -126,7 +157,7 @@ export default function BookingPage() {
             const payload: any = {
                 service_id: mainServiceId,
                 scheduled_date: selectedDate,
-                scheduled_time: selectedTime + ":00",
+                scheduled_time: selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA') ? "00:00:00" : selectedTime + ":00",
                 address: formData.address,
                 notes: detailedNotes,
                 total_price: calculateTotal(),
@@ -139,14 +170,14 @@ export default function BookingPage() {
             const response = await bookingsAPI.create(payload);
             const bookingData = response.data;
 
-            const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT');
-            const message = `Halo PERABOX, saya ada order baru${isEmergency ? ' (DARURAT)' : ''}:
-- Layanan: ${serviceNames}
-- Waktu: ${selectedDate} jam ${selectedTime}
-- Lokasi: ${formData.address}
-- Catatan: ${formData.notes}
-- Total Estimasi: Rp ${calculateTotal().toLocaleString('id-ID')} (${paymentMethod})
-Mohon konfirmasinya. Terima kasih.`;
+            const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA');
+            const message = `${t('bookPage.wa.newOrder')}${isEmergency ? ' ' + t('bookPage.wa.emergency') : ''}:
+- ${t('bookPage.wa.service')}: ${serviceNames}
+- ${t('bookPage.wa.time')}: ${selectedDate} ${t('home') === 'BERANDA' ? 'jam' : t('home') === 'HOME' ? 'at' : ''} ${selectedTime}
+- ${t('bookPage.wa.location')}: ${formData.address}
+- ${t('bookPage.wa.notes')}: ${formData.notes}
+- ${t('bookPage.wa.estTotal')}: ${currencySymbol}${formatPrice(calculateTotal())} (${paymentMethod})
+${t('bookPage.wa.confirm')}`;
 
             const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
             const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
@@ -234,7 +265,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                         const firstTech = (technicians && technicians.length > 0) ? technicians[0] : mockTechnicians[0];
                                         setSelectedTechnician(firstTech);
                                         setSelectedDate(new Date().toISOString().split('T')[0]);
-                                        setSelectedTime('DIRECT (SEKARANG)');
+                                        setSelectedTime(t('bookPage.wa.direct') || 'DIRECT (NOW)');
                                         setSelectedServices(['srv-5']);
                                         setStep(5);
                                         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -254,6 +285,11 @@ Mohon konfirmasinya. Terima kasih.`;
                                         {t('bookPage.emergencyAction')}
                                     </div>
                                 </button>
+                            </div>
+
+                            <div className="mb-6 px-1">
+                                <h2 className="text-xl md:text-2xl font-black text-dark tracking-tight">{t('bookPage.topTechs')}</h2>
+                                <p className="text-gray-400 text-sm font-medium">{t('bookPage.topTechsSub')}</p>
                             </div>
 
                             <div className="rounded-2xl pr-1 pb-10">
@@ -306,10 +342,10 @@ Mohon konfirmasinya. Terima kasih.`;
                                 <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title2')}</h2>
                                 {selectedTechnician && (
                                     <div className="flex items-center gap-3 mb-6 bg-primary/5 border border-primary/20 rounded-xl p-4">
-                                        <img src={selectedTechnician.photoUrl} alt={selectedTechnician.name} className="w-10 h-10 rounded-full object-cover" />
+                                        <img src={selectedTechnician.photoUrl} alt={t(`bookPage.techNames.${selectedTechnician.id}`) || selectedTechnician.name} className="w-10 h-10 rounded-full object-cover" />
                                         <div className="flex-1">
                                             <p className="text-xs text-primary font-semibold uppercase tracking-wider">{t('bookPage.selectedTech')}</p>
-                                            <p className="font-bold text-dark">{selectedTechnician.name}</p>
+                                            <p className="font-bold text-dark">{t(`bookPage.techNames.${selectedTechnician.id}`) || selectedTechnician.name}</p>
                                         </div>
                                         <span className="text-primary text-lg">✓</span>
                                     </div>
@@ -373,7 +409,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                             </div>
                                             <div className="flex-1">
                                                 {t('bookPage.selectedTech')}
-                                                <h3 className="text-2xl font-black text-dark tracking-tight leading-tight">{selectedTechnician.name}</h3>
+                                                <h3 className="text-2xl font-black text-dark tracking-tight leading-tight">{t(`bookPage.techNames.${selectedTechnician.id}`) || selectedTechnician.name}</h3>
                                                 <div className="flex items-center gap-1.5 mt-1">
                                                     <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
                                                     <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-none">
@@ -502,7 +538,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                             )}
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">{t('bookPage.selectedTech')}</p>
-                                                <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
+                                                <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{t(`bookPage.techNames.${selectedTechnician?.id}`) || selectedTechnician?.name}</h3>
                                                 <div className="flex items-center gap-1.5">
                                                     <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
                                                     <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">
@@ -529,19 +565,14 @@ Mohon konfirmasinya. Terima kasih.`;
                                         <div className="pt-8 border-t border-gray-100 space-y-6">
                                             <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t('bookPage.costDetails')}</p>
                                             <div className="flex justify-between items-center text-lg font-bold text-gray-700">
-                                                <span>{t('bookPage.estService')} ({selectedServices.length})</span>
-                                                <span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                                                <span className="text-gray-400 font-bold">{t('bookPage.estTotal')}</span>
+                                                <span className="text-2xl font-black text-primary">{currencySymbol}{formatPrice(calculateTotal())}</span>
                                             </div>
                                             <div className="pl-4 space-y-1">
                                                 {selectedServices.map(id => {
                                                     const s = apiServices.find(service => service.id === id);
                                                     if (!s) return null;
-                                                    const translatedTitle = id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') :
-                                                        id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') :
-                                                            id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') :
-                                                                id === 'srv-4' ? t('bookPage.serviceNames.acRepair') :
-                                                                    id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') :
-                                                                        s.title;
+                                                    const translatedTitle = getServiceLabel(id) || s.title;
                                                     return (
                                                         <div key={id} className="flex justify-between items-center text-xs text-gray-500">
                                                             <span>• {translatedTitle}</span>
@@ -550,7 +581,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                                     );
                                                 })}
                                             </div>
-                                            <div className="flex justify-between items-end pt-4"><span className="text-lg font-black text-dark mb-2">{t('bookPage.estTotal')}</span><div className="text-right"><span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">Rp {calculateTotal().toLocaleString('id-ID')}</span><span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span></div></div>
+                                            <div className="flex justify-between items-end pt-4"><span className="text-lg font-black text-dark mb-2">{t('bookPage.estTotal')}</span><div className="text-right"><span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">{currencySymbol}{formatPrice(calculateTotal())}</span><span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span></div></div>
                                         </div>
                                     </div>
                                 </div>
@@ -592,13 +623,27 @@ Mohon konfirmasinya. Terima kasih.`;
                                 <div className="bg-white rounded-3xl w-full overflow-hidden shadow-2xl mx-auto">
                                     <div className="bg-blue-600 p-6 text-white text-center"><div className="flex items-center justify-center gap-2 mb-1"><span className="text-2xl font-black tracking-tight">PERABOX</span></div><h3 className="text-lg font-bold">{t('bookPage.paymentBCA')}</h3><p className="text-white/80 text-sm">{t('bookPage.subtitle5') || 'Selesaikan pembayaran untuk konfirmasi pesanan'}</p></div>
                                     <div className="p-8">
-                                        <div className="text-center mb-6"><p className="text-gray-500 text-sm uppercase font-bold tracking-wider mb-2">{t('bookPage.transferTotal')}</p><div className="bg-blue-50 rounded-xl p-4 border border-blue-100 inline-block"><h4 className="text-3xl font-black text-blue-600">Rp {(calculateTotal() + uniqueCode).toLocaleString('id-ID')}</h4><p className="text-xs text-blue-500 mt-1 font-medium bg-blue-100/50 px-2 py-1 rounded inline-block">{t('bookPage.transferNote').replace('{code}', uniqueCode.toString())}</p></div></div>
+                                        <div className="text-center mb-6"><p className="text-gray-500 text-sm uppercase font-bold tracking-wider mb-2">{t('bookPage.transferTotal')}</p><div className="bg-blue-50 rounded-xl p-4 border border-blue-100 inline-block"><h4 className="text-3xl font-black text-blue-600">{currencySymbol}{formatPrice(calculateTotal() + uniqueCode)}</h4><p className="text-xs text-blue-500 mt-1 font-medium bg-blue-100/50 px-2 py-1 rounded inline-block">{t('bookPage.transferNote').replace('{code}', uniqueCode.toString())}</p></div></div>
                                         <div className="space-y-4 mb-8">
                                             <div><p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountNumber')}</p><div className="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-200"><span className="font-mono font-bold text-lg text-dark">888888888</span><button onClick={() => navigator.clipboard.writeText('888888888')} className="text-blue-500 text-xs font-bold hover:text-blue-600">{t('bookPage.copy')}</button></div></div>
                                             <div><p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountName')}</p><div className="bg-gray-50 p-3 rounded-xl border border-gray-200"><span className="font-bold text-dark">PT PERABOX MANDIRI SEJAHTERA</span></div></div>
                                         </div>
                                         <div className="mt-8">
-                                            <button onClick={() => { setStep(7); window.scrollTo({ top: 0, behavior: 'smooth' }); const totalWithUnique = calculateTotal() + uniqueCode; const serviceNames = selectedServices.map((id: string) => { const s = apiServices.find((sv: Service) => sv.id === id); if (!s) return id; return id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') : id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') : id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') : id === 'srv-4' ? t('bookPage.serviceNames.acRepair') : id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') : s.title; }).join(', '); const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT'); const message = `Halo PERABOX, saya ${isEmergency ? '*PERLU LAYANAN DARURAT*' : 'ingin konfirmasi transfer'} untuk order:\n- Layanan: ${serviceNames}\n- Waktu: ${selectedDate} jam ${selectedTime}\n- Lokasi: ${formData.address}\n\n*Total Transfer: Rp ${totalWithUnique.toLocaleString('id-ID')} (BCA)*\n*Kode Unik: ${uniqueCode}*${isEmergency ? '\n\n*STATUS: DARURAT / ASAP*' : ''}\n\nBerikut bukti transfer saya (lampirkan foto):`; const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360'; const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`; window.open(waUrl, '_blank'); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"><span className="text-xl">📤</span> {t('bookPage.confirmPayment')}</button>
+                                            <button onClick={() => {
+                                                setStep(7);
+                                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                                                const totalWithUnique = calculateTotal() + uniqueCode;
+                                                const serviceNames = selectedServices.map((id: string) => {
+                                                    const s = apiServices.find((sv: Service) => sv.id === id);
+                                                    if (!s) return id;
+                                                    return getServiceLabel(id) || s.title;
+                                                }).join(', ');
+                                                const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA');
+                                                const message = `${t('bookPage.wa.newOrder')}, ${isEmergency ? t('bookPage.wa.emergencyPrefix') : t('bookPage.wa.confirmTransfer')} ${t('bookPage.forOrder') || 'for order'}:\n- ${t('bookPage.wa.service')}: ${serviceNames}\n- ${t('bookPage.wa.time')}: ${selectedDate} ${t('home') === 'BERANDA' ? 'jam' : t('home') === 'HOME' ? 'at' : ''} ${selectedTime}\n- ${t('bookPage.wa.location')}: ${formData.address}\n\n*${t('bookPage.wa.totalTransfer')}: ${currencySymbol}${formatPrice(totalWithUnique)} (BCA)*\n*${t('bookPage.wa.uniqueCode')}: ${uniqueCode}*${isEmergency ? '\n\n' + t('bookPage.wa.statusEmergency') : ''}\n\n${t('bookPage.wa.proofInstruction')}`;
+                                                const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
+                                                const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
+                                                window.open(waUrl, '_blank');
+                                            }} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"><span className="text-xl">📤</span> {t('bookPage.confirmPayment')}</button>
                                             <button onClick={() => setStep(5)} className="w-full mt-3 text-gray-400 hover:text-gray-600 font-medium py-2 rounded-xl transition-all text-sm">{t('bookPage.backToDetails')}</button>
                                         </div>
                                     </div>
