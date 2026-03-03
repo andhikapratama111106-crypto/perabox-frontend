@@ -131,7 +131,7 @@ export default function RootLayout({
                             "image": "https://perabox.vercel.app/perabox_icon.png",
                             "@id": "https://perabox.vercel.app",
                             "url": "https://perabox.vercel.app",
-                            "telephone": "+6281234567894",
+                            "telephone": `+62${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '81234567894'}`,
                             "address": {
                                 "@type": "PostalAddress",
                                 "streetAddress": "Jl. Kemerdekaan No. 123",
