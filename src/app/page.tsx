@@ -29,28 +29,33 @@ export default function Home() {
     };
 
     return (
-        <main className="min-h-screen">
+        <main className="min-h-screen bg-white">
             <Hero />
 
-            {/* Gradient: white → secondary (features bg is white, about bg is secondary) */}
-            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
+            {/* Gradient: Hero (secondary) → Features (white) */}
+            <div className="h-48 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
             <Features />
 
-            {/* Gradient: white → secondary */}
-            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
+            {/* Gradient: Features (white) → About (secondary) */}
+            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <About />
 
+            {/* BrandSlider sits over secondary/secondary-white blend */}
             <BrandSlider />
 
-            {/* Gradient: secondary → white */}
-            <div className="h-20 bg-gradient-to-b from-secondary to-white -mt-1" />
+            {/* Gradient: BrandSlider/About (secondary) → Services (secondary/30 ≈ white-ish cream) */}
+            <div className="h-48 bg-gradient-to-b from-secondary to-[#FAF8F2] -mt-1 relative z-10" />
             <Services />
 
-            {/* Gradient: white → secondary */}
-            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
+            {/* Gradient: Services (secondary/30) → WhyChooseUs (white) */}
+            <div className="h-48 bg-gradient-to-b from-[#FAF8F2] to-white -mt-1 relative z-10" />
             <WhyChooseUs />
 
+            {/* Gradient: WhyChooseUs (white) → Discover (secondary) */}
+            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <Discover />
+
+            {/* Testimonials is already bg-secondary, so it flows from Discover perfectly */}
             <Testimonials />
 
             <BookingModal

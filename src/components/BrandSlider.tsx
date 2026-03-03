@@ -41,7 +41,7 @@ export default function BrandSlider() {
     const handleTouchEnd = () => setIsPaused(false);
 
     return (
-        <section className="py-20 bg-white/50 overflow-hidden">
+        <section className="py-20 bg-secondary overflow-hidden">
             <Reveal direction="up">
                 <div className="container mx-auto px-6 mb-12 text-center">
                     <h2 className="text-accent font-bold tracking-widest uppercase text-sm mb-4">{t('brandSlider.sectionTitle')}</h2>
