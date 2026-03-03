@@ -57,7 +57,7 @@ export default function Preloader() {
                     {/* Logo Branding */}
                     <div className="relative z-10 flex flex-col items-center">
                         <div className="opacity-100">
-                            <div className="w-40 md:w-56 aspect-[16/9] relative">
+                            <div className="w-56 md:w-80 aspect-[16/9] relative drop-shadow-2xl">
                                 <Image
                                     src="/perabox_icon.png"
                                     alt="PERABOX"
@@ -70,8 +70,8 @@ export default function Preloader() {
                     </div>
 
                     {/* Background Decorative Text */}
-                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.03] select-none">
-                        <span className="text-[20vw] font-black tracking-tighter whitespace-nowrap text-primary">
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-[0.07] select-none">
+                        <span className="text-[20vw] font-black tracking-tighter whitespace-nowrap text-primary stroke-primary">
                             PERABOX
                         </span>
                     </div>

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useUIStore } from '@/store/uiStore';
 import { useLanguage } from '@/context/LanguageContext';
+import { useEffect as useEffectLang } from 'react';
 
 interface Message {
     role: 'user' | 'model';
@@ -14,13 +15,18 @@ interface Message {
 
 const ChatBot = () => {
     const router = useRouter();
-    const { t } = useLanguage();
+    const { t, language } = useLanguage();
     const isFinishedPreloading = useUIStore((state: any) => state.isFinishedPreloading);
     const [isOpen, setIsOpen] = useState(false);
     const [showProactive, setShowProactive] = useState(false);
     const [messages, setMessages] = useState<Message[]>([
         { role: 'model', content: t('chatbot.initialMessage') }
     ]);
+
+    // Reset chatbot to localized greeting when language changes
+    useEffectLang(() => {
+        setMessages([{ role: 'model', content: t('chatbot.initialMessage') }]);
+    }, [language]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -131,7 +137,8 @@ const ChatBot = () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     message: userMessage,
-                    history: messages
+                    history: messages,
+                    language: language
                 }),
             });
 
@@ -321,7 +328,7 @@ const ChatBot = () => {
                                         value={input}
                                         onKeyDown={handleKeyDown}
                                         onChange={(e) => setInput(e.target.value)}
-                                        placeholder="Tanya Pera..."
+                                        placeholder={t('chatbot.inputPlaceholder') || 'Tanya Pera...'}
                                         className="flex-1 bg-gray-100 border-none rounded-xl md:rounded-2xl px-4 md:px-6 py-3 md:py-4 text-xs md:text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none font-medium resize-none min-h-[48px] md:min-h-[56px] max-h-[120px] md:max-h-[150px]"
                                     />
                                     <motion.button

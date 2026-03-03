@@ -102,10 +102,10 @@ const Footer = () => {
                     <div>
                         <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.company')}</h4>
                         <ul className="space-y-4 text-sm">
-                            <li><Link href="/faq" className="text-gray-400 hover:text-primary transition-colors duration-300">FAQ</Link></li>
-                            <li><Link href="/terms" className="text-gray-400 hover:text-primary transition-colors duration-300">Terms of Service</Link></li>
-                            <li><Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">Privacy Policy</Link></li>
-                            <li><Link href="/contact" className="text-gray-400 hover:text-primary transition-colors duration-300">Contact Support</Link></li>
+                            <li><Link href="/faq" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.faq')}</Link></li>
+                            <li><Link href="/terms" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.termsOfService')}</Link></li>
+                            <li><Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.privacyPolicy')}</Link></li>
+                            <li><Link href="/contact" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.contact')}</Link></li>
                         </ul>
                     </div>
 
@@ -119,9 +119,9 @@ const Footer = () => {
                     <div>
                         <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.support')}</h4>
                         <ul className="space-y-4 text-sm">
-                            <li><Link href="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">About Us</Link></li>
-                            <li><Link href="/services" className="text-gray-400 hover:text-primary transition-colors duration-300">Services</Link></li>
-                            <li><Link href="/booking" className="text-gray-400 hover:text-primary transition-colors duration-300">Book Technician</Link></li>
+                            <li><Link href="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.aboutUs')}</Link></li>
+                            <li><Link href="/services" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.services')}</Link></li>
+                            <li><Link href="/booking" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('bookPage.title1')}</Link></li>
                             <li><Link href="/vendor-registration" className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm italic">Become a Vendor Partner</Link></li>
                         </ul>
                     </div>

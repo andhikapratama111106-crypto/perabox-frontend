@@ -22,7 +22,8 @@ export const homeTranslations = {
             "proactiveMessage": "How can Pera help you today?",
             "headerTitle": "Chat with Pera",
             "initialMessage": "Hello! I'm Pera, your technician assistant. Ready to help with all your home needs. How can I help you?",
-            "bookingRedirectMessage": "Sure! I'll redirect you to the booking page right away. Please wait a moment..."
+            "bookingRedirectMessage": "Sure! I'll redirect you to the booking page right away. Please wait a moment...",
+            "inputPlaceholder": "Ask Pera..."
         },
         "featuresSection": {
             "sectionTitle": "Features",
@@ -240,7 +241,8 @@ export const homeTranslations = {
             "bcaSuccess": " Please send proof of transfer if needed.",
             "waSuccess": " Please complete payment as instructed on WhatsApp.",
             "backToHome": "Back to Home",
-            "btnNext": "Next"
+            "btnNext": "Next",
+            "experienceLabel": "Experience"
         },
         "loginPage": {
             "title": "Welcome Home!",
@@ -323,7 +325,8 @@ export const homeTranslations = {
             "proactiveMessage": "Ada yang bisa Pera bantu?",
             "headerTitle": "Chat dengan Pera",
             "initialMessage": "Halo! Saya Pera, asisten teknisi Anda. Siap membantu segala kebutuhan rumah Anda. Ada yang bisa saya bantu?",
-            "bookingRedirectMessage": "Tentu! Saya akan langsung mengarahkan Anda ke halaman pemesanan. Mohon tunggu sebentar..."
+            "bookingRedirectMessage": "Tentu! Saya akan langsung mengarahkan Anda ke halaman pemesanan. Mohon tunggu sebentar...",
+            "inputPlaceholder": "Tanya Pera..."
         },
         "featuresSection": {
             "sectionTitle": "Fitur",
@@ -541,7 +544,8 @@ export const homeTranslations = {
             "bcaSuccess": " Silakan kirim bukti transfer jika diperlukan.",
             "waSuccess": " Silakan selesaikan pembayaran sesuai instruksi di WhatsApp.",
             "backToHome": "Kembali ke Beranda",
-            "btnNext": "Lanjut"
+            "btnNext": "Lanjut",
+            "experienceLabel": "Pengalaman"
         },
         "loginPage": {
             "title": "Selamat Datang!",
@@ -624,7 +628,8 @@ export const homeTranslations = {
             "proactiveMessage": "¿Cómo puede ayudarte Pera hoy?",
             "headerTitle": "Chatea con Pera",
             "initialMessage": "¡Hola! Soy Pera, tu asistente técnico. Listo para ayudarte con todas las necesidades de tu hogar. ¿En qué posso ayudarte?",
-            "bookingRedirectMessage": "¡Claro! Te redirigiré a la página de reservas de inmediato. Por favor, espera un momento..."
+            "bookingRedirectMessage": "¡Claro! Te redirigiré a la página de reservas de inmediato. Por favor, espera un momento...",
+            "inputPlaceholder": "Pregunta a Pera..."
         },
         "featuresSection": {
             "sectionTitle": "Características",
@@ -925,7 +930,8 @@ export const homeTranslations = {
             "proactiveMessage": "ペラが何かお手伝いしましょうか？",
             "headerTitle": "ペラとチャット",
             "initialMessage": "こんにちは！私はあなたの技術アシスタント、ペラです。あなたの家のあらゆるニーズをお手伝いする準備ができています。何かお手伝いしましょうか？",
-            "bookingRedirectMessage": "承知いたしました！すぐに予約ページにご案内します。少々お待ちください..."
+            "bookingRedirectMessage": "承知いたしました！すぐに予約ページにご案内します。少々お待ちください...",
+            "inputPlaceholder": "ペラに質問する..."
         },
         "featuresSection": {
             "sectionTitle": "特徴",
@@ -1226,7 +1232,8 @@ export const homeTranslations = {
             "proactiveMessage": "Pera 有什么可以帮您的吗？",
             "headerTitle": "与 Pera 聊天",
             "initialMessage": "您好！我是 Pera，您的技术助理。随时准备为您提供家居方面的帮助。有什么我可以帮您的吗？",
-            "bookingRedirectMessage": "没问题！我将立即为您转到预订页面。请稍候..."
+            "bookingRedirectMessage": "没问题！我将立即为您转到预订页面。请稍候...",
+            "inputPlaceholder": "询问 Pera..."
         },
         "featuresSection": {
             "sectionTitle": "功能",

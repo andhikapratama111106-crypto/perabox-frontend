@@ -31,11 +31,25 @@ export default function Home() {
     return (
         <main className="min-h-screen">
             <Hero />
+
+            {/* Gradient: white → secondary (features bg is white, about bg is secondary) */}
+            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
             <Features />
+
+            {/* Gradient: white → secondary */}
+            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
             <About />
+
             <BrandSlider />
+
+            {/* Gradient: secondary → white */}
+            <div className="h-20 bg-gradient-to-b from-secondary to-white -mt-1" />
             <Services />
+
+            {/* Gradient: white → secondary */}
+            <div className="h-20 bg-gradient-to-b from-white to-secondary -mt-1" />
             <WhyChooseUs />
+
             <Discover />
             <Testimonials />
 
