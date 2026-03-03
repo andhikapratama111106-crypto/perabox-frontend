@@ -250,6 +250,7 @@ export const homeTranslations = {
             "experienceLabel": "Experience",
             "currencySymbol": "IDR ",
             "currencyCode": "en-US",
+            "timeAt": "at ",
             "steps": {
                 "tech": "Tech",
                 "time": "Time",
@@ -653,6 +654,7 @@ export const homeTranslations = {
             "experienceLabel": "Pengalaman",
             "currencySymbol": "Rp",
             "currencyCode": "id-ID",
+            "timeAt": "jam ",
             "steps": {
                 "tech": "Teknisi",
                 "time": "Waktu",
@@ -1056,6 +1058,7 @@ export const homeTranslations = {
             "experienceLabel": "Experiencia",
             "currencySymbol": "Rp",
             "currencyCode": "es-ES",
+            "timeAt": "a las ",
             "steps": {
                 "tech": "Técnico",
                 "time": "Horario",
@@ -1459,6 +1462,7 @@ export const homeTranslations = {
             "experienceLabel": "経験",
             "currencySymbol": "Rp",
             "currencyCode": "ja-JP",
+            "timeAt": " ",
             "steps": {
                 "tech": "技術者",
                 "time": "スケジュール",
@@ -1862,6 +1866,7 @@ export const homeTranslations = {
             "experienceLabel": "经验",
             "currencySymbol": "Rp",
             "currencyCode": "zh-CN",
+            "timeAt": " ",
             "steps": {
                 "tech": "技术员",
                 "time": "时间",

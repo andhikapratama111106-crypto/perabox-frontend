@@ -136,17 +136,12 @@ export default function BookingPage() {
             const serviceNames = selectedServices.map((id: string) => {
                 const s = apiServices.find((sv: Service) => sv.id === id);
                 if (!s) return id;
-                return id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') :
-                    id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') :
-                        id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') :
-                            id === 'srv-4' ? t('bookPage.serviceNames.acRepair') :
-                                id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') :
-                                    s.title;
+                return getServiceLabel(id) || s.title;
             }).join(', ');
 
             const detailedNotes = `
 ${t('bookPage.wa.summaryHeader')}
-${t('bookPage.wa.summaryTech')}: ${selectedTechnician.name}
+${t('bookPage.wa.summaryTech')}: ${t(`bookPage.techNames.${selectedTechnician.id}`) || selectedTechnician.name}
 ${t('bookPage.wa.summaryAddon')}: ${serviceNames}
 ${t('bookPage.wa.summaryPay')}: ${paymentMethod}
 ${t('bookPage.wa.summaryNotes')}: ${formData.notes}
@@ -173,7 +168,7 @@ ${t('bookPage.wa.summaryNotes')}: ${formData.notes}
             const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA');
             const message = `${t('bookPage.wa.newOrder')}${isEmergency ? ' ' + t('bookPage.wa.emergency') : ''}:
 - ${t('bookPage.wa.service')}: ${serviceNames}
-- ${t('bookPage.wa.time')}: ${selectedDate} ${t('home') === 'BERANDA' ? 'jam' : t('home') === 'HOME' ? 'at' : ''} ${selectedTime}
+- ${t('bookPage.wa.time')}: ${selectedDate} ${t('bookPage.timeAt') || ''}${selectedTime}
 - ${t('bookPage.wa.location')}: ${formData.address}
 - ${t('bookPage.wa.notes')}: ${formData.notes}
 - ${t('bookPage.wa.estTotal')}: ${currencySymbol}${formatPrice(calculateTotal())} (${paymentMethod})
@@ -429,7 +424,7 @@ ${t('bookPage.wa.confirm')}`;
                                     </div>
                                     <div className="flex-1 leading-tight">
                                         <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('bookPage.visitSchedule')}</p>
-                                        <h4 className="font-black text-dark text-base">{selectedDate ? new Date(selectedDate).toLocaleDateString(t('home') === 'BERANDA' ? 'id-ID' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                        <h4 className="font-black text-dark text-base">{selectedDate ? new Date(selectedDate).toLocaleDateString(currencyCode, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
                                         <p className="text-[#9C6D3F] font-black text-lg">{selectedTime || '-'}</p>
                                     </div>
                                 </div>
@@ -558,7 +553,7 @@ ${t('bookPage.wa.confirm')}`;
                                             </div>
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
-                                                <h4 className="font-black text-dark text-xl leading-tight">{selectedDate ? new Date(selectedDate).toLocaleDateString(t('home') === 'BERANDA' ? 'id-ID' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                                <h4 className="font-black text-dark text-xl leading-tight">{selectedDate ? new Date(selectedDate).toLocaleDateString(currencyCode, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
                                                 <p className="text-[#9C6D3F] text-2xl font-black mt-1">{selectedTime || '-'}</p>
                                             </div>
                                         </div>
@@ -639,7 +634,7 @@ ${t('bookPage.wa.confirm')}`;
                                                     return getServiceLabel(id) || s.title;
                                                 }).join(', ');
                                                 const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA');
-                                                const message = `${t('bookPage.wa.newOrder')}, ${isEmergency ? t('bookPage.wa.emergencyPrefix') : t('bookPage.wa.confirmTransfer')} ${t('bookPage.forOrder') || 'for order'}:\n- ${t('bookPage.wa.service')}: ${serviceNames}\n- ${t('bookPage.wa.time')}: ${selectedDate} ${t('home') === 'BERANDA' ? 'jam' : t('home') === 'HOME' ? 'at' : ''} ${selectedTime}\n- ${t('bookPage.wa.location')}: ${formData.address}\n\n*${t('bookPage.wa.totalTransfer')}: ${currencySymbol}${formatPrice(totalWithUnique)} (BCA)*\n*${t('bookPage.wa.uniqueCode')}: ${uniqueCode}*${isEmergency ? '\n\n' + t('bookPage.wa.statusEmergency') : ''}\n\n${t('bookPage.wa.proofInstruction')}`;
+                                                const message = `${t('bookPage.wa.newOrder')}, ${isEmergency ? t('bookPage.wa.emergencyPrefix') : t('bookPage.wa.confirmTransfer')} ${t('bookPage.forOrder') || 'for order'}:\n- ${t('bookPage.wa.service')}: ${serviceNames}\n- ${t('bookPage.wa.time')}: ${selectedDate} ${t('bookPage.timeAt') || ''}${selectedTime}\n- ${t('bookPage.wa.location')}: ${formData.address}\n\n*${t('bookPage.wa.totalTransfer')}: ${currencySymbol}${formatPrice(totalWithUnique)} (BCA)*\n*${t('bookPage.wa.uniqueCode')}: ${uniqueCode}*${isEmergency ? '\n\n' + t('bookPage.wa.statusEmergency') : ''}\n\n${t('bookPage.wa.proofInstruction')}`;
                                                 const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
                                                 const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
                                                 window.open(waUrl, '_blank');
