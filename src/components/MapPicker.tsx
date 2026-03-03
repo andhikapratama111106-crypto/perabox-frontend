@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import { useLanguage } from '@/context/LanguageContext';
 
 // Fix for default marker icons in React-Leaflet
 if (typeof window !== 'undefined') {
@@ -32,6 +33,7 @@ function MapController({ onPositionChange }: { onPositionChange: (pos: L.LatLng)
 }
 
 export default function MapPicker({ onAddressSelect, initialAddress }: MapPickerProps) {
+    const { t } = useLanguage();
     const [center, setCenter] = useState<L.LatLngExpression>([-6.2088, 106.8456]); // Jakarta default
     const [address, setAddress] = useState(initialAddress || '');
     const [searchQuery, setSearchQuery] = useState('');
@@ -85,7 +87,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
 
     const handleUseMyLocation = () => {
         if (!("geolocation" in navigator)) {
-            alert("Geolocation is not supported by your browser");
+            alert(t('bookPage.map.locationError'));
             return;
         }
 
@@ -104,7 +106,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
             (error) => {
                 console.error("Error getting location", error);
                 setIsLocating(false);
-                alert("Gagal mendapatkan lokasi. Pastikan izin lokasi aktif.");
+                alert(t('bookPage.map.locationError'));
             },
             { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 }
         );
@@ -127,7 +129,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                             type="text"
                             value={searchQuery}
                             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setSearchQuery(e.target.value)}
-                            placeholder="Cari lokasi anda..."
+                            placeholder={t('bookPage.map.searchPlaceholder')}
                             className="w-full pl-10 pr-4 py-3 rounded-2xl border border-gray-100 bg-gray-50 focus:bg-white focus:border-primary focus:ring-4 focus:ring-primary/10 outline-none transition-all text-sm font-medium"
                         />
                         <svg className="absolute left-3.5 top-3.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -139,7 +141,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                         disabled={isSearching}
                         className="bg-dark hover:bg-dark/90 text-white px-6 py-3 rounded-2xl font-bold transition-all text-sm disabled:opacity-50 shadow-lg shadow-dark/10"
                     >
-                        {isSearching ? '...' : 'Cari'}
+                        {isSearching ? '...' : t('bookPage.map.searchBtn')}
                     </button>
                 </form>
 
@@ -156,7 +158,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                             <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
                         </svg>
                     )}
-                    Gunakan Lokasi Saat Ini
+                    {t('bookPage.map.useMyLocation')}
                 </button>
             </div>
 
@@ -193,7 +195,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
 
                 {/* Floating Map Help */}
                 <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-[1000] bg-dark/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 shadow-2xl pointer-events-none transition-all group-hover:opacity-100">
-                    <p className="text-[9px] font-black text-white uppercase tracking-widest text-center whitespace-nowrap">Geser peta untuk menentukan titik</p>
+                    <p className="text-[9px] font-black text-white uppercase tracking-widest text-center whitespace-nowrap">{t('bookPage.map.dragHelp')}</p>
                 </div>
             </div>
 
@@ -207,7 +209,7 @@ export default function MapPicker({ onAddressSelect, initialAddress }: MapPicker
                         </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                        <p className="text-[10px] font-black text-[#9C6D3F] uppercase tracking-wider mb-0.5">Titik Lokasi Terpilih</p>
+                        <p className="text-[10px] font-black text-[#9C6D3F] uppercase tracking-wider mb-0.5">{t('bookPage.map.selectedLocation')}</p>
                         <p className="text-xs text-dark font-medium leading-relaxed truncate-2-lines">
                             {address}
                         </p>

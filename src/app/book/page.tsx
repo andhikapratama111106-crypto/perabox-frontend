@@ -83,7 +83,7 @@ export default function BookingPage() {
     const handleScheduleSelect = () => {
         if (selectedDate && selectedTime) {
             if (!validateDateRange(selectedDate)) {
-                alert('Silakan pilih tanggal antara tahun 2025 dan 2030.');
+                alert(t('bookPage.dateError'));
                 return;
             }
             setStep(3);
@@ -139,7 +139,8 @@ export default function BookingPage() {
             const response = await bookingsAPI.create(payload);
             const bookingData = response.data;
 
-            const message = `Halo PERABOX, saya ada order baru:
+            const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT');
+            const message = `Halo PERABOX, saya ada order baru${isEmergency ? ' (DARURAT)' : ''}:
 - Layanan: ${serviceNames}
 - Waktu: ${selectedDate} jam ${selectedTime}
 - Lokasi: ${formData.address}
@@ -191,7 +192,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                 {s}
                             </div>
                             <span className="text-[10px] mt-1 font-medium text-gray-500 uppercase">
-                                {s === 1 ? 'Tech' : s === 2 ? 'Time' : s === 3 ? 'Service' : s === 4 ? 'Info' : s === 5 ? 'Pay' : 'QRIS'}
+                                {s === 1 ? t('bookPage.steps.tech') : s === 2 ? t('bookPage.steps.time') : s === 3 ? t('bookPage.steps.service') : s === 4 ? t('bookPage.steps.info') : s === 5 ? t('bookPage.steps.pay') : t('bookPage.steps.qris')}
                             </span>
                             {s < 6 && (
                                 <div className={`absolute left-1/2 top-4 w-full h-[2px] -z-10 transition-all duration-500 ${step > s ? 'bg-primary' : 'bg-gray-100'}`} />
@@ -374,24 +375,26 @@ Mohon konfirmasinya. Terima kasih.`;
                                                 {t('bookPage.selectedTech')}
                                                 <h3 className="text-2xl font-black text-dark tracking-tight leading-tight">{selectedTechnician.name}</h3>
                                                 <div className="flex items-center gap-1.5 mt-1">
-                                                    <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
-                                                    <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-none">{selectedTechnician.experience} {t('bookPage.experienceLabel') || 'Experience'}</p>
+                                                    <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                                                    <p className="text-gray-400 text-[10px] font-bold uppercase tracking-widest leading-none">
+                                                        {selectedTechnician.experience?.replace(/[^0-9]/g, '')} {t('bookPage.years')} {t('bookPage.experienceLabel') || 'Experience'}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
                                     )}
-                                    <div className="bg-[#f9fbfc] rounded-3xl p-5 flex items-center gap-5 border border-gray-50">
-                                        <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center overflow-hidden shrink-0">
-                                            <div className="bg-red-500 w-full h-3 flex items-center justify-center">
-                                                <span className="text-[6px] text-white font-black uppercase">{selectedDate ? new Date(selectedDate).toLocaleDateString('en-US', { month: 'short' }).toUpperCase() : 'DATE'}</span>
-                                            </div>
-                                            <span className="text-lg font-black text-dark leading-none mt-1">{selectedDate ? new Date(selectedDate).getDate() : '--'}</span>
+                                </div>
+                                <div className="bg-[#f9fbfc] rounded-3xl p-5 flex items-center gap-5 border border-gray-50">
+                                    <div className="w-12 h-12 bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col items-center justify-center overflow-hidden shrink-0">
+                                        <div className="bg-red-500 w-full h-3 flex items-center justify-center">
+                                            <span className="text-[6px] text-white font-black uppercase">{selectedDate ? t('bookPage.months')[new Date(selectedDate).getMonth()] : 'DATE'}</span>
                                         </div>
-                                        <div className="flex-1 leading-tight">
-                                            {t('bookPage.visitSchedule')}
-                                            <h4 className="font-black text-dark text-base">{selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
-                                            <p className="text-[#9C6D3F] font-black text-lg">{selectedTime || '-'}</p>
-                                        </div>
+                                        <span className="text-lg font-black text-dark leading-none mt-1">{selectedDate ? new Date(selectedDate).getDate() : '--'}</span>
+                                    </div>
+                                    <div className="flex-1 leading-tight">
+                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('bookPage.visitSchedule')}</p>
+                                        <h4 className="font-black text-dark text-base">{selectedDate ? new Date(selectedDate).toLocaleDateString(t('home') === 'BERANDA' ? 'id-ID' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                        <p className="text-[#9C6D3F] font-black text-lg">{selectedTime || '-'}</p>
                                     </div>
                                 </div>
                                 <div className="grid grid-cols-1 gap-4">
@@ -401,7 +404,14 @@ Mohon konfirmasinya. Terima kasih.`;
                                                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
                                             </div>
                                             <div className="flex-1">
-                                                <h3 className={`text-xl font-black tracking-tight mb-1 transition-colors ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-dark'}`}>{service.title}</h3>
+                                                <h3 className={`text-xl font-black tracking-tight mb-1 transition-colors ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-dark'}`}>
+                                                    {service.id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') :
+                                                        service.id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') :
+                                                            service.id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') :
+                                                                service.id === 'srv-4' ? t('bookPage.serviceNames.acRepair') :
+                                                                    service.id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') :
+                                                                        service.title}
+                                                </h3>
                                                 <div className="flex items-center gap-2">
                                                     <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest">{t('bookPage.startFrom')}</span>
                                                     <p className={`font-black text-lg ${selectedServices.includes(service.id) ? 'text-[#9C6D3F]' : 'text-gray-600'}`}>{service.price}</p>
@@ -493,22 +503,53 @@ Mohon konfirmasinya. Terima kasih.`;
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">{t('bookPage.selectedTech')}</p>
                                                 <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
-                                                <div className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span><p className="text-gray-400 text-xs font-medium uppercase tracking-widest">{selectedTechnician?.experience} {t('bookPage.experienceLabel') || 'Experience'}</p></div>
+                                                <div className="flex items-center gap-1.5">
+                                                    <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
+                                                    <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">
+                                                        {selectedTechnician?.experience?.replace(/[^0-9]/g, '')} {t('bookPage.years')} {t('bookPage.experienceLabel') || 'Experience'}
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="p-8 space-y-8">
                                         <div className="flex items-start gap-5">
-                                            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex flex-col items-center justify-center border border-gray-100 shadow-sm overflow-hidden"><div className="bg-red-500 w-full h-4 flex items-center justify-center"><span className="text-[8px] text-white font-black uppercase">JUL</span></div><span className="text-xl font-black text-dark leading-none mt-1">17</span></div>
+                                            <div className="w-14 h-14 rounded-2xl bg-gray-50 flex flex-col items-center justify-center border border-gray-100 shadow-sm overflow-hidden">
+                                                <div className="bg-red-500 w-full h-4 flex items-center justify-center">
+                                                    <span className="text-[8px] text-white font-black uppercase">{selectedDate ? t('bookPage.months')[new Date(selectedDate).getMonth()] : 'MONTH'}</span>
+                                                </div>
+                                                <span className="text-xl font-black text-dark leading-none mt-1">{selectedDate ? new Date(selectedDate).getDate() : '--'}</span>
+                                            </div>
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
-                                                <h4 className="font-black text-dark text-xl leading-tight">{selectedDate ? new Date(selectedDate).toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                                <h4 className="font-black text-dark text-xl leading-tight">{selectedDate ? new Date(selectedDate).toLocaleDateString(t('home') === 'BERANDA' ? 'id-ID' : 'en-US', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
                                                 <p className="text-[#9C6D3F] text-2xl font-black mt-1">{selectedTime || '-'}</p>
                                             </div>
                                         </div>
                                         <div className="pt-8 border-t border-gray-100 space-y-6">
                                             <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t('bookPage.costDetails')}</p>
-                                            <div className="flex justify-between items-center text-lg font-bold text-gray-700"><span>{t('bookPage.estService')} ({selectedServices.length})</span><span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span></div>
+                                            <div className="flex justify-between items-center text-lg font-bold text-gray-700">
+                                                <span>{t('bookPage.estService')} ({selectedServices.length})</span>
+                                                <span className="text-dark">Rp {calculateTotal().toLocaleString('id-ID')}</span>
+                                            </div>
+                                            <div className="pl-4 space-y-1">
+                                                {selectedServices.map(id => {
+                                                    const s = apiServices.find(service => service.id === id);
+                                                    if (!s) return null;
+                                                    const translatedTitle = id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') :
+                                                        id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') :
+                                                            id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') :
+                                                                id === 'srv-4' ? t('bookPage.serviceNames.acRepair') :
+                                                                    id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') :
+                                                                        s.title;
+                                                    return (
+                                                        <div key={id} className="flex justify-between items-center text-xs text-gray-500">
+                                                            <span>• {translatedTitle}</span>
+                                                            <span>{s.price}</span>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
                                             <div className="flex justify-between items-end pt-4"><span className="text-lg font-black text-dark mb-2">{t('bookPage.estTotal')}</span><div className="text-right"><span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">Rp {calculateTotal().toLocaleString('id-ID')}</span><span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span></div></div>
                                         </div>
                                     </div>
@@ -516,8 +557,14 @@ Mohon konfirmasinya. Terima kasih.`;
                                 <div className="mb-8">
                                     <h3 className="font-bold text-dark mb-4">{t('bookPage.paymentMethod')}</h3>
                                     <div className="space-y-3">
-                                        {['QRIS (Ovo/GoPay/Dana)', 'Transfer Bank BCA'].map((method) => (
-                                            <label key={method} className={`flex items-center p-4 rounded-xl border cursor-pointer transition-all ${paymentMethod === method ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-gray-200 hover:border-gray-300'}`}><input type="radio" name="payment" value={method} checked={paymentMethod === method} onChange={(e: any) => setPaymentMethod(e.target.value)} className="w-5 h-5 text-primary focus:ring-primary" /><span className="ml-3 font-medium text-gray-700">{method}</span></label>
+                                        {[
+                                            { id: 'qris', label: t('bookPage.paymentQRIS') },
+                                            { id: 'bca', label: t('bookPage.paymentBCA') }
+                                        ].map((method) => (
+                                            <label key={method.id} className={`flex items-center p-4 rounded-xl border cursor-pointer transition-all ${paymentMethod === method.label ? 'border-primary bg-primary/5 ring-1 ring-primary' : 'border-gray-200 hover:border-gray-300'}`}>
+                                                <input type="radio" name="payment" value={method.label} checked={paymentMethod === method.label} onChange={(e: any) => setPaymentMethod(e.target.value)} className="w-5 h-5 text-primary focus:ring-primary" />
+                                                <span className="ml-3 font-medium text-gray-700">{method.label}</span>
+                                            </label>
                                         ))}
                                     </div>
                                 </div>
@@ -551,7 +598,7 @@ Mohon konfirmasinya. Terima kasih.`;
                                             <div><p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountName')}</p><div className="bg-gray-50 p-3 rounded-xl border border-gray-200"><span className="font-bold text-dark">PT PERABOX MANDIRI SEJAHTERA</span></div></div>
                                         </div>
                                         <div className="mt-8">
-                                            <button onClick={() => { setStep(7); window.scrollTo({ top: 0, behavior: 'smooth' }); const totalWithUnique = calculateTotal() + uniqueCode; const serviceNames = selectedServices.map((id: string) => apiServices.find((s: Service) => s.id === id)?.title).join(', '); const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT'); const message = `Halo PERABOX, saya ${isEmergency ? '*PERLU LAYANAN DARURAT*' : 'ingin konfirmasi transfer'} untuk order:\n- Layanan: ${serviceNames}\n- Waktu: ${selectedDate} jam ${selectedTime}\n- Lokasi: ${formData.address}\n\n*Total Transfer: Rp ${totalWithUnique.toLocaleString('id-ID')} (BCA)*\n*Kode Unik: ${uniqueCode}*${isEmergency ? '\n\n*STATUS: DARURAT / ASAP*' : ''}\n\nBerikut bukti transfer saya (lampirkan foto):`; const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360'; const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`; window.open(waUrl, '_blank'); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"><span className="text-xl">📤</span> {t('bookPage.confirmPayment')}</button>
+                                            <button onClick={() => { setStep(7); window.scrollTo({ top: 0, behavior: 'smooth' }); const totalWithUnique = calculateTotal() + uniqueCode; const serviceNames = selectedServices.map((id: string) => { const s = apiServices.find((sv: Service) => sv.id === id); if (!s) return id; return id === 'srv-1' ? t('bookPage.serviceNames.acCleaning') : id === 'srv-2' ? t('bookPage.serviceNames.acInstallation') : id === 'srv-3' ? t('bookPage.serviceNames.freonRefill') : id === 'srv-4' ? t('bookPage.serviceNames.acRepair') : id === 'srv-5' ? t('bookPage.serviceNames.emergencyCall') : s.title; }).join(', '); const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT'); const message = `Halo PERABOX, saya ${isEmergency ? '*PERLU LAYANAN DARURAT*' : 'ingin konfirmasi transfer'} untuk order:\n- Layanan: ${serviceNames}\n- Waktu: ${selectedDate} jam ${selectedTime}\n- Lokasi: ${formData.address}\n\n*Total Transfer: Rp ${totalWithUnique.toLocaleString('id-ID')} (BCA)*\n*Kode Unik: ${uniqueCode}*${isEmergency ? '\n\n*STATUS: DARURAT / ASAP*' : ''}\n\nBerikut bukti transfer saya (lampirkan foto):`; const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360'; const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`; window.open(waUrl, '_blank'); }} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"><span className="text-xl">📤</span> {t('bookPage.confirmPayment')}</button>
                                             <button onClick={() => setStep(5)} className="w-full mt-3 text-gray-400 hover:text-gray-600 font-medium py-2 rounded-xl transition-all text-sm">{t('bookPage.backToDetails')}</button>
                                         </div>
                                     </div>
@@ -581,28 +628,30 @@ Mohon konfirmasinya. Terima kasih.`;
             </div>
 
             {/* Sticky Summary Bar (Only visible in step 2, 3, 4) */}
-            {(step >= 2 && step <= 4) && (
-                <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg md:hidden z-40">
-                    <div className="flex items-center justify-between">
-                        {step === 2 && (
-                            <button onClick={() => { if (validateDateRange(selectedDate)) { handleScheduleSelect(); } else { alert('Silakan pilih tanggal antara tahun 2026 dan 2028.'); } }} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
-                                {t('bookPage.btnNext')}
-                            </button>
-                        )}
-                        {step === 3 && (
-                            <button onClick={() => selectedServices.length > 0 && setStep(4)} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
-                                {t('bookPage.btnNext')}
-                            </button>
-                        )}
-                        {step === 4 && (
-                            <button onClick={() => formData.full_name && formData.phone && formData.address && setStep(5)} disabled={!formData.full_name || !formData.phone || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
-                                {t('bookPage.btnNext')}
-                            </button>
-                        )}
+            {
+                (step >= 2 && step <= 4) && (
+                    <div className="fixed bottom-0 left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg md:hidden z-40">
+                        <div className="flex items-center justify-between">
+                            {step === 2 && (
+                                <button onClick={() => { if (validateDateRange(selectedDate)) { handleScheduleSelect(); } else { alert(t('bookPage.dateError')); } }} disabled={!selectedDate || !selectedTime} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                                    {t('bookPage.btnNext')}
+                                </button>
+                            )}
+                            {step === 3 && (
+                                <button onClick={() => selectedServices.length > 0 && setStep(4)} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                                    {t('bookPage.btnNext')}
+                                </button>
+                            )}
+                            {step === 4 && (
+                                <button onClick={() => formData.full_name && formData.phone && formData.address && setStep(5)} disabled={!formData.full_name || !formData.phone || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                                    {t('bookPage.btnNext')}
+                                </button>
+                            )}
+                        </div>
                     </div>
-                </div>
-            )}
+                )
+            }
 
-        </main>
+        </main >
     );
 }

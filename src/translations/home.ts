@@ -245,7 +245,35 @@ export const homeTranslations = {
             "waSuccess": " Please complete payment as instructed on WhatsApp.",
             "backToHome": "Back to Home",
             "btnNext": "Next",
-            "experienceLabel": "Experience"
+            "experienceLabel": "Experience",
+            "steps": {
+                "tech": "Tech",
+                "time": "Time",
+                "service": "Service",
+                "info": "Info",
+                "pay": "Pay",
+                "qris": "QRIS"
+            },
+            "years": "Years",
+            "map": {
+                "searchPlaceholder": "Search your location...",
+                "searchBtn": "Search",
+                "useMyLocation": "Use My Current Location",
+                "dragHelp": "Drag map to set point",
+                "selectedLocation": "Selected Location Point",
+                "locationError": "Failed to get location. Make sure location permission is active."
+            },
+            "serviceNames": {
+                "acCleaning": "AC Cleaning",
+                "acInstallation": "AC Installation",
+                "freonRefill": "Freon Refill",
+                "acRepair": "AC Repair",
+                "emergencyCall": "Emergency Call (Direct)",
+                "deepCleaning": "Deep Cleaning",
+                "maintenance": "Maintenance",
+                "regularService": "Regular Service",
+                "disassembly": "Disassembly & Assembly"
+            }
         },
         "loginPage": {
             "title": "Welcome Home!",
@@ -551,7 +579,35 @@ export const homeTranslations = {
             "waSuccess": " Silakan selesaikan pembayaran sesuai instruksi di WhatsApp.",
             "backToHome": "Kembali ke Beranda",
             "btnNext": "Lanjut",
-            "experienceLabel": "Pengalaman"
+            "experienceLabel": "Pengalaman",
+            "steps": {
+                "tech": "Teknisi",
+                "time": "Jadwal",
+                "service": "Layanan",
+                "info": "Data Diri",
+                "pay": "Bayar",
+                "qris": "QRIS"
+            },
+            "years": "Tahun",
+            "map": {
+                "searchPlaceholder": "Cari lokasi anda...",
+                "searchBtn": "Cari",
+                "useMyLocation": "Gunakan Lokasi Saat Ini",
+                "dragHelp": "Geser peta untuk menentukan titik",
+                "selectedLocation": "Titik Lokasi Terpilih",
+                "locationError": "Gagal mendapatkan lokasi. Pastikan izin lokasi aktif."
+            },
+            "serviceNames": {
+                "acCleaning": "Cuci AC",
+                "acInstallation": "Pasang AC",
+                "freonRefill": "Isi Freon",
+                "acRepair": "Service AC",
+                "emergencyCall": "Panggilan Darurat (Langsung)",
+                "deepCleaning": "Deep Cleaning",
+                "maintenance": "Maintenance",
+                "regularService": "Service Rutin",
+                "disassembly": "Bongkar Pasang"
+            }
         },
         "loginPage": {
             "title": "Selamat Datang!",
@@ -856,7 +912,35 @@ export const homeTranslations = {
             "bcaSuccess": " Por favor envía el comprobante de transferencia si es necesario.",
             "waSuccess": " Por favor completa el pago como se indica en WhatsApp.",
             "backToHome": "Volver al Inicio",
-            "btnNext": "Siguiente"
+            "btnNext": "Siguiente",
+            "steps": {
+                "tech": "Técnico",
+                "time": "Horario",
+                "service": "Servicio",
+                "info": "Info",
+                "pay": "Pago",
+                "qris": "QRIS"
+            },
+            "years": "Años",
+            "map": {
+                "searchPlaceholder": "Buscar tu ubicación...",
+                "searchBtn": "Buscar",
+                "useMyLocation": "Usar mi ubicación actual",
+                "dragHelp": "Arrastra el mapa para fijar el punto",
+                "selectedLocation": "Punto de ubicación seleccionado",
+                "locationError": "Error al obtener la ubicación. Asegúrese de que el permiso de ubicación esté activo."
+            },
+            "serviceNames": {
+                "acCleaning": "Limpieza de AC",
+                "acInstallation": "Instalación de AC",
+                "freonRefill": "Carga de Freón",
+                "acRepair": "Reparación de AC",
+                "emergencyCall": "Llamada de Emergencia (Directo)",
+                "deepCleaning": "Limpieza Profunda",
+                "maintenance": "Mantenimiento",
+                "regularService": "Servicio Regular",
+                "disassembly": "Desmontaje y Montaje"
+            }
         },
         "loginPage": {
             "title": "¡Bienvenido a casa!",
@@ -1161,7 +1245,35 @@ export const homeTranslations = {
             "bcaSuccess": " 必要に応じて振込証明書を送信してください。",
             "waSuccess": " WhatsAppの指示に従って支払いを完了してください。",
             "backToHome": "ホームに戻る",
-            "btnNext": "次へ"
+            "btnNext": "次へ",
+            "steps": {
+                "tech": "技術者",
+                "time": "スケジュール",
+                "service": "サービス",
+                "info": "情報",
+                "pay": "支払い",
+                "qris": "QRIS"
+            },
+            "years": "年",
+            "map": {
+                "searchPlaceholder": "現在地を検索...",
+                "searchBtn": "検索",
+                "useMyLocation": "現在地を使用する",
+                "dragHelp": "地図をドラッグしてポイントを設定",
+                "selectedLocation": "選択したロケーションポイント",
+                "locationError": "場所の取得に失敗しました。位置情報の許可が有効であることを確認してください。"
+            },
+            "serviceNames": {
+                "acCleaning": "エアコンクリーニング",
+                "acInstallation": "エアコン設置",
+                "freonRefill": "フロン補充",
+                "acRepair": "エアコン修理",
+                "emergencyCall": "緊急通報（直通）",
+                "deepCleaning": "ディープクリーニング",
+                "maintenance": "メンテナンス",
+                "regularService": "定期サービス",
+                "disassembly": "分解・組み立て"
+            }
         },
         "loginPage": {
             "title": "おかえりなさい！",
@@ -1466,7 +1578,35 @@ export const homeTranslations = {
             "bcaSuccess": " 如有需要，请发送转账凭证。",
             "waSuccess": " 请按照 WhatsApp 上的指示完成付款。",
             "backToHome": "返回首页",
-            "btnNext": "下一步"
+            "btnNext": "下一步",
+            "steps": {
+                "tech": "技术员",
+                "time": "时间",
+                "service": "服务",
+                "info": "信息",
+                "pay": "支付",
+                "qris": "QRIS"
+            },
+            "years": "年",
+            "map": {
+                "searchPlaceholder": "搜索您的位置...",
+                "searchBtn": "搜索",
+                "useMyLocation": "使用当前位置",
+                "dragHelp": "拖动地图以设置点",
+                "selectedLocation": "选定的位置点",
+                "locationError": "无法获取位置。请确保位置权限已启用。"
+            },
+            "serviceNames": {
+                "acCleaning": "空调清洗",
+                "acInstallation": "空调安装",
+                "freonRefill": "氟利昂填充",
+                "acRepair": "空调维修",
+                "emergencyCall": "紧急呼叫（直达）",
+                "deepCleaning": "深度清洁",
+                "maintenance": "维护",
+                "regularService": "常规服务",
+                "disassembly": "拆卸与组装"
+            }
         },
         "loginPage": {
             "title": "欢迎回来！",

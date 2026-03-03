@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Technician } from '@/data/mockData';
+import { useLanguage } from '@/context/LanguageContext';
 
 interface TechnicianCardProps {
     technician: Technician;
@@ -10,6 +11,11 @@ interface TechnicianCardProps {
 }
 
 export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSelect, selected, priority = false }) => {
+    const { t } = useLanguage();
+
+    const experienceLabel = t('bookPage.experienceLabel') || 'Pengalaman';
+    const startFromLabel = t('bookPage.startFrom') || 'Mulai dari';
+
     return (
         <div
             onClick={() => onSelect(technician)}
@@ -47,28 +53,45 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                     </h3>
                     {technician.experience && (
                         <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1 block">
-                            {technician.experience} Pengalaman
+                            {technician.experience.replace(/[^0-9]/g, '')} {t('bookPage.years')} {experienceLabel}
                         </span>
                     )}
                 </div>
 
+                {/* Bio: exactly 2 lines, no overlap */}
                 {technician.bio && (
-                    <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70 flex-none h-[2.5rem]">
-                        &quot;{technician.bio}&quot;
-                    </p>
+                    <div className="flex-none overflow-hidden" style={{ height: '3rem' }}>
+                        <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70">
+                            &quot;{technician.bio}&quot;
+                        </p>
+                    </div>
                 )}
 
                 <div className="flex flex-wrap gap-1.5 pt-1 flex-1 items-start content-start">
-                    {technician.specialties.slice(0, 2).map((spec, index) => (
-                        <span key={index} className="text-[9px] font-bold px-2 py-1 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 uppercase tracking-tighter">
-                            {spec}
-                        </span>
-                    ))}
+                    {technician.specialties.slice(0, 2).map((spec, index) => {
+                        const specKey = spec === 'Service AC' ? 'acRepair' :
+                            spec === 'Cuci AC' ? 'acCleaning' :
+                                spec === 'Bongkar Pasang' ? 'disassembly' :
+                                    spec === 'Isi Freon' ? 'freonRefill' :
+                                        spec === 'Deep Cleaning' ? 'deepCleaning' :
+                                            spec === 'Instalasi' ? 'acInstallation' :
+                                                spec === 'Maintenance' ? 'maintenance' :
+                                                    spec === 'Service Rutin' ? 'regularService' :
+                                                        spec === 'Perbaikan' ? 'acRepair' : '';
+
+                        const translatedSpec = specKey ? t(`bookPage.serviceNames.${specKey}`) : spec;
+
+                        return (
+                            <span key={index} className="text-[9px] font-bold px-2 py-1 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 uppercase tracking-tighter">
+                                {translatedSpec}
+                            </span>
+                        );
+                    })}
                 </div>
 
                 <div className="pt-4 flex items-center justify-between border-t border-gray-100/50 mt-auto">
                     <div className="flex flex-col">
-                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">Mulai dari</span>
+                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">{startFromLabel}</span>
                         <span className={`font-black text-lg transition-colors ${selected ? 'text-[#9C6D3F]' : 'text-dark'}`}>
                             Rp{technician.basePrice.toLocaleString('id-ID')}
                         </span>
@@ -92,4 +115,5 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
         </div>
     );
 }
+
 export default TechnicianCard;
