@@ -13,17 +13,22 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
     const pathname = usePathname();
     const isAdmin = pathname?.startsWith('/admin');
     const isAuth = pathname === '/login' || pathname === '/register';
+    const isBook = pathname === '/book';
 
     return (
         <>
             {!isAdmin && <Navbar />}
-            <ScrollBlur>
-                <div className="scroll-blur-content">
+            {isBook ? (
+                <PageTransition>
+                    {children}
+                </PageTransition>
+            ) : (
+                <ScrollBlur>
                     <PageTransition>
                         {children}
                     </PageTransition>
-                </div>
-            </ScrollBlur>
+                </ScrollBlur>
+            )}
             {!isAdmin && !isAuth && <Footer />}
             <ChatBot />
             <BackToTop />
