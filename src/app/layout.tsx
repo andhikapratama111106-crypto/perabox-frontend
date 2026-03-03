@@ -4,16 +4,10 @@ import '../styles/globals.css';
 import '../styles/animations.css';
 
 
-import ChatBot from '../components/ChatBot';
-import BackToTop from '../components/BackToTop';
-import Preloader from '../components/Preloader';
-import ScrollBlur from '../components/ScrollBlur';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { LanguageProvider } from '../context/LanguageContext';
 import React from 'react';
-import PageTransition from '../components/PageTransition';
-import { usePathname } from 'next/navigation';
+import LayoutWrapper from '../components/LayoutWrapper';
+import Preloader from '../components/Preloader';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -107,6 +101,10 @@ export const metadata: Metadata = {
 
 
 /* ───────── Root Layout ───────── */
+function PreloaderWrapper() {
+    return <Preloader />;
+}
+
 export default function RootLayout({
     children,
 }: {
@@ -170,7 +168,7 @@ export default function RootLayout({
                 />
             </head>
             <body className="font-sans antialiased bg-secondary text-dark">
-                <Preloader />
+                <PreloaderWrapper />
                 <LanguageProvider>
                     <LayoutWrapper>
                         {children}
@@ -178,27 +176,5 @@ export default function RootLayout({
                 </LanguageProvider>
             </body>
         </html>
-    );
-}
-
-function LayoutWrapper({ children }: { children: React.ReactNode }) {
-    const pathname = usePathname();
-    const isAdmin = pathname?.startsWith('/admin');
-    const isAuth = pathname === '/login' || pathname === '/register';
-
-    return (
-        <>
-            {!isAdmin && <Navbar />}
-            <ScrollBlur>
-                <div className="scroll-blur-content">
-                    <PageTransition>
-                        {children}
-                    </PageTransition>
-                </div>
-            </ScrollBlur>
-            {!isAdmin && !isAuth && <Footer />}
-            <ChatBot />
-            <BackToTop />
-        </>
     );
 }
