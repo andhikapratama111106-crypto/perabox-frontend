@@ -177,11 +177,11 @@ const Hero = () => {
                         animate={{
                             opacity: 1,
                             y: 0,
-                            scale: [1, 1.03, 1],
+                            scale: [1, 1.025, 1],
                             boxShadow: [
-                                '0 25px 50px -12px rgba(0,0,0,0.15)',
-                                '0 25px 60px -8px rgba(0,0,0,0.22)',
-                                '0 25px 50px -12px rgba(0,0,0,0.15)',
+                                '0 15px 40px -12px rgba(139, 94, 60, 0.1)',
+                                '0 25px 50px -10px rgba(139, 94, 60, 0.18)',
+                                '0 15px 40px -12px rgba(139, 94, 60, 0.1)',
                             ],
                         }}
                         transition={{
