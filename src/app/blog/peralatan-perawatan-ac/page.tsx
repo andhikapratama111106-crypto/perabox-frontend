@@ -1,7 +1,21 @@
+"use client";
 
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ArticlePage() {
+    const { t, currencyCode } = useLanguage();
+    const articleId = 'peralatan';
+    const date = "2023-11-22";
+
+    const formatDate = (dateStr: string) => {
+        return new Date(dateStr).toLocaleDateString(currencyCode, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    };
+
     return (
         <main className="min-h-screen bg-light">
             {/* Header */}
@@ -11,12 +25,12 @@ export default function ArticlePage() {
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        Kembali ke Beranda
+                        {t('blogPage.backToHome')}
                     </Link>
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-3xl">
-                        Peralatan Perawatan AC: Wajib Dimiliki untuk Menjaga AC Tetap Optimal
+                        {t(`blogPage.articles.${articleId}`)}
                     </h1>
-                    <p className="text-gray-400 text-sm mt-4">November 22, 2023</p>
+                    <p className="text-gray-400 text-sm mt-4">{formatDate(date)}</p>
                 </div>
             </div>
 

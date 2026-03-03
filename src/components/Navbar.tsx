@@ -128,10 +128,14 @@ const Navbar = () => {
                             role="menuitem"
                             onClick={(e) => {
                                 e.preventDefault();
-                                if (pathname === '/') {
-                                    customSmoothScroll(link.href);
+                                if (link.href.startsWith('#')) {
+                                    if (pathname === '/') {
+                                        customSmoothScroll(link.href);
+                                    } else {
+                                        router.push(`/${link.href}`);
+                                    }
                                 } else {
-                                    router.push(`/${link.href}`);
+                                    router.push(`/${link.href.startsWith('/') ? link.href.slice(1) : link.href}`);
                                 }
                             }}
                             className={`transition-colors hover:text-primary tracking-wide cursor-pointer ${isScrolled ? 'text-gray-700' : 'text-gray-800'
@@ -217,10 +221,14 @@ const Navbar = () => {
                                     onClick={(e) => {
                                         e.preventDefault();
                                         setIsMobileMenuOpen(false);
-                                        if (pathname === '/') {
-                                            customSmoothScroll(link.href);
+                                        if (link.href.startsWith('#')) {
+                                            if (pathname === '/') {
+                                                customSmoothScroll(link.href);
+                                            } else {
+                                                router.push(`/${link.href}`);
+                                            }
                                         } else {
-                                            router.push(`/${link.href}`);
+                                            router.push(`/${link.href.startsWith('/') ? link.href.slice(1) : link.href}`);
                                         }
                                     }}
                                     className="text-gray-700 hover:text-primary py-3 px-4 hover:bg-primary/5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 cursor-pointer"

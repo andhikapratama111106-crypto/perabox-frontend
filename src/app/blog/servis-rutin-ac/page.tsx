@@ -1,23 +1,39 @@
+"use client";
 
 import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function ArticlePage() {
+    const { t, currencyCode } = useLanguage();
+    const articleId = 'servis';
+    const date = "2023-07-15";
+
+    const formatDate = (dateStr: string) => {
+        return new Date(dateStr).toLocaleDateString(currencyCode, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    };
+
     return (
         <main className="min-h-screen bg-light">
             {/* Header */}
             <div className="bg-dark text-white py-16">
                 <div className="container mx-auto px-6">
-                    <Link href="/blog" className="inline-flex items-center text-sm text-gray-300 hover:text-white mb-6 transition-colors">
+                    <Link href="/" className="inline-flex items-center text-sm text-gray-300 hover:text-white mb-6 transition-colors">
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        Kembali ke Blog
+                        {t('blogPage.backToHome')}
                     </Link>
-                    <span className="inline-block bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">Edukasi</span>
+                    <span className="inline-block bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full mb-4">
+                        {t('blogPage.categories.edu')}
+                    </span>
                     <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight max-w-3xl">
-                        Kenapa AC Harus Diservis Rutin? Ini 5 Alasan Pentingnya
+                        {t(`blogPage.articles.${articleId}`)}
                     </h1>
-                    <p className="text-gray-400 text-sm mt-4">July 15, 2023</p>
+                    <p className="text-gray-400 text-sm mt-4">{formatDate(date)}</p>
                 </div>
             </div>
 
