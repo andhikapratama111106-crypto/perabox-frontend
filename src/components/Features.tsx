@@ -83,8 +83,8 @@ const Features = () => {
                                     }
                                 }}
                                 className={`group p-10 rounded-[2.5rem] bg-secondary border cursor-pointer transition-all duration-500 ${expandedIndex === index
-                                    ? 'border-primary/30 bg-white shadow-2xl shadow-primary/10 ring-1 ring-primary/20'
-                                    : 'border-transparent hover:border-accent/20 hover:bg-white hover:shadow-2xl hover:shadow-accent/10'
+                                    ? 'border-primary/30 bg-white shadow-[0_20px_50px_rgba(139,94,60,0.15)] ring-1 ring-primary/20'
+                                    : 'border-transparent hover:border-accent/20 hover:bg-white hover:shadow-[0_20px_40px_rgba(139,94,60,0.08)]'
                                     }`}
                             >
                                 <div className="flex items-start justify-between mb-8">

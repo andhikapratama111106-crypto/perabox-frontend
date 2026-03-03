@@ -106,7 +106,7 @@ const Testimonials = () => {
                                     key={index}
                                     className="w-full flex-shrink-0 px-1"
                                 >
-                                    <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-8 md:p-12 hover:shadow-xl transition-shadow duration-300">
+                                    <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(139,94,60,0.06)] border border-gray-100 p-8 md:p-12 hover:shadow-[0_30px_60px_rgba(139,94,60,0.12)] transition-all duration-500">
                                         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                                             {/* Photo */}
                                             <div className="flex-shrink-0">

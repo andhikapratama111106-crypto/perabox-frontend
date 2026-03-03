@@ -43,7 +43,7 @@ const Discover = () => {
                     {articles.map((article, index) => (
                         <Reveal key={index} direction="up" delay={index * 0.15}>
                             <div
-                                className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow cursor-pointer block group"
+                                className="bg-white rounded-xl overflow-hidden shadow-[0_8px_30px_rgba(139,94,60,0.04)] hover:shadow-[0_20px_40px_rgba(139,94,60,0.1)] transition-all duration-500 cursor-pointer block group"
                                 onClick={() => article.slug !== "#" && router.push(article.slug)}
                             >
                                 <div className="h-48 relative overflow-hidden">
