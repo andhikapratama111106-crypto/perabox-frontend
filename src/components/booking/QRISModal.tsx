@@ -35,8 +35,25 @@ export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInl
             setTimeLeft((prev: number) => (prev > 0 ? prev - 1 : 0));
         }, 1000);
 
-        return () => clearInterval(timer);
-    }, [paymentId]);
+        // Auto-polling for payment status every 10 seconds
+        const pollInterval = setInterval(async () => {
+            if (verifying || timeLeft <= 0) return;
+            try {
+                const response = await paymentAPI.verify(paymentId);
+                if (response.data.status === 'paid') {
+                    onSuccess();
+                }
+            } catch (error) {
+                // Silently fail polling to not disturb user
+                console.error("Polling failed", error);
+            }
+        }, 10000);
+
+        return () => {
+            clearInterval(timer);
+            clearInterval(pollInterval);
+        };
+    }, [paymentId, verifying, timeLeft, onSuccess]);
 
     const formatTime = (seconds: number) => {
         const mins = Math.floor(seconds / 60);
