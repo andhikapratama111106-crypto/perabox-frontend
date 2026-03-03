@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Features from "@/components/Features";
 import OurCompany from "@/components/OurCompany";
@@ -11,7 +10,6 @@ import { Services } from "@/components/Services";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Discover from "@/components/Discover";
 import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
 import BookingModal from "@/components/BookingModal";
 import { useRouter } from "next/navigation";
 
@@ -32,7 +30,6 @@ export default function Home() {
 
     return (
         <main className="min-h-screen">
-            <Navbar />
             <Hero />
             <Features />
             <About />
@@ -41,7 +38,6 @@ export default function Home() {
             <WhyChooseUs />
             <Discover />
             <Testimonials />
-            <Footer />
 
             <BookingModal
                 isOpen={isBookingModalOpen}

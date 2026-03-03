@@ -4,7 +4,6 @@ import { useState, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { authAPI } from '@/lib/api';
-import Navbar from '@/components/Navbar';
 import { useLanguage } from '@/context/LanguageContext';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -165,9 +164,7 @@ export default function LoginPage() {
     }, [router]);
 
     return (
-        <main className="min-h-screen bg-secondary flex flex-col">
-            <Navbar />
-
+        <main className="min-h-screen bg-secondary flex flex-col pt-20">
             <div className="flex-grow flex items-center justify-center py-10 px-6">
                 <AnimatePresence mode="wait">
                     {!isSuccess ? (
@@ -345,9 +342,6 @@ export default function LoginPage() {
                 </AnimatePresence>
             </div>
 
-            <div className="py-8 px-6 text-center">
-                <p className="text-[10px] text-gray-400">{t('footer.allRightsReserved')}</p>
-            </div>
         </main>
     );
 }

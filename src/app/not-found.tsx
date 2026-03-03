@@ -2,13 +2,10 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 export default function NotFound() {
     return (
-        <main className="min-h-screen bg-secondary flex flex-col">
-            <Navbar />
+        <main className="min-h-screen bg-secondary flex flex-col pt-20">
             <div className="flex-grow flex items-center justify-center px-6 py-24">
                 <div className="text-center max-w-2xl">
                     <motion.div
@@ -53,7 +50,6 @@ export default function NotFound() {
                     </motion.div>
                 </div>
             </div>
-            <Footer />
         </main>
     );
 }

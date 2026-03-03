@@ -8,9 +8,12 @@ import ChatBot from '../components/ChatBot';
 import BackToTop from '../components/BackToTop';
 import Preloader from '../components/Preloader';
 import ScrollBlur from '../components/ScrollBlur';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { LanguageProvider } from '../context/LanguageContext';
 import React from 'react';
 import PageTransition from '../components/PageTransition';
+import { usePathname } from 'next/navigation';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -169,17 +172,33 @@ export default function RootLayout({
             <body className="font-sans antialiased bg-secondary text-dark">
                 <Preloader />
                 <LanguageProvider>
-                    <ScrollBlur>
-                        <div className="scroll-blur-content">
-                            <PageTransition>
-                                {children}
-                            </PageTransition>
-                        </div>
-                    </ScrollBlur>
-                    <ChatBot />
-                    <BackToTop />
+                    <LayoutWrapper>
+                        {children}
+                    </LayoutWrapper>
                 </LanguageProvider>
             </body>
         </html>
+    );
+}
+
+function LayoutWrapper({ children }: { children: React.ReactNode }) {
+    const pathname = usePathname();
+    const isAdmin = pathname?.startsWith('/admin');
+    const isAuth = pathname === '/login' || pathname === '/register';
+
+    return (
+        <>
+            {!isAdmin && <Navbar />}
+            <ScrollBlur>
+                <div className="scroll-blur-content">
+                    <PageTransition>
+                        {children}
+                    </PageTransition>
+                </div>
+            </ScrollBlur>
+            {!isAdmin && !isAuth && <Footer />}
+            <ChatBot />
+            <BackToTop />
+        </>
     );
 }

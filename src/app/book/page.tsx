@@ -2,8 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { useLanguage } from '@/context/LanguageContext';
 import { servicesAPI, bookingsAPI, techniciansAPI } from '@/lib/api';
 import { mockTechnicians, Technician, timeSlots, serviceTypes } from '@/data/mockData';
@@ -230,7 +228,6 @@ Mohon konfirmasinya. Terima kasih.`;
 
     return (
         <main className="min-h-screen bg-gray-50 pb-20">
-            <Navbar />
 
             {/* Steps Progress - Integrated with Navbar spacing */}
             <div className="pt-20">
