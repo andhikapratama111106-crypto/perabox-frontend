@@ -33,34 +33,34 @@ export default function Home() {
             <Hero />
 
             {/* Gradient: Hero (secondary) → Features (white) */}
-            <div className="h-48 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
+            <div className="h-64 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
             <Features />
 
             {/* Gradient: Features (white) → About (secondary) */}
-            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
+            <div className="h-64 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <About />
 
             {/* BrandSlider sits over secondary/secondary-white blend */}
             <BrandSlider />
 
-            {/* Gradient: BrandSlider/About (secondary) → Services (secondary/30 ≈ white-ish cream) */}
-            <div className="h-48 bg-gradient-to-b from-secondary to-[#FAF8F2] -mt-1 relative z-10" />
+            {/* Gradient: BrandSlider/About (secondary) → Services (#FAF8F2) */}
+            <div className="h-64 bg-gradient-to-b from-secondary to-[#FAF8F2] -mt-1 relative z-10" />
             <Services />
 
-            {/* Gradient: Services (secondary/30) → WhyChooseUs (white) */}
-            <div className="h-48 bg-gradient-to-b from-[#FAF8F2] to-white -mt-1 relative z-10" />
+            {/* Gradient: Services (#FAF8F2) → WhyChooseUs (white) */}
+            <div className="h-64 bg-gradient-to-b from-[#FAF8F2] to-white -mt-1 relative z-10" />
             <WhyChooseUs />
 
             {/* Gradient: WhyChooseUs (white) → Discover (secondary) */}
-            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
+            <div className="h-64 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <Discover />
 
             {/* Gradient: Discover (secondary) → Testimonials (white) */}
-            <div className="h-48 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
+            <div className="h-64 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
             <Testimonials />
 
             {/* Final Gradient: Testimonials (white) → Footer (secondary) */}
-            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
+            <div className="h-64 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
 
             <BookingModal
                 isOpen={isBookingModalOpen}

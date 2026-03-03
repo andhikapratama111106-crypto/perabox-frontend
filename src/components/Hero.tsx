@@ -30,7 +30,7 @@ const Hero = () => {
     const headlineLines = [t('hero.headlineLine1'), t('hero.headlineLine2')];
 
     return (
-        <section id="home" ref={heroRef} className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+        <section id="home" ref={heroRef} className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-secondary">
             {/* Parallax ambient blobs */}
             <div ref={parallaxRef} className="absolute inset-0 -z-10" style={{ willChange: 'transform' }}>
                 <div className="absolute top-0 left-0 w-full h-full bg-secondary" style={{ transform: parallaxTransform }}></div>

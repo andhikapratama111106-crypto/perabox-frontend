@@ -51,7 +51,7 @@ export const Services: React.FC = () => {
     const active = services[activeTab];
 
     return (
-        <section id="services" className="py-20 md:py-32 bg-secondary/30 relative overflow-hidden">
+        <section id="services" className="py-20 md:py-32 bg-[#FAF8F2] relative overflow-hidden">
             {/* Background Decorations */}
             <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/50 to-transparent pointer-events-none" />
             <div className="absolute -bottom-32 -left-32 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
