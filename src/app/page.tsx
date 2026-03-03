@@ -55,8 +55,12 @@ export default function Home() {
             <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <Discover />
 
-            {/* Testimonials is already bg-secondary, so it flows from Discover perfectly */}
+            {/* Gradient: Discover (secondary) → Testimonials (white) */}
+            <div className="h-48 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
             <Testimonials />
+
+            {/* Final Gradient: Testimonials (white) → Footer (secondary) */}
+            <div className="h-48 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
 
             <BookingModal
                 isOpen={isBookingModalOpen}

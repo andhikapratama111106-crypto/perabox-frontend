@@ -72,7 +72,7 @@ const Testimonials = () => {
     }, [nextSlide, isPaused]);
 
     return (
-        <section className="py-20 md:py-28 bg-secondary overflow-hidden">
+        <section className="py-20 md:py-28 bg-white overflow-hidden">
             <div className="container mx-auto px-6">
                 {/* Section Header */}
                 <Reveal direction="up">
