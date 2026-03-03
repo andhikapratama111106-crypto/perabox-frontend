@@ -132,11 +132,21 @@ const ChatBot = () => {
                 }
             }
 
+            const languageInstructions: Record<string, string> = {
+                'en': 'Please respond in English.',
+                'id': 'Tolong balas dalam Bahasa Indonesia.',
+                'es': 'Por favor, responde en español.',
+                'ja': '日本語でお答えください。',
+                'zh': '请用中文回复。'
+            };
+            const langInstruction = languageInstructions[language] || languageInstructions['id'];
+            const messageWithLang = `[${langInstruction}]\n${userMessage}`;
+
             const response = await fetch(`${apiUrl}/api/v1/chat/message`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    message: userMessage,
+                    message: messageWithLang,
                     history: messages,
                     language: language
                 }),

@@ -159,6 +159,9 @@ export const homeTranslations = {
             "help": "Help",
             "faq": "FAQ",
             "support": "Support",
+            "joinUs": "Join Us",
+            "vendorPartner": "Vendor Partner",
+            "becomeVendor": "Become a Vendor Partner",
             "allRightsReserved": "© 2024 PERABOX. All rights reserved.",
             "slogan": "Simple. Smooth. Secure."
         },
@@ -367,7 +370,7 @@ export const homeTranslations = {
             "mainHeading": "Perusahaan Kami",
             "description1": " adalah platform perawatan rumah yang menghubungkan pengguna dengan teknisi terlatih dan vendor penyewaan peralatan secara cepat, aman, dan transparan. Kami hadir untuk membuat hidup Anda lebih mudah.",
             "description2": "Slogan kami adalah:",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "Sederhana. Lancar. Aman."
         },
         "brandSlider": {
             "sectionTitle": "Mitra Kami",
@@ -462,6 +465,9 @@ export const homeTranslations = {
             "help": "Bantuan",
             "faq": "FAQ",
             "support": "Dukungan",
+            "joinUs": "Bergabung",
+            "vendorPartner": "Mitra Vendor",
+            "becomeVendor": "Jadi Mitra Vendor",
             "allRightsReserved": "© 2024 PERABOX. Hak cipta dilindungi undang-undang.",
             "slogan": "Simple. Smooth. Secure."
         },
@@ -670,7 +676,7 @@ export const homeTranslations = {
             "mainHeading": "Nuestra Compañía",
             "description1": "PERABOX es una plataforma de mantenimiento del hogar que conecta a los usuarios con técnicos capacitados rápidamente y de manera segura. Estamos aquí para facilitar su vida.",
             "description2": "Nuestro eslogan es:",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "Simple. Suave. Seguro."
         },
         "brandSlider": {
             "sectionTitle": "Nuestros Socios",
@@ -765,6 +771,9 @@ export const homeTranslations = {
             "help": "Ayuda",
             "faq": "Preguntas Frecuentes",
             "support": "Soporte",
+            "joinUs": "Únete",
+            "vendorPartner": "Socio Vendedor",
+            "becomeVendor": "Convértete en Socio Vendedor",
             "allRightsReserved": "© 2024 PERABOX. Todos los derechos reservados.",
             "slogan": "Simple. Smooth. Secure."
         },
@@ -972,7 +981,7 @@ export const homeTranslations = {
             "mainHeading": "会社概要",
             "description1": "PERABOXは、訓練を受けた技術者とユーザーを迅速かつ安全につなぐホームケアプラットフォームです。",
             "description2": "私たちのスローガンは次のとおりです:",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "シンプル。スムーズ。安心。"
         },
         "brandSlider": {
             "sectionTitle": "パートナー",
@@ -1067,8 +1076,11 @@ export const homeTranslations = {
             "help": "ヘルプ",
             "faq": "よくある質問",
             "support": "サポート",
+            "joinUs": "参加する",
+            "vendorPartner": "ベンダーパートナー",
+            "becomeVendor": "ベンダーパートナーになる",
             "allRightsReserved": "© 2024 PERABOX。無断転載を禁じます。",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "シンプル。スムーズ。安心。"
         },
         "faqPage": {
             "pageTitle": "よくある質問",
@@ -1274,7 +1286,7 @@ export const homeTranslations = {
             "mainHeading": "我们的公司",
             "description1": "PERABOX 是一个家庭护理平台，可快速安全地将用户与经过培训的技术人员联系起来。我们在这里让您的生活更轻松。",
             "description2": "我们的口号是：",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "简单。顺畅。安全。"
         },
         "brandSlider": {
             "sectionTitle": "我们的合作伙伴",
@@ -1369,8 +1381,11 @@ export const homeTranslations = {
             "help": "帮助",
             "faq": "常见问题",
             "support": "支持",
+            "joinUs": "加入我们",
+            "vendorPartner": "供应商合作伙伴",
+            "becomeVendor": "成为供应商合作伙伴",
             "allRightsReserved": "© 2024 PERABOX. 保留所有权利。",
-            "slogan": "Simple. Smooth. Secure."
+            "slogan": "简单。顺畅。安全。"
         },
         "faqPage": {
             "pageTitle": "常见问题",

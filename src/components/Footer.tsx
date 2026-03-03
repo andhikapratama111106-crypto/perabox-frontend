@@ -110,9 +110,9 @@ const Footer = () => {
                     </div>
 
                     <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">Join Us</h4>
-                        <ul className="space-y-4 text-sm text-gray-600">
-                            <li><Link href="/vendor-registration" className="hover:text-primary transition-colors">Vendor Partner</Link></li>
+                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.joinUs')}</h4>
+                        <ul className="space-y-4 text-sm text-gray-400">
+                            <li><Link href="/vendor-registration" className="hover:text-primary transition-colors">{t('footer.vendorPartner')}</Link></li>
                         </ul>
                     </div>
 
@@ -122,7 +122,7 @@ const Footer = () => {
                             <li><Link href="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.aboutUs')}</Link></li>
                             <li><Link href="/services" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.services')}</Link></li>
                             <li><Link href="/booking" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('bookPage.title1')}</Link></li>
-                            <li><Link href="/vendor-registration" className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm italic">Become a Vendor Partner</Link></li>
+                            <li><Link href="/vendor-registration" className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm italic">{t('footer.becomeVendor')}</Link></li>
                         </ul>
                     </div>
                 </div>
