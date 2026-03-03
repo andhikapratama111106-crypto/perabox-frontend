@@ -5,7 +5,7 @@ import Link from 'next/link';
 import { Reveal } from '@/components/Reveal/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
 import { translations, Language } from '@/translations';
-// Forced refresh for Vercel build v1.1.1
+// Forced refresh for Vercel build v1.1.2
 
 
 const socialLinks = [
