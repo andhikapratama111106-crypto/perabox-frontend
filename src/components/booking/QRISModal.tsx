@@ -13,9 +13,7 @@ interface QRISModalProps {
 }
 
 export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInline = false }: QRISModalProps) {
-    const { t } = useLanguage();
-    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
-    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+    const { t, currencyCode, currencySymbol } = useLanguage();
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat(currencyCode, {

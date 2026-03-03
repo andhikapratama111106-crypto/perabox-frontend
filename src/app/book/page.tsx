@@ -25,9 +25,7 @@ interface Service {
 }
 
 export default function BookingPage() {
-    const { t, language } = useLanguage();
-    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
-    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+    const { t, language, currencyCode, currencySymbol } = useLanguage();
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat(currencyCode, {

@@ -83,6 +83,7 @@ const Navbar = () => {
         { name: t('services') || 'Services', href: '#services' },
         { name: t('features') || 'Features', href: '#features' },
         { name: t('about') || 'Tentang Kami', href: '#about' },
+        { name: t('articles') || 'Articles', href: 'blog' },
     ];
 
     const menuVariants = {

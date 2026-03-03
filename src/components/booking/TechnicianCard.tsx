@@ -11,12 +11,10 @@ interface TechnicianCardProps {
 }
 
 export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSelect, selected, priority = false }) => {
-    const { t } = useLanguage();
+    const { t, currencyCode, currencySymbol } = useLanguage();
 
     const experienceLabel = t('bookPage.experienceLabel') || 'Pengalaman';
     const startFromLabel = t('bookPage.startFrom') || 'Mulai dari';
-    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
-    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
 
     const formatPrice = (price: number) => {
         return new Intl.NumberFormat(currencyCode, {

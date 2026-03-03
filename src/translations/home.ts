@@ -7,6 +7,7 @@ export const homeTranslations = {
         "login": "Login",
         "profile": "PROFILE",
         "logout": "LOGOUT",
+        "articles": "ARTICLES",
         "hero": {
             "badge": "#1 Homecare Platform in Indonesia",
             "headlineLine1": "The Smart Way to",
@@ -251,6 +252,30 @@ export const homeTranslations = {
             "currencySymbol": "IDR ",
             "currencyCode": "en-US",
             "timeAt": "at ",
+            "blogPage": {
+                "title": "Blog & Articles",
+                "subtitle": "Discover the latest information about AC maintenance, electricity saving tips, and household guides from the PERABOX team.",
+                "backToHome": "Back to Home",
+                "comingSoon": "Coming Soon",
+                "categories": {
+                    "tips": "Tips & Tricks",
+                    "edu": "Education",
+                    "diy": "DIY",
+                    "guide": "Guide",
+                    "warning": "Warning"
+                },
+                "articles": {
+                    "peralatan": "AC Maintenance Equipment: Must-Have to Keep Your AC Optimal",
+                    "menangis": "Did You Know? Your AC \"Cries\" When Too Overburdened",
+                    "memperbaiki": "How to Fix a Broken AC: Easy Steps You Can Try At Home",
+                    "servis": "Why Should AC Be Serviced Regularly? Here are 5 Important Reasons",
+                    "inverter": "Inverter vs Non-Inverter AC: Which is More Economical?",
+                    "panduanPk": "Guide to Choosing the Right AC PK Based on Room Size",
+                    "bahaya": "Dangers of Freon Leak: Signs and How to Handle It",
+                    "berbau": "Why Does Your AC Smell? Causes and Solutions",
+                    "merawat": "Tips for Maintaining Your AC to Last for Years"
+                }
+            },
             "steps": {
                 "tech": "Tech",
                 "time": "Time",
@@ -411,6 +436,7 @@ export const homeTranslations = {
         "login": "Masuk",
         "profile": "PROFIL",
         "logout": "KELUAR",
+        "articles": "ARTIKEL",
         "hero": {
             "badge": "Platform Perawatan Rumah #1 di Indonesia",
             "headlineLine1": "Cara Cerdas Merawat",
@@ -655,6 +681,30 @@ export const homeTranslations = {
             "currencySymbol": "Rp",
             "currencyCode": "id-ID",
             "timeAt": "jam ",
+            "blogPage": {
+                "title": "Blog & Artikel",
+                "subtitle": "Temukan informasi terbaru seputar perawatan AC, tips hemat listrik, dan panduan rumah tangga dari tim PERABOX.",
+                "backToHome": "Kembali ke Beranda",
+                "comingSoon": "Segera Hadir",
+                "categories": {
+                    "tips": "Tips & Trik",
+                    "edu": "Edukasi",
+                    "diy": "DIY",
+                    "guide": "Panduan",
+                    "warning": "Peringatan"
+                },
+                "articles": {
+                    "peralatan": "Peralatan Perawatan AC: Wajib Dimiliki untuk Menjaga AC Tetap Optimal",
+                    "menangis": "Tahukah Anda? AC Anda \"Menangis\" Saat Terlalu Terbebani",
+                    "memperbaiki": "Cara Memperbaiki AC yang Rusak: Langkah Mudah yang Bisa Anda Coba di Rumah",
+                    "servis": "Kenapa AC Harus Diservis Rutin? Ini 5 Alasan Pentingnya",
+                    "inverter": "Perbedaan AC Inverter dan Non-Inverter: Mana yang Lebih Hemat?",
+                    "panduanPk": "Panduan Memilih PK AC yang Tepat Sesuai Ukuran Ruangan",
+                    "bahaya": "Bahaya Freon Bocor: Tanda-Tanda dan Cara Mengatasinya",
+                    "berbau": "Mengapa AC Anda Berbau? Penyebab dan Solusinya",
+                    "merawat": "Tips Merawat AC Agar Tetap Awet Selama Bertahun-Tahun"
+                }
+            },
             "steps": {
                 "tech": "Teknisi",
                 "time": "Waktu",
@@ -815,6 +865,7 @@ export const homeTranslations = {
         "login": "Entrar",
         "profile": "PERFIL",
         "logout": "CERRAR SESIÓN",
+        "articles": "ARTÍCULOS",
         "hero": {
             "badge": "Plataforma de mantenimiento del hogar #1",
             "headlineLine1": "La forma inteligente de cuidar",
@@ -1059,6 +1110,30 @@ export const homeTranslations = {
             "currencySymbol": "Rp",
             "currencyCode": "es-ES",
             "timeAt": "a las ",
+            "blogPage": {
+                "title": "Blog y Artículos",
+                "subtitle": "Descubre la información más reciente sobre el mantenimiento del aire acondicionado, consejos para ahorrar electricidad y guías para el hogar del equipo de PERABOX.",
+                "backToHome": "Volver al Inicio",
+                "comingSoon": "Proximamente",
+                "categories": {
+                    "tips": "Consejos y Trucos",
+                    "edu": "Educación",
+                    "diy": "Bricolaje",
+                    "guide": "Guía",
+                    "warning": "Advertencia"
+                },
+                "articles": {
+                    "peralatan": "Equipos de Mantenimiento de AC: Imprescindibles para un AC Óptimo",
+                    "menangis": "¿Sabías que? Tu AC \"Llora\" Cuando está muy Sobrecargado",
+                    "memperbaiki": "Cómo Reparar un AC Estropeado: Pasos Fáciles que puedes Probar en Casa",
+                    "servis": "¿Por qué el AC debe Revisarse Regularmente? 5 Razones Importantes",
+                    "inverter": "AC Inverter vs No Inverter: ¿Cuál es más conómico?",
+                    "panduanPk": "Guía para Elegir el PK de AC Adecuado según el Tamaño de la Habitación",
+                    "bahaya": "Peligros de la Fuga de Freón: Signos y Cómo Manejarlo",
+                    "berbau": "¿Por qué Huele su AC? Causas y Soluciones",
+                    "merawat": "Consejos para Mantener su AC durante Años"
+                }
+            },
             "steps": {
                 "tech": "Técnico",
                 "time": "Horario",
@@ -1219,6 +1294,7 @@ export const homeTranslations = {
         "login": "ログイン",
         "profile": "プロフィール",
         "logout": "ログアウト",
+        "articles": "記事",
         "hero": {
             "badge": "インドネシアNo.1のホームケアプラットフォーム",
             "headlineLine1": "家をスマートに",
@@ -1463,6 +1539,30 @@ export const homeTranslations = {
             "currencySymbol": "Rp",
             "currencyCode": "ja-JP",
             "timeAt": " ",
+            "blogPage": {
+                "title": "ブログと記事",
+                "subtitle": "エアコンのメンテナンス、節電のヒント、PERABOXチームからの家庭用ガイドに関する最新情報をご覧ください。",
+                "backToHome": "ホームに戻る",
+                "comingSoon": "近日公開",
+                "categories": {
+                    "tips": "ヒントとコツ",
+                    "edu": "教育",
+                    "diy": "DIY",
+                    "guide": "ガイド",
+                    "warning": "警告"
+                },
+                "articles": {
+                    "peralatan": "エアコンメンテナンス機器：エアコンを最適に保つために必須",
+                    "menangis": "ご存知ですか？エアコンは過負荷になると「泣き」ます",
+                    "memperbaiki": "壊れたエアコンを修理する方法：自宅で試せる簡単なステップ",
+                    "servis": "なぜエアコンを定期的にサービスする必要があるのか？5つの重要な理由",
+                    "inverter": "インバーター対ノンインバーターエアコン：どちらがより経済的か？",
+                    "panduanPk": "部屋のサイズに合わせた適切なエアコンPKの選択ガイド",
+                    "bahaya": "フロン漏れの危険性：兆候と対処法",
+                    "berbau": "なぜエアコンが臭うのか？原因と解決策",
+                    "merawat": "エアコンを何年も長持ちさせるためのメンテナンスのヒント"
+                }
+            },
             "steps": {
                 "tech": "技術者",
                 "time": "スケジュール",
@@ -1623,6 +1723,7 @@ export const homeTranslations = {
         "login": "登录",
         "profile": "个人资料",
         "logout": "退出登录",
+        "articles": "文章",
         "hero": {
             "badge": "印度尼西亚排名第一的家庭护理平台",
             "headlineLine1": "维护您房屋的",
@@ -1867,6 +1968,30 @@ export const homeTranslations = {
             "currencySymbol": "Rp",
             "currencyCode": "zh-CN",
             "timeAt": " ",
+            "blogPage": {
+                "title": "博客与文章",
+                "subtitle": "探索来自 PERABOX 团队的关于空调维护、节电技巧和家庭指南的最新信息。",
+                "backToHome": "返回首页",
+                "comingSoon": "即将推出",
+                "categories": {
+                    "tips": "技巧与提示",
+                    "edu": "教育",
+                    "diy": "DIY",
+                    "guide": "指南",
+                    "warning": "警告"
+                },
+                "articles": {
+                    "peralatan": "空调维护设备：保持空调最佳状态的必备品",
+                    "menangis": "你知道吗？当空调负担过重时会“哭泣”",
+                    "memperbaiki": "如何修理损坏的空调：在家就能尝试的简单步骤",
+                    "servis": "为什么空调应该定期保养？这是5个重要原因",
+                    "inverter": "变频与定频空调：哪个更省钱？",
+                    "panduanPk": "根据房间大小选择合适空调匹数（PK）的指南",
+                    "bahaya": "氟利昂泄漏的危险：迹象及处理方法",
+                    "berbau": "为什么你的空调有异味？原因及解决方案",
+                    "merawat": "让空调经久耐用的维护技巧"
+                }
+            },
             "steps": {
                 "tech": "技术员",
                 "time": "时间",

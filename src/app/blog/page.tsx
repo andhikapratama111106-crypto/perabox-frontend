@@ -1,81 +1,94 @@
-import Link from 'next/link';
+"use client";
 
-const articles = [
-    {
-        title: "Peralatan Perawatan AC: Wajib Dimiliki untuk Menjaga AC Tetap Optimal",
-        date: "November 22, 2023",
-        image: "/article_handyman.png",
-        slug: "/blog/peralatan-perawatan-ac",
-        category: "Tips & Trik",
-        position: "center",
-    },
-    {
-        title: "Tahukah Anda? AC Anda \"Menangis\" Saat Terlalu Terbebani",
-        date: "August 20, 2023",
-        image: "/article_ac_broken.png",
-        slug: "/blog/ac-menangis",
-        category: "Edukasi",
-        position: "top",
-    },
-    {
-        title: "Cara Memperbaiki AC yang Rusak: Langkah Mudah yang Bisa Anda Coba di Rumah",
-        date: "August 8, 2023",
-        image: "/article_ac_unit.png",
-        slug: "/blog/cara-memperbaiki-ac",
-        category: "DIY",
-        position: "bottom",
-    },
-    {
-        title: "Kenapa AC Harus Diservis Rutin? Ini 5 Alasan Pentingnya",
-        date: "July 15, 2023",
-        image: "/cover_servis_rutin.png",
-        slug: "/blog/servis-rutin-ac",
-        category: "Edukasi",
-        position: "top",
-    },
-    {
-        title: "Perbedaan AC Inverter dan Non-Inverter: Mana yang Lebih Hemat?",
-        date: "July 2, 2023",
-        image: "/cover_inverter.png",
-        slug: "/blog/ac-inverter-vs-non-inverter",
-        category: "Panduan",
-        position: "center",
-    },
-    {
-        title: "Panduan Memilih PK AC yang Tepat Sesuai Ukuran Ruangan",
-        date: "June 20, 2023",
-        image: "/cover_pk_ac.png",
-        slug: "/blog/panduan-pk-ac",
-        category: "Edukasi",
-        position: "center",
-    },
-    {
-        title: "Bahaya Freon Bocor: Tanda-Tanda dan Cara Mengatasinya",
-        date: "June 5, 2023",
-        image: "/cover_freon_bocor.png",
-        slug: "/blog/bahaya-freon-bocor",
-        category: "Peringatan",
-        position: "center",
-    },
-    {
-        title: "Mengapa AC Anda Berbau? Penyebab dan Solusinya",
-        date: "May 18, 2023",
-        image: "/cover_ac_bau.png",
-        slug: "/blog/ac-berbau",
-        category: "Edukasi",
-        position: "top",
-    },
-    {
-        title: "Tips Merawat AC Agar Tetap Awet Selama Bertahun-Tahun",
-        date: "May 1, 2023",
-        image: "/cover_rawat_ac.png",
-        slug: "/blog/tips-merawat-ac",
-        category: "Tips & Trik",
-        position: "top",
-    },
-];
+import Link from 'next/link';
+import { useLanguage } from '@/context/LanguageContext';
 
 export default function BlogPage() {
+    const { t, currencyCode } = useLanguage();
+
+    const articles = [
+        {
+            id: 'peralatan',
+            date: "2023-11-22",
+            image: "/article_handyman.png",
+            slug: "/blog/peralatan-perawatan-ac",
+            categoryKey: "tips",
+            position: "center",
+        },
+        {
+            id: 'menangis',
+            date: "2023-08-20",
+            image: "/article_ac_broken.png",
+            slug: "/blog/ac-menangis",
+            categoryKey: "edu",
+            position: "top",
+        },
+        {
+            id: 'memperbaiki',
+            date: "2023-08-08",
+            image: "/article_ac_unit.png",
+            slug: "/blog/cara-memperbaiki-ac",
+            categoryKey: "diy",
+            position: "bottom",
+        },
+        {
+            id: 'servis',
+            date: "2023-07-15",
+            image: "/cover_servis_rutin.png",
+            slug: "/blog/servis-rutin-ac",
+            categoryKey: "edu",
+            position: "top",
+        },
+        {
+            id: 'inverter',
+            date: "2023-07-02",
+            image: "/cover_inverter.png",
+            slug: "/blog/ac-inverter-vs-non-inverter",
+            categoryKey: "guide",
+            position: "center",
+        },
+        {
+            id: 'panduanPk',
+            date: "2023-06-20",
+            image: "/cover_pk_ac.png",
+            slug: "/blog/panduan-pk-ac",
+            categoryKey: "edu",
+            position: "center",
+        },
+        {
+            id: 'bahaya',
+            date: "2023-06-05",
+            image: "/cover_freon_bocor.png",
+            slug: "/blog/bahaya-freon-bocor",
+            categoryKey: "warning",
+            position: "center",
+        },
+        {
+            id: 'berbau',
+            date: "2023-05-18",
+            image: "/cover_ac_bau.png",
+            slug: "/blog/ac-berbau",
+            categoryKey: "edu",
+            position: "top",
+        },
+        {
+            id: 'merawat',
+            date: "2023-05-01",
+            image: "/cover_rawat_ac.png",
+            slug: "/blog/tips-merawat-ac",
+            categoryKey: "tips",
+            position: "top",
+        },
+    ];
+
+    const formatDate = (dateStr: string) => {
+        return new Date(dateStr).toLocaleDateString(currencyCode, {
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+        });
+    };
+
     return (
         <main className="min-h-screen bg-light">
             {/* Header */}
@@ -85,13 +98,13 @@ export default function BlogPage() {
                         <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
-                        Kembali ke Beranda
+                        {t('blogPage.backToHome')}
                     </Link>
                     <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
-                        Blog & Artikel
+                        {t('blogPage.title')}
                     </h1>
                     <p className="text-gray-400 text-lg mt-4 max-w-2xl">
-                        Temukan informasi terbaru seputar perawatan AC, tips hemat listrik, dan panduan rumah tangga dari tim PERABOX.
+                        {t('blogPage.subtitle')}
                     </p>
                 </div>
             </div>
@@ -113,22 +126,22 @@ export default function BlogPage() {
                                 ></div>
                                 <div className="absolute top-4 left-4">
                                     <span className="bg-primary/90 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                        {article.category}
+                                        {t(`blogPage.categories.${article.categoryKey}`)}
                                     </span>
                                 </div>
                                 {article.slug === '#' && (
                                     <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
                                         <span className="bg-white/90 text-dark text-xs font-bold px-4 py-2 rounded-full">
-                                            Segera Hadir
+                                            {t('blogPage.comingSoon')}
                                         </span>
                                     </div>
                                 )}
                             </div>
                             <div className="p-6">
                                 <h3 className="font-bold text-dark text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
-                                    {article.title}
+                                    {t(`blogPage.articles.${article.id}`)}
                                 </h3>
-                                <p className="text-xs text-gray-400">{article.date}</p>
+                                <p className="text-xs text-gray-400">{formatDate(article.date)}</p>
                             </div>
                         </Link>
                     ))}

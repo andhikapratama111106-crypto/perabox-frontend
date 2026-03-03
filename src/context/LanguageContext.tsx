@@ -7,6 +7,8 @@ interface LanguageContextType {
     language: Language;
     setLanguage: (lang: Language) => void;
     t: (path: string) => string;
+    currencyCode: string;
+    currencySymbol: string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -45,8 +47,11 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         return current as string;
     };
 
+    const currencyCode = t('bookPage.currencyCode') || 'id-ID';
+    const currencySymbol = t('bookPage.currencySymbol') || 'Rp';
+
     return (
-        <LanguageContext.Provider value={{ language, setLanguage, t }}>
+        <LanguageContext.Provider value={{ language, setLanguage, t, currencyCode, currencySymbol }}>
             {children}
         </LanguageContext.Provider>
     );
