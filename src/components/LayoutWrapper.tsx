@@ -15,13 +15,15 @@ import CookieBanner from './CookieBanner';
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
     const isAdmin = pathname?.startsWith('/admin');
+    const isCustomer = pathname?.startsWith('/customer');
+    const isDashboard = isAdmin || isCustomer; // Both have their own layouts
     const isAuth = pathname === '/login' || pathname === '/register';
     const isBook = pathname === '/book';
 
     return (
         <>
-            {!isAdmin && <PromoBanner />}
-            {!isAdmin && <Navbar />}
+            {!isDashboard && <PromoBanner />}
+            {!isDashboard && <Navbar />}
             {isBook ? (
                 <PageTransition>
                     {children}
@@ -33,7 +35,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
                     </PageTransition>
                 </ScrollBlur>
             )}
-            {!isAdmin && !isAuth && <Footer />}
+            {!isDashboard && !isAuth && <Footer />}
             <ChatBot />
             <FloatingWhatsApp />
             <BackToTop />

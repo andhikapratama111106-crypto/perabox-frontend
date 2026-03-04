@@ -138,10 +138,11 @@ const Navbar = () => {
                                     router.push(`/${link.href.startsWith('/') ? link.href.slice(1) : link.href}`);
                                 }
                             }}
-                            className={`transition-colors hover:text-primary tracking-wide cursor-pointer ${isScrolled ? 'text-gray-700' : 'text-gray-800'
-                                } focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg px-2 py-1`}
+                            className={`relative group transition-all tracking-wide cursor-pointer ${isScrolled ? 'text-gray-700' : 'text-gray-800'
+                                } hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg px-2 py-1`}
                         >
                             {link.name.toUpperCase()}
+                            <span className="absolute -bottom-1 left-2 right-2 h-0.5 bg-primary scale-x-0 origin-left transition-transform duration-300 group-hover:scale-x-100 rounded-full opacity-0 group-hover:opacity-100"></span>
                         </a>
                     ))}
 
@@ -172,9 +173,27 @@ const Navbar = () => {
                     )}
                 </div>
 
-                {/* Mobile Actions (Language + Hamburger) */}
-                <div className="flex md:hidden items-center gap-4">
+                {/* Mobile Actions (Language, Auth, Hamburger) */}
+                <div className="flex md:hidden items-center gap-3">
                     <LanguageSwitcher />
+                    {isLoggedIn ? (
+                        <Link
+                            href="/customer/profile"
+                            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${isScrolled ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' : 'bg-white/20 text-dark hover:bg-white/30 backdrop-blur-sm'}`}
+                            aria-label={t('profile') || 'Profile'}
+                        >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </Link>
+                    ) : (
+                        <Link
+                            href="/login"
+                            className="bg-primary hover:bg-primary/90 text-white text-xs font-bold px-4 py-2 rounded-full shadow-md active:scale-95 transition-all"
+                        >
+                            {t('login') || 'LOGIN'}
+                        </Link>
+                    )}
                     <button
                         ref={hamburgerRef}
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}

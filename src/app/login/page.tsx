@@ -194,11 +194,11 @@ export default function LoginPage() {
                                             </div>
                                         </div>
                                     </Link>
-                                    <h2 className="text-4xl font-display font-extrabold leading-tight mb-4">
+                                    <h2 className="text-4xl font-extrabold leading-tight mb-6">
                                         {t('loginPage.brandingTitle1')} <br />
                                         {t('loginPage.brandingTitle2')} <span className="text-accent italic">{t('loginPage.brandingTitle3')}</span>
                                     </h2>
-                                    <p className="text-white/80 text-lg max-w-sm font-body">
+                                    <p className="text-white/80 text-lg max-w-sm">
                                         {t('loginPage.brandingSubtitle')}
                                     </p>
                                 </div>
@@ -215,15 +215,9 @@ export default function LoginPage() {
 
                             {/* Right: Login Form */}
                             <div className="p-8 md:p-16 lg:p-20">
-                                <div className="mb-8 text-center lg:text-left">
-                                    <h1 className="text-3xl font-display font-extrabold text-dark mb-2">{t('loginPage.title')}</h1>
-                                    <p className="text-gray-500 font-body">{t('loginPage.subtitle')}</p>
-                                    {/* Trust badges */}
-                                    <div className="flex flex-wrap gap-2 mt-4 justify-center lg:justify-start">
-                                        {['🔒 Aman & Terenkripsi', '✅ Terverifikasi', '🏆 10.000+ Pengguna'].map((b) => (
-                                            <span key={b} className="text-[11px] font-bold bg-primary/8 text-primary px-3 py-1 rounded-full border border-primary/15">{b}</span>
-                                        ))}
-                                    </div>
+                                <div className="mb-10 text-center lg:text-left">
+                                    <h1 className="text-3xl font-extrabold text-dark mb-3">{t('loginPage.title')}</h1>
+                                    <p className="text-gray-500 font-medium">{t('loginPage.subtitle')}</p>
                                 </div>
 
                                 {serverError && (
