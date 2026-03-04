@@ -4,6 +4,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { authAPI } from '@/lib/api';
 import { motion } from 'framer-motion';
 import { useLanguage } from '@/context/LanguageContext';
+import BookingList from './components/BookingList';
+
+type TabType = 'profile' | 'active' | 'history';
 
 const CustomerProfile = () => {
     const { t } = useLanguage();
@@ -35,6 +38,9 @@ const CustomerProfile = () => {
         personal: false,
         address: false
     });
+
+    // Tab state
+    const [activeTab, setActiveTab] = useState<TabType>('profile');
 
     // Temporary state for form inputs (to allow canceling)
     const [formData, setFormData] = useState(user);
@@ -186,173 +192,218 @@ const CustomerProfile = () => {
 
     return (
         <div className="space-y-6 animate-fade-in-up pb-10">
-            <h1 className="text-2xl font-bold text-gray-800 mb-6">{t('myProfile')}</h1>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-2">
+                <h1 className="text-2xl font-bold text-gray-800">{t('myProfile')}</h1>
+            </div>
 
-            {/* Top Card: Identity */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
-                <div className="flex items-center gap-4 w-full">
-                    <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0">
-                        <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
-                    </div>
-                    <div className="flex-1">
-                        {editMode.identity ? (
-                            <div className="space-y-2 max-w-md">
-                                <input
-                                    type="text"
-                                    value={formData.name}
-                                    onChange={(e) => handleChange(e, 'name')}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                    placeholder={t('profilePage.fullName')}
-                                />
-                                <input
-                                    type="text"
-                                    value={formData.location}
-                                    onChange={(e) => handleChange(e, 'location')}
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
-                                    placeholder={t('profilePage.location')}
-                                />
+            {/* Dashboard Tabs */}
+            <div className="flex overflow-x-auto hide-scrollbar gap-2 p-1 bg-white border border-gray-100 rounded-xl shadow-sm mb-6">
+                {[
+                    { id: 'profile', label: 'Profil & Akun', icon: 'M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z' },
+                    { id: 'active', label: 'Pesanan Aktif', icon: 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z' },
+                    { id: 'history', label: 'Riwayat Selesai', icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2' }
+                ].map((tab) => (
+                    <button
+                        key={tab.id}
+                        onClick={() => setActiveTab(tab.id as TabType)}
+                        className={`flex items-center gap-2 px-5 py-2.5 rounded-lg font-bold text-sm whitespace-nowrap transition-all flex-1 justify-center
+                            ${activeTab === tab.id
+                                ? 'bg-primary text-white shadow-md'
+                                : 'text-gray-500 hover:text-gray-800 hover:bg-gray-50'
+                            }`}
+                    >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={tab.icon} />
+                        </svg>
+                        {tab.label}
+                    </button>
+                ))}
+            </div>
+
+            {/* Tab: Profile Information */}
+            {activeTab === 'profile' && (
+                <div className="space-y-6 animate-fade-in">
+                    {/* Top Card: Identity */}
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                        <div className="flex items-center gap-4 w-full">
+                            <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0">
+                                <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
                             </div>
-                        ) : (
-                            <>
-                                <h2 className="text-lg font-bold text-gray-900">{user.name}</h2>
-                                <div className="text-sm text-gray-500 mb-1">{user.role}</div>
-                                <div className="text-sm text-gray-400 flex items-center gap-1">
-                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                                    {user.location}
-                                </div>
-                            </>
-                        )}
+                            <div className="flex-1">
+                                {editMode.identity ? (
+                                    <div className="space-y-2 max-w-md">
+                                        <input
+                                            type="text"
+                                            value={formData.name}
+                                            onChange={(e) => handleChange(e, 'name')}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                            placeholder={t('profilePage.fullName')}
+                                        />
+                                        <input
+                                            type="text"
+                                            value={formData.location}
+                                            onChange={(e) => handleChange(e, 'location')}
+                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none"
+                                            placeholder={t('profilePage.location')}
+                                        />
+                                    </div>
+                                ) : (
+                                    <>
+                                        <h2 className="text-lg font-bold text-gray-900">{user.name}</h2>
+                                        <div className="text-sm text-gray-500 mb-1">{user.role}</div>
+                                        <div className="text-sm text-gray-400 flex items-center gap-1">
+                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                                            {user.location}
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                        <div className="flex gap-2 self-end md:self-center">
+                            {editMode.identity ? (
+                                <>
+                                    <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                                    <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
+                                </>
+                            ) : (
+                                <button onClick={() => handleEdit('identity')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+                                    {t('edit')}
+                                </button>
+                            )}
+                        </div>
                     </div>
-                </div>
-                <div className="flex gap-2 self-end md:self-center">
-                    {editMode.identity ? (
-                        <>
-                            <button onClick={() => handleSave('identity')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
-                            <button onClick={() => handleCancel('identity')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
-                        </>
-                    ) : (
-                        <button onClick={() => handleEdit('identity')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                            {t('edit')}
-                        </button>
-                    )}
-                </div>
-            </div>
 
-            {/* Middle Card: Personal Information */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">{t('profilePage.personalInfo')}</h3>
-                    <div className="flex gap-2">
-                        {editMode.personal ? (
-                            <>
-                                <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
-                                <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
-                            </>
-                        ) : (
-                            <button onClick={() => handleEdit('personal')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                {t('edit')}
-                            </button>
-                        )}
-                    </div>
-                </div>
+                    {/* Middle Card: Personal Information */}
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-lg font-bold text-gray-800">{t('profilePage.personalInfo')}</h3>
+                            <div className="flex gap-2">
+                                {editMode.personal ? (
+                                    <>
+                                        <button onClick={() => handleSave('personal')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                                        <button onClick={() => handleCancel('personal')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
+                                    </>
+                                ) : (
+                                    <button onClick={() => handleEdit('personal')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+                                        {t('edit')}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.firstName')}</label>
-                        {editMode.personal ? (
-                            <input type="text" value={formData.firstName} onChange={(e) => handleChange(e, 'firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.firstName}</p>
-                        )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.firstName')}</label>
+                                {editMode.personal ? (
+                                    <input type="text" value={formData.firstName} onChange={(e) => handleChange(e, 'firstName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.firstName}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.lastName')}</label>
+                                {editMode.personal ? (
+                                    <input type="text" value={formData.lastName} onChange={(e) => handleChange(e, 'lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.lastName}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.email')}</label>
+                                {editMode.personal ? (
+                                    <input type="email" value={formData.email} onChange={(e) => handleChange(e, 'email')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800 break-all">{user.email}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.phone')}</label>
+                                {editMode.personal ? (
+                                    <input type="tel" value={formData.phone} onChange={(e) => handleChange(e, 'phone')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.phone}</p>
+                                )}
+                            </div>
+                            <div className="md:col-span-2">
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.bio')}</label>
+                                {editMode.personal ? (
+                                    <input type="text" value={formData.bio} onChange={(e) => handleChange(e, 'bio')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.bio}</p>
+                                )}
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.lastName')}</label>
-                        {editMode.personal ? (
-                            <input type="text" value={formData.lastName} onChange={(e) => handleChange(e, 'lastName')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.lastName}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.email')}</label>
-                        {editMode.personal ? (
-                            <input type="email" value={formData.email} onChange={(e) => handleChange(e, 'email')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800 break-all">{user.email}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.phone')}</label>
-                        {editMode.personal ? (
-                            <input type="tel" value={formData.phone} onChange={(e) => handleChange(e, 'phone')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.phone}</p>
-                        )}
-                    </div>
-                    <div className="md:col-span-2">
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.bio')}</label>
-                        {editMode.personal ? (
-                            <input type="text" value={formData.bio} onChange={(e) => handleChange(e, 'bio')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.bio}</p>
-                        )}
-                    </div>
-                </div>
-            </div>
 
-            {/* Bottom Card: Address */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-                <div className="flex justify-between items-center mb-6">
-                    <h3 className="text-lg font-bold text-gray-800">{t('profilePage.address')}</h3>
-                    <div className="flex gap-2">
-                        {editMode.address ? (
-                            <>
-                                <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
-                                <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
-                            </>
-                        ) : (
-                            <button onClick={() => handleEdit('address')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
-                                {t('edit')}
-                            </button>
-                        )}
-                    </div>
-                </div>
+                    {/* Bottom Card: Address */}
+                    <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-lg font-bold text-gray-800">{t('profilePage.address')}</h3>
+                            <div className="flex gap-2">
+                                {editMode.address ? (
+                                    <>
+                                        <button onClick={() => handleSave('address')} className="px-4 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors">{t('save')}</button>
+                                        <button onClick={() => handleCancel('address')} className="px-4 py-2 bg-gray-100 text-gray-600 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors">{t('cancel')}</button>
+                                    </>
+                                ) : (
+                                    <button onClick={() => handleEdit('address')} className="text-sm font-medium text-blue-500 hover:underline px-4 py-2 hover:bg-blue-50 rounded-lg transition-colors">
+                                        {t('edit')}
+                                    </button>
+                                )}
+                            </div>
+                        </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.country')}</label>
-                        {editMode.address ? (
-                            <input type="text" value={formData.address.country} onChange={(e) => handleChange(e, 'address', 'country')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.address.country}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.street')}</label>
-                        {editMode.address ? (
-                            <textarea rows={2} value={formData.address.street} onChange={(e) => handleChange(e, 'address', 'street')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800 leading-relaxed">{user.address.street}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.postalCode')}</label>
-                        {editMode.address ? (
-                            <input type="text" value={formData.address.postalCode} onChange={(e) => handleChange(e, 'address', 'postalCode')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.address.postalCode}</p>
-                        )}
-                    </div>
-                    <div>
-                        <label className="block text-xs text-gray-400 mb-1">{t('profilePage.taxId')}</label>
-                        {editMode.address ? (
-                            <input type="text" value={formData.address.taxId} onChange={(e) => handleChange(e, 'address', 'taxId')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
-                        ) : (
-                            <p className="font-medium text-gray-800">{user.address.taxId}</p>
-                        )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12">
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.country')}</label>
+                                {editMode.address ? (
+                                    <input type="text" value={formData.address.country} onChange={(e) => handleChange(e, 'address', 'country')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.address.country}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.street')}</label>
+                                {editMode.address ? (
+                                    <textarea rows={2} value={formData.address.street} onChange={(e) => handleChange(e, 'address', 'street')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none resize-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800 leading-relaxed">{user.address.street}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.postalCode')}</label>
+                                {editMode.address ? (
+                                    <input type="text" value={formData.address.postalCode} onChange={(e) => handleChange(e, 'address', 'postalCode')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.address.postalCode}</p>
+                                )}
+                            </div>
+                            <div>
+                                <label className="block text-xs text-gray-400 mb-1">{t('profilePage.taxId')}</label>
+                                {editMode.address ? (
+                                    <input type="text" value={formData.address.taxId} onChange={(e) => handleChange(e, 'address', 'taxId')} className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none" />
+                                ) : (
+                                    <p className="font-medium text-gray-800">{user.address.taxId}</p>
+                                )}
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
+
+            {/* Tab: Active Bookings */}
+            {activeTab === 'active' && (
+                <div className="animate-fade-in">
+                    <BookingList type="active" />
+                </div>
+            )}
+
+            {/* Tab: History */}
+            {activeTab === 'history' && (
+                <div className="animate-fade-in">
+                    <BookingList type="history" />
+                </div>
+            )}
         </div>
     );
 };

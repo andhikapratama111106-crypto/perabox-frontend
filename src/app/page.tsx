@@ -11,7 +11,6 @@ import WhyChooseUs from "@/components/WhyChooseUs";
 import Discover from "@/components/Discover";
 import Testimonials from "@/components/Testimonials";
 import BookingModal from "@/components/BookingModal";
-import HowItWorks from "@/components/HowItWorks";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
@@ -48,11 +47,9 @@ export default function Home() {
             <div className="h-64 bg-gradient-to-b from-secondary to-[#FAF8F2] -mt-1 relative z-10" />
             <Services />
 
-            {/* Gradient: Services (#FAF8F2) → HowItWorks (white) */}
+            {/* Gradient: Services (#FAF8F2) → WhyChooseUs (white) */}
             <div className="h-64 bg-gradient-to-b from-[#FAF8F2] to-white -mt-1 relative z-10" />
-            <HowItWorks />
 
-            {/* Gradient: HowItWorks (white) → WhyChooseUs (white) */}
             <WhyChooseUs />
 
             {/* Gradient: WhyChooseUs (white) → Discover (secondary) */}
