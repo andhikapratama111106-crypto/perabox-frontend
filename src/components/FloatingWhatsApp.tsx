@@ -21,8 +21,8 @@ export default function FloatingWhatsApp() {
                     initial={{ opacity: 0, scale: 0.5 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
-                    // Stacked: ChatBot is at bottom-4, BackToTop is at bottom-40, WA sits between at bottom-[5.5rem]
-                    className="fixed bottom-[5.5rem] right-4 md:bottom-[6.5rem] md:right-10 z-[9997]"
+                    // Moved to left to avoid overlapping ChatBot on the right
+                    className="fixed bottom-[5.5rem] left-4 md:bottom-6 md:left-10 z-[9997]"
                     onMouseEnter={() => setIsHovered(true)}
                     onMouseLeave={() => setIsHovered(false)}
                 >
@@ -30,13 +30,13 @@ export default function FloatingWhatsApp() {
                     <AnimatePresence>
                         {isHovered && (
                             <motion.div
-                                initial={{ opacity: 0, x: 10, scale: 0.9 }}
+                                initial={{ opacity: 0, x: -10, scale: 0.9 }}
                                 animate={{ opacity: 1, x: 0, scale: 1 }}
-                                exit={{ opacity: 0, x: 10, scale: 0.9 }}
-                                className="absolute right-16 md:right-[4.5rem] top-1/2 -translate-y-1/2 bg-white text-dark text-sm font-bold px-4 py-2 rounded-xl shadow-lg whitespace-nowrap"
+                                exit={{ opacity: 0, x: -10, scale: 0.9 }}
+                                className="absolute left-16 md:left-[4.5rem] top-1/2 -translate-y-1/2 bg-white text-dark text-sm font-bold px-4 py-2 rounded-xl shadow-lg whitespace-nowrap"
                             >
                                 Chat dengan Kami
-                                <div className="absolute right-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-l-[6px] border-l-white" />
+                                <div className="absolute left-[-6px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent border-r-[6px] border-r-white" />
                             </motion.div>
                         )}
                     </AnimatePresence>

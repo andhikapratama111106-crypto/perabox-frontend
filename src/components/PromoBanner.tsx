@@ -13,12 +13,17 @@ export default function PromoBanner() {
         const dismissed = sessionStorage.getItem('promo_dismissed');
         if (!dismissed) {
             setIsVisible(true);
+            document.body.classList.add('has-promo');
+        }
+        return () => {
+            document.body.classList.remove('has-promo');
         }
     }, []);
 
     const dismiss = () => {
         setIsVisible(false);
         sessionStorage.setItem('promo_dismissed', 'true');
+        document.body.classList.remove('has-promo');
     };
 
     return (
@@ -29,7 +34,7 @@ export default function PromoBanner() {
                     animate={{ y: 0, opacity: 1 }}
                     exit={{ y: -50, opacity: 0 }}
                     transition={{ duration: 0.3 }}
-                    className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-primary to-accent text-white text-center py-2.5 px-4 text-sm font-bold shadow-md"
+                    className="fixed top-0 left-0 right-0 z-[60] h-[44px] bg-gradient-to-r from-primary to-accent text-white text-center py-2.5 px-4 text-sm font-bold shadow-md overflow-hidden"
                 >
                     <div className="container mx-auto flex items-center justify-center gap-3">
                         <span className="hidden sm:inline">🎉</span>
