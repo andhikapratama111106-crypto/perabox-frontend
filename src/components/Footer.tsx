@@ -154,8 +154,8 @@ const Footer = () => {
 
                         <div className="flex flex-col md:flex-row items-center gap-6 order-1 md:order-2">
                             <div className="flex gap-6 text-[10px] text-gray-400">
-                                <Link href="#" className="hover:text-primary transition-colors">{t('footer.termsOfService')}</Link>
-                                <Link href="#" className="hover:text-primary transition-colors">{t('footer.privacyPolicy')}</Link>
+                                <Link href="/terms" className="hover:text-primary transition-colors">{t('footer.termsOfService')}</Link>
+                                <Link href="/privacy" className="hover:text-primary transition-colors">{t('footer.privacyPolicy')}</Link>
                             </div>
                         </div>
                     </div>

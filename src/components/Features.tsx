@@ -145,7 +145,7 @@ const Features = () => {
                                 {/* "Learn more" hint when collapsed */}
                                 {expandedIndex !== index && (
                                     <div className="mt-8 flex items-center gap-2 text-primary font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                                        {t('features.learnMore')}
+                                        {t('featuresSection.learnMore')}
                                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                                         </svg>

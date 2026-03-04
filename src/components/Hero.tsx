@@ -130,9 +130,14 @@ const Hero = () => {
                     <Reveal direction="up" delay={0.9}>
                         <div className="mt-12 flex items-center gap-6">
                             <div className="flex -space-x-3">
-                                {[1, 2, 3, 4].map((i) => (
-                                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white bg-gray-200 overflow-hidden shadow-sm">
-                                        <img src={`https://i.pravatar.cc/100?u=${i}`} alt="user" />
+                                {[
+                                    { bg: '#D4A373', initial: 'A' },
+                                    { bg: '#8B5E3C', initial: 'R' },
+                                    { bg: '#B07D56', initial: 'S' },
+                                    { bg: '#A67C5B', initial: 'D' },
+                                ].map((user, i) => (
+                                    <div key={i} className="w-10 h-10 rounded-full border-2 border-white overflow-hidden shadow-sm flex items-center justify-center" style={{ backgroundColor: user.bg }}>
+                                        <span className="text-white text-xs font-bold">{user.initial}</span>
                                     </div>
                                 ))}
                             </div>

@@ -203,9 +203,8 @@ export default function LoginPage() {
                                     </p>
                                 </div>
                                 <div className="relative z-10 flex items-center gap-4 bg-white/10 backdrop-blur-sm p-6 rounded-[2rem] border border-white/20">
-                                    <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden shrink-0">
-                                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                                        <img src="https://i.pravatar.cc/100?img=47" alt="Customer" className="w-full h-full object-cover" />
+                                    <div className="w-12 h-12 rounded-full border-2 border-white overflow-hidden shrink-0 flex items-center justify-center bg-accent">
+                                        <span className="text-white text-sm font-bold">B</span>
                                     </div>
                                     <div>
                                         <p className="text-sm font-bold">{t('loginPage.testimonialText')}</p>
