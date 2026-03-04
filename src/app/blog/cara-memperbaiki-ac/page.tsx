@@ -9,11 +9,16 @@ export default function ArticlePage() {
     const date = "2023-08-08";
 
     const formatDate = (dateStr: string) => {
-        return new Date(dateStr).toLocaleDateString(currencyCode, {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        try {
+            return new Date(dateStr).toLocaleDateString(currencyCode || 'id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        } catch (error) {
+            console.error('Date formatting error:', error);
+            return dateStr;
+        }
     };
 
     return (

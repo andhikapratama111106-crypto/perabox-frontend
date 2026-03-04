@@ -421,8 +421,17 @@ ${t('bookPage.wa.confirm')}`;
                                         <span className="text-lg font-black text-dark leading-none mt-1">{selectedDate ? new Date(selectedDate).getDate() : '--'}</span>
                                     </div>
                                     <div className="flex-1 leading-tight">
-                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1">{t('bookPage.visitSchedule')}</p>
-                                        <h4 className="font-black text-dark text-base">{selectedDate ? new Date(selectedDate).toLocaleDateString(currencyCode, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                        <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
+                                        <h4 className="font-black text-dark text-base">
+                                            {(() => {
+                                                if (!selectedDate) return '-';
+                                                try {
+                                                    return new Date(selectedDate).toLocaleDateString(currencyCode || 'id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                                                } catch (e) {
+                                                    return selectedDate;
+                                                }
+                                            })()}
+                                        </h4>
                                         <p className="text-[#9C6D3F] font-black text-lg">{selectedTime || '-'}</p>
                                     </div>
                                 </div>
@@ -551,7 +560,16 @@ ${t('bookPage.wa.confirm')}`;
                                             </div>
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
-                                                <h4 className="font-black text-dark text-xl leading-tight">{selectedDate ? new Date(selectedDate).toLocaleDateString(currencyCode, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</h4>
+                                                <h4 className="font-black text-dark text-xl leading-tight">
+                                                    {(() => {
+                                                        if (!selectedDate) return '-';
+                                                        try {
+                                                            return new Date(selectedDate).toLocaleDateString(currencyCode || 'id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+                                                        } catch (e) {
+                                                            return selectedDate;
+                                                        }
+                                                    })()}
+                                                </h4>
                                                 <p className="text-[#9C6D3F] text-2xl font-black mt-1">{selectedTime || '-'}</p>
                                             </div>
                                         </div>

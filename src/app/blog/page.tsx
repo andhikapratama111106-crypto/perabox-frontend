@@ -82,11 +82,17 @@ export default function BlogPage() {
     ];
 
     const formatDate = (dateStr: string) => {
-        return new Date(dateStr).toLocaleDateString(currencyCode, {
-            day: 'numeric',
-            month: 'long',
-            year: 'numeric'
-        });
+        try {
+            return new Date(dateStr).toLocaleDateString(currencyCode || 'id-ID', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+        } catch (error) {
+            console.error('Date formatting error:', error);
+            // Fallback to a simple date string if toLocaleDateString fails
+            return dateStr;
+        }
     };
 
     return (
