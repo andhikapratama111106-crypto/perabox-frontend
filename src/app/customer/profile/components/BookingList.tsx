@@ -20,9 +20,7 @@ const BookingList = ({ type }: BookingListProps) => {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                setLoading(true);
-                // Currently fetching all, we should filter by status
-                // Status string options: pending, confirmed, assigned, in_progress, completed, cancelled
+                if (loading) setLoading(true);
                 const res = await bookingsAPI.getAll();
                 let allBookings = res.data || [];
 
@@ -32,7 +30,6 @@ const BookingList = ({ type }: BookingListProps) => {
                     allBookings = allBookings.filter((b: any) => ['completed', 'cancelled'].includes(b.status.toLowerCase()));
                 }
 
-                // Sort by date (newest first)
                 allBookings.sort((a: any, b: any) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
                 setBookings(allBookings);
             } catch (error) {
@@ -43,6 +40,16 @@ const BookingList = ({ type }: BookingListProps) => {
         };
 
         fetchBookings();
+
+        // Real-time polling for active bookings every 15 seconds
+        let pollInterval: any;
+        if (type === 'active') {
+            pollInterval = setInterval(fetchBookings, 15000);
+        }
+
+        return () => {
+            if (pollInterval) clearInterval(pollInterval);
+        };
     }, [type]);
 
     if (loading) {

@@ -1,9 +1,38 @@
 "use client";
 
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence, useInView, animate } from 'framer-motion';
 import { Reveal } from '@/components/Reveal/Reveal';
 import { useLanguage } from '@/context/LanguageContext';
+
+function Counter({ from = 0, to, duration = 2.5 }: { from?: number, to: number, duration?: number }) {
+    const nodeRef = useRef<HTMLSpanElement>(null);
+    const isInView = useInView(nodeRef, { once: true, margin: "-100px" });
+
+    useEffect(() => {
+        if (!isInView) return;
+
+        const node = nodeRef.current;
+        if (!node) return;
+
+        const controls = animate(from, to, {
+            duration,
+            ease: "easeOut",
+            onUpdate(value) {
+                // Determine if we need decimals (for ratings like 4.7)
+                if (to % 1 !== 0) {
+                    node.textContent = value.toFixed(1);
+                } else {
+                    node.textContent = Math.round(value).toLocaleString('id-ID');
+                }
+            },
+        });
+
+        return () => controls.stop();
+    }, [from, to, isInView, duration]);
+
+    return <span ref={nodeRef} />;
+}
 
 const Features = () => {
     const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
@@ -154,6 +183,53 @@ const Features = () => {
                             </div>
                         </Reveal>
                     ))}
+                </div>
+
+                {/* Animated Stats Numbers */}
+                <div className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 pt-16 border-t border-gray-100">
+                    <Reveal delay={0.1}>
+                        <div className="text-center group">
+                            <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2 flex justify-center items-center group-hover:scale-110 transition-transform">
+                                <Counter to={10000} />
+                                <span>+</span>
+                            </div>
+                            <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-wide">
+                                {t('featuresSection.stat1') || 'Pelanggan'}
+                            </p>
+                        </div>
+                    </Reveal>
+                    <Reveal delay={0.2}>
+                        <div className="text-center group">
+                            <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2 flex justify-center items-center group-hover:scale-110 transition-transform">
+                                <Counter to={120} />
+                                <span>+</span>
+                            </div>
+                            <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-wide">
+                                {t('featuresSection.stat2') || 'Teknisi'}
+                            </p>
+                        </div>
+                    </Reveal>
+                    <Reveal delay={0.3}>
+                        <div className="text-center group">
+                            <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2 flex justify-center items-center group-hover:scale-110 transition-transform">
+                                <Counter to={4.7} />
+                                <span className="text-3xl ml-1 text-yellow-400">★</span>
+                            </div>
+                            <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-wide">
+                                {t('featuresSection.stat3') || 'Rating'}
+                            </p>
+                        </div>
+                    </Reveal>
+                    <Reveal delay={0.4}>
+                        <div className="text-center group">
+                            <div className="text-4xl md:text-5xl font-extrabold text-primary mb-2 flex justify-center items-center group-hover:scale-110 transition-transform">
+                                <Counter to={30} />
+                            </div>
+                            <p className="text-sm md:text-base font-bold text-gray-500 uppercase tracking-wide">
+                                {t('featuresSection.stat4') || 'Hari Garansi'}
+                            </p>
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </section>

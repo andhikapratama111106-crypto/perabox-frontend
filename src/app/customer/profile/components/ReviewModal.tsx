@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import { bookingsAPI } from '@/lib/api';
 
 interface ReviewModalProps {
     isOpen: boolean;
@@ -23,15 +24,22 @@ const ReviewModal = ({ isOpen, onClose, bookingId, serviceName, onSubmit }: Revi
         if (rating === 0) return;
 
         setIsSubmitting(true);
-        // Simulate API call
-        setTimeout(() => {
+        try {
+            await bookingsAPI.submitRating({
+                booking_id: bookingId,
+                rating: rating,
+                review_text: review
+            });
             onSubmit(rating, review);
-            setIsSubmitting(false);
             onClose();
-            // Reset state for next time
             setRating(0);
             setReview('');
-        }, 1000);
+        } catch (error) {
+            console.error("Failed to submit review", error);
+            alert("Gagal mengirim ulasan. Silakan coba lagi.");
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (
@@ -70,8 +78,8 @@ const ReviewModal = ({ isOpen, onClose, bookingId, serviceName, onSubmit }: Revi
                                     type="button"
                                     key={star}
                                     className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${rating >= star || hover >= star
-                                            ? 'text-yellow-400 bg-yellow-50 scale-110 shadow-sm'
-                                            : 'text-gray-300 hover:text-yellow-300 hover:bg-gray-50'
+                                        ? 'text-yellow-400 bg-yellow-50 scale-110 shadow-sm'
+                                        : 'text-gray-300 hover:text-yellow-300 hover:bg-gray-50'
                                         }`}
                                     onClick={() => setRating(star)}
                                     onMouseEnter={() => setHover(star)}

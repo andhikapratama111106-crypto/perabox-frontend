@@ -65,6 +65,8 @@ export const bookingsAPI = {
     getById: (id: string) => api.get(`/bookings/${id}`),
     updateStatus: (id: string, status: string) =>
         api.patch(`/bookings/${id}/status`, { new_status: status }),
+    submitRating: (data: { booking_id: string, rating: number, review_text: string }) =>
+        api.post('/ratings', data),
 };
 
 export const adminAPI = {
@@ -87,6 +89,7 @@ export const techniciansAPI = {
 
 export const paymentAPI = {
     getQRIS: (paymentId: string) => api.get(`/payments/${paymentId}/qris`),
+    getSnapToken: (paymentId: string) => api.post(`/payments/${paymentId}/snap-token`),
     verify: (paymentId: string) => api.post(`/payments/${paymentId}/verify`),
 };
 

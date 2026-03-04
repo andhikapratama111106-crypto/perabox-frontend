@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useLanguage } from '@/context/LanguageContext';
-import { servicesAPI, bookingsAPI, techniciansAPI } from '@/lib/api';
+import { servicesAPI, bookingsAPI, techniciansAPI, paymentAPI } from '@/lib/api';
 import { mockTechnicians, Technician, timeSlots, serviceTypes } from '@/data/mockData';
 import { TechnicianCard } from '@/components/booking/TechnicianCard';
 import QRISModal from '@/components/booking/QRISModal';
@@ -181,13 +181,41 @@ ${t('bookPage.wa.confirm')}`;
             const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
             const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
 
-            if (paymentMethod.includes('QRIS')) {
-                setCurrentPaymentId(bookingData.payments?.[0]?.id || 'dummy-payment-id');
-                setStep(6);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            } else if (paymentMethod.includes('BCA')) {
-                setStep(6);
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (paymentMethod.includes('QRIS') || paymentMethod.includes('BCA')) {
+                // Midtrans Snap Integration
+                try {
+                    const paymentId = bookingData.payments?.[0]?.id || 'dummy-payment-id';
+                    const snapResponse = await paymentAPI.getSnapToken(paymentId);
+                    const snapToken = snapResponse.data.token;
+
+                    if (window.snap) {
+                        window.snap.pay(snapToken, {
+                            onSuccess: (result: any) => {
+                                console.log('Payment success:', result);
+                                setStep(7);
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            },
+                            onPending: (result: any) => {
+                                console.log('Payment pending:', result);
+                                router.push('/customer/profile');
+                            },
+                            onError: (result: any) => {
+                                console.error('Payment error:', result);
+                                alert(t('bookPage.payError') || 'Pembayaran gagal. Silakan coba lagi.');
+                            },
+                            onClose: () => {
+                                console.log('Payment popup closed');
+                            }
+                        });
+                    } else {
+                        // Fallback if script not loaded
+                        window.open(snapResponse.data.redirect_url, '_blank');
+                    }
+                } catch (snapError) {
+                    console.error("Snap initiation failed", snapError);
+                    // Fallback to profile
+                    router.push('/customer/profile');
+                }
             } else {
                 setStep(7);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -624,49 +652,12 @@ ${t('bookPage.wa.confirm')}`;
                         </motion.div>
                     )}
 
-                    {/* STEP 6: PAYMENT INSTRUCTION (QRIS OR BCA) */}
+                    {/* STEP 6: OBSOLETE / REDIRECTING */}
                     {step === 6 && (
-                        <motion.div
-                            key="step6"
-                            initial={{ opacity: 0, x: 20 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            transition={{ duration: 0.3 }}
-                            className="max-w-md mx-auto py-4"
-                        >
-                            {paymentMethod.includes('QRIS') ? (
-                                <QRISModal paymentId={currentPaymentId} amount={calculateTotal()} onSuccess={() => { setStep(7); window.scrollTo({ top: 0, behavior: 'smooth' }); }} onClose={() => setStep(5)} isInline={true} />
-                            ) : paymentMethod.includes('BCA') ? (
-                                <div className="bg-white rounded-3xl w-full overflow-hidden shadow-2xl mx-auto">
-                                    <div className="bg-blue-600 p-6 text-white text-center"><div className="flex items-center justify-center gap-2 mb-1"><span className="text-2xl font-black tracking-tight">PERABOX</span></div><h3 className="text-lg font-bold">{t('bookPage.paymentBCA')}</h3><p className="text-white/80 text-sm">{t('bookPage.subtitle5') || 'Selesaikan pembayaran untuk konfirmasi pesanan'}</p></div>
-                                    <div className="p-8">
-                                        <div className="text-center mb-6"><p className="text-gray-500 text-sm uppercase font-bold tracking-wider mb-2">{t('bookPage.transferTotal')}</p><div className="bg-blue-50 rounded-xl p-4 border border-blue-100 inline-block"><h4 className="text-3xl font-black text-blue-600">{currencySymbol}{formatPrice(calculateTotal() + uniqueCode)}</h4><p className="text-xs text-blue-500 mt-1 font-medium bg-blue-100/50 px-2 py-1 rounded inline-block">{t('bookPage.transferNote').replace('{code}', uniqueCode.toString())}</p></div></div>
-                                        <div className="space-y-4 mb-8">
-                                            <div><p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountNumber')}</p><div className="flex items-center justify-between bg-gray-50 p-3 rounded-xl border border-gray-200"><span className="font-mono font-bold text-lg text-dark">888888888</span><button onClick={() => navigator.clipboard.writeText('888888888')} className="text-blue-500 text-xs font-bold hover:text-blue-600">{t('bookPage.copy')}</button></div></div>
-                                            <div><p className="text-xs text-gray-400 font-bold uppercase mb-1">{t('bookPage.accountName')}</p><div className="bg-gray-50 p-3 rounded-xl border border-gray-200"><span className="font-bold text-dark">PT PERABOX MANDIRI SEJAHTERA</span></div></div>
-                                        </div>
-                                        <div className="mt-8">
-                                            <button onClick={() => {
-                                                setStep(7);
-                                                window.scrollTo({ top: 0, behavior: 'smooth' });
-                                                const totalWithUnique = calculateTotal() + uniqueCode;
-                                                const serviceNames = selectedServices.map((id: string) => {
-                                                    const s = apiServices.find((sv: Service) => sv.id === id);
-                                                    if (!s) return id;
-                                                    return getServiceLabel(id) || s.title;
-                                                }).join(', ');
-                                                const isEmergency = selectedServices.includes('srv-5') || selectedTime.includes('DIRECT') || selectedTime.includes('LANGSUNG') || selectedTime.includes('即时') || selectedTime.includes('立即') || selectedTime.includes('AHORA');
-                                                const message = `${t('bookPage.wa.newOrder')}, ${isEmergency ? t('bookPage.wa.emergencyPrefix') : t('bookPage.wa.confirmTransfer')} ${t('bookPage.forOrder') || 'for order'}:\n- ${t('bookPage.wa.service')}: ${serviceNames}\n- ${t('bookPage.wa.time')}: ${selectedDate} ${t('bookPage.timeAt') || ''}${selectedTime}\n- ${t('bookPage.wa.location')}: ${formData.address}\n\n*${t('bookPage.wa.totalTransfer')}: ${currencySymbol}${formatPrice(totalWithUnique)} (BCA)*\n*${t('bookPage.wa.uniqueCode')}: ${uniqueCode}*${isEmergency ? '\n\n' + t('bookPage.wa.statusEmergency') : ''}\n\n${t('bookPage.wa.proofInstruction')}`;
-                                                const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
-                                                const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
-                                                window.open(waUrl, '_blank');
-                                            }} className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-2xl transition-all shadow-lg shadow-blue-600/30 flex items-center justify-center gap-2"><span className="text-xl">📤</span> {t('bookPage.confirmPayment')}</button>
-                                            <button onClick={() => setStep(5)} className="w-full mt-3 text-gray-400 hover:text-gray-600 font-medium py-2 rounded-xl transition-all text-sm">{t('bookPage.backToDetails')}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ) : null}
-                        </motion.div>
+                        <div className="flex flex-col items-center justify-center py-20">
+                            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                            <p className="text-gray-500 font-medium">{t('bookPage.redirectingToPay') || 'Mengarahkan ke pembayaran...'}</p>
+                        </div>
                     )}
 
                     {/* STEP 7: SUCCESS */}

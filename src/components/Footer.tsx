@@ -51,47 +51,34 @@ const socialLinks = [
 ];
 
 const Footer = () => {
-    const { t, language } = useLanguage();
-    const faqs = (translations[language as Language] as any)?.faqPage?.faqs || [];
+    const { t } = useLanguage();
+
     return (
-        <footer className="bg-secondary pt-20 pb-10">
+        <footer className="bg-white pt-24 pb-12 border-t border-gray-100">
             <div className="container mx-auto px-6">
 
-                {/* Bottom CTA Banner with Family Photo */}
-                <Reveal direction="up">
-                    <div className="relative rounded-3xl overflow-hidden mb-20 shadow-2xl min-h-[280px] md:min-h-[320px]">
-                        <div
-                            className="absolute inset-0 bg-cover bg-center"
-                            style={{
-                                backgroundImage: "url('/family_photo.jpg')"
-                            }}
-                        ></div>
-                        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/60 to-gray-900/20"></div>
+                {/* 4-Column Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-20 mb-20">
 
-                        <div className="absolute inset-0 z-10 p-6 md:p-10 lg:p-16 flex flex-col justify-end">
-                            <h2 className="text-3xl md:text-5xl font-bold text-white max-w-xl leading-tight">
-                                {t('footer.slogan')}
-                            </h2>
+                    {/* Column 1: Brand & Social */}
+                    <div className="space-y-8">
+                        <div>
+                            <h3 className="text-2xl font-black text-dark mb-4 tracking-tighter">
+                                PERA<span className="text-primary">BOX</span>
+                            </h3>
+                            <p className="text-gray-500 leading-relaxed text-sm">
+                                Solusi pintar untuk perawatan dan pemeliharaan rumah Anda. Teknisi profesional, harga transparan, dan bergaransi.
+                            </p>
                         </div>
-                    </div>
-                </Reveal>
 
-                {/* Footer Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16 px-4">
-                    <div className="lg:col-span-2">
-                        <p className="text-sm text-gray-500 mb-6">{t('footer.stayInTouch')}</p>
-
-                        {/* Social Media Icons */}
-                        <div className="flex gap-3">
+                        <div className="flex gap-4">
                             {socialLinks.map((social) => (
                                 <a
                                     key={social.name}
                                     href={social.href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    aria-label={`Follow us on ${social.name}`}
-                                    title={social.name}
-                                    className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300 hover:scale-110 hover:shadow-md"
+                                    className="w-11 h-11 rounded-xl bg-secondary flex items-center justify-center text-dark hover:bg-primary hover:text-white transition-all duration-300 hover:-translate-y-1 shadow-sm"
                                 >
                                     {social.icon}
                                 </a>
@@ -99,64 +86,53 @@ const Footer = () => {
                         </div>
                     </div>
 
+                    {/* Column 2: Quick Links */}
                     <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.company')}</h4>
-                        <ul className="space-y-4 text-sm">
-                            <li><Link href="/faq" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.faq')}</Link></li>
-                            <li><Link href="/terms" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.termsOfService')}</Link></li>
-                            <li><Link href="/privacy" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.privacyPolicy')}</Link></li>
-                            <li><Link href="/contact" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.contact')}</Link></li>
+                        <h4 className="font-black text-dark text-xs uppercase tracking-[0.2em] mb-8">{t('footer.company')}</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/about" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.aboutUs')}</Link></li>
+                            <li><Link href="/services" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.services')}</Link></li>
+                            <li><Link href="/blog" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('articles') || 'Blog & Artikel'}</Link></li>
+                            <li><Link href="/contact" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.contact')}</Link></li>
                         </ul>
                     </div>
 
+                    {/* Column 3: Support */}
                     <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.joinUs')}</h4>
-                        <ul className="space-y-4 text-sm text-gray-400">
-                            <li><Link href="/vendor-registration" className="hover:text-primary transition-colors">{t('footer.vendorPartner')}</Link></li>
+                        <h4 className="font-black text-dark text-xs uppercase tracking-[0.2em] mb-8">{t('footer.support')}</h4>
+                        <ul className="space-y-4">
+                            <li><Link href="/faq" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.faq')}</Link></li>
+                            <li><Link href="/terms" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.termsOfService')}</Link></li>
+                            <li><Link href="/privacy" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.privacyPolicy')}</Link></li>
+                            <li><Link href="/vendor-registration" className="text-gray-500 hover:text-primary transition-all text-sm font-medium">{t('footer.becomeVendor')}</Link></li>
                         </ul>
                     </div>
 
-                    <div>
-                        <h4 className="font-bold text-dark text-xs uppercase tracking-wider mb-6">{t('footer.support')}</h4>
-                        <ul className="space-y-4 text-sm">
-                            <li><Link href="/about" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.aboutUs')}</Link></li>
-                            <li><Link href="/services" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('footer.services')}</Link></li>
-                            <li><Link href="/book" className="text-gray-400 hover:text-primary transition-colors duration-300">{t('bookPage.title1')}</Link></li>
-                            <li><Link href="/vendor-registration" className="text-gray-400 hover:text-primary transition-colors duration-300 text-sm italic">{t('footer.becomeVendor')}</Link></li>
-                        </ul>
-                    </div>
-                </div>
-
-                {/* FAQ Section (Coursera-style reference) */}
-                <div className="border-t border-gray-100 pt-16 mb-16">
-                    <h3 className="text-xl font-bold text-dark mb-8">{t('faqPage.pageTitle') || 'Frequently Asked Questions'}</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-                        {faqs.slice(0, 6).map((faq: { question: string, answer: string }, idx: number) => (
-                            <div key={idx}>
-                                <h4 className="font-bold text-sm text-dark mb-2">{faq.question}</h4>
-                                <p className="text-xs text-gray-500 leading-relaxed">{faq.answer}</p>
-                            </div>
-                        ))}
-                    </div>
-                    <div className="mt-8">
-                        <Link href="/faq" className="text-primary text-xs font-bold hover:underline">
-                            {t('faqPage.seeAllFaq')}
+                    {/* Column 4: Newsletter / Contact */}
+                    <div className="bg-primary/5 p-8 rounded-3xl border border-primary/10">
+                        <h4 className="font-black text-dark text-xs uppercase tracking-[0.2em] mb-6">Butuh Bantuan?</h4>
+                        <p className="text-sm text-gray-500 mb-6">Hubungi Customer Service kami 24/7</p>
+                        <Link
+                            href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360'}`}
+                            className="flex items-center justify-center gap-2 bg-primary text-white py-3 px-4 rounded-xl font-bold text-sm shadow-lg shadow-primary/20 hover:bg-black transition-all"
+                        >
+                            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z" /></svg>
+                            WhatsApp CS
                         </Link>
                     </div>
+
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="border-t border-gray-200 pt-8 mt-12">
+                <div className="border-t border-gray-100 pt-10">
                     <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-                        <p className="text-[10px] text-gray-400 order-2 md:order-1 text-center md:text-left">
-                            {t('footer.allRightsReserved')} (v1.1.1)
+                        <p className="text-xs text-gray-400 font-medium tracking-tight">
+                            © 2024 PERABOX Indonesia. All rights reserved.
                         </p>
 
-                        <div className="flex flex-col md:flex-row items-center gap-6 order-1 md:order-2">
-                            <div className="flex gap-6 text-[10px] text-gray-400">
-                                <Link href="/terms" className="hover:text-primary transition-colors">{t('footer.termsOfService')}</Link>
-                                <Link href="/privacy" className="hover:text-primary transition-colors">{t('footer.privacyPolicy')}</Link>
-                            </div>
+                        <div className="flex gap-8">
+                            <Link href="/terms" className="text-xs text-gray-400 hover:text-primary transition-colors font-medium">Syarat & Ketentuan</Link>
+                            <Link href="/privacy" className="text-xs text-gray-400 hover:text-primary transition-colors font-medium">Kebijakan Privasi</Link>
                         </div>
                     </div>
                 </div>
