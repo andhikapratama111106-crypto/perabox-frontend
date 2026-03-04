@@ -8,6 +8,7 @@ import { LanguageProvider } from '../context/LanguageContext';
 import React from 'react';
 import LayoutWrapper from '../components/LayoutWrapper';
 import Preloader from '../components/Preloader';
+import GoogleAnalytics from '../components/GoogleAnalytics';
 
 /* ───────── Font Subsets ───────── */
 const inter = Inter({
@@ -190,6 +191,7 @@ export default function RootLayout({
             </head>
             <body className="font-sans antialiased bg-secondary text-dark">
                 <PreloaderWrapper />
+                <GoogleAnalytics />
                 <LanguageProvider>
                     <LayoutWrapper>
                         {children}
