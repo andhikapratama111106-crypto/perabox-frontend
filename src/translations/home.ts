@@ -17,7 +17,22 @@ export const homeTranslations = {
             "exploreServices": "Explore Services",
             "socialProof": "10,000+ Happy Customers",
             "techStatus": "Technician Status",
-            "availableNow": "120+ Available Now"
+            "availableNow": "120+ Available Now",
+            "trustBadge1": "10,000+ Customers",
+            "trustBadge2": "Rating 4.7",
+            "trustBadge3": "Verified Technicians",
+            "trustBadge4": "Response < 60 Min"
+        },
+        "howItWorks": {
+            "sectionTitle": "How It Works",
+            "mainHeading": "As Easy as 1, 2, 3",
+            "description": "Book a service in minutes, professional technicians are ready to come.",
+            "step1Title": "Choose Service",
+            "step1Desc": "Select the service you need, set a schedule that's convenient for you.",
+            "step2Title": "Technician Arrives",
+            "step2Desc": "Verified and certified technician arrives on time at your location.",
+            "step3Title": "Done & Guaranteed",
+            "step3Desc": "Pay after you're satisfied with the result. 30-day service warranty."
         },
         "chatbot": {
             "proactiveMessage": "How can Pera help you today?",
@@ -446,7 +461,22 @@ export const homeTranslations = {
             "exploreServices": "Jelajahi Layanan",
             "socialProof": "10,000+ Pelanggan Puas",
             "techStatus": "Status Teknisi",
-            "availableNow": "120+ Tersedia Saat Ini"
+            "availableNow": "120+ Tersedia Saat Ini",
+            "trustBadge1": "10.000+ Pelanggan",
+            "trustBadge2": "Rating 4.7",
+            "trustBadge3": "Teknisi Terverifikasi",
+            "trustBadge4": "Respon < 60 Menit"
+        },
+        "howItWorks": {
+            "sectionTitle": "Cara Kerja",
+            "mainHeading": "Semudah 1, 2, 3",
+            "description": "Pesan layanan dalam hitungan menit, teknisi profesional siap hadir.",
+            "step1Title": "Pilih Layanan",
+            "step1Desc": "Pilih layanan yang Anda butuhkan, tentukan jadwal yang nyaman untuk Anda.",
+            "step2Title": "Teknisi Datang",
+            "step2Desc": "Teknisi terverifikasi dan bersertifikat tiba tepat waktu di lokasi Anda.",
+            "step3Title": "Selesai & Garansi",
+            "step3Desc": "Bayar setelah puas dengan hasilnya. Garansi layanan 30 hari."
         },
         "chatbot": {
             "proactiveMessage": "Ada yang bisa Pera bantu?",
@@ -875,7 +905,22 @@ export const homeTranslations = {
             "exploreServices": "Explorar servicios",
             "socialProof": "Más de 10,000 clientes satisfechos",
             "techStatus": "Estado del técnico",
-            "availableNow": "Más de 120 disponibles"
+            "availableNow": "Más de 120 disponibles",
+            "trustBadge1": "10.000+ Clientes",
+            "trustBadge2": "Calificación 4.7",
+            "trustBadge3": "Técnicos Verificados",
+            "trustBadge4": "Respuesta < 60 Min"
+        },
+        "howItWorks": {
+            "sectionTitle": "Cómo Funciona",
+            "mainHeading": "Tan Fácil como 1, 2, 3",
+            "description": "Reserve un servicio en minutos, técnicos profesionales están listos.",
+            "step1Title": "Elija el Servicio",
+            "step1Desc": "Seleccione el servicio que necesita, establezca un horario conveniente.",
+            "step2Title": "El Técnico Llega",
+            "step2Desc": "Un técnico verificado y certificado llega puntualmente a su ubicación.",
+            "step3Title": "Listo y Garantizado",
+            "step3Desc": "Pague después de estar satisfecho con el resultado. Garantía de 30 días."
         },
         "chatbot": {
             "proactiveMessage": "¿Cómo puede ayudarte Pera hoy?",
@@ -1304,7 +1349,22 @@ export const homeTranslations = {
             "exploreServices": "サービスを見る",
             "socialProof": "10,000人以上のお客様が満足",
             "techStatus": "技術者の状況",
-            "availableNow": "現在120人以上が対応可能"
+            "availableNow": "現在120人以上が対応可能",
+            "trustBadge1": "10,000+ お客様",
+            "trustBadge2": "評価 4.7",
+            "trustBadge3": "認定技術者",
+            "trustBadge4": "応答 < 60分"
+        },
+        "howItWorks": {
+            "sectionTitle": "ご利用の流れ",
+            "mainHeading": "かんたん3ステップ",
+            "description": "数分でサービスを予約、プロの技術者が駆けつけます。",
+            "step1Title": "サービスを選ぶ",
+            "step1Desc": "必要なサービスを選び、ご都合の良いスケジュールを設定してください。",
+            "step2Title": "技術者が到着",
+            "step2Desc": "認定済みの技術者が時間通りにお伺いします。",
+            "step3Title": "完了＆保証",
+            "step3Desc": "結果にご満足いただいてからお支払い。30日間のサービス保証付き。"
         },
         "chatbot": {
             "proactiveMessage": "ペラが何かお手伝いしましょうか？",
@@ -1733,7 +1793,22 @@ export const homeTranslations = {
             "exploreServices": "探索服务",
             "socialProof": "10,000+ 满意的客户",
             "techStatus": "技术人员状态",
-            "availableNow": "120+ 可用人员"
+            "availableNow": "120+ 可用人员",
+            "trustBadge1": "10,000+ 客户",
+            "trustBadge2": "评分 4.7",
+            "trustBadge3": "认证技师",
+            "trustBadge4": "响应 < 60分钟"
+        },
+        "howItWorks": {
+            "sectionTitle": "使用流程",
+            "mainHeading": "简单三步",
+            "description": "几分钟内预约服务，专业技师随时待命。",
+            "step1Title": "选择服务",
+            "step1Desc": "选择您需要的服务，设定方便的时间。",
+            "step2Title": "技师上门",
+            "step2Desc": "经过验证和认证的技师准时到达您的位置。",
+            "step3Title": "完成并保修",
+            "step3Desc": "满意后再付款。30天服务保修。"
         },
         "chatbot": {
             "proactiveMessage": "Pera 有什么可以帮您的吗？",

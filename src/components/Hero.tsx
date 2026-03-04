@@ -154,6 +154,29 @@ const Hero = () => {
                             </div>
                         </div>
                     </Reveal>
+
+                    {/* Trust Badges */}
+                    <Reveal direction="up" delay={1.1}>
+                        <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+                            {[
+                                { icon: '✅', text: t('hero.trustBadge1') || '10.000+ Pelanggan' },
+                                { icon: '⭐', text: t('hero.trustBadge2') || 'Rating 4.7' },
+                                { icon: '🛡️', text: t('hero.trustBadge3') || 'Teknisi Terverifikasi' },
+                                { icon: '⚡', text: t('hero.trustBadge4') || 'Respon < 60 Menit' },
+                            ].map((badge, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: 10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 1.2 + i * 0.1 }}
+                                    className="bg-white/60 backdrop-blur-sm border border-gray-100 rounded-xl px-3 py-2.5 flex items-center gap-2 shadow-sm"
+                                >
+                                    <span className="text-base">{badge.icon}</span>
+                                    <span className="text-xs font-bold text-dark font-body">{badge.text}</span>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </Reveal>
                 </div>
 
                 {/* Hero Image */}

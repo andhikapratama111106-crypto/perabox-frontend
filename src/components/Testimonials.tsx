@@ -49,6 +49,8 @@ const Testimonials = () => {
         },
     ];
 
+    const reviewSources = ['via Google Review', 'via WhatsApp', 'via Google Review'];
+
     const [activeIndex, setActiveIndex] = useState(0);
     const [isTransitioning, setIsTransitioning] = useState(false);
     const [isPaused, setIsPaused] = useState(false);
@@ -72,18 +74,23 @@ const Testimonials = () => {
     }, [nextSlide, isPaused]);
 
     return (
-        <section className="py-20 md:py-28 bg-white overflow-hidden">
-            <div className="container mx-auto px-6">
+        <section className="py-20 md:py-28 bg-dark overflow-hidden relative">
+            {/* Subtle pattern overlay */}
+            <div className="absolute inset-0 opacity-5" style={{
+                backgroundImage: 'radial-gradient(circle, #D4A373 1px, transparent 1px)',
+                backgroundSize: '32px 32px',
+            }} />
+            <div className="container mx-auto px-6 relative z-10">
                 {/* Section Header */}
                 <Reveal direction="up">
                     <div className="text-center mb-14">
                         <span className="text-accent font-bold tracking-widest uppercase text-sm mb-4 block">
                             {t('testimonials.sectionTitle')}
                         </span>
-                        <h2 className="text-3xl md:text-4xl font-bold text-dark mb-4">
+                        <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
                             {t('testimonials.mainHeading')}
                         </h2>
-                        <p className="text-lg text-gray-500 max-w-2xl mx-auto">
+                        <p className="text-lg text-gray-400 max-w-2xl mx-auto font-body">
                             {t('testimonials.description')}
                         </p>
                     </div>
@@ -106,11 +113,11 @@ const Testimonials = () => {
                                     key={index}
                                     className="w-full flex-shrink-0 px-1"
                                 >
-                                    <div className="bg-white rounded-3xl shadow-[0_20px_50px_rgba(139,94,60,0.06)] border border-gray-100 p-8 md:p-12 hover:shadow-[0_30px_60px_rgba(139,94,60,0.12)] transition-all duration-500">
+                                    <div className="bg-white/10 backdrop-blur-sm rounded-3xl border border-white/10 p-8 md:p-12 hover:bg-white/15 transition-all duration-500">
                                         <div className="flex flex-col md:flex-row items-center md:items-start gap-8">
                                             {/* Photo */}
                                             <div className="flex-shrink-0">
-                                                <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-md border-2 border-white ring-2 ring-primary/10">
+                                                <div className="relative w-24 h-24 rounded-full overflow-hidden shadow-md border-2 border-white/20 ring-2 ring-primary/20">
                                                     <Image
                                                         src={t.image}
                                                         alt={t.name}
@@ -119,7 +126,7 @@ const Testimonials = () => {
                                                         priority={index === 0}
                                                         onError={(e) => {
                                                             const target = e.target as HTMLImageElement;
-                                                            target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400";
+                                                            target.style.display = 'none';
                                                         }}
                                                     />
                                                 </div>
@@ -128,15 +135,18 @@ const Testimonials = () => {
                                             {/* Text Content */}
                                             <div className="flex-1 text-center md:text-left">
                                                 <StarRating count={t.rating} />
-                                                <blockquote className="text-gray-700 leading-relaxed text-lg mt-4 mb-6 relative">
+                                                <blockquote className="text-white/90 leading-relaxed text-lg mt-4 mb-6 relative font-body">
                                                     &ldquo;{t.quote}&rdquo;
                                                 </blockquote>
-                                                <h3 className="text-xl font-bold text-dark mb-1">
+                                                <h3 className="text-xl font-bold text-white mb-1">
                                                     {t.name}
                                                 </h3>
-                                                <p className="text-sm text-primary font-semibold">
+                                                <p className="text-sm text-accent font-semibold mb-2">
                                                     {t.role}
                                                 </p>
+                                                <span className="text-xs text-gray-400 italic">
+                                                    {reviewSources[index]}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -148,7 +158,7 @@ const Testimonials = () => {
                     {/* Navigation Arrows */}
                     <button
                         onClick={() => goToSlide((activeIndex - 1 + testimonials.length) % testimonials.length)}
-                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-500 hover:text-primary hover:shadow-xl transition-all duration-300"
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all duration-300"
                         aria-label="Previous testimonial"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -157,7 +167,7 @@ const Testimonials = () => {
                     </button>
                     <button
                         onClick={() => goToSlide((activeIndex + 1) % testimonials.length)}
-                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 rounded-full bg-white shadow-lg border border-gray-100 flex items-center justify-center text-gray-500 hover:text-primary hover:shadow-xl transition-all duration-300"
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white/60 hover:text-white hover:bg-white/20 transition-all duration-300"
                         aria-label="Next testimonial"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -172,8 +182,8 @@ const Testimonials = () => {
                                 key={index}
                                 onClick={() => goToSlide(index)}
                                 className={`h-2 rounded-full transition-all duration-300 ${index === activeIndex
-                                    ? 'w-8 bg-primary'
-                                    : 'w-2 bg-gray-300 hover:bg-gray-400'
+                                    ? 'w-8 bg-accent'
+                                    : 'w-2 bg-white/30 hover:bg-white/50'
                                     }`}
                                 aria-label={`Go to testimonial ${index + 1}`}
                             />

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Poppins } from 'next/font/google';
+import { Inter, Poppins, Plus_Jakarta_Sans, DM_Sans, Space_Grotesk } from 'next/font/google';
 import '../styles/globals.css';
 import '../styles/animations.css';
 
@@ -23,6 +23,27 @@ const poppins = Poppins({
     variable: '--font-poppins',
     display: 'swap',
     preload: true,
+});
+
+const plusJakarta = Plus_Jakarta_Sans({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700', '800'],
+    variable: '--font-plus-jakarta',
+    display: 'swap',
+});
+
+const dmSans = DM_Sans({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-dm-sans',
+    display: 'swap',
+});
+
+const spaceGrotesk = Space_Grotesk({
+    subsets: ['latin'],
+    weight: ['400', '500', '600', '700'],
+    variable: '--font-space-grotesk',
+    display: 'swap',
 });
 
 /* ───────── Metadata ───────── */
@@ -111,7 +132,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }) {
     return (
-        <html lang="id" className={`${inter.variable} ${poppins.variable}`}>
+        <html lang="id" className={`${inter.variable} ${poppins.variable} ${plusJakarta.variable} ${dmSans.variable} ${spaceGrotesk.variable}`}>
             <head>
                 {/* Performance: Preconnect to font origin */}
                 <link rel="preconnect" href="https://fonts.googleapis.com" />

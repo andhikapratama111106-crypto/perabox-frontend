@@ -18,6 +18,9 @@ const config: Config = {
             fontFamily: {
                 sans: ["var(--font-inter)", "sans-serif"],
                 heading: ["var(--font-poppins)", "sans-serif"],
+                display: ["var(--font-plus-jakarta)", "var(--font-poppins)", "sans-serif"],
+                body: ["var(--font-dm-sans)", "var(--font-inter)", "sans-serif"],
+                stat: ["var(--font-space-grotesk)", "monospace"],
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
