@@ -82,6 +82,15 @@ export const homeTranslations = {
             "description2": "Our slogan is:",
             "slogan": "Simple. Smooth. Secure."
         },
+        "promo": {
+            "bannerText": "This Month's Promo: Clean 2 AC units for only Rp 150,000!",
+            "bannerCTA": "Book Now →"
+        },
+        "cookie": {
+            "message": "We use cookies to improve your experience. By continuing, you agree to our cookie policy.",
+            "accept": "Accept",
+            "decline": "Decline"
+        },
         "brandSlider": {
             "sectionTitle": "Our Partners",
             "mainHeading": "Trusted by Leading Brands",
@@ -525,6 +534,15 @@ export const homeTranslations = {
             "description1": " adalah platform perawatan rumah yang menghubungkan pengguna dengan teknisi terlatih dan vendor penyewaan peralatan secara cepat, aman, dan transparan. Kami hadir untuk membuat hidup Anda lebih mudah.",
             "description2": "Slogan kami adalah:",
             "slogan": "Sederhana. Lancar. Aman."
+        },
+        "promo": {
+            "bannerText": "Promo Bulan Ini: Cuci AC 2 unit hanya Rp 150.000!",
+            "bannerCTA": "Pesan Sekarang →"
+        },
+        "cookie": {
+            "message": "Kami menggunakan cookie untuk meningkatkan pengalaman Anda. Dengan melanjutkan, Anda menyetujui penggunaan cookie kami.",
+            "accept": "Terima",
+            "decline": "Tolak"
         },
         "brandSlider": {
             "sectionTitle": "Mitra Kami",
@@ -970,6 +988,15 @@ export const homeTranslations = {
             "description2": "Nuestro eslogan es:",
             "slogan": "Simple. Suave. Seguro."
         },
+        "promo": {
+            "bannerText": "Promo del mes: ¡Limpia 2 unidades de AC por solo Rp 150.000!",
+            "bannerCTA": "Reservar ahora →"
+        },
+        "cookie": {
+            "message": "Usamos cookies para mejorar su experiencia. Al continuar, acepta nuestra política de cookies.",
+            "accept": "Aceptar",
+            "decline": "Rechazar"
+        },
         "brandSlider": {
             "sectionTitle": "Nuestros Socios",
             "mainHeading": "Con la confianza de marcas líderes",
@@ -1414,6 +1441,15 @@ export const homeTranslations = {
             "description2": "私たちのスローガンは次のとおりです:",
             "slogan": "シンプル。スムーズ。安心。"
         },
+        "promo": {
+            "bannerText": "今月のプロモ：エアコン2台洗浄がRp 150,000のみ！",
+            "bannerCTA": "今すぐ予約 →"
+        },
+        "cookie": {
+            "message": "当サイトではCookieを使用しています。続行することで、Cookieポリシーに同意したことになります。",
+            "accept": "同意する",
+            "decline": "拒否する"
+        },
         "brandSlider": {
             "sectionTitle": "パートナー",
             "mainHeading": "トップブランドからの信頼",
@@ -1857,6 +1893,15 @@ export const homeTranslations = {
             "description1": "PERABOX 是一个家庭护理平台，可快速安全地将用户与经过培训的技术人员联系起来。我们在这里让您的生活更轻松。",
             "description2": "我们的口号是：",
             "slogan": "简单。顺畅。安全。"
+        },
+        "promo": {
+            "bannerText": "本月优惠：清洗2台空调仅需Rp 150,000！",
+            "bannerCTA": "立即预约 →"
+        },
+        "cookie": {
+            "message": "我们使用Cookie来改善您的体验。继续使用即表示您同意我们的Cookie政策。",
+            "accept": "接受",
+            "decline": "拒绝"
         },
         "brandSlider": {
             "sectionTitle": "我们的合作伙伴",

@@ -8,6 +8,9 @@ import ScrollBlur from './ScrollBlur';
 import PageTransition from './PageTransition';
 import ChatBot from './ChatBot';
 import BackToTop from './BackToTop';
+import FloatingWhatsApp from './FloatingWhatsApp';
+import PromoBanner from './PromoBanner';
+import CookieBanner from './CookieBanner';
 
 export default function LayoutWrapper({ children }: { children: React.ReactNode }) {
     const pathname = usePathname();
@@ -17,6 +20,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
 
     return (
         <>
+            {!isAdmin && <PromoBanner />}
             {!isAdmin && <Navbar />}
             {isBook ? (
                 <PageTransition>
@@ -31,7 +35,9 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
             )}
             {!isAdmin && !isAuth && <Footer />}
             <ChatBot />
+            <FloatingWhatsApp />
             <BackToTop />
+            <CookieBanner />
         </>
     );
 }

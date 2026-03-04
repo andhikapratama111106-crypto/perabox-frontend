@@ -59,12 +59,12 @@ export default function Home() {
             <div className="h-64 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
             <Discover />
 
-            {/* Gradient: Discover (secondary) → Testimonials (dark) */}
-            <div className="h-64 bg-gradient-to-b from-secondary to-dark -mt-1 relative z-10" />
+            {/* Gradient: Discover (secondary) → Testimonials (white) */}
+            <div className="h-64 bg-gradient-to-b from-secondary to-white -mt-1 relative z-10" />
             <Testimonials />
 
-            {/* Final Gradient: Testimonials (dark) → Footer (secondary) */}
-            <div className="h-64 bg-gradient-to-b from-dark to-secondary -mt-1 relative z-10" />
+            {/* Final Gradient: Testimonials (white) → Footer (secondary) */}
+            <div className="h-64 bg-gradient-to-b from-white to-secondary -mt-1 relative z-10" />
 
             <BookingModal
                 isOpen={isBookingModalOpen}
