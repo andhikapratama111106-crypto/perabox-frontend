@@ -39,6 +39,11 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
 
     // Validation states
     const [touched, setTouched] = useState<Record<string, boolean>>({});
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     useEffect(() => {
         if (isOpen) {
@@ -159,9 +164,9 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
 
             setBookingSummary({
                 service: selectedService?.name || 'Layanan',
-                date: new Date(date).toLocaleDateString('id-ID', {
+                date: mounted ? new Date(date).toLocaleDateString('id-ID', {
                     weekday: 'long', year: 'numeric', month: 'long', day: 'numeric'
-                }),
+                }) : date,
                 time: time,
             });
             setSuccess(true);
@@ -297,7 +302,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
                                         <option value="" disabled>Pilih Layanan...</option>
                                         {services.map(s => (
                                             <option key={s.id} value={s.id}>
-                                                {s.name} - Rp {Number(s.base_price).toLocaleString()}
+                                                {s.name} - Rp {mounted ? Number(s.base_price).toLocaleString() : s.base_price}
                                             </option>
                                         ))}
                                     </select>
@@ -436,7 +441,7 @@ const BookingModal: React.FC<BookingModalProps> = ({ isOpen, onClose, initialSer
                             {estimatedPrice > 0 && (
                                 <div className="flex items-center justify-between p-4 bg-primary/5 rounded-xl border border-primary/10">
                                     <span className="text-sm font-bold text-gray-600">Estimasi Biaya</span>
-                                    <span className="text-xl font-bold text-primary">Rp {estimatedPrice.toLocaleString()}</span>
+                                    <span className="text-xl font-bold text-primary">Rp {mounted ? estimatedPrice.toLocaleString() : estimatedPrice}</span>
                                 </div>
                             )}
 

@@ -1,14 +1,22 @@
 "use client";
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function ArticlePage() {
     const { t, currencyCode } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const articleId = 'bahaya';
     const date = "2023-06-05";
 
     const formatDate = (dateStr: string) => {
+        if (!mounted) return dateStr;
         try {
             return new Date(dateStr).toLocaleDateString(currencyCode || 'id-ID', {
                 day: 'numeric',

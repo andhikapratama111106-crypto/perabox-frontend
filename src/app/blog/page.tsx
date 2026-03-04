@@ -1,10 +1,16 @@
 "use client";
 
 import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 
 export default function BlogPage() {
     const { t, currencyCode } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const articles = [
         {
@@ -82,6 +88,7 @@ export default function BlogPage() {
     ];
 
     const formatDate = (dateStr: string) => {
+        if (!mounted) return dateStr;
         try {
             return new Date(dateStr).toLocaleDateString(currencyCode || 'id-ID', {
                 day: 'numeric',

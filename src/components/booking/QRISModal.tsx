@@ -14,8 +14,14 @@ interface QRISModalProps {
 
 export default function QRISModal({ paymentId, amount, onSuccess, onClose, isInline = false }: QRISModalProps) {
     const { t, currencyCode, currencySymbol } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const formatPrice = (price: number) => {
+        if (!mounted) return price.toString();
         return new Intl.NumberFormat(currencyCode, {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0

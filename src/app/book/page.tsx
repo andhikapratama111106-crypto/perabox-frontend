@@ -26,8 +26,14 @@ interface Service {
 
 export default function BookingPage() {
     const { t, language, currencyCode, currencySymbol } = useLanguage();
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     const formatPrice = (price: number) => {
+        if (!mounted) return price.toString();
         return new Intl.NumberFormat(currencyCode, {
             minimumFractionDigits: 0,
             maximumFractionDigits: 0
@@ -424,7 +430,7 @@ ${t('bookPage.wa.confirm')}`;
                                         <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
                                         <h4 className="font-black text-dark text-base">
                                             {(() => {
-                                                if (!selectedDate) return '-';
+                                                if (!selectedDate || !mounted) return selectedDate || '-';
                                                 try {
                                                     return new Date(selectedDate).toLocaleDateString(currencyCode || 'id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
                                                 } catch (e) {
@@ -562,7 +568,7 @@ ${t('bookPage.wa.confirm')}`;
                                                 <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest mb-1.5">{t('bookPage.visitSchedule')}</p>
                                                 <h4 className="font-black text-dark text-xl leading-tight">
                                                     {(() => {
-                                                        if (!selectedDate) return '-';
+                                                        if (!selectedDate || !mounted) return selectedDate || '-';
                                                         try {
                                                             return new Date(selectedDate).toLocaleDateString(currencyCode || 'id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
                                                         } catch (e) {
