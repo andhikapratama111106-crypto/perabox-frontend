@@ -15,7 +15,7 @@ const CustomerProfile = () => {
         name: '',
         role: 'Customer',
         location: 'Indonesia',
-        avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
+        avatar: '',
         firstName: '',
         lastName: '',
         email: '',
@@ -59,7 +59,7 @@ const CustomerProfile = () => {
                     name: googleData.name || '',
                     role: 'Customer',
                     location: 'Indonesia',
-                    avatar: googleData.picture || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
+                    avatar: googleData.picture || '',
                     firstName: nameParts[0] || '',
                     lastName: nameParts.slice(1).join(' ') || '',
                     email: googleData.email || '',
@@ -85,11 +85,19 @@ const CustomerProfile = () => {
 
             // 2. Map backend data to local state (overwrites google_user if successful)
             const nameParts = data.full_name.split(' ');
+            const localGoogleItem = localStorage.getItem('google_user');
+            let googlePic = '';
+            if (localGoogleItem) {
+                try {
+                    googlePic = JSON.parse(localGoogleItem).picture || '';
+                } catch (e) { }
+            }
+
             const mappedUser = {
                 name: data.full_name,
                 role: data.role.charAt(0).toUpperCase() + data.role.slice(1),
                 location: 'Indonesia',
-                avatar: data.avatar_url || 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200',
+                avatar: data.avatar_url || googlePic || '',
                 firstName: nameParts[0] || '',
                 lastName: nameParts.slice(1).join(' ') || '',
                 email: data.email,
@@ -226,8 +234,14 @@ const CustomerProfile = () => {
                     {/* Top Card: Identity */}
                     <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
                         <div className="flex items-center gap-4 w-full">
-                            <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0">
-                                <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" />
+                            <div className="w-16 h-16 rounded-full overflow-hidden border border-gray-200 flex-shrink-0 flex items-center justify-center bg-[#FDF8F3] text-primary">
+                                {user.avatar ? (
+                                    <img src={user.avatar} alt="Profile" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                                ) : (
+                                    <svg className="w-8 h-8 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                )}
                             </div>
                             <div className="flex-1">
                                 {editMode.identity ? (

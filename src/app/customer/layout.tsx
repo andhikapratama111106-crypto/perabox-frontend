@@ -196,7 +196,7 @@ export default function CustomerLayout({
                     <div className="hidden sm:block">
                         <LanguageSwitcher />
                     </div>
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm aspect-square flex items-center justify-center bg-gray-50 text-gray-400">
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-primary/20 shadow-sm aspect-square flex items-center justify-center bg-[#FDF8F3] text-primary">
                         {userAvatar ? (
                             <img src={userAvatar} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
                         ) : (
