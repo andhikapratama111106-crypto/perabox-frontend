@@ -20,6 +20,7 @@ const Navbar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
     const hamburgerRef = useRef<HTMLButtonElement>(null);
+    const isBlogPage = pathname?.startsWith('/blog');
 
     useEffect(() => {
         const token = localStorage.getItem('access_token');
@@ -93,8 +94,8 @@ const Navbar = () => {
 
     return (
         <nav
-            className={`fixed w-full z-50 top-0 [.has-promo_&]:top-[44px] transition-all duration-300 ${isScrolled
-                ? 'bg-white/80 backdrop-blur-xl shadow-lg shadow-black/5 py-3'
+            className={`fixed w-full z-50 top-0 [.has-promo_&]:top-[44px] transition-all duration-300 ${(isScrolled || isBlogPage)
+                ? 'bg-white/95 backdrop-blur-xl shadow-lg shadow-black/5 py-3'
                 : 'bg-transparent py-5'
                 }`}
             role="navigation"
@@ -138,7 +139,7 @@ const Navbar = () => {
                                     router.push(`/${link.href.startsWith('/') ? link.href.slice(1) : link.href}`);
                                 }
                             }}
-                            className={`relative group transition-all tracking-wide cursor-pointer ${isScrolled ? 'text-gray-700' : 'text-gray-800'
+                            className={`relative group transition-all tracking-wide cursor-pointer ${(isScrolled || isBlogPage) ? 'text-gray-700' : 'text-gray-800'
                                 } hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 rounded-lg px-2 py-1`}
                         >
                             {link.name.toUpperCase()}
