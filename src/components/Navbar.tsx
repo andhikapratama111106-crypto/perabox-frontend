@@ -18,6 +18,7 @@ const Navbar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const [userAvatar, setUserAvatar] = useState<string | null>(null);
     const menuRef = useRef<HTMLDivElement>(null);
     const hamburgerRef = useRef<HTMLButtonElement>(null);
     const isBlogPage = pathname?.startsWith('/blog');
@@ -25,6 +26,20 @@ const Navbar = () => {
     useEffect(() => {
         const token = localStorage.getItem('access_token');
         setIsLoggedIn(!!token);
+
+        if (token) {
+            const savedGoogleUser = localStorage.getItem('google_user');
+            if (savedGoogleUser) {
+                try {
+                    const googleData = JSON.parse(savedGoogleUser);
+                    if (googleData.picture) {
+                        setUserAvatar(googleData.picture);
+                    }
+                } catch (e) {
+                    console.error('Failed to parse google_user', e);
+                }
+            }
+        }
 
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
@@ -180,12 +195,16 @@ const Navbar = () => {
                     {isLoggedIn ? (
                         <Link
                             href="/customer/profile"
-                            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors ${isScrolled ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' : 'bg-white/20 text-dark hover:bg-white/30 backdrop-blur-sm'}`}
+                            className={`w-9 h-9 flex items-center justify-center rounded-full transition-colors overflow-hidden ${isScrolled ? 'bg-gray-100 text-gray-700 hover:bg-gray-200' : 'bg-white/20 text-dark hover:bg-white/30 backdrop-blur-sm'}`}
                             aria-label={t('profile') || 'Profile'}
                         >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                            {userAvatar ? (
+                                <img src={userAvatar} alt="Profile" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                            ) : (
+                                <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            )}
                         </Link>
                     ) : (
                         <Link

@@ -12,17 +12,17 @@ const TermsPage = () => {
         {
             title: t('termsPage.usageTerms'),
             icon: <FileText className="w-5 h-5" />,
-            content: "Welcome to PERABOX. By using our services, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern PERABOX's relationship with you in relation to this website and our services."
+            content: t('termsPage.usageContent')
         },
         {
             title: t('termsPage.serviceAgreement'),
             icon: <FileCheck className="w-5 h-5" />,
-            content: "We provide professional AC services including cleaning, repair, and installation. Our technicians are trained to provide high-quality services. Completion times may vary based on the complexity of the task and on-site conditions."
+            content: t('termsPage.serviceContent')
         },
         {
             title: t('termsPage.privacyPolicy'),
             icon: <Shield className="w-5 h-5" />,
-            content: "Your privacy is important to us. We collect personal information only when necessary to provide our services. We do not share your personal data with third parties except as required by law or to facilitate your service booking."
+            content: t('termsPage.privacyContent')
         }
     ];
 
@@ -67,7 +67,7 @@ const TermsPage = () => {
                                     {section.content}
                                 </p>
                                 <div className="mt-4 p-4 bg-gray-50 rounded-xl text-xs text-gray-500 italic">
-                                    Note: This is a simplified version of our terms. For the full legal document, please contact our legal department.
+                                    {t('termsPage.noteText')}
                                 </div>
                             </div>
                         </motion.section>
@@ -76,7 +76,7 @@ const TermsPage = () => {
 
                 <div className="p-8 bg-gray-50 text-center">
                     <p className="text-xs text-gray-400 italic">
-                        © 2023 PERABOX Indonesia. All rights reserved.
+                        {t('termsPage.footerText')}
                     </p>
                 </div>
             </div>

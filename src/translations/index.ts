@@ -55,6 +55,19 @@ export const translations = {
             bookNow: 'Book New Service',
             quickActions: 'Quick Actions'
         },
+        termsPage: {
+            title: 'Terms & Conditions',
+            subtitle: 'Please read our terms and conditions carefully',
+            privacyPolicy: 'Privacy Policy',
+            usageTerms: 'Terms of Use',
+            serviceAgreement: 'Service Agreement',
+            lastUpdated: 'Last Updated',
+            usageContent: "Welcome to PERABOX. By using our services, you agree to comply with and be bound by the following terms and conditions of use, which together with our privacy policy govern PERABOX's relationship with you in relation to this website and our services.",
+            serviceContent: 'We provide professional AC services including cleaning, repair, and installation. Our technicians are trained to provide high-quality services. Completion times may vary based on the complexity of the task and on-site conditions.',
+            privacyContent: 'Your privacy is important to us. We collect personal information only when necessary to provide our services. We do not share your personal data with third parties except as required by law or to facilitate your service booking.',
+            noteText: 'Note: This is a simplified version of our terms. For the full legal document, please contact our legal department.',
+            footerText: '© 2023 PERABOX Indonesia. All rights reserved.'
+        },
         ...homeTranslations.en
     },
     id: {
@@ -127,7 +140,12 @@ export const translations = {
             privacyPolicy: 'Kebijakan Privasi',
             usageTerms: 'Ketentuan Penggunaan',
             serviceAgreement: 'Perjanjian Layanan',
-            lastUpdated: 'Terakhir Diperbarui'
+            lastUpdated: 'Terakhir Diperbarui',
+            usageContent: 'Selamat datang di PERABOX. Dengan menggunakan layanan kami, Anda setuju untuk mematuhi dan terikat oleh syarat dan ketentuan penggunaan berikut, yang bersama dengan kebijakan privasi kami mengatur hubungan PERABOX dengan Anda terkait situs web dan layanan kami.',
+            serviceContent: 'Kami menyediakan layanan AC profesional termasuk pembersihan, perbaikan, dan pemasangan. Teknisi kami dilatih untuk memberikan layanan berkualitas tinggi. Waktu penyelesaian dapat bervariasi berdasarkan kompleksitas tugas dan kondisi di lokasi.',
+            privacyContent: 'Privasi Anda penting bagi kami. Kami mengumpulkan informasi pribadi hanya jika diperlukan untuk menyediakan layanan kami. Kami tidak membagikan data pribadi Anda kepada pihak ketiga kecuali diwajibkan oleh hukum atau untuk memfasilitasi pemesanan layanan Anda.',
+            noteText: 'Catatan: Ini adalah versi ringkas dari ketentuan kami. Untuk dokumen hukum lengkap, silakan hubungi bagian hukum kami.',
+            footerText: '© 2023 PERABOX Indonesia. Semua hak dilindungi undang-undang.'
         },
         dashboardPage: {
             title: 'Dasbor',
@@ -213,7 +231,12 @@ export const translations = {
             privacyPolicy: 'Política de Privacidad',
             usageTerms: 'Términos de Uso',
             serviceAgreement: 'Acuerdo de Servicio',
-            lastUpdated: 'Última Actualización'
+            lastUpdated: 'Última Actualización',
+            usageContent: 'Bienvenido a PERABOX. Al usar nuestros servicios, aceptas cumplir y estar sujeto a los siguientes términos y condiciones de uso, que junto con nuestra política de privacidad rigen la relación de PERABOX contigo en relación con este sitio web y nuestros servicios.',
+            serviceContent: 'Proveemos servicios profesionales de aire acondicionado incluyendo limpieza, reparación e instalación. Nuestros técnicos están capacitados para brindar servicios de alta calidad. Los tiempos de finalización pueden variar según la complejidad de la tarea y las condiciones en el sitio.',
+            privacyContent: 'Tu privacidad es importante para nosotros. Recopilamos información personal solo cuando es necesario para brindar nuestros servicios. No compartimos tus datos personales con terceros excepto cuando lo exige la ley o para facilitar tu reserva de servicio.',
+            noteText: 'Nota: Esta es una versión simplificada de nuestros términos. Para el documento legal completo, por favor contacta a nuestro departamento legal.',
+            footerText: '© 2023 PERABOX Indonesia. Todos los derechos reservados.'
         },
         dashboardPage: {
             title: 'Tablero',
@@ -299,7 +322,12 @@ export const translations = {
             privacyPolicy: 'プライバシーポリシー',
             usageTerms: '利用規約',
             serviceAgreement: 'サービス契約',
-            lastUpdated: '最終更新日'
+            lastUpdated: '最終更新日',
+            usageContent: 'PERABOXへようこそ。当社のサービスを利用することで、このウェブサイトおよびサービスに関してPERABOXとお客様との関係を規定する以下の利用規約に同意したものとみなされます。',
+            serviceContent: '当社はエアコンのクリーニング、修理、設置を含む専門的なACサービスを提供します。技術者は高品質のサービスを提供するよう訓練されています。完了時間はタスクの複雑さや現地の状況によって異なる場合があります。',
+            privacyContent: 'お客様のプライバシーは当社にとって重要です。当社はサービス提供に必要な場合にのみ個人情報を収集します。法律で要求される場合またはサービス予約を促進する場合を除き、お客様の個人データを第三者と共有することはありません。',
+            noteText: '注意：これは当社の利用規約の簡略版です。完全な法的文書については、法務部門にお問い合わせください。',
+            footerText: '© 2023 PERABOX Indonesia. 全著作権所有。'
         },
         dashboardPage: {
             title: 'ダッシュボード',
@@ -385,7 +413,12 @@ export const translations = {
             privacyPolicy: '隐私政策',
             usageTerms: '使用条款',
             serviceAgreement: '服务协议',
-            lastUpdated: '最后更新'
+            lastUpdated: '最后更新',
+            usageContent: '欢迎来到PERABOX。使用我们的服务，即表示您同意遵守以下使用条款和条件，这些条款与我们的隐私政策共同规范PERABOX与您在本网站及服务方面的关系。',
+            serviceContent: '我们提供专业的空调服务，包括清洁、维修和安装。我们的技术人员经过培训，能够提供高质量的服务。完成时间可能因任务的复杂性和现场条件而有所不同。',
+            privacyContent: '您的隐私对我们很重要。我们仅在提供服务所必需时收集个人信息。除法律要求或为促进您的服务预订外，我们不会与第三方共享您的个人数据。',
+            noteText: '注意：这是我们条款的简化版本。如需完整法律文件，请联系我们的法务部门。',
+            footerText: '© 2023 PERABOX Indonesia. 版权所有。'
         },
         dashboardPage: {
             title: '仪表板',
