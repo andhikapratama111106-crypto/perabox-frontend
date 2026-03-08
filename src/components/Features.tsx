@@ -7,6 +7,7 @@ import { useLanguage } from '@/context/LanguageContext';
 
 function Counter({ from = 0, to, duration = 2.5 }: { from?: number, to: number, duration?: number }) {
     const nodeRef = useRef<HTMLSpanElement>(null);
+    const { language } = useLanguage();
     const isInView = useInView(nodeRef, { once: true, margin: "-100px" });
 
     useEffect(() => {
@@ -23,7 +24,8 @@ function Counter({ from = 0, to, duration = 2.5 }: { from?: number, to: number, 
                 if (to % 1 !== 0) {
                     node.textContent = value.toFixed(1);
                 } else {
-                    node.textContent = Math.round(value).toLocaleString('id-ID');
+                    const locale = language === 'id' ? 'id-ID' : language === 'en' ? 'en-US' : language === 'es' ? 'es-ES' : language === 'ja' ? 'ja-JP' : language === 'zh' ? 'zh-CN' : 'id-ID';
+                    node.textContent = Math.round(value).toLocaleString(locale);
                 }
             },
         });

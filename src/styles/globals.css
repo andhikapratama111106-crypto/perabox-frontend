@@ -86,3 +86,19 @@ body {
 .animate-spin-slow {
     animation: spin 1.2s linear infinite;
 }
+
+/* ===== Leaflet Map Fix ===== */
+/* Prevent map from showing black when tiles are slow or CDN blocked */
+.leaflet-container {
+    background: #e8e3da !important;
+}
+
+.leaflet-tile-pane {
+    opacity: 1;
+}
+
+/* Ensure map tiles aren't clipped by dark backgrounds */
+.leaflet-map-pane canvas,
+.leaflet-map-pane svg {
+    pointer-events: none;
+}

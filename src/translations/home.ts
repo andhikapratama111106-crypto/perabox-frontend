@@ -73,7 +73,11 @@ export const homeTranslations = {
                 "Emergency dispatch",
                 "Fast response times"
             ],
-            "learnMore": "Learn more"
+            "learnMore": "Learn more",
+            "stat1": "Customers",
+            "stat2": "Technicians",
+            "stat3": "Rating",
+            "stat4": "Warranty Days"
         },
         "aboutSection": {
             "sectionTitle": "About Us",
@@ -526,7 +530,11 @@ export const homeTranslations = {
                 "Pengiriman darurat",
                 "Waktu respons cepat"
             ],
-            "learnMore": "Pelajari lebih lanjut"
+            "learnMore": "Pelajari lebih lanjut",
+            "stat1": "Pelanggan",
+            "stat2": "Teknisi",
+            "stat3": "Rating",
+            "stat4": "Hari Garansi"
         },
         "aboutSection": {
             "sectionTitle": "Tentang Kami",
@@ -979,7 +987,11 @@ export const homeTranslations = {
                 "Despacho de emergencia",
                 "Tiempos de respuesta rápidos"
             ],
-            "learnMore": "Aprender más"
+            "learnMore": "Aprender más",
+            "stat1": "Clientes",
+            "stat2": "Técnicos",
+            "stat3": "Calificación",
+            "stat4": "Días de Garantía"
         },
         "aboutSection": {
             "sectionTitle": "Sobre Nosotros",
@@ -1432,7 +1444,11 @@ export const homeTranslations = {
                 "緊急派遣",
                 "迅速な対応"
             ],
-            "learnMore": "詳細を見る"
+            "learnMore": "詳細を見る",
+            "stat1": "お客様",
+            "stat2": "技術者",
+            "stat3": "評価",
+            "stat4": "保証期間（日）"
         },
         "aboutSection": {
             "sectionTitle": "私たちについて",
@@ -1885,7 +1901,11 @@ export const homeTranslations = {
                 "紧急调度",
                 "快速响应时间"
             ],
-            "learnMore": "了解更多"
+            "learnMore": "了解更多",
+            "stat1": "客户",
+            "stat2": "技术人员",
+            "stat3": "评分",
+            "stat4": "保修天数"
         },
         "aboutSection": {
             "sectionTitle": "关于我们",

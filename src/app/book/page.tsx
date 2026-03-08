@@ -574,11 +574,11 @@ ${t('bookPage.wa.confirm')}`;
                                             )}
                                             <div className="flex-1">
                                                 <p className="text-[10px] text-amber-700 font-black uppercase tracking-[0.2em] mb-1">{t('bookPage.selectedTech')}</p>
-                                                <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{t(`bookPage.techNames.${selectedTechnician?.id}`) || selectedTechnician?.name}</h3>
+                                                <h3 className="text-3xl font-black text-dark tracking-tight leading-tight mb-1">{selectedTechnician?.name}</h3>
                                                 <div className="flex items-center gap-1.5">
                                                     <span className="w-1.5 h-1.5 bg-gray-300 rounded-full"></span>
                                                     <p className="text-gray-400 text-xs font-medium uppercase tracking-widest">
-                                                        {selectedTechnician?.experience?.replace(/[^0-9]/g, '')} {t('bookPage.years')} {t('bookPage.experienceLabel') || 'Experience'}
+                                                        {selectedTechnician?.experience?.replace(/[^0-9]/g, '')} {t('bookPage.years') || 'Tahun'} {t('bookPage.experienceLabel') || 'Pengalaman'}
                                                     </p>
                                                 </div>
                                             </div>
@@ -607,26 +607,34 @@ ${t('bookPage.wa.confirm')}`;
                                                 <p className="text-[#9C6D3F] text-2xl font-black mt-1">{selectedTime || '-'}</p>
                                             </div>
                                         </div>
-                                        <div className="pt-8 border-t border-gray-100 space-y-6">
+                                        <div className="pt-8 border-t border-gray-100 space-y-4">
                                             <p className="text-[10px] text-gray-400 font-black uppercase tracking-widest">{t('bookPage.costDetails')}</p>
-                                            <div className="flex justify-between items-center text-lg font-bold text-gray-700">
-                                                <span className="text-gray-400 font-bold">{t('bookPage.estTotal')}</span>
-                                                <span className="text-2xl font-black text-primary">{currencySymbol}{formatPrice(calculateTotal())}</span>
-                                            </div>
-                                            <div className="pl-4 space-y-1">
+
+                                            <div className="space-y-2">
                                                 {selectedServices.map(id => {
                                                     const s = apiServices.find(service => service.id === id);
                                                     if (!s) return null;
                                                     const translatedTitle = getServiceLabel(id) || s.title;
                                                     return (
-                                                        <div key={id} className="flex justify-between items-center text-xs text-gray-500">
-                                                            <span>• {translatedTitle}</span>
-                                                            <span>{s.price}</span>
+                                                        <div key={id} className="flex justify-between items-center text-sm">
+                                                            <span className="text-gray-500">• {translatedTitle}</span>
+                                                            <span className="text-gray-400 font-medium">Rp{s.base_price.toLocaleString('id-ID')}</span>
                                                         </div>
                                                     );
                                                 })}
                                             </div>
-                                            <div className="flex justify-between items-end pt-4"><span className="text-lg font-black text-dark mb-2">{t('bookPage.estTotal')}</span><div className="text-right"><span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-2">{currencySymbol}{formatPrice(calculateTotal())}</span><span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span></div></div>
+
+                                            <div className="flex justify-between items-end pt-6 border-t border-gray-50">
+                                                <div className="flex flex-col">
+                                                    <span className="text-xl font-black text-dark mb-1">{t('bookPage.estTotal')}</span>
+                                                    <span className="text-[10px] text-gray-400 font-medium italic tracking-wide">{t('bookPage.taxInc')}</span>
+                                                </div>
+                                                <div className="text-right">
+                                                    <span className="block text-4xl font-black text-[#9C6D3F] leading-none mb-1">
+                                                        {currencySymbol}{formatPrice(calculateTotal())}
+                                                    </span>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -653,32 +661,36 @@ ${t('bookPage.wa.confirm')}`;
                     )}
 
                     {/* STEP 6: OBSOLETE / REDIRECTING */}
-                    {step === 6 && (
-                        <div className="flex flex-col items-center justify-center py-20">
-                            <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
-                            <p className="text-gray-500 font-medium">{t('bookPage.redirectingToPay') || 'Mengarahkan ke pembayaran...'}</p>
-                        </div>
-                    )}
+                    {
+                        step === 6 && (
+                            <div className="flex flex-col items-center justify-center py-20">
+                                <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mb-4"></div>
+                                <p className="text-gray-500 font-medium">{t('bookPage.redirectingToPay') || 'Mengarahkan ke pembayaran...'}</p>
+                            </div>
+                        )
+                    }
 
                     {/* STEP 7: SUCCESS */}
-                    {step === 7 && (
-                        <motion.div
-                            key="step7"
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            exit={{ opacity: 0, scale: 1.05 }}
-                            transition={{ duration: 0.3 }}
-                        >
-                            <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
-                                <div className="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
-                                <h2 className="text-2xl font-bold text-dark mb-2">{t('bookPage.orderReceived')}</h2>
-                                <p className="text-gray-500 mb-8">{t('bookPage.thankYouTech')} <strong>{selectedTechnician?.name}</strong>. {paymentMethod.includes('QRIS') ? t('bookPage.qrisSuccess') : paymentMethod.includes('BCA') ? t('bookPage.bcaSuccess') : t('bookPage.waSuccess')}</p>
-                                <button onClick={() => router.push('/')} className="bg-gray-100 hover:bg-gray-200 text-dark px-8 py-3 rounded-full font-bold transition-all w-full">{t('bookPage.backToHome')}</button>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
-            </div>
+                    {
+                        step === 7 && (
+                            <motion.div
+                                key="step7"
+                                initial={{ opacity: 0, scale: 0.95 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 1.05 }}
+                                transition={{ duration: 0.3 }}
+                            >
+                                <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
+                                    <div className="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
+                                    <h2 className="text-2xl font-bold text-dark mb-2">{t('bookPage.orderReceived')}</h2>
+                                    <p className="text-gray-500 mb-8">{t('bookPage.thankYouTech')} <strong>{selectedTechnician?.name}</strong>. {paymentMethod.includes('QRIS') ? t('bookPage.qrisSuccess') : paymentMethod.includes('BCA') ? t('bookPage.bcaSuccess') : t('bookPage.waSuccess')}</p>
+                                    <button onClick={() => router.push('/')} className="bg-gray-100 hover:bg-gray-200 text-dark px-8 py-3 rounded-full font-bold transition-all w-full">{t('bookPage.backToHome')}</button>
+                                </div>
+                            </motion.div>
+                        )
+                    }
+                </AnimatePresence >
+            </div >
 
             {/* Sticky Summary Bar (Only visible in step 2, 3, 4) */}
             {

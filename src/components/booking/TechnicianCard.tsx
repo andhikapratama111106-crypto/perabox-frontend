@@ -52,66 +52,64 @@ export const TechnicianCard: React.FC<TechnicianCardProps> = ({ technician, onSe
                 </div>
             </div>
 
-            <div className="space-y-3 px-1 pb-2 flex-1 flex flex-col">
-                <div className="flex-none">
-                    <h3 className={`font-black text-xl leading-tight transition-colors duration-300
+            <div className="flex-none">
+                <h3 className={`font-black text-xl leading-tight transition-colors duration-300
                         ${selected || 'group-hover:text-[#9C6D3F]'} text-dark`}>
-                        {t(`bookPage.techNames.${technician.id}`) || technician.name}
-                    </h3>
-                    {technician.experience && (
-                        <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1 block">
-                            {technician.experience.replace(/[^0-9]/g, '')} {t('bookPage.years')} {experienceLabel}
-                        </span>
-                    )}
-                </div>
-
-                {/* Bio: exactly 2 lines, no overlap */}
-                {technician.bio && (
-                    <div className="flex-none overflow-hidden" style={{ height: '3rem' }}>
-                        <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70">
-                            &quot;{t(`bookPage.techBios.${technician.id}`) || technician.bio}&quot;
-                        </p>
-                    </div>
+                    {technician.name}
+                </h3>
+                {technician.experience && (
+                    <span className="text-[10px] text-primary font-bold uppercase tracking-widest mt-1 block">
+                        {technician.experience.replace(/[^0-9]/g, '')} {t('bookPage.years') || 'Tahun'} {experienceLabel}
+                    </span>
                 )}
+            </div>
 
-                <div className="flex flex-wrap gap-1.5 pt-1 flex-1 items-start content-start">
-                    {technician.specialties.slice(0, 2).map((spec, index) => {
-                        const specKey = spec === 'Service AC' ? 'acRepair' :
-                            spec === 'Cuci AC' ? 'acCleaning' :
-                                spec === 'Bongkar Pasang' ? 'disassembly' :
-                                    spec === 'Isi Freon' ? 'freonRefill' :
-                                        spec === 'Deep Cleaning' ? 'deepCleaning' :
-                                            spec === 'Instalasi' ? 'acInstallation' :
-                                                spec === 'Maintenance' ? 'maintenance' :
-                                                    spec === 'Service Rutin' ? 'regularService' :
-                                                        spec === 'Perbaikan' ? 'acRepair' : '';
-
-                        const translatedSpec = specKey ? t(`bookPage.serviceNames.${specKey}`) : spec;
-
-                        return (
-                            <span key={index} className="text-[9px] font-bold px-2 py-1 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 uppercase tracking-tighter">
-                                {translatedSpec}
-                            </span>
-                        );
-                    })}
+            {/* Bio: exactly 2 lines, no overlap */}
+            {technician.bio && (
+                <div className="flex-none overflow-hidden" style={{ height: '3rem' }}>
+                    <p className="text-[11px] text-gray-500 line-clamp-2 italic leading-relaxed opacity-70">
+                        &quot;{t(`bookPage.techBios.${technician.id}`) || technician.bio}&quot;
+                    </p>
                 </div>
+            )}
 
-                <div className="pt-4 flex items-center justify-between border-t border-gray-100/50 mt-auto">
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">{startFromLabel}</span>
-                        <span className={`font-black text-lg transition-colors ${selected ? 'text-[#9C6D3F]' : 'text-dark'}`}>
-                            {currencySymbol}{formatPrice(technician.basePrice)}
+            <div className="flex flex-wrap gap-1.5 pt-1 flex-1 items-start content-start">
+                {technician.specialties.slice(0, 2).map((spec, index) => {
+                    const specKey = spec === 'Service AC' ? 'acRepair' :
+                        spec === 'Cuci AC' ? 'acCleaning' :
+                            spec === 'Bongkar Pasang' ? 'disassembly' :
+                                spec === 'Isi Freon' ? 'freonRefill' :
+                                    spec === 'Deep Cleaning' ? 'deepCleaning' :
+                                        spec === 'Instalasi' ? 'acInstallation' :
+                                            spec === 'Maintenance' ? 'maintenance' :
+                                                spec === 'Service Rutin' ? 'regularService' :
+                                                    spec === 'Perbaikan' ? 'acRepair' : '';
+
+                    const translatedSpec = specKey ? t(`bookPage.serviceNames.${specKey}`) : spec;
+
+                    return (
+                        <span key={index} className="text-[9px] font-bold px-2 py-1 bg-gray-50 text-gray-400 rounded-lg border border-gray-100 uppercase tracking-tighter">
+                            {translatedSpec}
                         </span>
-                    </div>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300
+                    );
+                })}
+            </div>
+
+            <div className="pt-4 flex items-center justify-between border-t border-gray-100/50 mt-auto">
+                <div className="flex flex-col">
+                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-widest leading-none mb-1">{startFromLabel}</span>
+                    <span className={`font-black text-lg transition-colors ${selected ? 'text-[#9C6D3F]' : 'text-dark'}`}>
+                        {currencySymbol}{formatPrice(technician.basePrice)}
+                    </span>
+                </div>
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300
                         ${selected
-                            ? 'bg-[#9C6D3F] text-white shadow-lg'
-                            : 'bg-gray-50 text-gray-400 group-hover:bg-[#9C6D3F] group-hover:text-white group-hover:shadow-md'
-                        }`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                        </svg>
-                    </div>
+                        ? 'bg-[#9C6D3F] text-white shadow-lg'
+                        : 'bg-gray-50 text-gray-400 group-hover:bg-[#9C6D3F] group-hover:text-white group-hover:shadow-md'
+                    }`}>
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                    </svg>
                 </div>
             </div>
 

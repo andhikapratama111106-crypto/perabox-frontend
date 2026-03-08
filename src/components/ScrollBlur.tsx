@@ -19,17 +19,18 @@ export default function ScrollBlur({ children }: { children: React.ReactNode }) 
         restDelta: 0.001
     });
 
-    const blurAmount = useTransform(smoothVelocity, [-2000, 0, 2000], [0, 0, 4]);
-    const scaleY = useTransform(smoothVelocity, [-2000, 0, 2000], [0.99, 1, 1.02]);
+    const blurAmount = useTransform(smoothVelocity, [-2000, 0, 2000], [0, 0, 2.5]); // Reduced max blur from 4 to 2.5
+    const scaleY = useTransform(smoothVelocity, [-2000, 0, 2000], [0.995, 1, 1.005]); // Subtle scaling
     const hasTriggered = React.useRef(false);
 
     useEffect(() => {
-        // Skip effect logic on blog pages
         if (isBlog) return;
 
         const unsubscribeBlur = blurAmount.on("change", (latest) => {
             if (hasTriggered.current) return;
-            document.documentElement.style.setProperty('--scroll-blur', `${latest}px`);
+            // Only apply blur if it's significant enough to be seen (performance win)
+            const value = latest < 0.2 ? 0 : latest;
+            document.documentElement.style.setProperty('--scroll-blur', `${value}px`);
         });
 
         const unsubscribeScale = scaleY.on("change", (latest) => {
@@ -37,26 +38,28 @@ export default function ScrollBlur({ children }: { children: React.ReactNode }) 
             document.documentElement.style.setProperty('--scroll-scale-y', `${latest}`);
         });
 
-        const handleFirstScroll = () => {
-            if (hasTriggered.current) return;
-            setTimeout(() => {
-                hasTriggered.current = true;
-                document.documentElement.style.setProperty('--scroll-blur', '0px');
-                document.documentElement.style.setProperty('--scroll-scale-y', '1');
-            }, 2000);
-            window.removeEventListener('scroll', handleFirstScroll);
+        // Cleanup values after scroll stops to ensure crisp text
+        let timeout: NodeJS.Timeout;
+        const handleScrollStop = () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                if (!hasTriggered.current) {
+                    document.documentElement.style.setProperty('--scroll-blur', '0px');
+                    document.documentElement.style.setProperty('--scroll-scale-y', '1');
+                }
+            }, 150);
         };
 
-        window.addEventListener('scroll', handleFirstScroll, { passive: true });
+        window.addEventListener('scroll', handleScrollStop, { passive: true });
 
         return () => {
             unsubscribeBlur();
             unsubscribeScale();
-            window.removeEventListener('scroll', handleFirstScroll);
+            window.removeEventListener('scroll', handleScrollStop);
+            clearTimeout(timeout);
         };
     }, [blurAmount, scaleY, isBlog]);
 
-    // On blog pages, render children without scroll effects
     if (isBlog) {
         return <>{children}</>;
     }
@@ -67,7 +70,7 @@ export default function ScrollBlur({ children }: { children: React.ReactNode }) 
             style={{
                 filter: 'blur(var(--scroll-blur, 0px))',
                 transform: 'scaleY(var(--scroll-scale-y, 1))',
-                willChange: 'filter, transform',
+                willChange: 'transform', // Removed 'filter' from will-change as it can be counter-productive on some GPUs
                 transformOrigin: 'center'
             }}
         >
