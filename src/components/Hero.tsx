@@ -177,25 +177,19 @@ const Hero = () => {
                     </div>
                     {/* Floating Info Card – breathe animation for real-time feel */}
                     <motion.div
-                        className="absolute bottom-4 -left-8 z-30 bg-white p-6 rounded-2xl shadow-2xl flex items-center gap-4 border border-gray-100"
+                        className="absolute bottom-4 -left-8 z-30 bg-white p-6 rounded-2xl shadow-[0_8px_24px_rgba(0,0,0,0.08)] flex items-center gap-4 border border-gray-100"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{
                             opacity: 1,
                             y: 0,
                             scale: [1, 1.025, 1],
-                            boxShadow: [
-                                '0 15px 40px -12px rgba(139, 94, 60, 0.1)',
-                                '0 25px 50px -10px rgba(139, 94, 60, 0.18)',
-                                '0 15px 40px -12px rgba(139, 94, 60, 0.1)',
-                            ],
                         }}
                         transition={{
                             opacity: { delay: 1.0, duration: 0.5 },
                             y: { delay: 1.0, duration: 0.5 },
                             scale: { delay: 1.5, duration: 4, repeat: Infinity, ease: 'easeInOut' },
-                            boxShadow: { delay: 1.5, duration: 4, repeat: Infinity, ease: 'easeInOut' },
                         }}
-                        style={{ willChange: 'transform, box-shadow' }}
+                        style={{ willChange: 'transform' }}
                     >
                         <div className="w-12 h-12 bg-accent/20 text-accent rounded-xl flex items-center justify-center">
                             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
