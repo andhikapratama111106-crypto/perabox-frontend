@@ -24,29 +24,50 @@ const Navbar = () => {
     const isBlogPage = pathname?.startsWith('/blog');
 
     useEffect(() => {
-        const token = localStorage.getItem('access_token');
-        setIsLoggedIn(!!token);
+        const checkLoginStatus = () => {
+            const token = localStorage.getItem('access_token');
+            setIsLoggedIn(!!token);
 
-        if (token) {
-            const savedGoogleUser = localStorage.getItem('google_user');
-            if (savedGoogleUser) {
-                try {
-                    const googleData = JSON.parse(savedGoogleUser);
-                    if (googleData.picture) {
-                        setUserAvatar(googleData.picture);
+            if (token) {
+                const savedGoogleUser = localStorage.getItem('google_user');
+                if (savedGoogleUser) {
+                    try {
+                        const googleData = JSON.parse(savedGoogleUser);
+                        if (googleData.picture) {
+                            setUserAvatar(googleData.picture);
+                        } else {
+                            setUserAvatar(null);
+                        }
+                    } catch (e) {
+                        console.error('Failed to parse google_user', e);
+                        setUserAvatar(null);
                     }
-                } catch (e) {
-                    console.error('Failed to parse google_user', e);
+                } else {
+                    setUserAvatar(null);
                 }
+            } else {
+                setUserAvatar(null);
             }
-        }
+        };
+
+        // Initial check
+        checkLoginStatus();
+
+        // Listen for custom login/logout events across components
+        window.addEventListener('user-login', checkLoginStatus);
+        window.addEventListener('user-logout', checkLoginStatus);
 
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 20);
         };
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
-        return () => window.removeEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('user-login', checkLoginStatus);
+            window.removeEventListener('user-logout', checkLoginStatus);
+        };
     }, []);
 
     /* ─── Focus Trap when mobile menu open ─── */
@@ -90,7 +111,10 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('access_token');
         localStorage.removeItem('refresh_token');
+        localStorage.removeItem('google_user');
         setIsLoggedIn(false);
+        setUserAvatar(null);
+        window.dispatchEvent(new Event('user-logout'));
         router.push('/login');
     };
 

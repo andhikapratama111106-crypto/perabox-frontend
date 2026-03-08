@@ -70,10 +70,16 @@ export default function LoginPage() {
                 const userRes = await authAPI.getCurrentUser();
                 const user = userRes.data;
                 setIsSuccess(true);
-                router.push(user.role === 'admin' ? '/admin' : '/customer/profile');
+                window.dispatchEvent(new Event('user-login'));
+                setTimeout(() => {
+                    router.push(user.role === 'admin' ? '/admin' : '/customer/profile');
+                }, 1500);
             } catch {
                 setIsSuccess(true);
-                router.push('/');
+                window.dispatchEvent(new Event('user-login'));
+                setTimeout(() => {
+                    router.push('/');
+                }, 1500);
             }
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
@@ -131,7 +137,10 @@ export default function LoginPage() {
                         }
 
                         setIsSuccess(true);
-                        router.push(data.user?.role === 'admin' ? '/admin' : '/customer/profile');
+                        window.dispatchEvent(new Event('user-login'));
+                        setTimeout(() => {
+                            router.push(data.user?.role === 'admin' ? '/admin' : '/customer/profile');
+                        }, 1500);
                     } else {
                         // Fallback: get user info from Google directly
                         const userRes = await fetch('https://www.googleapis.com/oauth2/v2/userinfo', {
@@ -146,7 +155,10 @@ export default function LoginPage() {
                         // Store access token so Navbar treats user as logged in
                         localStorage.setItem('access_token', tokenResponse.access_token);
                         setIsSuccess(true);
-                        router.push('/customer/profile');
+                        window.dispatchEvent(new Event('user-login'));
+                        setTimeout(() => {
+                            router.push('/customer/profile');
+                        }, 1500);
                     }
                 } catch (err) {
                     console.error("Google login error:", err);
