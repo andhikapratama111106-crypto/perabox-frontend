@@ -22,8 +22,26 @@ export default function CustomerLayout({
     const { t, language, setLanguage } = useLanguage();
     const [isLoading, setIsLoading] = useState(true);
     const [isLangOpen, setIsLangOpen] = useState(false);
+    const [userAvatar, setUserAvatar] = useState<string | null>(null);
 
     useEffect(() => {
+        const checkAvatar = () => {
+            const savedGoogleUser = localStorage.getItem('google_user');
+            if (savedGoogleUser) {
+                try {
+                    const data = JSON.parse(savedGoogleUser);
+                    setUserAvatar(data.picture || null);
+                } catch (e) {
+                    setUserAvatar(null);
+                }
+            } else {
+                setUserAvatar(null);
+            }
+        };
+
+        checkAvatar();
+        window.addEventListener('user-login', checkAvatar);
+
         const token = localStorage.getItem('access_token');
         if (!token) {
             router.replace('/login');
@@ -35,7 +53,10 @@ export default function CustomerLayout({
 
         const checkAuth = async () => {
             try {
-                await authAPI.getCurrentUser();
+                const res = await authAPI.getCurrentUser();
+                if (res.data?.avatar_url && !localStorage.getItem('google_user')) {
+                    setUserAvatar(res.data.avatar_url);
+                }
             } catch (error) {
                 console.error("Auth check failed", error);
                 localStorage.removeItem('access_token');
@@ -44,6 +65,8 @@ export default function CustomerLayout({
             }
         };
         checkAuth();
+
+        return () => window.removeEventListener('user-login', checkAvatar);
     }, [router]);
 
     if (isLoading) {
@@ -173,8 +196,14 @@ export default function CustomerLayout({
                     <div className="hidden sm:block">
                         <LanguageSwitcher />
                     </div>
-                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm aspect-square">
-                        <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=200" alt="User" className="w-full h-full object-cover" />
+                    <div className="w-10 h-10 rounded-full overflow-hidden border border-gray-100 shadow-sm aspect-square flex items-center justify-center bg-gray-50 text-gray-400">
+                        {userAvatar ? (
+                            <img src={userAvatar} alt="User" className="w-full h-full object-cover" referrerPolicy="no-referrer" />
+                        ) : (
+                            <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        )}
                     </div>
                 </div>
             </nav>
@@ -259,6 +288,9 @@ export default function CustomerLayout({
                             <button
                                 onClick={() => {
                                     localStorage.removeItem('access_token');
+                                    localStorage.removeItem('refresh_token');
+                                    localStorage.removeItem('google_user');
+                                    window.dispatchEvent(new Event('user-logout'));
                                     window.location.href = '/login';
                                 }}
                                 className="w-full text-left px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 rounded-xl transition-colors font-bold"
