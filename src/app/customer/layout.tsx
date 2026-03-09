@@ -20,7 +20,12 @@ export default function CustomerLayout({
     const router = useRouter();
     const pathname = usePathname();
     const { t, language, setLanguage } = useLanguage();
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return !localStorage.getItem('access_token');
+        }
+        return true;
+    });
     const [isLangOpen, setIsLangOpen] = useState(false);
     const [userAvatar, setUserAvatar] = useState<string | null>(null);
 

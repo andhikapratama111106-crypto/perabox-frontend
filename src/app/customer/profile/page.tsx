@@ -29,7 +29,12 @@ const CustomerProfile = () => {
         }
     });
 
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(() => {
+        if (typeof window !== 'undefined') {
+            return !localStorage.getItem('google_user');
+        }
+        return true;
+    });
     const [error, setError] = useState('');
 
     // State for edit modes
@@ -47,10 +52,13 @@ const CustomerProfile = () => {
 
     const fetchUserData = useCallback(async () => {
         try {
-            setLoading(true);
+            const savedGoogleUser = localStorage.getItem('google_user');
+
+            if (!savedGoogleUser) {
+                setLoading(true);
+            }
 
             // 1. Immediate fallback/initial load from localStorage if available
-            const savedGoogleUser = localStorage.getItem('google_user');
             if (savedGoogleUser) {
                 const googleData = JSON.parse(savedGoogleUser);
                 const nameParts = (googleData.name || "").split(' ');
@@ -76,8 +84,6 @@ const CustomerProfile = () => {
                 setUser(localUser);
                 setFormData(localUser);
                 setLoading(false); // Immediate render without loading spinner
-            } else {
-                setLoading(true);
             }
 
             const response = await authAPI.getCurrentUser();
