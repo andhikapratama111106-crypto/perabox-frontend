@@ -228,7 +228,7 @@ ${t('bookPage.wa.confirm')}`;
             setCurrentPaymentId(dummyPaymentId);
 
             if (paymentMethod.includes('QRIS') || paymentMethod.includes('BCA')) {
-                setStep(6);
+                setStep(7);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 setStep(7);

@@ -24,7 +24,7 @@ export default function LayoutWrapper({ children }: { children: React.ReactNode 
         <>
             {!isDashboard && <PromoBanner />}
             {!isDashboard && <Navbar />}
-            {isBook ? (
+            {isBook || isAuth ? (
                 <PageTransition>
                     {children}
                 </PageTransition>
