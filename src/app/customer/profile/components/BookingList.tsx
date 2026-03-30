@@ -165,6 +165,41 @@ const BookingList = ({ type }: BookingListProps) => {
                                         Beri Ulasan
                                     </button>
                                 )}
+
+                                {type === 'active' && booking.status === 'pending' && (
+                                    <div className="mt-4 p-4 border border-blue-100 bg-blue-50/50 rounded-xl">
+                                        <p className="text-xs font-bold text-gray-600 mb-2">Transfer Pembayaran</p>
+                                        <div className="flex items-center gap-3 mb-3">
+                                            <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center font-black text-blue-600 border border-blue-100 shadow-sm text-xs">
+                                                BCA
+                                            </div>
+                                            <div>
+                                                <p className="text-sm font-bold text-gray-900">1234 567 890</p>
+                                                <p className="text-[10px] text-gray-500 font-medium">a/n PT PERABOX INDONESIA</p>
+                                            </div>
+                                        </div>
+                                        <div className="flex justify-between items-center bg-white p-2.5 rounded-lg border border-gray-200 mb-3">
+                                            <span className="text-[10px] text-gray-500 font-medium">Jumlah Tagihan</span>
+                                            <span className="text-sm font-black text-primary">
+                                                Rp {(
+                                                    (booking.total_price || 0) + parseInt(booking.id.replace(/\D/g, '').substring(0, 3) || '0', 10) % 1000
+                                                ).toLocaleString('id-ID')}
+                                            </span>
+                                        </div>
+                                        <div className="text-[10px] text-blue-600/80 leading-snug mb-4">
+                                            *Nominal sudah termasuk kode unik <strong>+{parseInt(booking.id.replace(/\D/g, '').substring(0, 3) || '0', 10) % 1000}</strong>. Pastikan transfer tepat hingga tiga digit terakhir.
+                                        </div>
+                                        <button
+                                            className="w-full py-2.5 bg-blue-600 text-white text-sm font-bold rounded-xl hover:bg-blue-700 focus:ring-2 focus:ring-blue-200 transition-colors shadow-sm flex items-center justify-center gap-2"
+                                            onClick={() => {
+                                                alert("Instruksi Pembayaran BCA: Harap transfer ke rekening yang tertera. Admin akan memverifikasi dalam waktu 1x24 jam.");
+                                            }}
+                                        >
+                                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                                            Konfirmasi Pembayaran
+                                        </button>
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
