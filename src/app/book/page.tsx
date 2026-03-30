@@ -181,7 +181,7 @@ ${t('bookPage.wa.confirm')}`;
             const centralNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360';
             const waUrl = `https://wa.me/${centralNumber}?text=${encodeURIComponent(message)}`;
 
-            if (paymentMethod.includes('QRIS') || paymentMethod.includes('BCA')) {
+            if (paymentMethod.includes('QRIS')) {
                 // Midtrans Snap Integration
                 try {
                     const paymentId = bookingData.payments?.[0]?.id || 'dummy-payment-id';
@@ -216,6 +216,11 @@ ${t('bookPage.wa.confirm')}`;
                     // Fallback to profile
                     router.push('/customer/profile');
                 }
+            } else if (paymentMethod.includes('BCA')) {
+                const dummyPaymentId = bookingData.id || 'simulated-payment-id-' + Date.now();
+                setCurrentPaymentId(dummyPaymentId);
+                setStep(7);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
                 setStep(7);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -499,7 +504,7 @@ ${t('bookPage.wa.confirm')}`;
                                 </div>
                                 <div className="mt-8 flex justify-between">
                                     <button onClick={() => setStep(2)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
-                                    <button onClick={() => selectedServices.length > 0 && setStep(4)} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all">{t('bookPage.btnNextInfo')}</button>
+                                    <button onClick={() => { if (selectedServices.length > 0) { setStep(4); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all">{t('bookPage.btnNextInfo')}</button>
                                 </div>
                             </div>
                         </motion.div>
@@ -516,7 +521,7 @@ ${t('bookPage.wa.confirm')}`;
                         >
                             <div className="max-w-2xl mx-auto bg-white rounded-3xl shadow-sm p-6 md:p-8">
                                 <h2 className="text-2xl font-bold text-dark mb-6">{t('bookPage.title4')}</h2>
-                                <div className="space-y-4">
+                                <div className="space-y-6">
                                     <div>
                                         <label className="block text-sm font-medium text-gray-700 mb-1">{t('bookPage.fullName')}</label>
                                         <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-primary focus:ring-2 focus:ring-primary/20" value={formData.full_name} onChange={(e: any) => setFormData({ ...formData, full_name: e.target.value })} placeholder={t('bookPage.fullNamePlaceholder')} />
@@ -541,7 +546,7 @@ ${t('bookPage.wa.confirm')}`;
                                 </div>
                                 <div className="mt-8 flex justify-between">
                                     <button onClick={() => setStep(3)} className="text-gray-500 hover:text-dark">{t('bookPage.btnBack')}</button>
-                                    <button onClick={() => { const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10 && formData.phone.length <= 12; if (formData.full_name && isPhoneValid && formData.address) setStep(5); }} disabled={!formData.full_name || !formData.phone || formData.phone.length < 10 || formData.phone.length > 12 || !formData.phone.startsWith('08') || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white px-8 py-3 rounded-full font-bold transition-all">{t('bookPage.btnNextPayment')}</button>
+                                    <button onClick={() => { const isPhoneValid = formData.phone.startsWith('08') && formData.phone.length >= 10 && formData.phone.length <= 12; if (formData.full_name && isPhoneValid && formData.address) { setStep(5); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} disabled={!formData.full_name || !formData.phone || formData.phone.length < 10 || formData.phone.length > 12 || !formData.phone.startsWith('08') || !formData.address} className="bg-[#9C6D3F] hover:bg-[#8A5A30] active:scale-[0.98] disabled:bg-gray-200 disabled:text-gray-400 disabled:shadow-none disabled:active:scale-100 disabled:cursor-not-allowed shadow-md hover:shadow-lg text-white px-8 py-3 rounded-full font-bold transition-all duration-300">{t('bookPage.btnNextPayment')}</button>
                                 </div>
                             </div>
                         </motion.div>
@@ -680,12 +685,50 @@ ${t('bookPage.wa.confirm')}`;
                                 exit={{ opacity: 0, scale: 1.05 }}
                                 transition={{ duration: 0.3 }}
                             >
-                                <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
-                                    <div className="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
-                                    <h2 className="text-2xl font-bold text-dark mb-2">{t('bookPage.orderReceived')}</h2>
-                                    <p className="text-gray-500 mb-8">{t('bookPage.thankYouTech')} <strong>{selectedTechnician?.name}</strong>. {paymentMethod.includes('QRIS') ? t('bookPage.qrisSuccess') : paymentMethod.includes('BCA') ? t('bookPage.bcaSuccess') : t('bookPage.waSuccess')}</p>
-                                    <button onClick={() => router.push('/')} className="bg-gray-100 hover:bg-gray-200 text-dark px-8 py-3 rounded-full font-bold transition-all w-full">{t('bookPage.backToHome')}</button>
-                                </div>
+                                {paymentMethod.includes('BCA') ? (
+                                    <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-0 text-left overflow-hidden border border-gray-100">
+                                        <div className="bg-blue-600 p-6 text-white text-center">
+                                            <h2 className="text-xl font-bold mb-1">Menunggu Pembayaran</h2>
+                                            <p className="text-blue-100 text-sm">Selesaikan pembayaran sesuai instruksi</p>
+                                        </div>
+                                        <div className="p-6">
+                                            <div className="flex items-center justify-between mb-4 pb-4 border-b border-gray-100">
+                                                <div className="text-gray-500 text-sm">Total Tagihan</div>
+                                                <div className="text-2xl font-black text-blue-600">
+                                                    Rp {(
+                                                        (calculateTotal()) + parseInt(currentPaymentId.replace(/\D/g, '').substring(0, 3) || '0', 10) % 1000
+                                                    ).toLocaleString('id-ID')}
+                                                </div>
+                                            </div>
+                                            <div className="bg-blue-50/50 p-4 rounded-xl border border-blue-100 mb-6">
+                                                <div className="flex items-center gap-4">
+                                                    <div className="w-14 h-10 bg-white rounded-lg flex items-center justify-center font-black text-blue-600 border border-blue-100 shadow-sm text-sm">BCA</div>
+                                                    <div>
+                                                        <p className="text-lg font-black text-gray-900 tracking-wider">1234 567 890</p>
+                                                        <p className="text-xs text-gray-500 font-medium">a/n PT PERABOX INDONESIA</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="text-xs text-gray-500 mb-8 bg-gray-50 p-4 rounded-xl leading-relaxed">
+                                                <span className="font-bold text-gray-700 block mb-1">Penting:</span>
+                                                Nominal tagihan di atas sudah termasuk kode unik <strong className="text-blue-600">+{parseInt(currentPaymentId.replace(/\D/g, '').substring(0, 3) || '0', 10) % 1000}</strong> untuk verifikasi otomatis. Pastikan transfer tepat hingga 3 digit terakhir.
+                                            </div>
+                                            <button onClick={() => { window.open(`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '6287774266360'}?text=${encodeURIComponent('Halo Kak, saya sudah melakukan pembayaran BCA untuk pesanan saya sebesar Rp' + ((calculateTotal()) + parseInt(currentPaymentId.replace(/\D/g, '').substring(0, 3) || '0', 10) % 1000).toLocaleString('id-ID') + '. Berikut bukti transfernya:')}`, '_blank'); router.push('/customer/profile'); }} className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3.5 rounded-full font-bold transition-all w-full mb-3 shadow-lg shadow-blue-600/20 text-sm flex items-center justify-center gap-2">
+                                                Konfirmasi via WhatsApp
+                                            </button>
+                                            <button onClick={() => router.push('/customer/profile')} className="bg-white border-2 border-gray-100 hover:bg-gray-50 text-gray-600 px-8 py-3 rounded-full font-bold transition-all w-full text-sm">
+                                                Cek Status Pesanan
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="max-w-md mx-auto bg-white rounded-3xl shadow-lg p-8 text-center">
+                                        <div className="w-20 h-20 rounded-full bg-green-100 text-green-500 flex items-center justify-center mx-auto mb-6 text-4xl">✓</div>
+                                        <h2 className="text-2xl font-bold text-dark mb-2">{t('bookPage.orderReceived')}</h2>
+                                        <p className="text-gray-500 mb-8">{t('bookPage.thankYouTech')} <strong>{selectedTechnician?.name}</strong>. {paymentMethod.includes('QRIS') ? t('bookPage.qrisSuccess') : t('bookPage.waSuccess')}</p>
+                                        <button onClick={() => router.push('/')} className="bg-gray-100 hover:bg-gray-200 text-dark px-8 py-3 rounded-full font-bold transition-all w-full">{t('bookPage.backToHome')}</button>
+                                    </div>
+                                )}
                             </motion.div>
                         )
                     }
@@ -703,12 +746,12 @@ ${t('bookPage.wa.confirm')}`;
                                 </button>
                             )}
                             {step === 3 && (
-                                <button onClick={() => selectedServices.length > 0 && setStep(4)} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                                <button onClick={() => { if (selectedServices.length > 0) { setStep(4); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} disabled={selectedServices.length === 0} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
                                     {t('bookPage.btnNext')}
                                 </button>
                             )}
                             {step === 4 && (
-                                <button onClick={() => formData.full_name && formData.phone && formData.address && setStep(5)} disabled={!formData.full_name || !formData.phone || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
+                                <button onClick={() => { if (formData.full_name && formData.phone && formData.address) { setStep(5); window.scrollTo({ top: 0, behavior: 'smooth' }); } }} disabled={!formData.full_name || !formData.phone || !formData.address} className="bg-primary hover:bg-primary/90 disabled:opacity-50 text-white text-sm px-6 py-3 rounded-full font-bold">
                                     {t('bookPage.btnNext')}
                                 </button>
                             )}
